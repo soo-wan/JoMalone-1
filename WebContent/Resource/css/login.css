@@ -1,0 +1,9 @@
+#login {margin-top: 100px; height: 500px;}
+
+#login-title {margin-bottom: 30px; padding: 0px; height: 50px;}
+#login-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+
+#login-inputbox {margin: auto; width: 300px; text-align: center; border: 1px solid black;}
+input[type=text], input[type=password] {margin: 10px; width: 250px; height: 35px; border: 1px solid darkgray; border-radius: 10px;}
+
+#cookie-check {padding: 0px; height: 30px; border: 1px solid red;}
