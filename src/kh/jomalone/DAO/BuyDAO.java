@@ -2,6 +2,8 @@ package kh.jomalone.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
@@ -72,6 +74,18 @@ public class BuyDAO {
 				con.commit();
 			}
 		}
+	}
+
+	public List<OrderListDTO> selectBuyList(String id) throws Exception {
+		List<OrderListDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select * from prod_buy")) {
+			ResultSet rs = pstat.executeQuery();
+			while(rs.next()) {
+				list.add(new OrderListDTO(rs.getInt(1),rs.getTimestamp(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getNString(15)));
+			}
+		}
+		return list;
 	}
 
 }
