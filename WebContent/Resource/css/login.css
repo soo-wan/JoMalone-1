@@ -1,9 +1,34 @@
-#login {margin-top: 100px; height: 500px;}
+#general-login {margin-top: 80px; height: 380px;}
 
 #login-title {margin-bottom: 30px; padding: 0px; height: 50px;}
 #login-title>h4 {width: 100%; line-height: 45px; text-align: center;}
 
-#login-inputbox {margin: auto; width: 300px; text-align: center; border: 1px solid black;}
-input[type=text], input[type=password] {margin: 10px; width: 250px; height: 35px; border: 1px solid darkgray; border-radius: 10px;}
+#login-inputbox {margin: auto; width: 300px; text-align: center;}
+input[type=text], input[type=password] {margin: 5px; padding-left: 20px; width: 250px; height: 35px; border: 1px solid darkgray; border-radius: 10px;}
 
-#cookie-check {padding: 0px; height: 30px; border: 1px solid red;}
+#cookie-check {margin: 15px 0px 15px 0px; padding: 0px; height: 20px;}
+#cookie-check>input[type=checkbox], #cookie-check>h6 {float: left;}
+input[type=checkbox] {margin: 0px 10px 0px 30px; width: 15px; height: 15px;}
+
+#login-btn {margin-bottom: 15px;}
+#login-btn>input[type=button] {width: 250px; height: 30px; background-color: lightgrey; color: dimgray; border: 0px;}
+
+#button-list>input[type=button] {margin: 0px 5px 0px 5px; height: 30px; background-color: lightgrey; color: dimgray; border: 0px;}
+
+#sns-login {height: 300px;}
+#sns-login>hr {width: 350px;}
+
+#sns-title {padding: 0px; height: 50px;}
+#sns-title>h5 {width: 100%; line-height: 45px; text-align: center;}
+
+#sns-btn {margin: auto; width: 250px;}
+
+#kakao {margin-bottom: 20px; padding: 0px; width: 50px; height: 50px; background-color: #FFE410; border: 1px solid lightgray; border-radius: 10px;}
+#kakao>img {width: 48px; height: 48px;}
+#kakao>img, #kakao>h5 {float: left;}
+#kakao>h5 {padding-left: 45px; width: 200px; line-height: 46px; color: #3F1600; font-size: 18px;}
+
+#naver {padding: 0px; width: 50px; height: 50px; background-color: #0BC904; border: 1px solid lightgray; border-radius: 10px;}
+#naver>img {width: 48px; height: 48px; border-radius: 10px;}
+#naver>img, #naver>h5 {float: left;}
+#naver>h5 {padding-left: 45px; width: 200px; line-height: 50px; color: white; font-size: 18px;}
