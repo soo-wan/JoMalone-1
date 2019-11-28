@@ -6,15 +6,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
 
 public class BuyDAO {
 	private static BuyDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-
+	private static BasicDataSource bds = new BasicDataSource();
 	private BuyDAO() {
 		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
@@ -22,15 +21,13 @@ public class BuyDAO {
 		bds.setPassword("jomalone");
 		bds.setInitialSize(30);
 	}
-
 	public synchronized static BuyDAO getInstance() {
-		if (instance == null) {
+		if(instance == null) {
 			instance = new BuyDAO();
 		}
 		return instance;
 	}
-
-	public Connection getConnection() throws Exception {
+	private Connection getConnection() throws Exception{
 		return bds.getConnection();
 	}
 
@@ -58,7 +55,7 @@ public class BuyDAO {
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into prod_buy values(order_seq.nextval,sysdate,?,?,?,?,?,?,'ÁÖ¹® ¿Ï·á',?,?,?,?,'¹è¼Û ÁØºñÁß',N)");) {
+						"insert into prod_buy values(order_seq.nextval,sysdate,?,?,?,?,?,?,'ï¿½Ö¹ï¿½ ï¿½Ï·ï¿½',?,?,?,?,'ï¿½ï¿½ï¿½ ï¿½Øºï¿½ï¿½ï¿½',N)");) {
 			for (OrderListDTO dto : list) {
 				pstat.setString(1, dto.getMerchant_uid());
 				pstat.setString(2, dto.getProd_code());
