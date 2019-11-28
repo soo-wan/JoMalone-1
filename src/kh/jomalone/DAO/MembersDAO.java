@@ -6,14 +6,15 @@ import java.sql.ResultSet;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
+import kh.jomalone.DTO.KMembersDTO;
 import kh.jomalone.DTO.MembersDTO;
+import kh.jomalone.DTO.NMembersDTO;
 
 public class MembersDAO {
-	//private static MemberDAO instance = new MemberDAO();
-	private static MembersDAO instance; //new를 안하고 변수만 만들어놓음.
+	private static MembersDAO instance; 
 	private BasicDataSource bds = new BasicDataSource();
 
-	private MembersDAO() { //생성자에 private이 붙었기 때문에 다른페이지에서 new MemberDAO();못함. 생성자가 private으로 막혀있으니까.
+	private MembersDAO() {
 		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
 
@@ -32,7 +33,7 @@ public class MembersDAO {
 		return bds.getConnection();
 	}
 	
-	//아이디 중복검사
+	
 	public boolean isIdExist (String id) throws Exception {
 		String sql = "select * from Members where mem_id = ?";
 		try(
@@ -49,7 +50,7 @@ public class MembersDAO {
 			}
 		}
 	};
-	//일반회원가입
+
 	public int signup (MembersDTO dto) throws Exception {
 		String sql = "insert into members values(?,'normal',null,?,?,?,?,?,?,?,?,?,sysdate,null,null,?,?)";
 		try(
@@ -77,7 +78,7 @@ public class MembersDAO {
 		}
 	}
 	
-	//일반로그인
+
 	public boolean login(String id , String pw) throws Exception {
 		String sql = "select * from members where mem_id =? and mem_pw = ?";
 		try(
@@ -93,4 +94,72 @@ public class MembersDAO {
 			}
 		}
 	}
+	
+	public int NFirstLogin (NMembersDTO ndto) throws Exception {
+		String sql = "insert into members (mem_id, logintype, access_token, mem_name, mem_email, mem_birth, mem_gender) values(?,'naver',?,?,?,?,?)";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, ndto.getId());
+			pstat.setString(2, ndto.getAccess_token());
+			pstat.setString(3, ndto.getName());
+			pstat.setString(4, ndto.getEmail());
+			pstat.setString(5, ndto.getBirth());
+			pstat.setString(6, ndto.getGender());
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+	public boolean Nlogin(String access_token) throws Exception {
+		String sql = "select * from members where access_token =?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, access_token);
+			
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				return rs.next();
+			}
+		}
+	}
+	
+	public int KFirstLogin (KMembersDTO kdto) throws Exception {
+		String sql = "insert into members (mem_id, logintype, access_token, mem_name, mem_email, mem_birth, mem_gender) values(?,'kakao',?,?,?,?,?)";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, kdto.getId());
+			pstat.setString(2, kdto.getAccess_token());
+			pstat.setString(3, kdto.getName());
+			pstat.setString(4, kdto.getEmail());
+			pstat.setString(5, kdto.getBirthday());
+			pstat.setString(6, kdto.getGender());
+
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+	public boolean Klogin(String access_token) throws Exception {
+		String sql = "select * from members where id =?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, access_token);
+			
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				return rs.next();
+			}
+		}
+	}
+	
+	
 }

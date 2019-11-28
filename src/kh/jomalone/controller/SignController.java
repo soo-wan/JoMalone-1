@@ -19,7 +19,7 @@ public class SignController extends HttpServlet {
 		System.out.println(cmd);
 		request.setCharacterEncoding("UTF8");
 		try {
-			if(cmd.contentEquals("/dupl.sign")) {
+			if(cmd.contentEquals("/Member/dupl.sign")) {
 				System.out.println(request.getParameter("id"));
 				MembersDAO dao = MembersDAO.getInstance();
 				String id = request.getParameter("id");
@@ -28,7 +28,7 @@ public class SignController extends HttpServlet {
 				System.out.println(result);
 				response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				
-			}else if(cmd.contentEquals("/signup.sign")) {
+			}else if(cmd.contentEquals("/Member/signup.sign")) {
 				String id = request.getParameter("id");
 				String name  = request.getParameter("name");
 				String pw = request.getParameter("pw");
@@ -63,6 +63,7 @@ public class SignController extends HttpServlet {
 				MembersDAO dao = MembersDAO.getInstance();
 				int result = dao.signup(dto);
 	
+				request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
 			}
 
 		}catch(Exception e) {
