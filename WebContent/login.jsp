@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Login | Jo Malone</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -21,16 +21,16 @@
 	    	<div id="cookie-check" class="col-12"><input type="checkbox"><h6>아이디저장</h6></div>
 	    	<div id="login-btn" class="col-12"><input type="button" value="LOGIN"></div>
 	    	<div id="button-list" class="col-12">
-	    		<input type="button" value="FIND ID">
-	    		<input type="button" value="FIND PW">
-	    		<input type="button" value="SIGN UP">
+	    		<input type="button" value="FIND ID" id="general-findid">
+	    		<input type="button" value="FIND PW" id="general-findpw">
+	    		<input type="button" value="SIGN UP" id="general-signup">
 	    	</div>
 	    </div>
 	</div>
 	
 	<div id="sns-login" class="container">
 		<div id="sns-title" class="row"><h5>SNS 간편 로그인</h5></div>
-		<hr>
+		<hr style="margin-bottom: 30px;">
 		<div id="sns-btn" class="row">
 			<div id="kakao" class="col-12">
 				<img src="Resource/img/kakao.png">
@@ -42,6 +42,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$("#general-signup").on("click", function() {
+			location.href = "signup.jsp";
+		})
+	</script>
 	
 	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
 </body>
