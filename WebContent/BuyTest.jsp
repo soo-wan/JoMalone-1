@@ -14,7 +14,7 @@
 </head>
 <body>
 	<button id=refund>환불하기</button>
-	<button id=bt>BT</button>
+	<button id=bt>결제</button>
 	<script>
 		$("#refund").on("click", function() {
 			console.log("refundtest로 ㄱㄱ")
