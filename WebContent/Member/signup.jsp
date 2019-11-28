@@ -44,12 +44,12 @@
 					<h5><span>*</span>이메일 : </h5>
 					<input type="text" name="email1" id="email1" style="width: 80px; height: 30px;">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;">@</span>
-					<input type="text" placeholder="직접입력" name="email2" style="margin-left: 0px; width: 90px; height: 30px;">
+					<input type="text" placeholder="직접입력" name="writeemail" style="margin-left: 0px; width: 90px; height: 30px;">
 					<select name="email2" id="email2" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 30px; border-radius: 5px; font-size: 13px;">
 						<option value="input">-- 선택없음</option>
-						<option value="naver">naver.com</option>
-						<option value="daum">daum.net</option>
-						<option value="gmail">gmail.com</option>
+						<option value="@naver.com">naver.com</option>
+						<option value="@daum.net">daum.net</option>
+						<option value="@gmail.com">gmail.com</option>
 					</select>
 				</div>
 				<div id="su-address" style="height: 110px;">
@@ -234,6 +234,8 @@
         }
 		
       	// 아이디중복검사&유효성검사 영어 소문자 및 숫자 4-12자리
+      	
+			var idcheck = 0;
 		$("#id").on("focusout", function() {
 			var id = $("#id").val();
 			$.ajax({
@@ -244,8 +246,9 @@
 				},
 				dataType : "json"
 			}).done(function(data) {
-				if (data.result) {
+				if (data.result == "true") {
 					$(".id.regex").html("사용중인 아이디 입니다.");
+					 idcheck = 1;
 				} else {
 					var regex = /^[a-z\d]{4,11}$/;
 					var result = regex.exec(id);
@@ -253,6 +256,7 @@
 						$(".id.regex").html("영어 소문자 및 숫자 4-12자리를 입력하세요.");
 					} else {
 						$(".id.regex").html("사용 가능한 아이디 입니다.");
+						idcheck = 0;
 					}
 				}
 			});
@@ -338,6 +342,12 @@
 				return;
 			}
 		
+			if(idcheck == 1){
+				alert("이미 사용중인 아이디 입니다.")
+				$("#id").focus();
+				return
+			}
+			
 			if(pwregex.exec(pw) == null){
 				alert("비밀번호 양식을 다시 확인해주세요.");
 				$("#pw").focus();

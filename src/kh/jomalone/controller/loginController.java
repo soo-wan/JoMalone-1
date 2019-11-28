@@ -19,7 +19,7 @@ public class loginController extends HttpServlet {
 		request.setCharacterEncoding("UTF8");
 		
 		try {
-			if(cmd.contentEquals("/login.log")) {
+			if(cmd.contentEquals("/Member/login.log")) {
 				String id = request.getParameter("id");
 				String pw = request.getParameter("pw");
 				System.out.println(id);
