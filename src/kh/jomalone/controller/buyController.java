@@ -27,7 +27,7 @@ public class buyController extends HttpServlet {
 		String requestURI = request.getRequestURI();
 		System.out.println("requestURI : " + requestURI);
 		String ctxPath = request.getContextPath();
-		System.out.println("ContextPath : " + ctxPath); // ¸Æ¶ô,È¯°æ,»óÅÂ °æ·Î
+		System.out.println("ContextPath : " + ctxPath); 
 		String cmd = requestURI.substring(ctxPath.length());
 		System.out.println(cmd);
 		
@@ -35,21 +35,21 @@ public class buyController extends HttpServlet {
 		try {
 			if(cmd.contentEquals("/buyComplet.buy")) {
 				BuyDAO dao = BuyDAO.getInstance();
-				String pg = "inicis";											//°áÁ¦»ç ¹Ş¾Æ¿Í¾ßÇÔ
+				String pg = "inicis";											//ê²°ì œì‚¬ ë°›ì•„ì™€ì•¼í•¨
 				String pay_method = request.getParameter("pay_method");
 				String merchant_uid = request.getParameter("merchant_uid");
-				String prod_name = request.getParameter("name");						// Ã³À½°Í¿Ü ¸î°³·Î  
-				int totalprice = Integer.parseInt("totalPrice");						//°¡°İ ¹Ş¾Æ¿Í¾ßÇÔ.
-				String mem_id = (String)request.getSession().getAttribute("loginInfo"); // ¼¼¼Ç¿¡¼­ ·Î±×ÀÎ Á¤º¸ ¹Ş¾Æ¿È
+				String prod_name = request.getParameter("name");						// ì²˜ìŒê²ƒì™¸ ëª‡ê°œë¡œ  
+				int totalprice = Integer.parseInt("totalPrice");						//ê°€ê²© ë°›ì•„ì™€ì•¼í•¨.
+				String mem_id = (String)request.getSession().getAttribute("loginInfo"); // ì„¸ì…˜ì—ì„œ ë¡œê·¸ì¸ ì •ë³´ ë°›ì•„ì˜´
 				String mem_name = request.getParameter("buyer_name");
 				String mem_phone = request.getParameter("buyer_tel");
 				String mem_email = request.getParameter("buyer_email");
 				String full_address = request.getParameter("buyer_addr");
 				String zip_code = request.getParameter("buyer_postcode");
-				String[] prod_names = request.getParameterValues("");			//ÀüÃ¼ ÀÌ¸§ ¸ñ·Ï ÇÑÅ¬·¡½ºÀÌ¸§À¸·Î ¹Ş¾Æ¿Í¾ßÇÔ
-				String[] prices = request.getParameterValues("");				//ÀüÃ¼ °¡°İ ¸ñ·Ï ÇÑÅ¬·¡½º·Î ¹Ş¾Æ¿Í¾ßÇÔ
-				String[] prod_quantitys = request.getParameterValues("");		//ÀüÃ¼ ¼ö·® ¸ñ·Ï ÇÑÅ¬·¡½º·Î ¹Ş¾Æ¿Í¾ßÇÔ.
-				String[] prod_codes = request.getParameterValues("");			//ÀüÃ¼ Ç°¸ñ ÄÚµå ¹Ş¾Æ¿Í¾ßÇÔ
+				String[] prod_names = request.getParameterValues("");			//ì „ì²´ ì´ë¦„ ëª©ë¡ í•œí´ë˜ìŠ¤ì´ë¦„ìœ¼ë¡œ ë°›ì•„ì™€ì•¼í•¨
+				String[] prices = request.getParameterValues("");				//ì „ì²´ ê°€ê²© ëª©ë¡ í•œí´ë˜ìŠ¤ë¡œ ë°›ì•„ì™€ì•¼í•¨
+				String[] prod_quantitys = request.getParameterValues("");		//ì „ì²´ ìˆ˜ëŸ‰ ëª©ë¡ í•œí´ë˜ìŠ¤ë¡œ ë°›ì•„ì™€ì•¼í•¨.
+				String[] prod_codes = request.getParameterValues("");			//ì „ì²´ í’ˆëª© ì½”ë“œ ë°›ì•„ì™€ì•¼í•¨
 				
 				List<OrderListDTO> list = new ArrayList<>();
 				for (int i = 0; i < prod_names.length; i++) {
@@ -64,13 +64,13 @@ public class buyController extends HttpServlet {
 				System.out.println("refund arrive");
 				
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
-				String test_already_cancelled_merchant_uid = "ORD0007";			// ÁÖ¹® ÄÚµå ³ÖÀ»°Í.
+				String test_already_cancelled_merchant_uid = "ORD0007";			// í™˜ë¶ˆí•  ID
 				CancelData cancel_data = new CancelData(test_already_cancelled_merchant_uid, false);
 				cancel_data.setEscrowConfirmed(true);
 				
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
-					System.out.println("¿Ï·á!");
+					System.out.println("ï¿½Ï·ï¿½!");
 				} catch (IamportResponseException e) {
 					System.out.println(e.getMessage());
 //					switch(e.getHttpStatusCode()) {
