@@ -58,11 +58,21 @@ public class CartDAO {
 		}
 	}
 	
-	public int deleteCart(int seq) throws Exception{
+	public int deleteCart(int seq) throws Exception{ // 장바구니 개인 삭제
 		String sql = "delete from cart where seq=?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int deleteAllCart() throws Exception{ // 장바구니 전체 삭제
+		String sql = "delete from cart";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

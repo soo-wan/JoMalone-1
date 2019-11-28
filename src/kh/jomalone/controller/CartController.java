@@ -66,6 +66,10 @@ public class CartController extends HttpServlet {
 				dao.updateProdQuantity(prod_quantity, seq);
 				response.sendRedirect("list.ca");
 			}
+			else if(cmd.contentEquals("/deleteAll.ca")) {
+				dao.deleteAllCart();
+				response.sendRedirect("list.ca");
+			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
