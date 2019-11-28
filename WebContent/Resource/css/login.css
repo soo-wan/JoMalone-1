@@ -25,10 +25,10 @@ input[type=checkbox] {margin: 0px 10px 0px 30px; width: 15px; height: 15px;}
 
 #kakao {margin-bottom: 20px; padding: 0px; width: 50px; height: 50px; background-color: #FFE410; border: 1px solid lightgray; border-radius: 10px;}
 #kakao>img {width: 48px; height: 48px;}
-#kakao>img, #kakao>h5 {float: left;}
+#kakao>img, #kakao>h5 {float: left; cursor: pointer;}
 #kakao>h5 {padding-left: 45px; width: 200px; line-height: 46px; color: #3F1600; font-size: 18px;}
 
 #naver {padding: 0px; width: 50px; height: 50px; background-color: #0BC904; border: 1px solid lightgray; border-radius: 10px;}
 #naver>img {width: 48px; height: 48px; border-radius: 10px;}
-#naver>img, #naver>h5 {float: left;}
+#naver>img, #naver>h5 {float: left; cursor: pointer;}
 #naver>h5 {padding-left: 45px; width: 200px; line-height: 50px; color: white; font-size: 18px;}

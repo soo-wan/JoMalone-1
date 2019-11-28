@@ -65,7 +65,7 @@
 	<c:choose>
 		<c:when test="${result>0 }">
 		<script>
-			alert("회원가입이 완료되었습니다");
+			alert("회원가입이 완료되었습니다.");
 			location.href = "login.jsp";
 		</script>
 		</c:when>
@@ -105,9 +105,9 @@
 		}).done(function(data){
 			console.log(data.result);
 			if(data.result == "false"){
-				$("#check").html("아이디 및 비밀번호를 확인해주세요");
+				$("#check").html("아이디 및 비밀번호를 확인해주세요.");
 			}else{
-				alert("로그인되었습니다")
+				alert("로그인되었습니다.")
 				location.href="${pageContext.request.contextPath}/home.jsp"
 			}
 			
