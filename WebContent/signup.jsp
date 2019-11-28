@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,10 +51,9 @@
 						<option value="daum">daum.net</option>
 						<option value="gmail">gmail.com</option>
 					</select>
-					
 				</div>
 				<div id="su-address" style="height: 110px;">
-					<h5><span>*</span>주소 : </h5><input type="text" id="zipcode"><input type="button" onclick="postcode()" value="주소 찾기" name="zipcode"><br>
+					<h5><span>*</span>주소 : </h5><input type="text" id="zip_code" name="zip_code"><input type="button" onclick="postcode()" value="주소 찾기"><br>
 					<input type="text" id="address1" placeholder="Input Your Road Name Address" style="margin: 8px 0px 0px 15px; width: 250px; height: 30px;" name="address1"><br>
 					<input type="text" id="address2" placeholder="Input Your Detail Address" style="margin: 8px 0px 0px 135px; width: 250px; height: 30px;" name="address2">				
 				</div>
@@ -149,7 +147,7 @@
 					본 약관에 포함된 어떠한 사항도 회사와 이용자간에 대리관계, 파트너쉽, 또는 기타 형태의 합작기업을 형성하는 것으로 해석될 수 없습니다. 회사가 이용자의 본 약관 조항 이행을 요구하지 않는다고 하더라도, 이는 추후 언제라도 이용자의 약관 조항의 이행을 요구할 수 있는 회사의 완전한 권리에 영향을 미치지 못하며, 본 약관 조항의 위반에 대해 회사가 권리를 행사하지 않는 것은 해당 조항의 포기로 간주되거나 해석될 수 없습니다. 본 약관의 어떠한 조항이 관련 법률상 이행 불가능하거나 유효하지 않을 경우, 또는 중재판정이나 법원의 판결을 통해 이행 불가능하거나 유효하지 않은 것으로 결정될 경우, 그와 같은 이행불가능성이나 무효성은 본 약관 전체의 이행가능성이나 유효성을 박탈할 수 없으나, 본 약관은 재판당국에 의하여 가능한 범위 내에서 원 조항에 반영된 바와 같이 당사자들의 원래 의도를 최대한 반영하기 위하여 수정될 수 있습니다.<br>					
 					본 약관과 관련하여 의문사항이 있을 경우, 고객관리지원팀 으로 문의 주시기 바랍니다.<br>
 				</div>
-				<h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">이용약관에 동의 하십니까?</h6><input type="checkbox" id="agree_service_check0" style="float: left;"><h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">동의함</h6><br>
+				<h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">이용약관에 동의 하십니까?</h6><input type="checkbox" value="1" id="agree_service_check0"  name="agree_service_check" style="float: left;"><h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">동의함</h6><br>
 				<h6 style="margin-top: 30px;"><span>*</span>개인정보의 수집 및 이용에 대한 동의 (필수)</h6>
 				<div id="consent-two">
 					이엘씨에이한국유한회사(이하 '회사')는 다음과 같이 개인정보를 수집•이용합니다.<br><br>
@@ -205,7 +203,7 @@
 					- 온라인 이용자: 온라인 사이트 회원정보 수정 기록 및 서비스 이용 기록 또는 오프라인 서비스 이용 (구매, 서비스, 샘플 수령 등)도 이용 내역으로 판단합니다.<br>
 					- 오프라인 이용자: 구매, 서비스, 샘플 수령 등으로 판단합니다.<br>
 				</div>
-				<h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">개인정보 수집 및 이용에 동의 하십니까?</h6><input type="checkbox" id="agree_privacy_check0" style="float: left;"><h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">동의함</h6><br>
+				<h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">개인정보 수집 및 이용에 동의 하십니까?</h6><input type="checkbox" value="1" id="agree_privacy_check0" name="agree_privacy_check" style="float: left;"><h6 style="float:left; margin: 5px 15px 0px 3px; font-size: 12px;">동의함</h6><br>
 			</div>
 			<div id="consent-all" class="ec-base-box typeThinBg gStrong" style="font-size: 14px;">
 				<p>
@@ -216,8 +214,8 @@
 				</p>
 			</div>
 			<div id="signup-btn">
-				<input type="button" value="sign up">
-				<input type="button" value="reset">
+				<input id="sign-join" type="button" value="sign up">
+				<input id="sign-reset" type="reset" value="re-input">
 			</div>
 		</div>
 	</form>
@@ -229,7 +227,7 @@
                 oncomplete: function(data) {
                 	var roadAddr = data.roadAddress;
 	                var extraRoadAddr = '';
-                    document.getElementById("zipcode").value = data.zonecode;
+                    document.getElementById("zip_code").value = data.zonecode;
                     document.getElementById("address1").value = roadAddr;
                 }
             }).open();
@@ -321,41 +319,90 @@
 	            $("#agree_privacy_check0").prop("checked",false)
 	        }
 	    });
-      	
-		$("#signupbtn").on("click",function(){
+		
+		$("#sign-join").on("click",function(){
 			var id = $("#id").val();
 			var pw = $("#pw").val();
 			var name = $("#name").val();
 			var repw = $("#repw").val();
+			var phone2 = $("#phone2").val();
+			var phone3 = $("#phone3").val();
 			
 			var idregex = /^[a-z\d]{4,11}$/;
 			var pwregex = /^[A-Za-z\d]{8,12}$/;
-			
+			var phoneregex = /^\d{3,4}$/;
 			
 			if(idregex.exec(id) == null){
-				alert("아이디양식을 다시 확인해주세요");
+				alert("아이디 양식을 다시 확인해주세요.");
 				$("#id").focus();
 				return;
 			}
 		
 			if(pwregex.exec(pw) == null){
-				alert("비밀번호양식을 다시 확인해주세요");
+				alert("비밀번호 양식을 다시 확인해주세요.");
 				$("#pw").focus();
 				return;
 			}
 			
 			if(repw == ""){
-				alert("비밀번호 확인을 해주세요");
+				alert("비밀번호 확인을 다시 확인해주세요.");
 				$("#repw").focus();
+				return;
+			}
+			
+			if(repw != pw){
+				alert("비밀번호가 일치하지 않습니다.");
+				$("#repw").focus();
+				return;
+			}
+			
+			if($("#name").val() == ""){
+				alert("이름을 입력해주세요.");
+				$("#name").focus();
+				return;
+			}
+			
+			if($("#phone2").val() == "" || $("#phone3").val() == ""){
+				alert("전화번호를 입력해주세요.");
+				$("#phone2").focus();
+				return;
+			}
+			
+			if(phoneregex.exec(phone2) == null || phoneregex.exec(phone3) == null){
+				alert("숫자만 입력해주세요.");
+				if(phoneregex.exec(phone2) == null){
+				$("#phone2").focus();
+				}else{
+					$("#phone3").focus();
+				}
+				return;
+			}
+			
+			if($("#email1").val() == "" || $("#email2").val() == ""){
+				alert("이메일을 입력해주세요.");
+				$("#email1").focus();
+				return;
+			}
+			
+			if($("#postcode").val() == "" || $("#roadAddress").val() == ""||$("#address2").val() == ""){
+					alert("주소를 입력해주세요.");
+				if($("#postcode").val() == ""){
+					$("#postcode").focus();
+				}else if($("#roadAddress").val() == ""){
+					$("#roadAddress").focus();
+				}else if($("#address2").val() == ""){
+					$("#address2").focus();
+				}
+				return;
 			}
 			
 			if(($("#agree_service_check0").is(":checked")==false)||($("#agree_privacy_check0").is(":checked")==false)) {
-				alert('약관에 동의해주세요');
+				alert("약관에 동의해주세요.");
 				return false;
-			}
+				}
 			
 			$("#signform").submit();
-			
+		
 		})
 	</script>
 	

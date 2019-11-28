@@ -11,9 +11,9 @@ input[type=text], input[type=password] {margin: 5px; padding-left: 20px; width: 
 input[type=checkbox] {margin: 0px 10px 0px 30px; width: 15px; height: 15px;}
 
 #login-btn {margin-bottom: 15px;}
-#login-btn>input[type=button] {width: 250px; height: 30px; background-color: lightgrey; color: dimgray; border: 0px;}
+#login-btn>input[type=button] {width: 250px; height: 30px; background-color: lightgray; color: dimgray; border: 0px;}
 
-#button-list>input[type=button] {margin: 0px 5px 0px 5px; height: 30px; background-color: lightgrey; color: dimgray; border: 0px;}
+#button-list>input[type=button] {margin: 0px 5px 0px 5px; height: 30px; background-color: lightgray; color: dimgray; border: 0px;}
 
 #sns-login {height: 300px;}
 #sns-login>hr {width: 350px;}
