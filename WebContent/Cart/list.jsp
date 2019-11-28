@@ -21,6 +21,12 @@ input{
 </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${list.size() == 0}">
+	<div align=center style="margin:100px;">장바구니 내역이 없습니다.</div>
+	<div align=center><a href=${pageContext.request.contextPath}/Cart/index.jsp>쇼핑 페이지 이동</a></div>
+</c:when>
+<c:otherwise>
 <p align=center>담은 결과
 <c:forEach items="${list }" var="dto">
 	<table bordercolor=black border=1 cellspacing=1>
@@ -61,13 +67,12 @@ input{
 			<td>총 합계</td>
 			<td><fmt:formatNumber value="${sum}" pattern="#,###" /> <!-- cout 대신에 formatNumber -->		
 		</tr>
-		<tr>
-			<td colspan=2><a href=${pageContext.request.contextPath}/Cart/index.jsp>쇼핑 페이지 이동</a>
-		</tr>
-		<tr>
-		<td colspan=2><a href="#">주문하기</a>
-		</tr>
 	</table>
+		<div align=center><button id="deleteAll">전체 삭제</button></div>
+		<div align=center><a href=${pageContext.request.contextPath}/Cart/index.jsp>쇼핑 페이지 이동</a></div>
+		<div align=center><a href="#">주문하기</a></div>
+	</c:otherwise>
+</c:choose>
 	<script>
 		
 		function deleteCart(seq){
@@ -82,6 +87,9 @@ input{
 			location.href="update.ca?prod_quantity="+countval+"&seq="+seq;
         }
 		
+        $("#deleteAll").on("click",function(){
+            location.href="deleteAll.ca";
+        })
     </script>
 </body>
 </html>
