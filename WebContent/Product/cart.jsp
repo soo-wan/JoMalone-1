@@ -105,6 +105,16 @@
 		</div>
 	</div>
 	
+	<script>
+		$(".select-btn").on("click", function() {
+			location.href = "order.jsp";
+		})
+		
+		$(".gogo-btn").on("click", function() {
+			location.href = "/JoMalone/home.jsp";
+		})
+	</script>
+	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>

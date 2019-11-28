@@ -25,7 +25,7 @@
             <div id="img_bar" class="col-2">
                 <a href="#"><img src="/JoMalone/Resource/img/notice.png"></a>
                 <a href="#"><img src="/JoMalone/Resource/img/info.png" id="information"></a>
-                <a href="#"><img src="/JoMalone/Resource/img/cart.png"></a>
+                <a href="#"><img src="/JoMalone/Resource/img/cart.png" id="cart"></a>
                 <a href="#"><img src="/JoMalone/Resource/img/search.png"></a>
             </div>
             <div class="col-2"></div>
@@ -73,6 +73,18 @@
     		</c:when>
     		<c:otherwise>
     			location.href= "/JoMalone/Member/mypage.jsp";
+    		</c:otherwise>
+    		</c:choose>
+    	})
+    	
+    	$("#cart").on("click", function() {
+    		<c:choose>
+    		<c:when test="${loginInfo == null}">
+	    		alert("로그인 후 이용해 주세요.");
+    			location.href = "/JoMalone/Member/login.jsp";
+    		</c:when>
+    		<c:otherwise>
+    			location.href= "/JoMalone/Product/cart.jsp";
     		</c:otherwise>
     		</c:choose>
     	})
