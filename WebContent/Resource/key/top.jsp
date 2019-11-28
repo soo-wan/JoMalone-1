@@ -69,10 +69,10 @@
     		<c:choose>
     		<c:when test="${loginInfo == null}">
 	    		alert("로그인 후 이용해 주세요.");
-    			location.href = "Member/login.jsp";
+    			location.href = "/JoMalone/Member/login.jsp";
     		</c:when>
     		<c:otherwise>
-    			location.href= "Member/mypage.jsp";
+    			location.href= "/JoMalone/Member/mypage.jsp";
     		</c:otherwise>
     		</c:choose>
     	})

@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="Resource/css/home.css">
 </head>
 <body>
-	<jsp:include page="Resource/key/top.jsp"/>
+	<jsp:include page="Resource/key/top.jsp" flush="false"/>
 	
 	<div id="main-event" class="container">
 	    <div id="main" class="row">
