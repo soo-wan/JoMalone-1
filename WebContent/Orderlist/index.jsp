@@ -71,7 +71,7 @@
 		<div class="contentsC">
 			<a href="#">
 				<img src="${pageContext.request.contextPath}/image11.gif" width=100 height=100>
-			</a> 내용2
+			</a>내용2
 		</div>
 		<div class="contents">내용3</div>
 		<div class="contents">내용4</div>
