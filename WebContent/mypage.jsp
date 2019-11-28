@@ -24,6 +24,28 @@
 		</div>
 	</div>
 	
+	<script>
+		$("#my-profile").on("click", function() {
+			location.href = "profile.jsp";
+		})
+		
+		$("#my-cart").on("click", function() {
+			location.href = "cart.jsp";
+		})
+		
+		$("#my-buylist").on("click", function() {
+			location.href = "buylist.jsp";
+		})
+		
+		$("#my-enquiry").on("click", function() {
+			location.href = "enquiry.jsp";
+		})
+		
+		$("#my-delevery").on("click", function() {
+			location.href = "delevery.jsp";
+		})
+	</script>
+	
 	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>
