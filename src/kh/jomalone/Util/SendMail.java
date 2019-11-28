@@ -13,11 +13,11 @@ import javax.mail.internet.MimeMessage;
 
 public class SendMail {
 	public void sendMail(String toEamil) {
-		final String user = "asdf@naver.com"; 					//¹ß½ÅÀÚÀÇ ÀÌ¸ÞÀÏ ¾ÆÀÌµð¸¦ ÀÔ·Â
-		final String password = ""; 							//¹ß½ÅÀÚ ÀÌ¸ÞÀÏÀÇ ÆÐ½º¿öµå¸¦ ÀÔ·Â
+		final String user = "asdf@naver.com"; 					//ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½
+		final String password = ""; 							//ï¿½ß½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½Ô·ï¿½
 		
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.naver.com");			//±¸±ÛÀÏ°æ¿ì smtp.gmail.com
+		prop.put("mail.smtp.host", "smtp.naver.com");			//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ smtp.gmail.com
 		prop.put("mail.smtp.port", 465);
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.ssl.enable", "true");
@@ -29,21 +29,24 @@ public class SendMail {
             }
         });
 
+		
+		
+		
 		try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
 
-            //¼ö½ÅÀÚ¸ÞÀÏÁÖ¼Ò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEamil));
 
             // Subject
-            message.setSubject("Á¦¸ñÀ» ÀÔ·ÂÇÏ¼¼¿ä"); //¸ÞÀÏ Á¦¸ñÀ» ÀÔ·Â
+            message.setSubject("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½"); //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 
             // Text
-            message.setText("³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä");    //¸ÞÀÏ ³»¿ëÀ» ÀÔ·Â
+            message.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
 
             // send the message
-            Transport.send(message); ////Àü¼Û
+            Transport.send(message); ////ï¿½ï¿½ï¿½ï¿½
             System.out.println("message sent successfully...");
         } catch (AddressException e) {
             // TODO Auto-generated catch block
@@ -56,11 +59,11 @@ public class SendMail {
 	
 	
 	public void sendMail(String toEmail, String subject, String msg) {
-		final String user = "asdf@naver.com"; 					//¹ß½ÅÀÚÀÇ ÀÌ¸ÞÀÏ ¾ÆÀÌµð¸¦ ÀÔ·Â
-		final String password = ""; 							//¹ß½ÅÀÚ ÀÌ¸ÞÀÏÀÇ ÆÐ½º¿öµå¸¦ ÀÔ·Â
+		final String user = "asdf@naver.com"; 					//ï¿½ß½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½
+		final String password = ""; 							//ï¿½ß½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð½ï¿½ï¿½ï¿½ï¿½å¸¦ ï¿½Ô·ï¿½
 		
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.naver.com");			//±¸±ÛÀÏ°æ¿ì smtp.gmail.com
+		prop.put("mail.smtp.host", "smtp.naver.com");			//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ smtp.gmail.com
 		prop.put("mail.smtp.port", 465);
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.ssl.enable", "true");
@@ -76,7 +79,7 @@ public class SendMail {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
 
-            //¼ö½ÅÀÚ¸ÞÀÏÁÖ¼Ò
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail)); 
 
             // Subject
@@ -86,7 +89,7 @@ public class SendMail {
             message.setText(msg);    
 
             // send the message
-            Transport.send(message); ////Àü¼Û
+            Transport.send(message); ////ï¿½ï¿½ï¿½ï¿½
             System.out.println("message sent successfully...");
         } catch (AddressException e) {
             // TODO Auto-generated catch block
@@ -94,6 +97,7 @@ public class SendMail {
         } catch (MessagingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            
         }
 
 	}
