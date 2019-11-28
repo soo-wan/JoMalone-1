@@ -10,7 +10,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">    <!-- Jo Malone / Korea -->
-<link rel="stylesheet" href="Resource/css/top.css">
+<link rel="stylesheet" href="/JoMalone/Resource/css/top.css">
 </head>
 <body>
     <div id="top-one" class="container-fulid">
@@ -23,10 +23,10 @@
 				<h5>Korea</h5>
 			</div>
             <div id="img_bar" class="col-2">
-                <a href="#"><img src="Resource/img/notice.png"></a>
-                <a href="#"><img src="Resource/img/info.png" id="information"></a>
-                <a href="#"><img src="Resource/img/cart.png"></a>
-                <a href="#"><img src="Resource/img/search.png"></a>
+                <a href="#"><img src="/JoMalone/Resource/img/notice.png"></a>
+                <a href="#"><img src="/JoMalone/Resource/img/info.png" id="information"></a>
+                <a href="#"><img src="/JoMalone/Resource/img/cart.png"></a>
+                <a href="#"><img src="/JoMalone/Resource/img/search.png"></a>
             </div>
             <div class="col-2"></div>
         </div>
@@ -62,17 +62,17 @@
     
     <script>
     	$("#title").on("click", function() {
-    		location.href= "home.jsp";
+    		location.href= "/JoMalone/home.jsp";
     	})
     
     	$("#information").on("click", function() {
     		<c:choose>
     		<c:when test="${loginInfo == null}">
 	    		alert("로그인 후 이용해 주세요.");
-    			location.href = "login.jsp";
+    			location.href = "Member/login.jsp";
     		</c:when>
     		<c:otherwise>
-    			location.href= "mypage.jsp";
+    			location.href= "Member/mypage.jsp";
     		</c:otherwise>
     		</c:choose>
     	})

@@ -9,10 +9,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="stylesheet" href="Resource/css/signup.css">
+<link rel="stylesheet" href="/JoMalone/Resource/css/signup.css">
 </head>
 <body>
-	<jsp:include page="Resource/key/top.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
 	<form action="signup.sign" method="post" id="signform">
 		<div id="signup-page" class="container">
@@ -406,6 +406,6 @@
 		})
 	</script>
 	
-	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>

@@ -8,10 +8,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="Resource/css/login.css">
+<link rel="stylesheet" href="/JoMalone/Resource/css/login.css">
 </head>
 <body>
-	<jsp:include page="Resource/key/top.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
 	<div id="general-login" class="container">
 	    <div id="login-title" class="row"><h4>LOGIN</h4></div>
@@ -34,11 +34,11 @@
 		<hr style="margin-bottom: 30px;">
 		<div id="sns-btn" class="row">
 			<div id="kakao" class="col-12">
-				<img src="Resource/img/kakao.png">
+				<img src="/JoMalone/Resource/img/kakao.png">
 				<h5>카카오 로그인</h5>
 			</div>
 			<div id="naver" class="col-12">
-				<img src="Resource/img/naver.jpg">
+				<img src="/JoMalone/Resource/img/naver.jpg">
 				<h5>네이버 로그인</h5>
 			</div>
 		</div>
@@ -50,6 +50,6 @@
 		})
 	</script>
 	
-	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="Resource/css/bottom.css">
+<link rel="stylesheet" href="/JoMalone/Resource/css/bottom.css">
 </head>
 <body>
     <div id="bottom-one" class="container">
@@ -31,9 +31,9 @@
             </div>
             <div id="info" class="col-3">
                 <p>
-                    <a href="https://www.facebook.com/JoMaloneLondon/" target="_blank"><img src="Resource/img/facebook.png"></a>
-                    <a href="https://twitter.com/JoMaloneLondon/" target="_blank"><img src="Resource/img/twitter.png"></a>
-                    <a href="https://www.instagram.com/jomalonelondon/" target="_blank"><img src="Resource/img/insta.png"></a>
+                    <a href="https://www.facebook.com/JoMaloneLondon/" target="_blank"><img src="/JoMalone/Resource/img/facebook.png"></a>
+                    <a href="https://twitter.com/JoMaloneLondon/" target="_blank"><img src="/JoMalone/Resource/img/twitter.png"></a>
+                    <a href="https://www.instagram.com/jomalonelondon/" target="_blank"><img src="/JoMalone/Resource/img/insta.png"></a>
                 </p>
                 <h5>GUIDE</h5>
                 <h6>이용약관</h6>

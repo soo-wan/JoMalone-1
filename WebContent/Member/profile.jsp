@@ -9,10 +9,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link rel="stylesheet" href="Resource/css/profile.css">
+<link rel="stylesheet" href="/Resource/css/profile.css">
 </head>
 <body>
-	<jsp:include page="Resource/key/top.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
 	<div id="profile" class="container">
 		<div id="profile-title" class="row"><h4>MY PROFILE</h4></div>
@@ -76,6 +76,6 @@
 		</div>
 	</div>
 	
-	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>
