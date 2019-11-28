@@ -1,8 +1,8 @@
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.security.SecureRandom"%>
 <%@page import="java.net.URLEncoder"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +61,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<c:choose>
+		<c:when test="${result>0 }">
+		<script>
+			alert("회원가입이 완료되었습니다");
+			location.href = "login.jsp";
+		</script>
+		</c:when>
+	</c:choose>
 
 	<div id="sns-login" class="container">
 		<div id="sns-title" class="row">
@@ -78,14 +87,6 @@
 			</div>
 		</div>
 	</div>
-
-	<c:choose>
-		<c:when test="${result>0 }">
-		<script>
-		alert("회원가입이 완료되었습니다")
-		</script>
-		</c:when>
-	</c:choose>
 
 	<script>
 		$("#general-signup").on("click", function() {
