@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +13,11 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
-	<button id=refund>È¯ºÒÇÏ±â</button>
+	<button id=refund>í™˜ë¶ˆí•˜ê¸°</button>
 	<button id=bt>BT</button>
 	<script>
 		$("#refund").on("click", function() {
-			console.log("refundtest·Î ¤¡¤¡")
+			console.log("refundtestë¡œ ã„±ã„±")
 			$(location).attr("href","Refund.refund");
 		});
 
@@ -27,14 +27,14 @@
 			IMP.request_pay({
 				pg : "inicis",
 				pay_method : "card",
-				merchant_uid : "ORD0011",	// ¹æ½ÄÁ¤ÇÒ°Í
-				name : "³ë¸£¿şÀÌ È¸Àü ÀÇÀÚ",		// ¿©·¯°³ÀÏ½Ã   Ã³À½°Í ¿Ü N°³ 
-				amount : 100,				// ÃÑÇÕ °¡°İ
-				buyer_email : "asdf@naver.com",		// ÀÌ¸ŞÀÏ ÀÔ·Â
-				buyer_name : "È«±æµ¿",		// ÀÌ¸§
-				buyer_tel : "010-4242-4242",		//ÀüÈ­¹øÈ£
-				buyer_addr : "¼­¿ïÆ¯º°½Ã °­³²±¸ ½Å»çµ¿", 	//addr1 + addr2 
-				buyer_postcode : "01181"	// ¿ìÆí¹øÈ£
+				merchant_uid : "ORD0011",	// ë°©ì‹ì •í• ê²ƒ
+				name : "ë…¸ë¥´ì›¨ì´ íšŒì „ ì˜ì",		// ì—¬ëŸ¬ê°œì¼ì‹œ   ì²˜ìŒê²ƒ ì™¸ Nê°œ 
+				amount : 100,				// ì´í•© ê°€ê²©
+				buyer_email : "asdf@naver.com",		// ì´ë©”ì¼ ì…ë ¥
+				buyer_name : "í™ê¸¸ë™",		// ì´ë¦„
+				buyer_tel : "010-4242-4242",		//ì „í™”ë²ˆí˜¸
+				buyer_addr : "ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ì‹ ì‚¬ë™", 	//addr1 + addr2 
+				buyer_postcode : "01181"	// ìš°í¸ë²ˆí˜¸
 			}, function(rsp) { // callback
 				console.log(rsp);
 				if (rsp.success) {

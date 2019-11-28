@@ -131,9 +131,4 @@ public class OrderListDTO {
 	public void setRefund(String refund) {
 		this.refund = refund;
 	}
-	
-	
-	
-	
-	
 }
