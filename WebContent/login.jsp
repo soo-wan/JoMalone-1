@@ -18,6 +18,7 @@
 	    <div id="login-inputbox" class="row">
 	    	<div id="login-id" class="col-12"><input type="text" placeholder="Input Your ID "></div>
 	    	<div id="login-pw" class="col-12"><input type="password" placeholder="Input Your PW "></div>
+	    	<div id="check"></div>
 	    	<div id="cookie-check" class="col-12"><input type="checkbox"><h6>아이디저장</h6></div>
 	    	<div id="login-btn" class="col-12"><input type="button" value="LOGIN"></div>
 	    	<div id="button-list" class="col-12">
