@@ -14,7 +14,7 @@
 </head>
 <body>
 	<button id=refund>환불하기</button>
-	<button id=bt>BT</button>
+	<button id=bt>결제</button>
 	<script>
 		$("#refund").on("click", function() {
 			console.log("refundtest로 ㄱㄱ")
@@ -27,7 +27,7 @@
 			IMP.request_pay({
 				pg : "inicis",
 				pay_method : "card",
-				merchant_uid : "ORD0011",	// 방식정할것
+				merchant_uid : "ORD0012",	// 방식정할것
 				name : "노르웨이 회전 의자",		// 여러개일시   처음것 외 N개 
 				amount : 100,				// 총합 가격
 				buyer_email : "asdf@naver.com",		// 이메일 입력
