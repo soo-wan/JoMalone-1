@@ -146,7 +146,7 @@ public class Ncallback extends HttpServlet {
 						
 							}else { //아이디가 없으면 db에 저장.
 								NMembersDTO ndto = new NMembersDTO(id,null,name,email,birthday,gender);
-								dao.NFirstLogin(ndto);
+								dao.naverFirLogin(ndto);
 								request.getSession().setAttribute("loginInfo", id);
 								request.getSession().setAttribute("name", name);
 								request.getRequestDispatcher("home.jsp").forward(request, response);
