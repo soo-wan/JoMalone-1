@@ -256,8 +256,59 @@ public class MembersDAO {
 			}
 		}
 	}
-
-	
+	//이름과 핸드폰번호가 일치하는 아이디 가져오기
+	public String findid(String name, String phone)throws Exception {
+		String sql = "select mem_id from members where mem_name=? and mem_phone=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, name);
+			pstat.setString(2, phone);
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				if(rs.next()) {
+					String id = rs.getString(1);
+					
+					return id;
+				}
+				return null;
+			}
+		}
+	}
+	//존재하는 이메일인가?
+	public boolean isEmailExist(String email)throws Exception {
+		String sql = "select * from members where mem_email = ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, email);
+			
+			try(
+					ResultSet rs = pstat.executeQuery();
+					){
+				return rs.next();
+			}
+		}
+	}
+	//임시비밀번호 변경
+	public int changePw(String tempPw, String id, String email)throws Exception{
+		String sql = "update members set mem_pw =? where mem_id=? and mem_email=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, tempPw);
+			pstat.setString(2, id);
+			pstat.setString(3, email);
+			
+			int result = pstat.executeUpdate();
+			return result;
+		}
+		
+	}
 
 	
 
