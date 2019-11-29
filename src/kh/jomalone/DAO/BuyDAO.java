@@ -55,7 +55,7 @@ public class BuyDAO {
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into prod_buy values(order_seq.nextval,sysdate,?,?,?,?,?,?,'�ֹ� �Ϸ�',?,?,?,?,'��� �غ���',N)");) {
+						"insert into prod_buy values(order_seq.nextval,sysdate,?,?,?,?,?,?,'결제완료',?,?,?,?,'배송상태','N',11111111,'N')");) {
 			for (OrderListDTO dto : list) {
 				pstat.setString(1, dto.getMerchant_uid());
 				pstat.setString(2, dto.getProd_code());
@@ -79,7 +79,7 @@ public class BuyDAO {
 				PreparedStatement pstat = con.prepareStatement("select * from prod_buy")) {
 			ResultSet rs = pstat.executeQuery();
 			while(rs.next()) {
-				list.add(new OrderListDTO(rs.getInt(1),rs.getTimestamp(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getNString(15)));
+				list.add(new OrderListDTO(rs.getInt(1),rs.getTimestamp(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
 			}
 		}
 		return list;
