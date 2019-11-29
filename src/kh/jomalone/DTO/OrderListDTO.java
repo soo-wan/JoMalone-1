@@ -18,12 +18,13 @@ public class OrderListDTO {
 	private String zip_code;
 	private String delivery_check;
 	private String refund;
+	private String processed;
 	public OrderListDTO() {
 		super();
 	}
 	public OrderListDTO(int order_seq, Timestamp order_date, String merchant_uid, String prod_code, String prod_name,
 			String pay_method, String mem_id, String mem_name, String order_state, int prod_quantity, int price,
-			String full_address, String zip_code, String delivery_check, String refund) {
+			String full_address, String zip_code, String delivery_check, String refund, String processed) {
 		super();
 		this.order_seq = order_seq;
 		this.order_date = order_date;
@@ -40,6 +41,7 @@ public class OrderListDTO {
 		this.zip_code = zip_code;
 		this.delivery_check = delivery_check;
 		this.refund = refund;
+		this.processed = processed;
 	}
 	public int getOrder_seq() {
 		return order_seq;
@@ -131,4 +133,11 @@ public class OrderListDTO {
 	public void setRefund(String refund) {
 		this.refund = refund;
 	}
+	public String getProcessed() {
+		return processed;
+	}
+	public void setProcessed(String processed) {
+		this.processed = processed;
+	}
+	
 }
