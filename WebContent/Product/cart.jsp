@@ -102,7 +102,7 @@
 				<input class="select-btn" type="button" value="선택상품주문">
 			</div>
 			<div id="gogo-btn"><input class="gogo-btn" type="button" value="쇼핑계속하기"></div>
-			<div style="margin-top: 30px; width: 1140px; height: 260px; border: 1px solid red;">
+			<div style="margin-top: 30px; width: 1140px; height: 260px;">
 				<h6 style="font-size: 12px; line-height: 20px;">이용안내</h6>
 				<h6 style="font-size: 12px; color: darkgray; line-height: 20px;">[장바구니 이용안내]</h6>
 				<h6 style="font-size: 11px; color: darkgray; line-height: 20px;">
