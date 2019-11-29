@@ -1,6 +1,7 @@
 package kh.jomalone.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.jomalone.DAO.MembersDAO;
+import kh.jomalone.DTO.MembersDTO;
+import kh.jomalone.Util.encrypt;
 
 @WebServlet("*.log")
 public class loginController extends HttpServlet {
@@ -16,28 +19,37 @@ public class loginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println(cmd);
+		MembersDAO dao = MembersDAO.getInstance();
 		request.setCharacterEncoding("UTF8");
 		
 		try {
 			if(cmd.contentEquals("/Member/login.log")) {
 				String id = request.getParameter("id");
-				String pw = request.getParameter("pw");
+				String pw = encrypt.encrypt(request.getParameter("pw"));
 				System.out.println(id);
 				System.out.println(pw);
 				
-				MembersDAO dao = MembersDAO.getInstance();
 				boolean result = dao.login(id, pw);
 				System.out.println(result);
 				
 				if(result) {
 					request.getSession().setAttribute("loginInfo", id);
 					String info = (String)request.getSession().getAttribute("loginInfo");
-					System.out.println(info);
+					MembersDTO dto = dao.selectById(info);
+					String name = dto.getName();
+
+					request.getSession().setAttribute("name", name);
+
+					System.out.println(name);
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 					
 				}else {
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				}
+			}else if(cmd.contentEquals("/logout.log")) {
+				request.getSession().invalidate();
+				response.sendRedirect("home.jsp");
+				
 			}
 
 		}catch(Exception e) {

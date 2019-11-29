@@ -28,7 +28,7 @@ public class Ncallback extends HttpServlet {
 		    String clientSecret = "4Yn9S9ceBY";//���ø����̼� Ŭ���̾�Ʈ ��ũ����";
 		    String code = request.getParameter("code");
 		    String state = request.getParameter("state");
-		    String redirectURI = URLEncoder.encode("http://localhost:8080/JoMalone/callback", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://localhost:8080/JoMalone/Ncallback", "UTF-8");
 		    String apiURL;
 		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 		    apiURL += "client_id=" + clientId;
@@ -146,7 +146,7 @@ public class Ncallback extends HttpServlet {
 						
 							}else { //아이디가 없으면 db에 저장.
 								NMembersDTO ndto = new NMembersDTO(id,null,name,email,birthday,gender);
-								dao.NFirstLogin(ndto);
+								dao.naverFirLogin(ndto);
 								request.getSession().setAttribute("loginInfo", id);
 								request.getSession().setAttribute("name", name);
 								request.getRequestDispatcher("home.jsp").forward(request, response);
