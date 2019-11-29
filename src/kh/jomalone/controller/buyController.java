@@ -17,6 +17,7 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import kh.jomalone.DAO.BuyDAO;
+import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
 
@@ -33,32 +34,52 @@ public class buyController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf8");
 		try {
-			if(cmd.contentEquals("/buyComplet.buy")) {
-				BuyDAO dao = BuyDAO.getInstance();
-				String pg = "inicis";											//결제사 받아와야함
-				String pay_method = request.getParameter("pay_method");
-				String merchant_uid = request.getParameter("merchant_uid");
-				String prod_name = request.getParameter("name");						// 처음것외 몇개로  
-				int totalprice = Integer.parseInt("totalPrice");						//가격 받아와야함.
-				String mem_id = (String)request.getSession().getAttribute("loginInfo"); // 세션에서 로그인 정보 받아옴
-				String mem_name = request.getParameter("buyer_name");
-				String mem_phone = request.getParameter("buyer_tel");
-				String mem_email = request.getParameter("buyer_email");
-				String full_address = request.getParameter("buyer_addr");
-				String zip_code = request.getParameter("buyer_postcode");
-				String[] prod_names = request.getParameterValues("");			//전체 이름 목록 한클래스이름으로 받아와야함
-				String[] prices = request.getParameterValues("");				//전체 가격 목록 한클래스로 받아와야함
-				String[] prod_quantitys = request.getParameterValues("");		//전체 수량 목록 한클래스로 받아와야함.
-				String[] prod_codes = request.getParameterValues("");			//전체 품목 코드 받아와야함
+			if(cmd.contentEquals("/Product/callMerchantuid.buy")){
+				BuyDAO bdao = BuyDAO.getInstance();
+				MembersDAO mdao = MembersDAO.getInstance();
+				String merchant_uid = "ORD"+String.format("%05d", bdao.selectMaxBuySeq()+1);
+				String mem_id = (String)request.getSession().getAttribute("loginInfo");
+				String mem_name = mdao.selectById(mem_id).getName();//
 				
+				response.getWriter().append("{\"merchant_uid\" : \""+ merchant_uid +"\","
+						+ " \"name\" : \""+ mem_name+ "\"}");
+			}else if(cmd.contentEquals("/buyComplet.buy")) {
+				BuyDAO bdao = BuyDAO.getInstance();
+				MembersDAO mdao = MembersDAO.getInstance();
+				String pg = "inicis";//													//결제사 받아와야함
+				String pay_method = "card";//
+				String prod_name = request.getParameter("name");//						// 처음것외 몇개로  
+				int totalprice = Integer.parseInt("totalPrice");//						//가격 받아와야함.
+				String mem_id = (String)request.getSession().getAttribute("loginInfo"); // 세션에서 로그인 정보 받아옴
+				
+				
+				String phone1 = request.getParameter("phone1");//
+				String phone2 = request.getParameter("phone2");//
+				String phone3 = request.getParameter("phone3");//
+				String mem_phone = phone1 + phone2 + phone3;//
+				
+				String address1 = request.getParameter("address1");//
+				String address2 = request.getParameter("address2");//
+				String full_address = address1 + address2;//
+				String zip_code = request.getParameter("zip_code");//
+				String[] prod_names = request.getParameterValues("prod_names");//			//전체 이름 목록 한클래스이름으로 받아와야함
+				String[] prices = request.getParameterValues("prices");//				//전체 가격 목록 한클래스로 받아와야함
+				String[] prod_quantitys = request.getParameterValues("prod_quantitys");//		//전체 수량 목록 한클래스로 받아와야함.
+				String[] prod_codes = request.getParameterValues("prod_codes");//			//전체 품목 코드 받아와야함
+				
+				String endEmail = request.getParameter("writeEmail");
+				String merchant_uid = "ORD"+String.format("%05d", bdao.selectMaxBuySeq());//
+				
+				String mem_name = mdao.selectById(mem_id).getName();//
+				String mem_email = request.getParameter("emailID")+endEmail;//
 				List<OrderListDTO> list = new ArrayList<>();
 				for (int i = 0; i < prod_names.length; i++) {
 					int price = Integer.parseInt(prices[i]);
 					int prod_quantity = Integer.parseInt(prod_quantitys[i]);
 					list.add(new OrderListDTO(0,null,merchant_uid,prod_codes[i],prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null));
 				}
-				dao.insertOrderList(list);
-				dao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,prod_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code));
+				bdao.insertOrderList(list);
+				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,prod_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code));
 				
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
