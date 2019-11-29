@@ -1,4 +1,15 @@
-#order-page {margin-top: 80px; height: 380px;}
+#order-page {margin-top: 80px; height: 1550px;}
 
 #order-title {margin-bottom: 30px; padding: 0px; height: 50px;}
 #order-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+
+.order-table {margin-top: 10px; width: 100%; text-align: center;}
+.my-item {height: 100px; border-bottom: 1px solid lightgray;}
+.item-img {width: 80px; height: 90px; text-align: center;}
+
+#check-delete {margin-bottom: 100px;}
+#check-btn {width: 80px; height: 20px; font-size: 11px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}
+
+#return {width: 100px; height: 20px; font-size: 11px; background-color: white; color: dimgray; border: 1px solid lightgray; border-radius: 5px;}
+
+#delevery-info {margin-bottom: 100px;}

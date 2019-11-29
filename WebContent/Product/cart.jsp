@@ -18,13 +18,13 @@
 		<div id="cart-list" class="row">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 			  <li class="nav-item">
-			    <a class="nav-link active" id="korea-title" data-toggle="tab" href="#korea" role="tab">국내 배송상품</a>
+			    <a class="nav-link active" id="korea-title" data-toggle="tab" href="#korea" role="tab"><h6>국내 배송상품</h6></a>
 			  </li>
 			  <li class="nav-item">
-			    <a class="nav-link" id="country-title" data-toggle="tab" href="#country" role="tab">해외 배송상품</a>
+			    <a class="nav-link" id="country-title" data-toggle="tab" href="#country" role="tab"><h6>해외 배송상품</h6></a>
 			  </li>
 			  <li>
-			  	<h6 style="width: 867px; line-height: 50px; text-align: right; font-size: 12px;">장바구니에 담긴 상품은 30일 동안 보관됩니다.</h6> 
+			  	<h6 style="width: 875px; line-height: 50px; text-align: right; font-size: 12px;">장바구니에 담긴 상품은 30일 동안 보관됩니다.</h6> 
 			  </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -102,6 +102,23 @@
 				<input class="select-btn" type="button" value="선택상품주문">
 			</div>
 			<div id="gogo-btn"><input class="gogo-btn" type="button" value="쇼핑계속하기"></div>
+			<div style="margin-top: 30px; width: 1140px; height: 260px; border: 1px solid red;">
+				<h6 style="font-size: 12px; line-height: 20px;">이용안내</h6>
+				<h6 style="font-size: 12px; color: darkgray; line-height: 20px;">[장바구니 이용안내]</h6>
+				<h6 style="font-size: 11px; color: darkgray; line-height: 20px;">
+					1. 해외배송 상품과 국내배송 상품은 함께 결제하실 수 없으니 장바구니 별도 따로 결제해 주시기 바랍니다.<br>
+					2. 해외배송 가능 상품의 경우 국내배송 장바구니에 담았다가 해외배송 장바구니로 이동하여 결제하실 수 있습니다.<br>
+					3. 선택하신 상품의 수량을 변경하시려면 수량변경 입력창에 갯수 변경을 하시면 됩니다.<br>
+					4. [쇼핑계속하기] 버튼을 누르시면 쇼핑을 계속 하실 수 있습니다.<br>
+					5. 장바구니와 관심상품을 이용하여 원하시는 상품만 주문하거나 관심상품으로 등록하실 수 있습니다.<br>
+				</h6>
+				<h6 style="font-size: 12px; color: darkgray; line-height: 20px;">[무이자할부]</h6>
+				<h6 style="font-size: 11px; color: darkgray; line-height: 20px;">
+					1. 상품별 무이자할부 혜택을 받으시려면 무이자할부 상품만 선택하여 [주문하기] 버튼을 눌러 주문/결제 하시면 됩니다.<br>
+					2. [전체상품주문] 버튼을 누르시면 장바구니의 구분없이 선택된 모든 상품에 대한 주문/결제가 이루어집니다.<br>
+					3. 단, 전체 상품을 주문/결제하실 경우, 상품별 무이자할부 혜택을 받으실 수 없습니다.<br>
+				</h6>
+			</div>
 		</div>
 	</div>
 	

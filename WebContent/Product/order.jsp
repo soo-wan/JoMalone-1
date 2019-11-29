@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="/JoMalone/Resource/css/order.css">
 </head>
 <body>
@@ -15,7 +16,207 @@
 	
 	<div id="order-page" class="container">
 	    <div id="order-title" class="row"><h4>ORDER</h4></div>
+	    <div class="row" style="padding-left: 10px; height: 18px;"><h6 style="font-size: 13px;">국내배송상품 주문내역</h6></div>
+	    <div id="order-list" class="row">
+	    	<table class="order-table">
+				<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
+			  	 	<td style="width: 50px;"><input type="checkbox">
+			  	  	<td style="width: 130px;">IMAGE
+			  	  	<td style="width: 400px;">ITEM
+			  	  	<td style="width: 130px;">PRICE
+			  	  	<td style="width: 130px;">QTY
+			  	  	<td style="width: 130px;">CHARGE
+			  	  	<td>TOTAL
+			  	</tr>
+			  	<tr class="my-item">
+			  		<td style="width: 50px;"><input type="checkbox">
+			  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+			  		<td style="width: 400px;">Lime Basil & Mandarin Cologne
+			  		<td style="width: 130px;">99,000 		
+			  		<td style="width: 130px;">1
+			  		<td style="width: 130px;">2,000
+			  		<td>
+			  	</tr>
+			  	<tr class="my-item">
+			  		<td style="width: 50px;"><input type="checkbox">
+			  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+			  		<td style="width: 400px;">Lime Basil & Mandarin Cologne
+			  		<td style="width: 130px;">99,000 		
+			  		<td style="width: 130px;">1
+			  		<td style="width: 130px;">2,000
+			  		<td>
+			  	</tr>
+			</table>
+	    </div>
+	    <div id="money-info" class="row" style="height: 40px; border-bottom: 2px solid lightgray;">
+	    	<div style="float: left; margin: 10px 0px 0px 5px;"><h6 style="font-size: 13px;">[기본배송]</h6></div>
+	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;"><h6 style="font-size: 13px;">상품구매금액 99,000 + 배송비 2,000 = TOTAL 102,000</h6></div>
+	    </div>
+	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
+		<div class="row" style="height: 25px;">
+		    <div id="check-delete" style=" width: 150px; height: 25px;">
+				<h6 style="margin: 2px 10px 0px 2px; float: left; font-size: 12px;">선택상품</h6>
+				<input type="button" id="check-btn" value="삭제하기" style="float: left;">
+			</div>
+			<div style="width: 987px; height: 25px; text-align: right;">
+				<input type="button" id="return" value="이전페이지" style="float: right;">
+			</div>
+		</div>
+		<div class="row" style="margin-top: 70px; height: 25px;">
+			<div id="delevery-info" style="width: 100px; height: 25px;">
+				<h6 style="margin: 2px 10px 0px 2px; float: left; font-size: 13px;">배송 정보</h6>
+			</div>
+			<div style="width: 1030px; height: 25px; text-align: right;">
+				<h6 style="font-size: 13px; float: right;"><span style="color: crimson">*</span>필수입력사항</h6>
+			</div>
+		</div>
+		<div id="dele-table" class="row" style="height: 332px; border: 1px solid lightgray; border-radius: 5px;">
+			<table>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">배송지 선택</h6>
+					<td style="padding: 6px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;">
+						<input type="checkbox" style="float: left; margin-top: 1px;">
+						<h6 style="float: left; margin-left: 10px; font-size: 13px;">회원정보와 동일</h6>
+						<input type="checkbox" style="float: left; margin: 1px 0px 0px 20px;">
+						<h6 style="float: left; margin-left: 9px; font-size: 13px;">새로운 배송지</h6>
+				</tr>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">받으시는 분<span style="color: crimson;"> *</span></h6>
+					<td style="padding: 0px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;"><input type="text" style="width: 200px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;">
+				</tr>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 90px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">주소<span style="color: crimson;"> *</span></h6>
+					<td style="padding-left: 10px; width: 1040px; height: 90px; text-align: left;">
+						<input type="text" id="zip_code" name="zip_code" style="width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;">
+						<input type="button" onclick="postcode()" value="주소찾기" style="margin-bottom: 0px; width: 100px; height: 20px; background-color: lightgray; border: 0px; border-radius: 5px; font-size: 11px;"><br>
+						<input type="text" id="address1" name="address1" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
+						<input type="text" id="address2" name="address2" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
+				</tr>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">일반전화</h6>
+					<td style="padding-left: 10px; width: 1040px; height: 20px; text-align: left;">
+						<select name="phone1" id="phone1" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
+							<option value="02">02</option>
+							<option value="031">031</option>
+							<option value="032">032</option>
+							<option value="033">033</option>
+							<option value="041">041</option>
+							<option value="042">042</option>
+							<option value="043">043</option>
+							<option value="044">044</option>
+							<option value="051">051</option>
+							<option value="052">052</option>
+							<option value="053">053</option>
+							<option value="054">054</option>
+							<option value="055">055</option>
+							<option value="061">061</option>
+							<option value="062">062</option>
+							<option value="063">063</option>
+							<option value="064">064</option>
+						</select>
+						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
+						<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
+						<input type="text" name="phone3" id="phone3" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
+				</tr>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">휴대전화<span style="color: crimson;"> *</span></h6>
+					<td style="padding-left: 10px; width: 1040px; height: 20px; text-align: left;">
+						<select name="phone1" id="phone1" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="017">018</option>
+							<option value="017">019</option>
+						</select>
+						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
+						<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
+						<input type="text" name="phone3" id="phone3" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
+				</tr>
+				<tr style="border-bottom: 1px solid lightgray;">
+					<td style="width: 100px; height: 50px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">이메일</h6>
+					<td style="padding-left: 10px; width: 1040px; height: 50px; text-align: left;">
+						<input type="text" style="margin-left: 0px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> @ </span>
+						<input type="text" placeholder="직접입력" name="writeemail" style="margin-left: 0px; padding-left: 7px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<select name="email2" id="email2" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+							<option value="input">-- 선택없음</option>
+							<option value="@naver.com">naver.com</option>
+							<option value="@daum.net">daum.net</option>
+							<option value="@gmail.com">gmail.com</option>
+						</select>
+						<br>
+						<h6 style="line-height: 25px; font-size: 11px;">이메일을 통해 결제완료내역을 보내드립니다.</h6>
+				</tr>
+				<tr>
+					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">배송메시지</h6>
+					<td style="padding: 5px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;">
+						<textarea cols="50" rows="2" style="resize: none; border: 1px solid lightgray; border-radius: 5px; font-size: 13px;"></textarea>
+				</tr>
+			</table>
+		</div>
+		<div class="row" style="margin-top: 70px; height: 25px;">
+			<div id="payment-money" style="width: 100%; height: 25px;">
+				<h6 style="margin: 2px 10px 0px 2px; font-size: 13px;">결제 예정 금액</h6>
+			</div>
+		</div>
+		<div class="row">
+			<table id="money-table" style="width:100%; text-align: center;">
+				<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
+					<td>총 상품금액
+					<td>총 배송비
+					<td>결제 예정금액
+				</tr>
+				<tr style="height: 100px; border-bottom: 1px solid lightgray;">
+					<td>99,000
+					<td>+2,000
+					<td>=102,000
+				</tr>
+			</table>
+		</div>
+		<div class="row" style="margin-top: 100px; height: 150px;">
+			<div style="width: 785px; height: 130px; border: 1px solid lightgray; border-radius: 5px 0px 0px 5px;">
+				<div style="padding: 15px 0px 15px 15px; width: 785px; height: 50px;"><input type="checkbox" checked style="float:left; margin-right: 10px;"><h6 style="float:left; line-height: 13px;">카드결제</h6></div>
+				<div style="padding: 10px 0px 20px 20px; width: 785px; height: 80px;">
+					<h6 style="font-size: 11px;">- 최소 결제 가능 금액은 결제금액에서 배송비를 제외한 금액입니다.</h6>
+					<h6 style="font-size: 11px;">- 소액 결제의 경우 PG사 정책에 따라 결제 금액 제한이 있을 수 있습니다.</h6>
+				</div>
+			</div>
+			<div style="width: 350px; height: 130px; border: 1px solid lightgray; border-radius: 0px 5px 5px 0px;">
+				<div style="width: 350px; height: 70px;">
+					<h6 style="padding: 30px 0px 0px 0px; text-align: center;">최종결제금액 <span style="margin-left: 30px;">102,000원</span></h6>
+				</div>
+				<div style="width: 350px; height: 60px;">
+					<div style="padding: 10px 0px 0px 0px; text-align: center;"><input type="button" value="결제하기" style="width: 300px; height: 30px; background-color: lightgray; border: 0px; border-radius: 5px; text-align: center; font-size: 14px;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top: 10px; height: 80px;">
+			<h6 style="width: 1140px; font-size: 11px;">무이자 할부 이용안내</h6>
+			<h6 style="width: 1140px; font-size: 10px; color: darkgray;">- 무이자할부가 적용되지 않은 상품과 무이자할부가 가능한 상품을 동시에 구매할 경우 전체 주문 상품 금액에 대해 무이자할부가 적용되지 않습니다.</h6>
+			<h6 style="width: 1140px; font-size: 10px; color: darkgray;">- 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.</h6>
+		</div>
 	</div>
+	
+	<script>
+		$("#return").on("click", function() {
+			location.href = "cart.jsp";
+		})
+		
+		// 주소찾기	
+        function postcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                	var roadAddr = data.roadAddress;
+	                var extraRoadAddr = '';
+                    document.getElementById("zip_code").value = data.zonecode;
+                    document.getElementById("address1").value = roadAddr;
+                }
+            }).open();
+        }
+	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
