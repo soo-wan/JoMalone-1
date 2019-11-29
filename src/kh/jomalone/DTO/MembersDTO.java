@@ -3,18 +3,17 @@ package kh.jomalone.DTO;
 import java.sql.Timestamp;
 
 public class MembersDTO {
-	private String id, logintype, access_token, pw, name, phone1, phone2, phone3, email1, email2, zip_code, address1, address2, gender, del_yn;
+	private String id, logintype, pw, name, phone1, phone2, phone3, email1, email2, zip_code, address1, address2, gender, del_yn;
 	private String year, month, day, agree_s, agree_p;
 	private Timestamp enrolldate,deletedate;
 
-	public MembersDTO(String id, String logintype, String access_token, String pw, String name, String phone1,
+	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,
 			String address2,  String year, String month, String day, String gender,
 			Timestamp enrolldate, String del_yn, Timestamp deletedate, String agree_s, String agree_p) {
 		super();
 		this.id = id;
 		this.logintype = logintype;
-		this.access_token = access_token;
 		this.pw = pw;
 		this.name = name;
 		this.phone1 = phone1;
@@ -46,12 +45,6 @@ public class MembersDTO {
 	}
 	public void setLogintype(String logintype) {
 		this.logintype = logintype;
-	}
-	public String getAccess_token() {
-		return access_token;
-	}
-	public void setAccess_token(String access_token) {
-		this.access_token = access_token;
 	}
 	public String getPw() {
 		return pw;

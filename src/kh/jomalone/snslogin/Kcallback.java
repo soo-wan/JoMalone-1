@@ -17,7 +17,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kh.jomalone.DAO.MembersDAO;
-import kh.jomalone.DTO.KMembersDTO;
+import kh.jomalone.DTO.NMembersDTO;
 
 
 @WebServlet("/Kcallback")
@@ -113,51 +113,56 @@ public class Kcallback extends HttpServlet {
 						JsonElement a_el = parser.parse(account.toString());
 						JsonObject a_obj = a_el.getAsJsonObject();
 						JsonElement profile = parser.parse(a_obj.get("profile").toString());
-						String name = profile.getAsJsonObject().get("nickname").toString();
+						String name = profile.getAsJsonObject().get("nickname").toString().replaceAll("\"", "");
 						String email;
 						String birthday;
 						String gender;
 						
 						
 						if(a_obj.get("birthday") != null) {
-							birthday = a_obj.get("birthday").toString();
+							birthday = a_obj.get("birthday").toString().replaceAll("\"", "");
 						}else {
 							birthday = null;
 						}
 						
 						if(a_obj.get("email") != null) {
-							email = a_obj.get("email").toString();
+							email = a_obj.get("email").toString().replaceAll("\"", "");
 						}else {
 							email = null;
 						}
 
 						if(a_obj.get("gender") != null) {
-							gender = a_obj.get("gender").toString();
+							gender = a_obj.get("gender").toString().replaceAll("\"", "");
 						}else {
 							gender = null;
 						}
 						
 						System.out.println(id+name+email+birthday+gender);
+					
+					
 						
 						MembersDAO dao = MembersDAO.getInstance();
 						
-						boolean result = dao.Klogin(access_token);
+						boolean result = dao.Klogin(id);
 						System.out.println(result);
 						
-						if(result) {
-							request.getSession().setAttribute("loginInfo", id);
-							request.setAttribute("name", name);
-							request.getRequestDispatcher("test.jsp").forward(request, response);
 					
-						}else {
-							KMembersDTO kdto = new KMembersDTO(id,null,access_token,name,email,birthday,gender);
-							dao.KFirstLogin(kdto);
+						if(result) { //이미 아이디가 있으면
+							
 							request.getSession().setAttribute("loginInfo", id);
-							request.setAttribute("name", name);
-							request.getRequestDispatcher("test.jsp").forward(request, response);
+							request.getSession().setAttribute("name", name);
+							request.getRequestDispatcher("home.jsp").forward(request, response);
+							
+					
+						}else { //아이디가 없으면 db에 저장.
+							NMembersDTO ndto = new NMembersDTO(id,null,name,email,birthday,gender);
+							dao.KFirstLogin(ndto);
+							request.getSession().setAttribute("loginInfo", id);
+							request.getSession().setAttribute("name", name);
+							request.getRequestDispatcher("home.jsp").forward(request, response);
 
-						}
 				      }
+			      }
 	    	}catch(Exception e) {
 	    		e.printStackTrace();
 	    	}
