@@ -1,5 +1,7 @@
 package kh.jomalone.Util;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -12,9 +14,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendMail {
-	public void sendMail(String toEamil) {
-		final String user = "asdf@naver.com"; 					// 보내는사람 아이디
-		final String password = ""; 							//보내는사람 비밀번호
+	public void pwsendMail(String toEmail, String tempPw) {
+		final String user = "gahae37"; 					// 보내는사람 아이디
+		final String password = "pghpgh34215615"; 							//보내는사람 비밀번호
 		
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.naver.com");			//구글 메일이면 smtp.gmail.com
@@ -34,14 +36,17 @@ public class SendMail {
             message.setFrom(new InternetAddress(user));
 
             //메일 수신자
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEamil));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
             // Subject
-            message.setSubject("보내기 제목입니다."); //제목 적어주는칸
-
+            message.setSubject("JoMalone임시비밀번호 입니다."); //제목 적어주는칸
+     
             // Text
-            message.setText("보내기 내용입니다.");    // 내용 적어주는칸
-
+    		StringBuilder sb = new StringBuilder();
+    		sb.append("안녕하세요. JoMalone입니다. 고객님의 임시비밀번호는 " + tempPw + "입니다.\n");
+    		sb.append("임시비밀번호로 로그인 후 마이페이지에서 비밀번호를 변경해 주시기 바랍니다.");
+    		message.setText(sb.toString());
+            
             // send the message
             Transport.send(message); //전송
             System.out.println("message sent successfully...");

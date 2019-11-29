@@ -123,7 +123,10 @@
 		})
 		
 		$("#general-findid").on("click",function(){
-			location.href="id.find"
+			location.href="findid.jsp"
+		})
+		$("#general-findpw").on("click",function(){
+			location.href="findpw.jsp"
 		})
 		
 		//아이디기억하기
