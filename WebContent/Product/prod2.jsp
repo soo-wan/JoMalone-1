@@ -19,7 +19,7 @@
 			<input type=hidden name=seq value="2">	    <!-- 시퀀스 값? -->
 			<tr align=center>
 				<td colspan=2>
-					<img src="${pageContext.request.contextPath}/Cart/image12.gif" width=100 height=100>
+					<img src="${pageContext.request.contextPath}/Resource/img/event02.jpg" width=100 height=100>
 				</td>
 			</tr>
 			<tr align=center>

@@ -18,14 +18,14 @@ body{
 <body>
 <div align="center"><a href="prod1.jsp">상품명 : 조말론 향수 1</a></div>
 <div align="center">판매가 : 27,900원</div>
-<div align="center"><a href="prod1.jsp"><img src="${pageContext.request.contextPath}/image11.gif" width=100 height=100></a></div>
+<div align="center"><a href="prod1.jsp"><img src="${pageContext.request.contextPath}/Cart/image11.gif" width=100 height=100></a></div>
 <br>
 <br>
 <br>
 <br>
 <div align="center"><a href="prod2.jsp">상품명 : 조말론 향수 2</a></div>
 <div align="center">판매가 : 18,900원</div>
-<div align="center"><a href="prod2.jsp"><img src="${pageContext.request.contextPath}/image12.gif" width=100 height=100></a></div>
+<div align="center"><a href="prod2.jsp"><img src="${pageContext.request.contextPath}/Cart/image12.gif" width=100 height=100></a></div>
 <div align="center"><button id="list">리스트 보기</button></div>
 <script>
     $("#list").on("click",function(){
