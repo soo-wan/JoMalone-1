@@ -3,19 +3,17 @@ package kh.jomalone.DTO;
 public class NMembersDTO {
 	private String id;
 	private String logintype;
-	private String access_token;
 	private String name;
 	private String email;
 	private String birthday;
 	private String gender;
 	
-	
-	public NMembersDTO(String id, String logintype, String access_token, String name, String email, String birthday,
+	public NMembersDTO() {}
+	public NMembersDTO(String id, String logintype, String name, String email, String birthday,
 			String gender) {
 		super();
 		this.id = id;
 		this.logintype = logintype;
-		this.access_token = access_token;
 		this.name = name;
 		this.email = email;
 		this.birthday = birthday;
@@ -32,12 +30,6 @@ public class NMembersDTO {
 	}
 	public void setLogintype(String logintype) {
 		this.logintype = logintype;
-	}
-	public String getAccess_token() {
-		return access_token;
-	}
-	public void setAccess_token(String access_token) {
-		this.access_token = access_token;
 	}
 	public String getName() {
 		return name;

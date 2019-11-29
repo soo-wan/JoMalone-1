@@ -66,15 +66,12 @@
     	})
     
     	$("#information").on("click", function() {
-    		<c:choose>
-    		<c:when test="${loginInfo == null}">
+    		if(${loginInfo == null}){
 	    		alert("로그인 후 이용해 주세요.");
-    			location.href = "/JoMalone/Member/login.jsp";
-    		</c:when>
-    		<c:otherwise>
-    			location.href= "/JoMalone/Member/mypage.jsp";
-    		</c:otherwise>
-    		</c:choose>
+	    		location.href = "/JoMalone/Member/login.jsp";
+    		}else{
+    			location.href = "/JoMalone/Member/mypage.jsp";
+    		}
     	})
     	
     	$("#cart").on("click", function() {

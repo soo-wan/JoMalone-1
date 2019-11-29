@@ -57,7 +57,7 @@ public class SignController extends HttpServlet {
 				System.out.println(gender);
 				System.out.println(agree_s);
 				System.out.println(agree_p);
-				MembersDTO dto = new MembersDTO(id,"normal",null,pw,name,phone1,phone2,phone3,email1,email2,
+				MembersDTO dto = new MembersDTO(id,"normal",pw,name,phone1,phone2,phone3,email1,email2,
 						zip_code,address1,address2,year,month,day,gender,null,null,null,agree_s,agree_p);
 				
 				MembersDAO dao = MembersDAO.getInstance();
