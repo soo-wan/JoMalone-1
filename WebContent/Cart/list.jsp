@@ -28,14 +28,23 @@ input{
 </c:when>
 <c:otherwise>
 <p align=center>담은 결과
-<c:forEach items="${list }" var="dto">
+<c:forEach items="${list}" var="dto">
 	<table bordercolor=black border=1 cellspacing=1>
 		<!-- <caption>담은결과</caption> -->
-		<!-- 
-		<tr align=center>
-			<td colspan=2>${dto.seq}번 장바구니  
-		</tr> -->
+		<!-- <tr align=center><td colspan=2>${dto.seq}번 장바구니</tr> -->
+		
 		<input type=hidden name="seq">
+		<tr>
+			<th class="checkbox">
+				<input type="checkbox" id="ck_all"></th>
+			<th colspan=2>전체 선택</th> 
+		</tr>
+		<tr data-tr_value="${dto.seq}">
+			<td style="width: 40px;">
+				<input type="checkbox" name="checkRow" value="${dto.seq}">
+			</td>
+			<td colspan=2>선택</td>
+		</tr>
 		<tr align=center>
 			<td>품명</td>
 			<td colspan=2>${dto.prod_name}</td>
@@ -56,18 +65,15 @@ input{
 			<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>
 			</td>
 		</tr>
-		<tr align=center>
-			<td colspan=3><button onclick ="deleteCart(${dto.seq})">삭제</button></td>
-		</tr>
 	</table>
 </c:forEach>
-	
 	<table>
 		<tr>
 			<td>총 합계</td>
-			<td><fmt:formatNumber value="${sum}" pattern="#,###" /> <!-- cout 대신에 formatNumber -->		
+			<td><fmt:formatNumber value="${sum}" pattern="#,###" /> <!-- cout 대신에 formatNumber --></td>		
 		</tr>
 	</table>
+		<div align=center><button onclick ="deleteCart(${dto.seq})">선택 삭제</button></div>
 		<div align=center><button id="deleteAll">전체 삭제</button></div>
 		<div align=center><a href=${pageContext.request.contextPath}/Cart/index.jsp>쇼핑 페이지 이동</a></div>
 		<div align=center><a href="#">주문하기</a></div>
@@ -90,6 +96,28 @@ input{
         $("#deleteAll").on("click",function(){
             location.href="deleteAll.ca";
         })
+        
+    // 체크박스 전체 선택&해제
+    $('#ck_all').click(function(){
+         if($("#ck_all").prop("checked")){
+            $("input[type=checkbox]").prop("checked",true); 
+        }else{
+            $("input[type=checkbox]").prop("checked",false); 
+        }
+    });
+ 
+    $('#delete').click(function(){
+        if(confirm("삭제하시겠습니까?")){
+            $("input[name=checkRow]:checked").each(function(){
+                var tr_value =$(this).val();
+                var tr=$("tr[data-tr_value='"+tr_value+"']");
+                tr.remove();
+            });
+        }else{
+            return false;
+        }
+    });
+    
     </script>
 </body>
 </html>
