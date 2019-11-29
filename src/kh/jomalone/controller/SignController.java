@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.MembersDTO;
+import kh.jomalone.Util.encrypt;
 
 @WebServlet("*.sign")
 public class SignController extends HttpServlet {
@@ -18,10 +19,10 @@ public class SignController extends HttpServlet {
 		String cmd = request.getRequestURI().substring(request.getContextPath().length());
 		System.out.println(cmd);
 		request.setCharacterEncoding("UTF8");
+		MembersDAO dao = MembersDAO.getInstance();
 		try {
 			if(cmd.contentEquals("/Member/dupl.sign")) {
 				System.out.println(request.getParameter("id"));
-				MembersDAO dao = MembersDAO.getInstance();
 				String id = request.getParameter("id");
 
 				boolean result = dao.isIdExist(id);
@@ -31,7 +32,7 @@ public class SignController extends HttpServlet {
 			}else if(cmd.contentEquals("/Member/signup.sign")) {
 				String id = request.getParameter("id");
 				String name  = request.getParameter("name");
-				String pw = request.getParameter("pw");
+				String pw = encrypt.encrypt(request.getParameter("pw"));
 				String phone1 = request.getParameter("phone1");
 				String phone2 = request.getParameter("phone2");
 				String phone3 = request.getParameter("phone3");
@@ -57,15 +58,34 @@ public class SignController extends HttpServlet {
 				System.out.println(gender);
 				System.out.println(agree_s);
 				System.out.println(agree_p);
-				MembersDTO dto = new MembersDTO(id,"normal",null,pw,name,phone1,phone2,phone3,email1,email2,
+				MembersDTO dto = new MembersDTO(id,"normal",pw,name,phone1,phone2,phone3,email1,email2,
 						zip_code,address1,address2,year,month,day,gender,null,null,null,agree_s,agree_p);
-				
-				MembersDAO dao = MembersDAO.getInstance();
-				int result = dao.signup(dto);
-	
-				request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
-			}
 
+				int result = dao.signup(dto);
+				request.setAttribute("result", result);
+				request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
+				
+			}else if(cmd.contentEquals("/Member/check.sign")) {
+				String pw = encrypt.encrypt(request.getParameter("pw"));
+				System.out.println(pw);
+				
+				String loginInfo = (String)request.getSession().getAttribute("loginInfo");
+				MembersDTO dto = dao.selectById(loginInfo);
+				String id = dto.getId();
+				String checkpw = dao.checkpw(id);
+				System.out.println("checkpw : " + checkpw);
+				System.out.println(id);
+				System.out.println(loginInfo);
+				
+				if(pw.contentEquals(checkpw)) {
+					int result = dao.delete(id);
+					request.setAttribute("result", result);
+					request.getRequestDispatcher("delresult.jsp").forward(request, response);
+				}else {
+					request.getRequestDispatcher("delresult.jsp").forward(request, response);
+				}
+			}
+				
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -35,6 +35,7 @@
 		kapiURL += "client_id=6d5630d4385069dbc2b5bcdc92d10cd4";
 		kapiURL += "&redirect_uri=http://localhost:8080/JoMalone/Kcallback&response_type=code";
 	%>
+	
 	<div id="general-login" class="container">
 		<div id="login-title" class="row">
 			<h4>LOGIN</h4>
@@ -56,7 +57,7 @@
 			</div>
 			<div id="button-list" class="col-12">
 				<input type="button" value="FIND ID" id="general-findid"> <input
-					type="button" value="FIND PW" id="general-findpw"> <input
+					type="button" value="FIND PW" id="general-findpw" > <input
 					type="button" value="SIGN UP" id="general-signup">
 			</div>
 		</div>
@@ -100,6 +101,7 @@
 			data:{
 				id : $("#id").val(),
 				pw : $("#pw").val()
+				
 			},
 			dataType:"json"
 		}).done(function(data){
@@ -118,6 +120,10 @@
 		})
 		$("#kakao").on("click",function(){
 	 		location.href = "<%=kapiURL%>"
+		})
+		
+		$("#general-findid").on("click",function(){
+			location.href="id.find"
 		})
 		
 		//아이디기억하기

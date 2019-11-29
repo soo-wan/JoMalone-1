@@ -28,7 +28,7 @@ public class Ncallback extends HttpServlet {
 		    String clientSecret = "4Yn9S9ceBY";//���ø����̼� Ŭ���̾�Ʈ ��ũ����";
 		    String code = request.getParameter("code");
 		    String state = request.getParameter("state");
-		    String redirectURI = URLEncoder.encode("http://localhost:8080/JoMalone/callback", "UTF-8");
+		    String redirectURI = URLEncoder.encode("http://localhost:8080/JoMalone/Ncallback", "UTF-8");
 		    String apiURL;
 		    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
 		    apiURL += "client_id=" + clientId;
@@ -111,19 +111,19 @@ public class Ncallback extends HttpServlet {
 							
 							JsonElement respel = parser.parse(resp);
 							JsonObject respobj = respel.getAsJsonObject();
-							String email = respobj.get("email").toString();
-							String id = respobj.get("id").toString();
-							String name= respobj.get("name").toString();
+							String email = respobj.get("email").toString().replaceAll("\"", "");
+							String id = respobj.get("id").toString().replaceAll("\"", "");
+							String name= respobj.get("name").toString().replaceAll("\"", "");
 							String birthday="";
 							String gender="";
 							if(respobj.get("birthday") != null) {
-								birthday = respobj.get("birthday").toString();
+								birthday = respobj.get("birthday").toString().replaceAll("\"", "");
 								
 							}else {
 								birthday = null;
 							}
 							if(respobj.get("gender") != null) {
-								gender = respobj.get("gender").toString();
+								gender = respobj.get("gender").toString().replaceAll("\"", "");
 								
 							}else {
 								birthday = null;
@@ -133,20 +133,23 @@ public class Ncallback extends HttpServlet {
 							System.out.println(id+email+name+access_token);
 							MembersDAO dao = MembersDAO.getInstance();
 							
-							boolean result = dao.Nlogin(access_token);
+							boolean result = dao.Nlogin(id);
 							System.out.println(result);
 							
-							if(result) {
+							
+							if(result) { //이미 아이디가 있으면
+								
 								request.getSession().setAttribute("loginInfo", id);
-								request.setAttribute("name", name);
-								request.getRequestDispatcher("test.jsp").forward(request, response);
+								request.getSession().setAttribute("name", name);
+								request.getRequestDispatcher("home.jsp").forward(request, response);
+								
 						
-							}else {
-								NMembersDTO ndto = new NMembersDTO(id,null,access_token,name,email,birthday,gender);
-								dao.NFirstLogin(ndto);
+							}else { //아이디가 없으면 db에 저장.
+								NMembersDTO ndto = new NMembersDTO(id,null,name,email,birthday,gender);
+								dao.naverFirLogin(ndto);
 								request.getSession().setAttribute("loginInfo", id);
-								request.setAttribute("name", name);
-								request.getRequestDispatcher("test.jsp").forward(request, response);
+								request.getSession().setAttribute("name", name);
+								request.getRequestDispatcher("home.jsp").forward(request, response);
 
 							}
 

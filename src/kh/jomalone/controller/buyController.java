@@ -55,7 +55,7 @@ public class buyController extends HttpServlet {
 				for (int i = 0; i < prod_names.length; i++) {
 					int price = Integer.parseInt(prices[i]);
 					int prod_quantity = Integer.parseInt(prod_quantitys[i]);
-					list.add(new OrderListDTO(0,null,merchant_uid,prod_codes[i],prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null));
+					list.add(new OrderListDTO(0,null,merchant_uid,prod_codes[i],prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null));
 				}
 				dao.insertOrderList(list);
 				dao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,prod_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code));

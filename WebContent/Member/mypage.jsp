@@ -14,7 +14,7 @@
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
 	<div id="mypage-home" class="container">
-		<div id="welcome-msg" class="row"><h5>안소희 회원님 마이페이지에 오신걸 환영합니다!</h5></div> <!-- 이름 값 받아오기 -->
+		<div id="welcome-msg" class="row"><h5>${name } 회원님 마이페이지에 오신걸 환영합니다!</h5></div> <!-- 이름 값 받아오기 -->
 		<div id="mypage-menu" class="row">
 			<div id="my-profile"><img src="/JoMalone/Resource/img/my-profile.png"><h5>PROFILE</h5></div>
 			<div id="my-cart"><img src="/JoMalone/Resource/img/my-cart.png"><h5>CART</h5></div>
