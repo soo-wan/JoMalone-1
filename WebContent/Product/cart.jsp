@@ -1,10 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Enumeration"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <!-- 화폐 표시 tag lib -->
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Cart | Jo Malone</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,7 +16,7 @@
 </head>
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
-	
+
 	<div id="cart-page" class="container">
 		<div id="cart-title" class="row"><h4>CART</h4></div>
 		<div id="cart-list" class="row">
@@ -29,12 +33,12 @@
 			</ul>
 			<div class="tab-content" id="myTabContent">
 				<div id="all-delete">
-					<input id="all-btn" type="button" value="장바구니 비우기">
+					<!-- <input id="all-btn" type="button" value="장바구니 비우기"> -->
 				</div>
 			    <div class="tab-pane fade show active" id="korea" role="tabpanel">
 			  	  <table class="cart-table">
 			  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-			  	  		<td style="width: 50px;"><input type="checkbox">
+			  	  		<td style="width: 50px;"><input type="checkbox" id="ck_all">	
 			  	  		<td style="width: 130px;">IMAGE
 			  	  		<td style="width: 400px;">ITEM
 			  	  		<td style="width: 130px;">PRICE
@@ -42,25 +46,29 @@
 			  	  		<td style="width: 130px;">CHARGE
 			  	  		<td>TOTAL
 			  	  	</tr>
-			  	  	<tr class="my-item">
-			  	  		<td style="width: 50px;"><input type="checkbox">
-			  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  	  		<td style="width: 400px;">Lime Basil & Mandarin Cologne
-			  	  		<td style="width: 130px;">99,000 		
-			  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" value="1">
-			  	  		<td style="width: 130px;">2,000
-			  	  		<td>
-			  	  	</tr>
-			  	  	<tr class="my-item">
-			  	  		<td style="width: 50px;"><input type="checkbox">
-			  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  	  		<td style="width: 400px;">Lime Basil & Mandarin Cologne
-			  	  		<td style="width: 130px;">99,000 		
-			  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" value="1">
-			  	  		<td style="width: 130px;">2,000
-			  	  		<td>
-			  	  	</tr>
+			  	  	<c:choose>
+			  	  		<c:when test="${list.size() == 0}">
+				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
+				  	  	</tr>
+						</c:when>
+					<c:otherwise>
+					<c:forEach items="${list}" var="dto">
+						<tr class="my-item">
+				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck" data-cartNum="${dto.seq}">
+				  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+				  	  		<td style="width: 400px;">${dto.prod_name}
+				  	  		<td style="width: 130px;">${dto.price} 		
+				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
+				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
+				  	  		<td style="width: 130px;">2,000
+				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
+							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
+				  	  	</tr>
+				  	</c:forEach>
+					</c:otherwise>
+			  	  	</c:choose>
 			  	  </table>
+			  	 
 			    </div>
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
@@ -82,7 +90,9 @@
 			<div id="check-delete">
 				<h6 style="margin: 10px 10px 0px 7px; float: left; font-size: 12px;">선택상품</h6>
 				<input type="button" id="check-btn" value="삭제하기" style="float: left;">
+				<input id="all-btn" type="button" value="장바구니 비우기" style="float: left;">
 			</div>
+
 			<div id="cart-money">
 				<table id="money-table" style="width:100%;">
 					<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
@@ -90,10 +100,16 @@
 						<td>총 배송비
 						<td>결제 예정금액
 					</tr>
-					<tr style="height: 100px; border-bottom: 1px solid lightgray;">
-						<td>99,000
-						<td>+2,000
-						<td>=102,000
+					<tr style="height: 100px; border-bottom: 1px solid lightgray;"> 
+					<c:choose>
+						<c:when test="${list.size()==0}">
+						</c:when>
+						<c:otherwise>
+								<td><fmt:formatNumber value="${sum}" pattern="#,###" /></td>	 <!-- cout 대신에 formatNumber -->	
+								<td>+2,000
+								<td><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></td>
+						</c:otherwise>
+					</c:choose>
 					</tr>
 				</table>
 			</div>
@@ -124,12 +140,112 @@
 	
 	<script>
 		$(".select-btn").on("click", function() {
-			location.href = "order.jsp";
+			location.href = "${pageContext.request.contextPath}/Product/order.jsp";
 		})
 		
 		$(".gogo-btn").on("click", function() {
 			location.href = "/JoMalone/home.jsp";
 		})
+		
+		function updateCart(seq){
+			var countval = $(".count"+seq).val();
+			location.href="update.ca?prod_quantity="+countval+"&seq="+seq;
+        }
+		
+	    // 체크박스 전체 선택&해제
+	    $('#ck_all').click(function(){
+	         if($("#ck_all").prop("checked")){
+	            $("input[type=checkbox]").prop("checked",true); 
+	        }else{
+	            $("input[type=checkbox]").prop("checked",false); 
+	        }
+	    });
+	    
+//		$("#check-btn").on("click",function(){ // 선택 체크 삭제
+//			var check = $(".delcheck").get(); //.get()은 선택한 요소를 배열로 가져온다.
+//			if(confirm("선택 상품을 삭제하시겠습니까?")){
+//				for(var i=0;i<check.length;i++){
+//					console.log(check[i].value);
+//					if(check[i].value=="check"){
+//					console.log(check[i].id);
+//					console.log("도착1");
+//						var seq = check[i].id;
+//						console.log("도착2");
+//						console.log(seq);
+//						$.ajax({
+//							url:"delete.ca",
+//							type:"post",		
+//							data:{
+//								seq:seq
+//							},dataType:"json"
+//						}).done(function(data){
+//							console.log("성공");
+//						}).fail(function(){
+//							console.log("실패");
+//						});
+//					}
+//				}
+//			}else{
+//	            return false;
+//	        }
+//		});
+		
+		//마지막 최종 소스 // 배열로 컨트롤러로 보내기, 그냥 하면 안보내짐
+		$("#check-btn").on("click",function(){ // 선택 체크 삭제 최종 
+			if(confirm("선택 상품을 삭제하시겠습니까?")){
+	                var checkArr = new Array();
+	                $("input[name='checks']:checked").each(function(){
+	                    checkArr.push($(this).attr("data-cartNum"));
+	                });
+	                	console.log(checkArr);
+						$.ajax({
+							url:"deletes.ca",
+							type:"post",		
+							data:{
+								seq:JSON.stringify(checkArr) 
+							}
+						}).done(function(data){
+							console.log("왔음");
+							location.href="list.ca";
+						}).fail(function(){
+							console.log("실패");
+						});
+				}
+			else{
+	            return false;
+	        }
+		});
+		
+//        $("#check-btn").on("click",function(){
+//            var cf = confirm("선택 상품을 삭제하시겠습니까?");
+//            if(cf){
+//                var checkArr = new Array();
+//                $("input[name='checks']:checked").each(function(){
+//                    checkArr.push($(this).attr("data-cartNum"));
+//                });
+//                $.ajax({
+//                		 url:"deletes.ca",
+//                         type : "post",
+//                         data : { 
+//                        	 chbox : checkArr 
+//                        	 },
+//                         	success : function(result){
+//                          if(result == 1) {          
+//                           location.href = "list.ca";
+//                          } else {
+//                           alert("삭제 실패");
+//                          }
+//                        }
+//                    });
+//                }
+//         });
+		
+		
+        $("#all-btn").on("click",function(){
+        	if(confirm("정말로 전체 삭제하시겠습니까?")){
+            	location.href="deleteAll.ca";
+        	}
+        })
 	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>

@@ -29,17 +29,18 @@
 	<div id="event" class="container">
 	    <div id="event-one" class="row">
 	        <div class="col-5">
-	            <a href="#"><div class="bg"><h4>ORANGE BITTERS COLOGNE</h4><h5>오렌지 비터스 코롱</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event01.jpg"></a>
+	            <a href="${pageContext.request.contextPath}/Product/prod1.jsp"><div class="bg"><h4>ORANGE BITTERS COLOGNE</h4><h5>오렌지 비터스 코롱</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event01.jpg"></a>
 	        </div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
+	        	<a href="${pageContext.request.contextPath}/Product/prod2.jsp"><div class="bg"><h4>LIMITED EDITION</h4><h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event02.jpg"></a>
 	        	<a href="#"><div class="bg"><h4>LIMITED EDITION</h4><
 	        	h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event02.jpg"></a>
 	        </div>
 	    </div>
 	    <div id="event-two" class="row">
 	    	<div class="col-5">
-	    		<a href="#"><div class="bg"><h4>ENGLISH PEAR & FREESIA DIFFUSER</h4><h5>잉글리쉬 페어 앤 프리지아 디퓨저</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event03.jpg"></a>
+	    		<a href="${pageContext.request.contextPath}/Product/prod3.jsp"><div class="bg"><h4>ENGLISH PEAR & FREESIA DIFFUSER</h4><h5>잉글리쉬 페어 앤 프리지아 디퓨저</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event03.jpg"></a>
 	    	</div>
 	        <div class="col-2"></div>
 	        <div class="col-5">

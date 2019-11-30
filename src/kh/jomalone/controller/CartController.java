@@ -3,6 +3,8 @@ package kh.jomalone.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +30,9 @@ public class CartController extends HttpServlet {
 				String[] prod_name = request.getParameterValues("prod_name");
 				String[] priceString = request.getParameterValues("price");
 				String[] prod_quantityString = request.getParameterValues("prod_quantity");
-				String mem_id = "test";
+				String mem_id = (String)request.getSession().getAttribute("loginInfo");
+				String mem_name = (String)request.getSession().getAttribute("name"); 
+				//String mem_id = "test";
 				int seq = 0;
 				int price = 0;
 				int prod_quantity = 0 ;
@@ -37,7 +41,7 @@ public class CartController extends HttpServlet {
 					seq = Integer.parseInt(seqString[i]);
 					price = Integer.parseInt(priceString[i]);
 					prod_quantity = Integer.parseInt(prod_quantityString[i]);
-					CartDTO dto = new CartDTO("test",seq,"테스트",prod_name[i],prod_quantity,price);				
+					CartDTO dto = new CartDTO(mem_id,seq,mem_name,prod_name[i],prod_quantity,price);				
 					boolean result = dao.checkProdExist(mem_id, prod_name[i]);
 					if(result) {
 						dao.sumProdQuantity(prod_quantity, mem_id, prod_name[i]);
@@ -50,14 +54,44 @@ public class CartController extends HttpServlet {
 				response.sendRedirect("list.ca");
 			}
 			else if(cmd.contentEquals("/list.ca")) {
-				String mem_id = "test"; // mem_id 받는 부분
+				String mem_id = (String)request.getSession().getAttribute("loginInfo");
+				//String mem_id = "test"; 
 				List<CartDTO> list = dao.selectCart(mem_id); 
+				//int seq = dao.checkboxSeq(seq);
 				request.setAttribute("list",list);
-				request.getRequestDispatcher("Cart/list.jsp").forward(request, response);
+				request.getRequestDispatcher("Product/cart.jsp").forward(request, response);
 			}
 			else if(cmd.contentEquals("/delete.ca")) {
-				int seq = Integer.parseInt(request.getParameter("seq"));
-				dao.deleteCart(seq);
+				//PrintWriter pwr = response.getWriter();
+				String seqString = request.getParameter("seq");
+				System.out.println(seqString);
+				seqString = seqString.substring(5);
+				int seq = Integer.parseInt(seqString);
+				System.out.println(seq);
+				List<Integer> list = new ArrayList<>();
+				list.add(seq);
+				for(int i : list) {
+					dao.deleteCart(i);
+				}
+				response.sendRedirect("list.ca");
+			}
+			else if(cmd.contentEquals("/deletes.ca")) {
+				String[] seqs = request.getParameterValues("seq");
+				seqs[0]=seqs[0].replaceAll("\"", "");
+				String regex = "(\\d+)";
+				Pattern p = Pattern.compile(regex);
+				Matcher m = p.matcher(seqs[0]);
+				int seq=0;
+//				seqs[0]=seqs[0].replaceAll("[", ""); 안됨
+//				seqs[0]=seqs[0].replaceAll("]", ""); 안됨				
+//				for (int i = 0; i < seqs.length; i++) {
+//					seq = Integer.parseInt(seqs[i]);
+//					//dao.deleteCart(seq);
+//				}
+				while(m.find()) {
+					seq = Integer.parseInt(m.group());
+					dao.deleteCart(seq);
+				}
 				response.sendRedirect("list.ca");
 			}
 			else if(cmd.contentEquals("/update.ca")) {

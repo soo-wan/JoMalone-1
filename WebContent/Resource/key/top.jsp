@@ -112,7 +112,7 @@
     			location.href = "/JoMalone/Member/login.jsp";
     		</c:when>
     		<c:otherwise>
-    			location.href= "/JoMalone/Product/cart.jsp";
+    			location.href= "${pageContext.request.contextPath}/list.ca";
     		</c:otherwise>
     		</c:choose>
     	})

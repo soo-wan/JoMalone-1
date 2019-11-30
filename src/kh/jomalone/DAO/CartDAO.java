@@ -58,6 +58,18 @@ public class CartDAO {
 		}
 	}
 	
+	public int checkboxSeq(int seq)throws Exception{ // seq뽑기 
+		String sql = "select * from cart where seq=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery();){
+				int result = rs.getInt(1);			
+				return result;
+			}
+		}
+	}
+	
 	public int deleteCart(int seq) throws Exception{ // 장바구니 개인 삭제
 		String sql = "delete from cart where seq=?";
 		try(Connection con = this.getConnection();
@@ -92,7 +104,7 @@ public class CartDAO {
 	}
 	
 	public List<CartDTO> selectCart(String mem_id) throws Exception{
-		String sql = "select * from cart where mem_id=?";
+		String sql = "select * from cart where mem_id=? order by seq desc";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, mem_id);
