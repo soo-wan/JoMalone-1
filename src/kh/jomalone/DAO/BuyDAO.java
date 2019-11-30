@@ -3,6 +3,7 @@ package kh.jomalone.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import kh.jomalone.DTO.OrderListDTO;
 public class BuyDAO {
 	private static BuyDAO instance;
 	private static BasicDataSource bds = new BasicDataSource();
+
 	private BuyDAO() {
 		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
@@ -21,13 +23,15 @@ public class BuyDAO {
 		bds.setPassword("jomalone");
 		bds.setInitialSize(30);
 	}
+
 	public synchronized static BuyDAO getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new BuyDAO();
 		}
 		return instance;
 	}
-	private Connection getConnection() throws Exception{
+
+	private Connection getConnection() throws Exception {
 		return bds.getConnection();
 	}
 
@@ -50,6 +54,19 @@ public class BuyDAO {
 			con.commit();
 			return result;
 		}
+	}
+
+	public int selectMaxBuySeq() throws Exception {
+		int maxSeq = 1;
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
+			try(ResultSet rs = pstat.executeQuery()){
+				if(rs.next()) {
+					maxSeq = rs.getInt(1);
+				}
+			}
+		}
+		return maxSeq;
 	}
 
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
@@ -77,9 +94,14 @@ public class BuyDAO {
 		List<OrderListDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select * from prod_buy")) {
-			ResultSet rs = pstat.executeQuery();
-			while(rs.next()) {
-				list.add(new OrderListDTO(rs.getInt(1),rs.getTimestamp(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15),rs.getString(16)));
+			try (ResultSet rs = pstat.executeQuery();) {
+				while (rs.next()) {
+					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2), rs.getString(3), rs.getString(4),
+							rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9),
+							rs.getInt(10), rs.getInt(11), rs.getString(12), rs.getString(13), rs.getString(14),
+							rs.getString(15), rs.getString(16)));
+
+				}
 			}
 		}
 		return list;
