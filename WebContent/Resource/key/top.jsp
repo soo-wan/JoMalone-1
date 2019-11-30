@@ -53,7 +53,7 @@
             	</c:when>
             	<c:otherwise>
             	<div id="info-box2" style="float:left;">
-            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>안소희 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a id='logout' class='b-tag' href='#'><h6>로그아웃</h6></a></div>">
+            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a class='b-tag' href='#'><h6 id='logout'>로그아웃</h6></a></div>">
             	</div>
             	</c:otherwise>
             	</c:choose>
@@ -104,7 +104,15 @@
     	$("#title").on("click", function() {
     		location.href= "/JoMalone/home.jsp";
     	})
-    
+    	
+    	$("#logout").on("click",function(){
+		var result = confirm("정말 로그아웃 하시겠습니까?");
+	
+		if(result){
+			location.href="logout.log";
+			}
+		})
+		
     	$("#cart").on("click", function() {
     		<c:choose>
     		<c:when test="${loginInfo == null}">
