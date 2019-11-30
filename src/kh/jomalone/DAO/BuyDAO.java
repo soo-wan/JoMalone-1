@@ -89,6 +89,10 @@ public class BuyDAO {
 			}
 		}
 	}
+	
+	
+	
+	
 
 	public List<OrderListDTO> selectBuyList(String id) throws Exception {
 		List<OrderListDTO> list = new ArrayList<>();
