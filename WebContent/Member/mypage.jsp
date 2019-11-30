@@ -26,7 +26,7 @@
 	
 	<script>
 		$("#my-profile").on("click", function() {
-			location.href = "/JoMalone/Member/profile.jsp";
+			location.href = "profile.my";
 		})
 		
 		$("#my-cart").on("click", function() {

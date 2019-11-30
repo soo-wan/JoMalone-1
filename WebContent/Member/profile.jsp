@@ -14,17 +14,27 @@
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
-	<form action="" method="post" id="profileform">
+	<form action="profile.p" method="post" id="profileform">
 		<div id="profile" class="container">
 			<div id="profile-title" class="row"><h4>MY PROFILE</h4></div>
-			<div id="profile-inputbox" class="row">
-				
-			</div>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
 			<div id="modify-btn" class="">
 				<input id="profile-modi" type="button" value="modify">
 				<input id="profile-re" type="button" value="backward">
 			</div>
-		</div>
+			</div>
 	</form>
 	
 	<script>
