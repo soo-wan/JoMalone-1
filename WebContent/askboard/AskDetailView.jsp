@@ -168,7 +168,7 @@
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="목록" id="toMain"> 
 				<c:choose>
-	                <c:when test="${sessionScope.loginId == readDTO.mem_id}">
+	                <c:when test="${sessionScope.loginInfo == readDTO.mem_id}">
 	                    <input type="button" value="수정" id="toModify">
 	                    <input type="button" value="삭제" id="toDelete">
 	                </c:when>
