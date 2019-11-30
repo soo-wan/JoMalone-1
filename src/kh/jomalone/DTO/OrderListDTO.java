@@ -6,7 +6,6 @@ public class OrderListDTO {
 	private int order_seq;
 	private Timestamp order_date;
 	private String merchant_uid;
-	private String prod_code;
 	private String prod_name;
 	private String pay_method;
 	private String mem_id;
@@ -19,17 +18,17 @@ public class OrderListDTO {
 	private String delivery_check;
 	private String refund;
 	private String processed;
+	private String buy_success;
 	public OrderListDTO() {
 		super();
 	}
-	public OrderListDTO(int order_seq, Timestamp order_date, String merchant_uid, String prod_code, String prod_name,
-			String pay_method, String mem_id, String mem_name, String order_state, int prod_quantity, int price,
-			String full_address, String zip_code, String delivery_check, String refund, String processed) {
+	public OrderListDTO(int order_seq, Timestamp order_date, String merchant_uid, String prod_name, String pay_method,
+			String mem_id, String mem_name, String order_state, int prod_quantity, int price, String full_address,
+			String zip_code, String delivery_check, String refund, String processed, String buy_success) {
 		super();
 		this.order_seq = order_seq;
 		this.order_date = order_date;
 		this.merchant_uid = merchant_uid;
-		this.prod_code = prod_code;
 		this.prod_name = prod_name;
 		this.pay_method = pay_method;
 		this.mem_id = mem_id;
@@ -42,6 +41,7 @@ public class OrderListDTO {
 		this.delivery_check = delivery_check;
 		this.refund = refund;
 		this.processed = processed;
+		this.buy_success = buy_success;
 	}
 	public int getOrder_seq() {
 		return order_seq;
@@ -60,12 +60,6 @@ public class OrderListDTO {
 	}
 	public void setMerchant_uid(String merchant_uid) {
 		this.merchant_uid = merchant_uid;
-	}
-	public String getProd_code() {
-		return prod_code;
-	}
-	public void setProd_code(String prod_code) {
-		this.prod_code = prod_code;
 	}
 	public String getProd_name() {
 		return prod_name;
@@ -139,5 +133,13 @@ public class OrderListDTO {
 	public void setProcessed(String processed) {
 		this.processed = processed;
 	}
+	public String getBuy_success() {
+		return buy_success;
+	}
+	public void setBuy_success(String buy_success) {
+		this.buy_success = buy_success;
+	}
+	
+	
 	
 }

@@ -8,7 +8,7 @@ public class BuyDTO {
 	private String pg;
 	private String pay_method;
 	private String merchant_uid;
-	private String name;
+	private String buy_name;
 	private int totalPrice;
 	private String mem_id;
 	private String mem_name;
@@ -16,19 +16,20 @@ public class BuyDTO {
 	private String mem_email;
 	private String full_address;
 	private String zip_code;
+	private String buy_success;
 	public BuyDTO() {
 		super();
 	}
-	public BuyDTO(int buy_seq, Timestamp buyDate, String pg, String pay_method, String merchant_uid, String name,
+	public BuyDTO(int buy_seq, Timestamp buyDate, String pg, String pay_method, String merchant_uid, String buy_name,
 			int totalPrice, String mem_id, String mem_name, String mem_phone, String mem_email, String full_address,
-			String zip_code) {
+			String zip_code, String buy_success) {
 		super();
 		this.buy_seq = buy_seq;
 		this.buyDate = buyDate;
 		this.pg = pg;
 		this.pay_method = pay_method;
 		this.merchant_uid = merchant_uid;
-		this.name = name;
+		this.buy_name = buy_name;
 		this.totalPrice = totalPrice;
 		this.mem_id = mem_id;
 		this.mem_name = mem_name;
@@ -36,6 +37,7 @@ public class BuyDTO {
 		this.mem_email = mem_email;
 		this.full_address = full_address;
 		this.zip_code = zip_code;
+		this.buy_success = buy_success;
 	}
 	public int getBuy_seq() {
 		return buy_seq;
@@ -67,11 +69,11 @@ public class BuyDTO {
 	public void setMerchant_uid(String merchant_uid) {
 		this.merchant_uid = merchant_uid;
 	}
-	public String getName() {
-		return name;
+	public String getBuy_name() {
+		return buy_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setBuy_name(String buy_name) {
+		this.buy_name = buy_name;
 	}
 	public int getTotalPrice() {
 		return totalPrice;
@@ -114,6 +116,12 @@ public class BuyDTO {
 	}
 	public void setZip_code(String zip_code) {
 		this.zip_code = zip_code;
+	}
+	public String getBuy_success() {
+		return buy_success;
+	}
+	public void setBuy_success(String buy_success) {
+		this.buy_success = buy_success;
 	}
 	
 	
