@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Order | Jo Malone</title>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -14,7 +16,7 @@
 </head>
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
-	
+	<form>
 	<div id="order-page" class="container">
 	    <div id="order-title" class="row"><h4>ORDER</h4></div>
 	    <div class="row" style="padding-left: 10px; height: 18px;"><h6 style="font-size: 13px;">국내배송상품 주문내역</h6></div>
@@ -32,26 +34,26 @@
 			  	<tr class="my-item">
 			  		<td style="width: 50px;"> <input type="checkbox">
 			  		<td style="width: 130px;"><img name="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  		<td style="width: 400px;"><div name="prod_names" class="prod_name">Lime Basil & Mandarin Cologne</div>
-			  		<td style="width: 130px;"><div name="prices">990</div>
-			  		<td style="width: 130px;"><div name="prod_quantitys">1</div>
-			  		<td style="width: 130px;"><div name="prod_codes">2,000</div>
+			  		<td style="width: 400px;"><div name="prod_names" class="buy_name">Lime Basil & Mandarin Cologne</div>
+			  		<td style="width: 130px;"><div name="prices" class = "prices">990</div>
+			  		<td style="width: 130px;"><div name="prod_quantitys" class = "prod_quantitys">1</div>
+			  		<td style="width: 130px;"><div>2,000</div>
 			  		<td>
 			  	</tr>
 			  	<tr class="my-item">
-			  		<td style="width: 50px;"><input type="checkbox">
+			  		<td style="width: 50px;"> <input type="checkbox">
 			  		<td style="width: 130px;"><img name="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  		<td style="width: 400px;"><div name="prod_names" class="prod_name">154</div>
-			  		<td style="width: 130px;"><div name="prices">990</div>
-			  		<td style="width: 130px;"><div name="prod_quantitys">1</div>
-			  		<td style="width: 130px;"><div name="prod_codes">2,000</div>
+			  		<td style="width: 400px;"><div name="prod_names" class="buy_name">154</div>
+			  		<td style="width: 130px;"><div name="prices" class="prices">990</div>
+			  		<td style="width: 130px;"><div name="prod_quantitys" class="prod_quantitys">2</div>
+			  		<td style="width: 130px;"><div name="prod_codes" class="prod_codes">2,000</div>
 			  		<td>
 			  	</tr>
 			</table>
 	    </div>
 	    <div id="money-info" class="row" style="height: 40px; border-bottom: 2px solid lightgray;">
 	    	<div style="float: left; margin: 10px 0px 0px 5px;"><h6 style="font-size: 13px;">[기본배송]</h6></div>
-	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;"><h6 style="float:right; width: 335px; text-align: right; font-size: 13px;"><div style="float:left; margin-left:5px;"> 상품구매금액 </div><div style="float:left; margin-left:5px;"> 99,000 </div><div style="float:left; margin-left:5px;"> + 배송비 2,000 = TOTAL </div><div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"> 102,000 </div></h6></div>
+	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;"><h6 style="float:right; width: 335px; text-align: right; font-size: 13px;"><div style="float:left; margin-left:5px;"> 상품구매금액 </div><div style="float:left; margin-left:5px;"> 99,000 </div><div style="float:left; margin-left:5px;"> + 배송비 2,000 = TOTAL </div><div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice">100</div></h6></div>
 	    </div>
 	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
 		<div class="row" style="height: 25px;">
@@ -83,20 +85,20 @@
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">받으시는 분<span style="color: crimson;"> *</span></h6>
-					<td style="padding: 0px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;"><input type="text" style="width: 200px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;" name="name">
+					<td style="padding: 0px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;"><input type="text" style="width: 200px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;" name="name" id="name">
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 90px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">주소<span style="color: crimson;"> *</span></h6>
 					<td style="padding-left: 10px; width: 1040px; height: 90px; text-align: left;">
-						<input type="text" id="zip_code" name="zip_code" style="width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;">
+						<input type="text" id="zip_code" style="width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;">
 						<input type="button" onclick="postcode()" value="주소찾기" style="margin-bottom: 0px; width: 100px; height: 20px; background-color: lightgray; border: 0px; border-radius: 5px; font-size: 11px;"><br>
-						<input type="text" id="address1" name="address1" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
-						<input type="text" id="address2" name="address2" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
+						<input type="text" id="address1" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
+						<input type="text" id="address2" style="width: 250px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 11px;"><br>
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">일반전화</h6>
 					<td style="padding-left: 10px; width: 1040px; height: 20px; text-align: left;">
-						<select id="phone1" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
+						<select id="phone4" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
 							<option value="02">02</option>
 							<option value="031">031</option>
 							<option value="032">032</option>
@@ -116,14 +118,14 @@
 							<option value="064">064</option>
 						</select>
 						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
-						<input type="text" id="phone2" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<input type="text" id="phone5" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
-						<input type="text" id="phone3" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
+						<input type="text" id="phone6" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">휴대전화<span style="color: crimson;"> *</span></h6>
 					<td style="padding-left: 10px; width: 1040px; height: 20px; text-align: left;">
-						<select name="phone1" id="phone1" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
+						<select  id="phone1" style="padding-left: 5px; width: 70px; height: 20px; border-radius: 5px; font-size: 13px;">
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
@@ -132,17 +134,17 @@
 							<option value="017">019</option>
 						</select>
 						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
-						<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<input type="text"  id="phone2" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> - </span>
-						<input type="text" name="phone3" id="phone3" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
+						<input type="text"  id="phone3" style="margin-left: 0px; width: 70px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">						
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 50px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">이메일</h6>
 					<td style="padding-left: 10px; width: 1040px; height: 50px; text-align: left;">
-						<input name="emailID" id=emailID type="text" style="margin-left: 0px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<input  id="email1" type="text" style="margin-left: 0px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 						<span style="margin: 0px 5px 0px 5px; height:20px; color: black;"> @ </span>
-						<input type="text" placeholder="직접입력" name="writeEmail" style="margin-left: 0px; padding-left: 7px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
-						<select name="email2" id="email2" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<input  id="email2"type="text" placeholder="직접입력" name="writeEmail" style="margin-left: 0px; padding-left: 7px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
+						<select id="email3" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 							<option value="input">-- 선택없음</option>
 							<option value="@naver.com">naver.com</option>
 							<option value="@daum.net">daum.net</option>
@@ -200,63 +202,84 @@
 			<h6 style="width: 1140px; font-size: 10px; color: darkgray;">- 무이자할부를 원하시는 경우 장바구니에서 무이자할부 상품만 선택하여 주문하여 주시기 바랍니다.</h6>
 		</div>
 	</div>
+	</form>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 	
 	<script>
-	
 		$("#buy").on("click",function(){
+			var email = $("#email1").val()+"@"+$("#email2").val();
+			var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+			var address = $("#address1").val()+ $("#address2").val();
+			console.log($("#name").val());
+			console.log(email);
+			console.log(phone);
+			console.log(address);
+			var buy_name = "";
+	        $(".buy_name").each(function(){
+	        	buy_name = buy_name  + $(this).text()+",";
+	        });
+	        var prices = "";
+	        $(".prices").each(function(){
+	        	prices = prices  + $(this).text()+",";
+	        });
+	        var prod_quantitys = "";
+	        $(".prod_quantitys").each(function(){
+	        	prod_quantitys = prod_quantitys  + $(this).text()+",";
+	        });
 			console.log("시작!");
+			console.log(prices);
+			console.log(prod_quantitys);
 			$.ajax({
-				url:"callMerchantuid.buy",
+				url:"../callMerchantuid.buy",
 				type:"post",
-				data:{},
+				data:{
+					name : $("#name").val(),
+					buy_name : buy_name ,
+					totalPirce : $("#totalPrice").html() ,
+					phone : phone ,
+					address : address ,
+					zip_code : $("#zip_code").val() ,
+					email : email ,
+					prices : prices ,
+					prod_quantitys : prod_quantitys
+				},
 				dataType:"json"
 			}).done(function(data){
-				var IMP = window.IMP; 
-				var Email = $("#emailID").val()+"@"+$("#writeEmail").val();
-				var Phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
-				var Address = $("#address1").val()+ $("#address").val();
-				var count =-1;
-				var prod_name = "";
-				$(".prod_name").each(function(){
-                	count = count + 1;
-                });
-                $(".prod_name").each(function(){
-                	prod_name = $(this).text();
-                    return false;
-                });
-                prod_name = prod_name + "외 제품" + count + "개";
-                
-                console.log(prod_name);
-                
-                IMP.init("imp97337518");
+				console.log(data);
+				var IMP = window.IMP;
+		        IMP.init("imp97337518");
+                console.log(buy_name);
 				IMP.request_pay({
-					pg : "inicis",
-					pay_method : "card",
+					pg : data.pg,
+					pay_method : data.pay_method,
 					merchant_uid : data.merchant_uid,
-					name : prod_name,
-					amount : $("#totalPrice").val(),
-					buyer_email : Email,
-					buyer_name : data.name,
-					buyer_tel : Phone,
-					buyer_addr : Address,
-					buyer_postcode : $("#zip_code").val(),
+					name : data.name,
+					amount : data.amount,
+					buyer_email : data.buyer_email,
+					buyer_name : data.buyer_name,
+					buyer_tel : data.buyer_tel,
+					buyer_addr : data.buyer_addr,
+					buyer_postcode : data.buyer_postcode,
 				}, function(rsp) { // callback
 					console.log(rsp);
 					if (rsp.success) {
+						console.log("callback 시작!")
 						$.ajax({
 							url:"buyComplet.buy",
 							type:"post",
 							data:rsp,
 							dataType:"json"
+						}).done(function(){
+							alert("결제가 완료되었습니다.");
+							location.href= "../home.jsp";
 						})
-					}		
+					}
 					 else {
 					}
 				});
+			}).fail(function(){
+				console.log("fail");
 			})
-			
-			
-			
 		})
 	
 		$("#return").on("click", function() {
@@ -276,6 +299,7 @@
         }
 	</script>
 	
-	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
+	
+	
 </body>
 </html>
