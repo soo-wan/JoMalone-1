@@ -40,7 +40,6 @@ public class SignController extends HttpServlet {
 				String email2 = request.getParameter("email2");
 				if(email2.contentEquals("input")) {
 					email2 = request.getParameter("writeemail");
-					email2 = "@"+email2;
 				}
 				System.out.println(email2);
 				String zip_code = request.getParameter("zipcode");
@@ -60,7 +59,6 @@ public class SignController extends HttpServlet {
 				System.out.println(agree_p);
 				MembersDTO dto = new MembersDTO(id,"normal",pw,name,phone1,phone2,phone3,email1,email2,
 						zip_code,address1,address2,year,month,day,gender,null,null,null,agree_s,agree_p);
-
 				int result = dao.signup(dto);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/Member/login.jsp").forward(request, response);

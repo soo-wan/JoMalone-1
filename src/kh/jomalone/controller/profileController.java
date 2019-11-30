@@ -26,7 +26,20 @@ public class profileController extends HttpServlet {
 			try {
 			String id =(String)request.getSession().getAttribute("loginInfo");
 			MembersDTO dto =dao.selectById(id);
-			request.getSession().setAttribute("dto", dto);
+			request.setAttribute("dto",dto);
+			
+			String[] phonearr = dto.phonesplit(dto.getPhone());
+			request.setAttribute("phone1", phonearr[0]);
+			request.setAttribute("phone2", phonearr[1]);
+			request.setAttribute("phone3", phonearr[2]);
+			String[] emailarr = dto.emailsplit(dto.getEmail());
+			request.setAttribute("email1", emailarr[0]);
+			request.setAttribute("email2", emailarr[1]);
+			String[] birtharr = dto.birthsplit(dto.getBirth());
+			request.setAttribute("year", birtharr[0]);
+			request.setAttribute("month", birtharr[1]);
+			request.setAttribute("day", birtharr[2]);
+			
 			request.getRequestDispatcher("profile22.jsp").forward(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();

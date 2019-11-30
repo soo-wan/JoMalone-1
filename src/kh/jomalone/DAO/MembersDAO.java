@@ -62,15 +62,12 @@ public class MembersDAO {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPw());
 			pstat.setString(3, dto.getName());
-				String phone = dto.getPhone1()+dto.getPhone2()+dto.getPhone3();
-			pstat.setString(4, phone);
-				String email = dto.getEmail1()+dto.getEmail2();
-			pstat.setString(5, email);
+			pstat.setString(4, dto.phone());
+			pstat.setString(5, dto.email());
 			pstat.setString(6, dto.getZip_code());
 			pstat.setString(7, dto.getAddress1());
 			pstat.setString(8, dto.getAddress2());
-				String birth = dto.getYear()+dto.getMonth()+dto.getDay();
-			pstat.setString(9, birth);
+			pstat.setString(9, dto.birth());
 			pstat.setString(10, dto.getGender());
 			pstat.setString(11, dto.getAgree_s());
 			pstat.setString(12, dto.getAgree_p());
@@ -256,42 +253,7 @@ public class MembersDAO {
 			}
 		}
 	}
-	//아이디에맞는 정보 가져오는데 회원가입양식과 동일하게.
-	public MembersDTO selectByIdBysign(String loginInfo) throws Exception {
-		String sql = "select * from members where mem_id = ?";
-		try(
-				Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				){
-			pstat.setString(1, loginInfo);
-			try(
-			ResultSet rs = pstat.executeQuery();
-					){
-				if(rs.next()) {
-					String id = rs.getString(1);
-					String logintype = rs.getString(2);
-					String pw = rs.getString(3);
-					String name =rs.getString(4);
-					String phone =rs.getString(5);
-					String email =rs.getString(6);
-					String zip_code=rs.getString(7);
-					String address1=rs.getString(8);
-					String address2=rs.getString(9);
-					String birth=rs.getString(10);
-					String gender=rs.getString(11);
-					Timestamp enrolldate =rs.getTimestamp(12);
-					String del_yn=rs.getString(13);
-					Timestamp deletedate=rs.getTimestamp(14);
-					String agree_s=rs.getString(15);
-					String agree_p=rs.getString(16);
-					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
-							address1,address2,birth,gender,enrolldate,del_yn,deletedate,agree_s,agree_p);
-					return dto;
-				}
-				return null;
-			}
-		}
-	}
+	
 	//이름과 핸드폰번호가 일치하는 아이디 가져오기
 	public String findid(String name, String phone)throws Exception {
 		String sql = "select mem_id from members where mem_name=? and mem_phone=?";
