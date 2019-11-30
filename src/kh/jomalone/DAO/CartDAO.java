@@ -104,7 +104,7 @@ public class CartDAO {
 	}
 	
 	public List<CartDTO> selectCart(String mem_id) throws Exception{
-		String sql = "select * from cart where mem_id=?";
+		String sql = "select * from cart where mem_id=? order by seq desc";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, mem_id);

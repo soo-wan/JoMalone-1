@@ -30,7 +30,7 @@ public class CartController extends HttpServlet {
 				String[] priceString = request.getParameterValues("price");
 				String[] prod_quantityString = request.getParameterValues("prod_quantity");
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
-				String mem_name = (String)request.getSession().getAttribute("name"); // name 값 세션?
+				String mem_name = (String)request.getSession().getAttribute("name"); 
 				//String mem_id = "test";
 				int seq = 0;
 				int price = 0;

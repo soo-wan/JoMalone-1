@@ -16,19 +16,19 @@
 <body>
 	<form action=../insert.ca method=post id="frm">
 		<table bordercolor=black border=1 cellspacing=1 >
-			<input type=hidden name=seq value="2">	    <!-- 시퀀스 값? -->
+			<input type=hidden name=seq value="3">	    <!-- 시퀀스 값? -->
 			<tr align=center>
 				<td colspan=2>
-					<img src="${pageContext.request.contextPath}/Resource/img/event02.jpg" width=100 height=100>
+					<img src="${pageContext.request.contextPath}/Resource/img/event03.jpg" width=100 height=100>
 				</td>
 			</tr>
 			<tr align=center>
 				<td>품명</td>
-				<td><input type=hidden name=prod_name value="향수2">향수2</td>
+				<td><input type=hidden name=prod_name value="향수3">향수3</td>
 			</tr>
 			<tr align=center>
 				<td>가격</td>
-				<td><input type=hidden name=price value="18200">18,200</td>
+				<td><input type=hidden name=price value="38000">38,000</td>
 			</tr>
 			<tr align=center>
 				<td>수량</td>

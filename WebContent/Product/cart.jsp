@@ -52,8 +52,8 @@
 				  	  	</tr>
 						</c:when>
 					<c:otherwise>
+					<c:forEach items="${list}" var="dto">
 						<tr class="my-item">
-							<c:forEach items="${list}" var="dto">
 				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck">
 				  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
 				  	  		<td style="width: 400px;">${dto.prod_name}
@@ -63,8 +63,9 @@
 				  	  		<td style="width: 130px;">2,000
 				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
 							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
-							</c:forEach>
+							
 				  	  	</tr>
+				  	  	</c:forEach>
 					</c:otherwise>
 			  	  	</c:choose>
 			  	  </table>

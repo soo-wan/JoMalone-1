@@ -38,7 +38,7 @@
 	    </div>
 	    <div id="event-two" class="row">
 	    	<div class="col-5">
-	    		<a href="#"><div class="bg"><h4>ENGLISH PEAR & FREESIA DIFFUSER</h4><h5>잉글리쉬 페어 앤 프리지아 디퓨저</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event03.jpg"></a>
+	    		<a href="${pageContext.request.contextPath}/Product/prod3.jsp"><div class="bg"><h4>ENGLISH PEAR & FREESIA DIFFUSER</h4><h5>잉글리쉬 페어 앤 프리지아 디퓨저</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event03.jpg"></a>
 	    	</div>
 	        <div class="col-2"></div>
 	        <div class="col-5">

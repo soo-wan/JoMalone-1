@@ -30,7 +30,7 @@
 		})
 		
 		$("#my-cart").on("click", function() {
-			location.href = "/JoMalone/Product/cart.jsp";
+			location.href= "${pageContext.request.contextPath}/list.ca";
 		})
 		
 		$("#my-buylist").on("click", function() {
