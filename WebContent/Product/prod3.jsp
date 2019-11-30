@@ -16,6 +16,7 @@
 <body>
 	<form action=../insert.ca method=post id="frm">
 		<table bordercolor=black border=1 cellspacing=1 >
+			
 			<input type=hidden name=seq value="3">	    <!-- 시퀀스 값? -->
 			<tr align=center>
 				<td colspan=2>

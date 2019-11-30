@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Top</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">    <!-- Jo Malone / Korea -->
-<link rel="stylesheet" href="/JoMalone/Resource/css/top.css">
 <style>
 	#top_bar {margin: 0px; height: 25px; background-color: lightgray;}
 	#middle_bar {margin: 0px; height: 160px;}
@@ -21,15 +21,15 @@
 
 	#lo-title {padding-top: 8px; font-size: 14px; text-align: center;}
 	#con-div {margin: auto; height: 20px;}
-	.a-tag {color: black;}
+	.a-tag {color: black; cursor: pointer;}
 	.a-tag:hover {text-decoration: none; color: black;}
-	.a-tag>h6 {width: 50%; float:left; text-align: center; font-size: 12px;}
+	.a-tag>h6 {width: 50%; float:left; text-align: center; font-size: 12px; cursor: pointer;}
 	
 	#lo-title2 {padding-top: 8px; font-size: 14px; text-align: center;}
 	#con-div2 {margin: auto; height: 20px;}
 	.b-tag {color: black;}
-	.b-tag:hover {text-decoration: none; color: black;}
-	.b-tag>h6 {width: 50%; float:left; text-align: center; font-size: 12px;}
+	.b-tag:hover {text-decoration: none; color: black; cursor: pointer;}
+	.b-tag>h6 {width: 50%; float:left; text-align: center; font-size: 12px; cursor: pointer;}
 </style>
 </head>
 <body>
@@ -48,12 +48,12 @@
             	<c:choose>
             	<c:when test="${sessionScope.loginInfo == null}">
             	<div id="info-box" style="float:left;">
-            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title'>로그인이 필요한 서비스입니다.<h6>" data-html="true" data-content="<div id='con-div'><a class='a-tag' href='/JoMalone/Member/login.jsp'><h6>로그인</h6></a><a class='a-tag' href='/JoMalone/Member/signup.jsp'><h6>회원가입</h6></a></div>">
+            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title'>로그인이 필요한 서비스입니다.<h6>" data-html="true" data-content="<div id='con-div'><a class='a-tag' href='/JoMalone/Member/login.jsp'><h6>로그인</h6></a><a id='logout' class='a-tag' href='/JoMalone/Member/signup.jsp'><h6>회원가입</h6></a></div>">
             	</div>
             	</c:when>
             	<c:otherwise>
             	<div id="info-box2" style="float:left;">
-            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a class='b-tag' href='#'><h6 id='logout'>로그아웃</h6></a></div>">
+            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a id='logout' class='b-tag' href='logout.log'><h6>로그아웃</h6></a></div>">
             	</div>
             	</c:otherwise>
             	</c:choose>
@@ -98,20 +98,12 @@
     
     <script>
 	    $(function () {
-	    	  $('[data-toggle="popover"]').popover()
-    	})
-    
+	    	$('[data-toggle="popover"]').popover();
+	    })
+    	    
     	$("#title").on("click", function() {
     		location.href= "/JoMalone/home.jsp";
     	})
-    	
-    	$("#logout").on("click",function(){
-		var result = confirm("정말 로그아웃 하시겠습니까?");
-	
-		if(result){
-			location.href="logout.log";
-			}
-		})
 		
     	$("#cart").on("click", function() {
     		<c:choose>

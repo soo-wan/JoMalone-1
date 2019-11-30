@@ -48,7 +48,7 @@ public class loginController extends HttpServlet {
 				}
 			}else if(cmd.contentEquals("/logout.log")) {
 				request.getSession().invalidate();
-				response.sendRedirect("home.jsp");
+				response.sendRedirect("/JoMalone/home.jsp");
 				
 			}
 

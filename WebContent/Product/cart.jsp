@@ -16,7 +16,7 @@
 </head>
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
-	
+
 	<div id="cart-page" class="container">
 		<div id="cart-title" class="row"><h4>CART</h4></div>
 		<div id="cart-list" class="row">
@@ -38,7 +38,7 @@
 			    <div class="tab-pane fade show active" id="korea" role="tabpanel">
 			  	  <table class="cart-table">
 			  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-			  	  		<td style="width: 50px;"><!-- <input type="checkbox">  -->
+			  	  		<td style="width: 50px;"><input type="checkbox" id="ck_all">	
 			  	  		<td style="width: 130px;">IMAGE
 			  	  		<td style="width: 400px;">ITEM
 			  	  		<td style="width: 130px;">PRICE
@@ -54,7 +54,7 @@
 					<c:otherwise>
 					<c:forEach items="${list}" var="dto">
 						<tr class="my-item">
-				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck">
+				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck" data-cartNum="${dto.seq}">
 				  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
 				  	  		<td style="width: 400px;">${dto.prod_name}
 				  	  		<td style="width: 130px;">${dto.price} 		
@@ -63,9 +63,8 @@
 				  	  		<td style="width: 130px;">2,000
 				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
 							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
-							
 				  	  	</tr>
-				  	  	</c:forEach>
+				  	</c:forEach>
 					</c:otherwise>
 			  	  	</c:choose>
 			  	  </table>
@@ -76,7 +75,6 @@
 				  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 				  	  		<td style="width: 50px;"><input type="checkbox">
 				  	  		<td style="width: 130px;">IMAGE
-				  	  		
 				  	  		<td style="width: 400px;">ITEM
 				  	  		<td style="width: 130px;">PRICE
 				  	  		<td style="width: 130px;">QTY
@@ -94,6 +92,7 @@
 				<input type="button" id="check-btn" value="삭제하기" style="float: left;">
 				<input id="all-btn" type="button" value="장바구니 비우기" style="float: left;">
 			</div>
+
 			<div id="cart-money">
 				<table id="money-table" style="width:100%;">
 					<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
@@ -101,10 +100,16 @@
 						<td>총 배송비
 						<td>결제 예정금액
 					</tr>
-					<tr style="height: 100px; border-bottom: 1px solid lightgray;">
-						<td><fmt:formatNumber value="${sum}" pattern="#,###" /></td>	 <!-- cout 대신에 formatNumber -->	
-						<td>+2,000
-						<td><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></td>
+					<tr style="height: 100px; border-bottom: 1px solid lightgray;"> 
+					<c:choose>
+						<c:when test="${list.size()==0}">
+						</c:when>
+						<c:otherwise>
+								<td><fmt:formatNumber value="${sum}" pattern="#,###" /></td>	 <!-- cout 대신에 formatNumber -->	
+								<td>+2,000
+								<td><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></td>
+						</c:otherwise>
+					</c:choose>
 					</tr>
 				</table>
 			</div>
@@ -135,7 +140,7 @@
 	
 	<script>
 		$(".select-btn").on("click", function() {
-			location.href = "order.jsp";
+			location.href = "${pageContext.request.contextPath}/Product/order.jsp";
 		})
 		
 		$(".gogo-btn").on("click", function() {
@@ -156,35 +161,85 @@
 	        }
 	    });
 	    
-		$("#check-btn").on("click",function(){ // 선택 체크 삭제
-			var check = $(".delcheck").get(); //.get()은 선택한 요소를 배열로 가져온다.
+//		$("#check-btn").on("click",function(){ // 선택 체크 삭제
+//			var check = $(".delcheck").get(); //.get()은 선택한 요소를 배열로 가져온다.
+//			if(confirm("선택 상품을 삭제하시겠습니까?")){
+//				for(var i=0;i<check.length;i++){
+//					console.log(check[i].value);
+//					if(check[i].value=="check"){
+//					console.log(check[i].id);
+//					console.log("도착1");
+//						var seq = check[i].id;
+//						console.log("도착2");
+//						console.log(seq);
+//						$.ajax({
+//							url:"delete.ca",
+//							type:"post",		
+//							data:{
+//								seq:seq
+//							},dataType:"json"
+//						}).done(function(data){
+//							console.log("성공");
+//						}).fail(function(){
+//							console.log("실패");
+//						});
+//					}
+//				}
+//			}else{
+//	            return false;
+//	        }
+//		});
+		
+		//마지막 최종 소스 // 배열로 컨트롤러로 보내기, 그냥 하면 안보내짐
+		$("#check-btn").on("click",function(){ // 선택 체크 삭제 최종 
 			if(confirm("선택 상품을 삭제하시겠습니까?")){
-				for(var i=0;i<check.length;i++){
-					//console.log(check[i].value);
-					if(check[i].value=="check"){
-					//console.log(check[i].id);
-					//	ArrayList<String> list = new ArrayList<>();
-					//	list.add(check[i].id);
-						var seq = check[i].id;
-					//	location.href="delete.ca?seq="+list;
-						console.log(seq);
+	                var checkArr = new Array();
+	                $("input[name='checks']:checked").each(function(){
+	                    checkArr.push($(this).attr("data-cartNum"));
+	                });
+	                	console.log(checkArr);
 						$.ajax({
-							url:"delete.ca",
+							url:"deletes.ca",
 							type:"post",		
 							data:{
-								seq:seq
-							},dataType:"json"
+								seq:JSON.stringify(checkArr) 
+							}
 						}).done(function(data){
-							console.log("성공");
+							console.log("왔음");
+							location.href="list.ca";
 						}).fail(function(){
 							console.log("실패");
 						});
-					}
 				}
-			}else{
+			else{
 	            return false;
 	        }
 		});
+		
+//        $("#check-btn").on("click",function(){
+//            var cf = confirm("선택 상품을 삭제하시겠습니까?");
+//            if(cf){
+//                var checkArr = new Array();
+//                $("input[name='checks']:checked").each(function(){
+//                    checkArr.push($(this).attr("data-cartNum"));
+//                });
+//                $.ajax({
+//                		 url:"deletes.ca",
+//                         type : "post",
+//                         data : { 
+//                        	 chbox : checkArr 
+//                        	 },
+//                         	success : function(result){
+//                          if(result == 1) {          
+//                           location.href = "list.ca";
+//                          } else {
+//                           alert("삭제 실패");
+//                          }
+//                        }
+//                    });
+//                }
+//         });
+		
 		
         $("#all-btn").on("click",function(){
         	if(confirm("정말로 전체 삭제하시겠습니까?")){

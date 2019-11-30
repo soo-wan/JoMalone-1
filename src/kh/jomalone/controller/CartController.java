@@ -1,9 +1,10 @@
 package kh.jomalone.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -63,6 +64,7 @@ public class CartController extends HttpServlet {
 			else if(cmd.contentEquals("/delete.ca")) {
 				//PrintWriter pwr = response.getWriter();
 				String seqString = request.getParameter("seq");
+				System.out.println(seqString);
 				seqString = seqString.substring(5);
 				int seq = Integer.parseInt(seqString);
 				System.out.println(seq);
@@ -70,6 +72,25 @@ public class CartController extends HttpServlet {
 				list.add(seq);
 				for(int i : list) {
 					dao.deleteCart(i);
+				}
+				response.sendRedirect("list.ca");
+			}
+			else if(cmd.contentEquals("/deletes.ca")) {
+				String[] seqs = request.getParameterValues("seq");
+				seqs[0]=seqs[0].replaceAll("\"", "");
+				String regex = "(\\d+)";
+				Pattern p = Pattern.compile(regex);
+				Matcher m = p.matcher(seqs[0]);
+				int seq=0;
+//				seqs[0]=seqs[0].replaceAll("[", ""); 안됨
+//				seqs[0]=seqs[0].replaceAll("]", ""); 안됨				
+//				for (int i = 0; i < seqs.length; i++) {
+//					seq = Integer.parseInt(seqs[i]);
+//					//dao.deleteCart(seq);
+//				}
+				while(m.find()) {
+					seq = Integer.parseInt(m.group());
+					dao.deleteCart(seq);
 				}
 				response.sendRedirect("list.ca");
 			}

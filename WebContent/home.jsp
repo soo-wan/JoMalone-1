@@ -33,7 +33,12 @@
 	        </div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
+<<<<<<< HEAD
 	        	<a href="${pageContext.request.contextPath}/Product/prod2.jsp"><div class="bg"><h4>LIMITED EDITION</h4><h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event02.jpg"></a>
+=======
+	        	<a href="#"><div class="bg"><h4>LIMITED EDITION</h4><
+	        	h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event02.jpg"></a>
+>>>>>>> 5706490e41762962236ea60f603127ea4476f4d2
 	        </div>
 	    </div>
 	    <div id="event-two" class="row">
