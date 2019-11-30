@@ -68,12 +68,14 @@
 					</c:otherwise>
 			  	  	</c:choose>
 			  	  </table>
+			  	 
 			    </div>
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
 				  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 				  	  		<td style="width: 50px;"><input type="checkbox">
 				  	  		<td style="width: 130px;">IMAGE
+				  	  		
 				  	  		<td style="width: 400px;">ITEM
 				  	  		<td style="width: 130px;">PRICE
 				  	  		<td style="width: 130px;">QTY
@@ -155,11 +157,11 @@
 	    
 		$("#check-btn").on("click",function(){ // 선택 체크 삭제
 			var check = $(".delcheck").get(); //.get()은 선택한 요소를 배열로 가져온다.
-			if(confirm("삭제하시겠습니까?")){
+			if(confirm("선택 상품을 삭제하시겠습니까?")){
 				for(var i=0;i<check.length;i++){
 					//console.log(check[i].value);
 					if(check[i].value=="check"){
-						//console.log(check[i].id);
+					//console.log(check[i].id);
 					//	ArrayList<String> list = new ArrayList<>();
 					//	list.add(check[i].id);
 						var seq = check[i].id;
@@ -184,7 +186,9 @@
 		});
 		
         $("#all-btn").on("click",function(){
-            location.href="deleteAll.ca";
+        	if(confirm("정말로 전체 삭제하시겠습니까?")){
+            	location.href="deleteAll.ca";
+        	}
         })
 	</script>
 	
