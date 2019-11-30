@@ -119,6 +119,32 @@ public class AskDAO {
 		}
 	}
 	
+	private int getArticleCountById(String mem_id) throws Exception{
+		String sql = "select count(*) from askboard where mem_id=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, mem_id);
+			try(ResultSet rs = pstat.executeQuery();){
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	}
+	
+	private int getArticleCountNotYetAnswer() throws Exception{
+		String sql = "select count(*) from askboard where answer_YN = 'N'";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			rs.next();
+			return rs.getInt(1);
+		}
+	}
+	
 	private int getArticleCount() throws Exception{
 		String sql = "select count(*) from askboard";
 		try(
@@ -131,8 +157,16 @@ public class AskDAO {
 		}
 	}
 	
-	public String getPageNavi(int currentPage, String linkURL) throws Exception {
-		int recordTotalCount = this.getArticleCount();
+	public String getPageNavi(int currentPage, String linkURL, String pageType, String mem_id) throws Exception {
+		int recordTotalCount = 0;
+		if(pageType.contentEquals("entire")) {
+			recordTotalCount = this.getArticleCount();
+		}else if(pageType.contentEquals("notYetAnswer")) {
+			recordTotalCount = this.getArticleCountNotYetAnswer();
+		}else if(pageType.contentEquals("byId")) {
+			recordTotalCount = this.getArticleCountById(mem_id);
+		}
+		
 		int pageTotalCount = 0;
 		if(recordTotalCount%Configuration.recordCountPerPage>0) {//총 글의 개수가 나누어 떨어지지 않을 때
 			pageTotalCount = recordTotalCount/Configuration.recordCountPerPage + 1;
@@ -151,10 +185,6 @@ public class AskDAO {
 		if(endNavi>pageTotalCount) {
 			endNavi = pageTotalCount;
 		}
-		
-		System.out.println("현재 페이지 : "+currentPage);
-		System.out.println("네비 시작 번호 : "+startNavi);
-		System.out.println("네비 끝 번호 : "+endNavi);
 		
 		boolean needPrev = true;
 		boolean needNext = true;

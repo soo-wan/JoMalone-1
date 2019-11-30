@@ -37,7 +37,7 @@ public class AskBoardController extends HttpServlet {
 		// String id = (String) request.getSession().getAttribute("loginId");
 		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
 		String id = "TestID";
-		request.getSession().setAttribute("loginId", id);
+		
 		//String id = "TestID2";
 		//String id = "TestID3";
 		//request.getSession().setAttribute("adminId", "admin");
@@ -46,6 +46,7 @@ public class AskBoardController extends HttpServlet {
 
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
 			request.getSession().invalidate();
+			request.getSession().setAttribute("loginId", id);
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
@@ -55,7 +56,7 @@ public class AskBoardController extends HttpServlet {
 				int start = currentPage * (Configuration.recordCountPerPage) - (Configuration.recordCountPerPage - 1);
 				int end = currentPage * (Configuration.recordCountPerPage);
 				List<AskDTO> result = dao.selectByPageById(start, end, id);
-				String pageNavi = dao.getPageNavi(currentPage,"list.ask");
+				String pageNavi = dao.getPageNavi(currentPage,"list.ask","byId",id);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("askboard/AskList.jsp").forward(request, response);
@@ -76,7 +77,7 @@ public class AskBoardController extends HttpServlet {
 				int start = currentPage * (Configuration.recordCountPerPage) - (Configuration.recordCountPerPage - 1);
 				int end = currentPage * (Configuration.recordCountPerPage);
 				List<AskDTO> result = dao.selectByPageNotYetAnswer(start, end);
-				String pageNavi = dao.getPageNavi(currentPage,"newList.ask");
+				String pageNavi = dao.getPageNavi(currentPage,"newList.ask","notYetAnswer",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("askboard/NewAskList.jsp").forward(request, response);
@@ -96,7 +97,7 @@ public class AskBoardController extends HttpServlet {
 				int start = currentPage * (Configuration.recordCountPerPage) - (Configuration.recordCountPerPage - 1);
 				int end = currentPage * (Configuration.recordCountPerPage);
 				List<AskDTO> result = dao.selectByPage(start, end);
-				String pageNavi = dao.getPageNavi(currentPage,"allList.ask");
+				String pageNavi = dao.getPageNavi(currentPage,"allList.ask","entire",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
 				request.getRequestDispatcher("askboard/AllAskList.jsp").forward(request, response);
