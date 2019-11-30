@@ -1,14 +1,20 @@
 package kh.jomalone.DTO;
 
+
+import java.sql.Array;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
 
 public class MembersDTO {
 	private String id, logintype, pw, name, phone1, phone2, phone3, email1, email2, zip_code, address1, address2, gender, del_yn;
 	private String year, month, day, agree_s, agree_p;
 	private Timestamp enrolldate,deletedate;
-	private String phone = phone1 + phone2 + phone3;
-	private String email = email1 + email2;
-	private String birth = year+month+day;
+	private String phone;
+	private String email;
+	private String birth;
 	
 	
 	public MembersDTO() {};
@@ -185,5 +191,65 @@ public class MembersDTO {
 	public void setDeletedate(Timestamp deletedate) {
 		this.deletedate = deletedate;
 	}
+	public String phone() {
+		phone = phone1+"-"+phone2+"-"+phone3;
+		return phone;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;	
+	}
+	public String email() {
+		email = email1+"@"+email2;
+		return email;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+		
+	}
+	public String birth() {
+		birth = year+"-"+month+"-"+day;
+		return birth;
+	}
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+		
+	}
+	
+	public String[] phonesplit(String text) {
+		String[] array = text.split("-");
+		return array;
+	}
+	
+	public String[] emailsplit(String text) {
+		String[] array = text.split("@");
+		return array;
+	}
+	public String[] birthsplit(String text) {
+		String[] array = text.split("-");
+		return array;
+	}
+	
+//	public String dateform(String birth) {
+//		try {
+//		Date date = new SimpleDateFormat("yyyyMMdd").parse(birth);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		String newDateFormat = sdf.format(date);
+//		return newDateFormat;
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			return null;
+//		}
+//	}
+	
 	
 }
