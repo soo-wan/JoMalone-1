@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -31,29 +32,37 @@
 			  	  	<td style="width: 130px;">CHARGE
 			  	  	<td>TOTAL
 			  	</tr>
-			  	<tr class="my-item">
-			  		<td style="width: 50px;"> <input type="checkbox">
-			  		<td style="width: 130px;"><img name="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  		<td style="width: 400px;"><div name="prod_names" class="buy_name">Lime Basil & Mandarin Cologne</div>
-			  		<td style="width: 130px;"><div name="prices" class = "prices">990</div>
-			  		<td style="width: 130px;"><div name="prod_quantitys" class = "prod_quantitys">1</div>
-			  		<td style="width: 130px;"><div>2,000</div>
-			  		<td>
-			  	</tr>
-			  	<tr class="my-item">
-			  		<td style="width: 50px;"> <input type="checkbox">
-			  		<td style="width: 130px;"><img name="item-img" src="/JoMalone/Resource/img/img.jpg">
-			  		<td style="width: 400px;"><div name="prod_names" class="buy_name">154</div>
-			  		<td style="width: 130px;"><div name="prices" class="prices">990</div>
-			  		<td style="width: 130px;"><div name="prod_quantitys" class="prod_quantitys">2</div>
-			  		<td style="width: 130px;"><div name="prod_codes" class="prod_codes">2,000</div>
-			  		<td>
-			  	</tr>
+			  		<c:choose>
+			  	  		<c:when test="${list.size() == 0}">
+				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
+				  	  	</tr>
+						</c:when>
+					<c:otherwise>
+					<c:forEach items="${list}" var="dto">
+						<tr class="my-item">
+				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck" data-cartNum="${dto.seq}">
+				  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+				  	  		<td style="width: 400px;">${dto.prod_name}
+				  	  		<td style="width: 130px;">${dto.price} 		
+				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
+				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
+				  	  		<td style="width: 130px;">2,000
+				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
+							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
+				  	  	</tr>
+				  	</c:forEach>
+					</c:otherwise>
+			  	  	</c:choose>	
 			</table>
 	    </div>
 	    <div id="money-info" class="row" style="height: 40px; border-bottom: 2px solid lightgray;">
 	    	<div style="float: left; margin: 10px 0px 0px 5px;"><h6 style="font-size: 13px;">[기본배송]</h6></div>
-	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;"><h6 style="float:right; width: 335px; text-align: right; font-size: 13px;"><div style="float:left; margin-left:5px;"> 상품구매금액 </div><div style="float:left; margin-left:5px;"> 99,000 </div><div style="float:left; margin-left:5px;"> + 배송비 2,000 = TOTAL </div><div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice">100</div></h6></div>
+	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;">
+	    	<h6 style="float:right; width: 335px; text-align: right; font-size: 13px;">
+	    	<div style="float:left; margin-left:5px;">상품구매금액 </div>
+	    	<div style="float:left; margin-left:5px;"> <fmt:formatNumber value="${sum}" pattern="#,###" /> </div>
+	    	<div style="float:left; margin-left:5px;"> + 배송비 2,000 = TOTAL </div>
+	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></div></h6></div>
 	    </div>
 	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
 		<div class="row" style="height: 25px;">
@@ -283,7 +292,7 @@
 		})
 	
 		$("#return").on("click", function() {
-			location.href = "cart.jsp";
+			location.href = "${pageContext.request.contextPath}/list.ca";
 		})
 		
 		// 주소찾기	

@@ -81,10 +81,11 @@ public class CartDAO {
 		}
 	}
 	
-	public int deleteAllCart() throws Exception{ // 장바구니 전체 삭제
-		String sql = "delete from cart";
+	public int deleteAllCart(String mem_id) throws Exception{ // mem_id로 장바구니 전체삭제 
+		String sql = "delete from cart where mem_id=?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, mem_id);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -135,6 +136,38 @@ public class CartDAO {
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
+		}
+	}
+	
+	public int allOrder(String mem_id) throws Exception{ // 장바구니 전체 주문
+		String sql = "delete from cart where mem_id=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, mem_id);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+		
+	public CartDTO selectOrder(int seq) throws Exception{ // 장바구니 선택 주문
+		String sql = "select * from cart where seq=? order by seq desc";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			try(ResultSet rs = pstat.executeQuery();){
+				if(rs.next()) {
+					CartDTO dto = new CartDTO();
+					dto.setSeq(rs.getInt(1));
+					dto.setMem_id(rs.getString(2));
+					dto.setMem_name(rs.getString(3));
+					dto.setProd_name(rs.getString(4));
+					dto.setProd_quantity(rs.getInt(5));
+					dto.setPrice(rs.getInt(6));
+					return dto;
+				}
+				return null;
+			}
 		}
 	}
 	
