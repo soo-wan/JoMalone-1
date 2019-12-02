@@ -77,6 +77,7 @@ public class SignController extends HttpServlet {
 				
 				if(pw.contentEquals(checkpw)) {
 					int result = dao.delete(id);
+					request.getSession().invalidate();
 					request.setAttribute("result", result);
 					request.getRequestDispatcher("delresult.jsp").forward(request, response);
 				}else {

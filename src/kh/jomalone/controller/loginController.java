@@ -32,21 +32,27 @@ public class loginController extends HttpServlet {
 				boolean result = dao.login(id, pw);
 				System.out.println(result);
 				
+				
 				if(result) {
-					request.getSession().setAttribute("loginInfo", id);
-					String info = (String)request.getSession().getAttribute("loginInfo");
-					MembersDTO dto = dao.selectById(info);
-					String name = dto.getName();
-
-					request.getSession().setAttribute("name", name);
-
-					System.out.println(name);
+					if(id.contentEquals("admin1")) {
+						request.getSession().setAttribute("AdminId", id);
+						String admin = (String)request.getSession().getAttribute("AdminId");
+						System.out.println(admin);
+					}else {
+						request.getSession().setAttribute("loginInfo", id);
+						String info = (String)request.getSession().getAttribute("loginInfo");
+						MembersDTO dto = dao.selectById(info);
+						String name = dto.getName();
+						request.getSession().setAttribute("name", name);
+						
+						System.out.println(name);
+					}
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
-					
+	
 				}else {
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				}
-			}else if(cmd.contentEquals("/logout.log")) {
+			}else if(cmd.contentEquals("${pageContext.request.contextPath}/logout.log")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/JoMalone/home.jsp");
 				
