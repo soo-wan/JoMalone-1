@@ -42,7 +42,7 @@
 		})
 		
 		$("#my-delevery").on("click", function() {
-			location.href = "delevery.jsp";
+			window.open('https://www.doortodoor.co.kr/parcel/pa_004.jsp','title','height=' + screen.height + ',width=' + screen.width + 'fullscreen=yes');
 		})
 	</script>
 	
