@@ -19,10 +19,10 @@ import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import kh.jomalone.configuration.Configuration;
 import kh.jomalone.DAO.AskDAO;
 import kh.jomalone.DTO.AskCommentsDTO;
 import kh.jomalone.DTO.AskDTO;
-import kh.jomalone.configuration.Configuration;
 
 @WebServlet("*.ask")
 public class AskBoardController extends HttpServlet {
@@ -36,8 +36,13 @@ public class AskBoardController extends HttpServlet {
 
 		// String id = (String) request.getSession().getAttribute("loginInfo");
 		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
+<<<<<<< HEAD
 		String id = "aaaaaaaa";
 		
+=======
+		//String id = "TestID";
+		String id = "TestID4";
+>>>>>>> 1a9c2a9478b2afc85afee57120e7e5a8d55398ef
 		//String id = "TestID2";
 		//String id = "TestID3";
 		//request.getSession().setAttribute("adminId", "admin");
@@ -67,7 +72,7 @@ public class AskBoardController extends HttpServlet {
 			
 		}else if (cmd.contentEquals("/newList.ask")) {//(관리자)신규문의게시판
 			request.getSession().setAttribute("adminId", "admin");
-			request.getSession().setAttribute("fromAdminAskPage", "yes");
+			request.getSession().setAttribute("fromAdminAskPage", "new");
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
@@ -87,7 +92,7 @@ public class AskBoardController extends HttpServlet {
 			}
 		}else if (cmd.contentEquals("/allList.ask")) {//(관리자)전체문의게시판
 			request.getSession().setAttribute("adminId", "admin");
-			request.getSession().setAttribute("fromAdminAskPage", "yes");
+			request.getSession().setAttribute("fromAdminAskPage", "entire");
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
@@ -105,28 +110,19 @@ public class AskBoardController extends HttpServlet {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
 			}
-		} else if (cmd.contentEquals("/write.ask")) {// 문의글 등록
-			String uploadPath = request.getServletContext().getRealPath("/files");
-			File uploadFilePath = new File(uploadPath);
-			if (!uploadFilePath.exists()) {
-				uploadFilePath.mkdir();
-			}
-			int maxSize = 1024 * 1024 * 10;
-			MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
-					new DefaultFileRenamePolicy());
-
-			String askCode = multi.getParameter("askMenu");
-			String title = multi.getParameter("title");
-			String contents = multi.getParameter("contents");
-			String emailCheck = multi.getParameter("emailCheck");
+		} else if (cmd.contentEquals("/write.ask")) {// 문의글 등록	
+			String askCode = request.getParameter("askMenu");
+			String title = request.getParameter("title");
+			String contents = request.getParameter("contents");
+			String emailCheck = request.getParameter("emailCheck");
+			
+			
 			if (emailCheck == null) {
 				emailCheck = "N";
 			} else {
 				emailCheck = "Y";
 			}
-			// 전달값 확인
-			System.out.println(askCode + " : " + title + " : " + contents + " : " + emailCheck);
-
+			
 			try {
 				dao.insertAsk(new AskDTO(0, askCode, title, contents, id, null, null, emailCheck));
 				int seq = dao.findLatestAskSeqById(id);
@@ -138,7 +134,6 @@ public class AskBoardController extends HttpServlet {
 
 		} else if (cmd.contentEquals("/read.ask")) {// 문의글 상세페이지 보기
 			int seq = Integer.parseInt(request.getParameter("no"));
-			System.out.println(seq);
 			try {
 				// 본문
 				AskDTO readDTO = dao.selectAskBySeq(seq);
@@ -164,31 +159,19 @@ public class AskBoardController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		} else if (cmd.contentEquals("/modifyConfirm.ask")) {// 문의글 수정완료			
-			String uploadPath = request.getServletContext().getRealPath("/files");
-			File uploadFilePath = new File(uploadPath);
-			if (!uploadFilePath.exists()) {
-				uploadFilePath.mkdir();
-			}
-			int maxSize = 1024 * 1024 * 10;
-			MultipartRequest multi = new MultipartRequest(request, uploadPath, maxSize, "UTF8",
-					new DefaultFileRenamePolicy());
-
-			int seq = Integer.parseInt(multi.getParameter("askSeq"));			
-			String askCode = multi.getParameter("askMenu");
-			String title = multi.getParameter("title");
-			String contents = multi.getParameter("contents");
-			String emailCheck = multi.getParameter("emailCheck");
+			int seq = Integer.parseInt(request.getParameter("askSeq"));			
+			String askCode = request.getParameter("askMenu");
+			String title = request.getParameter("title");
+			String contents = request.getParameter("contents");
+			String emailCheck = request.getParameter("emailCheck");
+			
 			if (emailCheck == null) {
 				emailCheck = "N";
 			} else {
 				emailCheck = "Y";
 			}
-			// 전달값 확인
-			System.out.println(askCode + " : " + title + " : " + contents + " : " + emailCheck);
-
 			try {
-				int result = dao.updateAsk(new AskDTO(seq, askCode, title, contents, id, null, null, emailCheck));
-				System.out.println(result);
+				int result = dao.updateAsk(new AskDTO(seq, askCode, title, contents, id, null, null, emailCheck));				
 				response.sendRedirect("read.ask?no=" + seq);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -197,7 +180,6 @@ public class AskBoardController extends HttpServlet {
 			
 		} else if (cmd.contentEquals("/delete.ask")) {// 문의글 삭제
 			int seq = Integer.parseInt(request.getParameter("no"));
-			System.out.println(seq);
 			try {
 				dao.deleteAsk(seq);
 				response.sendRedirect("list.ask");
@@ -229,8 +211,6 @@ public class AskBoardController extends HttpServlet {
 				obj.addProperty("url", request.getContextPath() + "/files/" + fileName);
 				list.add(obj);
 			}
-
-			System.out.println(list);
 			response.getWriter().append(list.toString());
 		} else if (cmd.contentEquals("/writeComment.ask")) {// 댓글작성 ajax
 			int originSeq = Integer.parseInt(request.getParameter("writingSeq"));
@@ -251,9 +231,7 @@ public class AskBoardController extends HttpServlet {
 
 		} else if (cmd.contentEquals("/deleteComment.ask")) {
 			int originSeq = Integer.parseInt(request.getParameter("no"));
-			int seq = Integer.parseInt(request.getParameter("coNo"));
-			System.out.println(originSeq);
-			System.out.println(seq);
+			int seq = Integer.parseInt(request.getParameter("coNo"));			
 			try {
 				dao.deleteAskComment(seq);
 				dao.AnswerAskCondition("N", originSeq);
@@ -264,8 +242,7 @@ public class AskBoardController extends HttpServlet {
 			}
 
 		} else if (cmd.contentEquals("/modifyComment.ask")) {
-			int seq = Integer.parseInt(request.getParameter("coNo"));
-			System.out.println(seq);
+			int seq = Integer.parseInt(request.getParameter("coNo"));		
 			PrintWriter pWriter = response.getWriter();
 			try {
 				AskCommentsDTO dto = dao.selectCommentByCoSeq(seq);
@@ -280,7 +257,6 @@ public class AskBoardController extends HttpServlet {
 			int originSeq = Integer.parseInt(request.getParameter("modSeq"));
 			int seq = Integer.parseInt(request.getParameter("modCoNo"));
 			String contents = (String) request.getParameter("modComment");
-			System.out.println(originSeq + " : " + seq + " : " + contents);
 			try {
 				dao.updateAskComment(contents, seq);
 				response.sendRedirect("read.ask?no=" + originSeq);
@@ -289,7 +265,6 @@ public class AskBoardController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

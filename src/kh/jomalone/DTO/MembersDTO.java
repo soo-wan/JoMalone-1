@@ -18,6 +18,23 @@ public class MembersDTO {
 	
 	
 	public MembersDTO() {};
+	public MembersDTO(String id, String pw, String phone1, String phone2, String phone3, String email1, String email2,
+			String zip_code, String address1, String address2, String year, String month, String day, String gender) {
+		this.pw = pw;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.phone3	= phone3;
+		this.email1 = email1;
+		this.email2 = email2;
+		this.zip_code = zip_code;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.gender = gender;
+		
+	}
 	public MembersDTO(String id, String logintype, String pw,String name, String phone, String email, String zip_code,
 			String address1, String address2, String birth, String gender,Timestamp enrolldate,String del_yn,Timestamp deletedate,String agree_s, String agree_p) {
 		super();

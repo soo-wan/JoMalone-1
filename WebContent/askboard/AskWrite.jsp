@@ -16,9 +16,17 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 	
 	
+=======
+<<<<<<< HEAD
+
+	<form action="../write.ask" method="post" id="writeFrm">
+=======
+>>>>>>> 1a9c2a9478b2afc85afee57120e7e5a8d55398ef
 	<form action="../write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
+>>>>>>> 4b8f91bdc1fafc11a821fbe6c2f6c509b01eb849
 		<div class=container>
 			<div class="row" style="text-align: center;" id="headDiv">
 				<div class="col-12">1:1 문의글 작성</div>
@@ -72,6 +80,7 @@
 		$("#cancel").on("click", function() {
 			var check = confirm("정말 취소하시겠습니까?");
 			if(check){
+				$('.summernote').summernote('reset');
 				location.href = "../list.ask";//1대1문의 리스트페이지				
 			}
 		});
