@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
-	<form action="signup.sign" method="post" id="signform">
+	<form action="modi.my" method="post" id="signform">
 	
 		<div id="signup-page" class="container">
 			<div id="signup-title" class="row"><h4>SIGN UP</h4></div>
@@ -24,7 +24,7 @@
 				<div id="su-name"><h5><span>*</span>이름 : </h5><input type="text" placeholder="Input Your Name" style="width: 200px; height: 30px;" name="name" value="${dto.name }" readonly></div>
 				<div id="su-phone">
 					<h5><span>*</span>전화번호 : </h5>
-					<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone1 }">
+					<input type="text" name="phone1" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
 					<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone2 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
@@ -34,7 +34,7 @@
 					<h5><span>*</span>이메일 : </h5>
 					<input type="text" name="email1" id="email1" style="width: 80px; height: 30px;" value="${email1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;">@</span>
-					<input type="text" name="writeemail" style="margin-left: 0px; width: 90px; height: 30px;" value="${email2 }">
+					<input type="text" name="email2" style="margin-left: 0px; width: 90px; height: 30px;" value="${email2 }">
 					
 				</div>
 				<div id="su-address" style="height: 110px;">
@@ -45,13 +45,13 @@
 				<div id="su-birth">
 					<h5>생년월일 : </h5>
 					<select name="year" id="year" style="margin-left: 15px; padding-left: 5px; height: 30px;">
-						<option value="year">${year }</option>
+						<option value="${year }">${year }</option>
 					</select>
 					<select name="month" id="month" style="margin-left: 8px; padding-left: 5px; height: 30px;">
-						<option value="month">${month }</option>
+						<option value="${month }">${month }</option>
 					</select>
 					<select name="day" id="day" style="margin-left: 8px; padding-left: 5px; height: 30px;">
-						<option value="day">${day }</option>
+						<option value="${day }">${day }</option>
 					</select>
 				</div>
 				<div id="su-gender">
@@ -70,14 +70,38 @@
 			</div>
 			
 			
-			<div id="signup-btn">
-				<input id="sign-join" type="button" value="수정하기">
-				<input id="sign-reset" type="reset" value="탈퇴하기">
-				<input id="sign-reset" type="reset" value="뒤로가기">
+			<div id="myprofile-btn">
+				<input id="profile-modi" type="submit" value="수정하기">
+				<input id="profile-del" type="reset" value="탈퇴하기">
+				<input id="profile-back" type="reset" value="뒤로가기">
 			</div>
 		</div>
 
 	</form>
+	<script>
+	$(document).ready(function() {
+		setDateBox();
+	});
 	
+	// 생년월일 :select box 연도 , 월 표시
+	function setDateBox() {
+		var dt = new Date();
+		var year = "";
+		var com_year = dt.getFullYear();
+		// 올해 기준으로 -70년부터 +5년을 보여준다.
+		for (var y = (com_year - 70); y <= (com_year); y++) {
+			$("#year").append(
+				"<option value='"+ y +"'>" + y + "년" + "</option>");
+		}
+		for (var i = 1; i <= 12; i++) {
+			$("#month").append(
+				"<option value='"+ i +"'>" + i + "월" + "</option>");
+		}
+		for (var i = 1; i <= 31; i++) {
+			$("#day").append(
+				"<option value='"+ i +"'>" + i + "일" + "</option>");
+		}
+	}
+	</script>
 </body>
 </html>
