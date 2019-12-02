@@ -107,10 +107,6 @@ input[type=text], textarea {
 		</div>
 	</form>
 
-
-
-
-
 	<script>
 		var emailCheck = "${readDTO.email_yn}";
 		if(emailCheck=="Y"){

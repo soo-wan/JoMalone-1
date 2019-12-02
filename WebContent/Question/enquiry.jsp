@@ -9,9 +9,13 @@
 <style>
 	.article{padding-bottom: 10px;}
 	.article:hover{background-color: #cbe7ff90;}
-	a:link{color: black;}
-	a:visited{color: #887f7f;}
-	a:hover{text-decoration: none;}
+	.a:link{color: black;}
+	.a:visited{color: black;}
+	.a:hover{color: gray; text-decoration: none;}
+	
+	.b:link{color: black;}
+	.b:visited{color: black;}
+	.b:hover{color: gray;}
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
@@ -35,19 +39,20 @@
 				</div>
 			</c:when>
 			<c:otherwise>
+				<div style="height: 500px;">
 				<c:forEach items="${selectResult }" var="dto">
-					<div class="row article p-1" style="text-align: center;">
-						<div class="col-3">${dto.askCodeKor }</div>
-						<div class="col-7" style="text-align: left;">
-						<c:if test="${dto.answer_yn eq 'Y' }">
-							<span>[답변완료]</span>
-						</c:if>
-							<a href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
-						</div>						
-						<div class="col-2">${dto.formedOnlyDate }</div>
-					</div>
-
+						<div class="row article p-1" style="text-align: center; border-bottom: 1px solid lightgray;">
+							<div class="col-3">${dto.askCodeKor }</div>
+							<div class="col-7" style="text-align: left;">
+							<c:if test="${dto.answer_yn eq 'Y' }">
+								<span>[답변완료]</span>
+							</c:if>
+								<a class="a" href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+							</div>						
+							<div class="col-2">${dto.formedOnlyDate }</div>
+						</div>
 				</c:forEach>
+				</div>
 			</c:otherwise>
 		</c:choose>
 		<hr>
@@ -75,7 +80,7 @@
 		
 		// 1:1 문의글 쓰기 페이지
 		$("#toWrite").on("click", function() {
-			location.href = "/JoMalone/Question/enquiry_call.jsp";
+			location.href = "/JoMalone/Question/enquiry_write_call.jsp";
 		});
 	</script>
 	

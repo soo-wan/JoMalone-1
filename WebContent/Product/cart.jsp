@@ -40,7 +40,8 @@
 			  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 			  	  		<td style="width: 50px;"><input type="checkbox" id="ck_all">	
 			  	  		<td style="width: 130px;">IMAGE
-			  	  		<td style="width: 400px;">ITEM
+			  	  		<td style="width: 400px;"
+			  	  		>ITEM
 			  	  		<td style="width: 130px;">PRICE
 			  	  		<td style="width: 130px;">QTY
 			  	  		<td style="width: 130px;">CHARGE
@@ -61,14 +62,13 @@
 				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
 				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
 				  	  		<td style="width: 130px;">2,000
-				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
+				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
 				  	  	</tr>
 				  	</c:forEach>
 					</c:otherwise>
 			  	  	</c:choose>
 			  	  </table>
-			  	 
 			    </div>
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
@@ -114,8 +114,8 @@
 				</table>
 			</div>
 			<div id="money-btn">
-				<input class="select-btn" type="button" value="전체상품주문">
-				<input class="select-btn" type="button" value="선택상품주문">
+				<input class="select-btn" type="button" value="전체상품주문" id="allOrder">
+				<input class="select-btn" type="button" value="선택상품주문" id="selectOrder">
 			</div>
 			<div id="gogo-btn"><input class="gogo-btn" type="button" value="쇼핑계속하기"></div>
 			<div style="margin-top: 30px; width: 1140px; height: 260px;">
@@ -240,10 +240,31 @@
 //                }
 //         });
 		
-		
         $("#all-btn").on("click",function(){
         	if(confirm("정말로 전체 삭제하시겠습니까?")){
             	location.href="deleteAll.ca";
+        	}
+        })
+        
+       $("#selectOrder").on("click",function(){   
+			if(confirm("선택 상품을 주문하시겠습니까?")){
+	                var checkArr = new Array();
+	                $("input[name='checks']:checked").each(function(){
+	                    checkArr.push($(this).attr("data-cartNum"));
+	                });
+	               	 	location.href="orderSelect.or?seq="+checkArr;
+				}
+			else{
+				location.href = "${pageContext.request.contextPath}/list.ca";
+	        }
+		});
+        
+       $("#allOrder").on("click",function(){
+        	if(confirm("전체 주문 하시겠습니까?")){
+            	location.href="orderAll.or";
+        	}
+        	else{
+        		location.href = "${pageContext.request.contextPath}/list.ca";
         	}
         })
 	</script>

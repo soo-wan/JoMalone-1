@@ -37,17 +37,16 @@ public class buyController extends HttpServlet {
 		request.setCharacterEncoding("utf8");
 		try {
 			if(cmd.contentEquals("/callMerchantuid.buy")){
-				
 				BuyDAO bdao = BuyDAO.getInstance();
 				MembersDAO mdao = MembersDAO.getInstance();
 				int nextSeq = bdao.selectMaxBuySeq()+1;
 				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
 				String mem_id = "test111"; //(String)request.getSession().getAttribute("loginInfo");
 				String mem_name = request.getParameter("name");
-				String pg = "inicis";//	
-				String pay_method = "card";//
-				String buy_name = request.getParameter("buy_name");//						
-				int totalprice = Integer.parseInt(request.getParameter("totalPirce"));//
+				String pg = "inicis";
+				String pay_method = "card";
+				String buy_name = request.getParameter("buy_name");					
+				int totalprice = Integer.parseInt(request.getParameter("totalPirce"));
 				String mem_phone = request.getParameter("phone");
 				String full_address = request.getParameter("address");
 				String zip_code = request.getParameter("zip_code");

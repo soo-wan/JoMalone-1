@@ -19,7 +19,7 @@
 </style>
 </head>
 <body>
-	<form action="/JoMalone/write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
+	<form action="../write.ask" method="post" id="writeFrm">
 		<div id="write-page" class=container>
 			<div id="write-title" class="row">
 				<h4>1:1 ENQUIRY WRITE</h4>
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="row" id=titleBox style="height: 30px;">
-				<input type=text placeholder="제목을 입력해주세요." id="title" name="title" style="margin: 0px; padding: 0px 0px 0px 7px; width: 100%; height: 30px; text-align: left;">
+				<input type=text placeholder="제목을 입력해주세요." id="askTitle" name="askTitle" style="margin: 0px; padding: 0px 0px 0px 7px; width: 100%; height: 30px; text-align: left;">
 			</div>
 			<div class="row" id=contentsBox>
 				<div class="col-12 p-0">
@@ -59,7 +59,7 @@
 			<hr>
 			<div class="row" id=btnBox>
 				<div class="col-12 p-0" style="text-align: center;">
-					<input type="button" value="Cencle" id="cancel">
+					<input type="button" value="Cancle" id="cancel">
 					<input type="button" value="Write" id="toWrite">
 				</div>
 			</div>
@@ -77,12 +77,13 @@
 		$("#toWrite").on("click", function() {
 			console.log($("#askMenu").val());
 			
+	
 			if($("#askMenu").val() == null){
 				alert("문의유형을 선택해주세요.");
 				return false;
 			}
 			
-			if ($("#titlebox").val() == "") {
+			if ($("#askTitle").val() == "") {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
@@ -91,6 +92,7 @@
 				return false;
 			}
 			document.getElementById("writeFrm").submit();
+			
 		});
 
 		(function($) {
