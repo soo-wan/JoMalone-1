@@ -9,9 +9,9 @@
 <style>
 	.article{padding-bottom: 10px;}
 	.article:hover{background-color: #cbe7ff90;}
-	a:link{color: black;}
-	a:visited{color: #887f7f;}
-	a:hover{text-decoration: none;}
+	#a:link{color: black;}
+	#a:visited{color: #887f7f;}
+	#a:hover{text-decoration: none;}
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
@@ -42,7 +42,7 @@
 						<c:if test="${dto.answer_yn eq 'Y' }">
 							<span>[답변완료]</span>
 						</c:if>
-							<a href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+							<a id="a" href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
 						</div>						
 						<div class="col-2">${dto.formedOnlyDate }</div>
 					</div>
