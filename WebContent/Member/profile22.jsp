@@ -200,7 +200,7 @@
 			var pwregex = /^[A-Za-z\d]{8,12}$/;
 			var phoneregex = /^\d{3,4}$/;
 			
-			if("${dto.logintype == 'normal'}"){
+			if(${dto.logintype == 'normal'}){
 				if(pw == ""){
 					alert("비밀번호 항목은 필수 입력값입니다.")
 					return;
@@ -232,7 +232,7 @@
 		if(${dto.logintype == 'normal'}){
 			$("#pwform").submit();			
 			
-		}else{
+		}else{ 
 			location.href = "del.sign"
 		}
 		
