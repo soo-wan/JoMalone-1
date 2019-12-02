@@ -61,7 +61,7 @@
 				  	  		<td style="width: 130px;">${dto.price} 		
 				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
 				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
-				  	  		<td style="width: 130px;">2,000
+				  	  		<td style="width: 130px;">20
 				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
 				  	  	</tr>
@@ -106,8 +106,8 @@
 						</c:when>
 						<c:otherwise>
 								<td><fmt:formatNumber value="${sum}" pattern="#,###" /></td>	 <!-- cout 대신에 formatNumber -->	
-								<td>+2,000
-								<td><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></td>
+								<td>+20
+								<td><fmt:formatNumber value="${sum+20}" pattern="#,###" /></td>
 						</c:otherwise>
 					</c:choose>
 					</tr>

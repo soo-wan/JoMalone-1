@@ -116,7 +116,7 @@ public class BuyDAO {
 	public void updateBuyComplete(String merchant_uid) throws Exception{
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("update prod_buy set buy_success ='Y' where merchant_uid= ?"); 
-				PreparedStatement pstat2 = con.prepareStatement("ubdate order_list set buy_success ='Y' where merchant_uid= ?");){
+				PreparedStatement pstat2 = con.prepareStatement("update order_list set buy_success ='Y' where merchant_uid= ?");){
 			pstat.setString(1, merchant_uid);
 			pstat2.setString(1, merchant_uid);
 			pstat.executeUpdate();
