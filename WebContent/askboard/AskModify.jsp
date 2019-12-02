@@ -57,7 +57,7 @@ input[type=text], textarea {
 </head>
 <body>
 
-	<form action="modifyConfirm.ask" method="post" id="modifyFrm" enctype="multipart/form-data">
+	<form action="modifyConfirm.ask" method="post" id="modifyFrm">
 		<div class=container>
 			<div class="row" style="text-align: center;" id="headDiv">
 				<div class="col-12">1:1 문의글 수정</div>

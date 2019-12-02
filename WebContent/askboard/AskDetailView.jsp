@@ -182,12 +182,14 @@
 	var answerCheck = "${readDTO.answer_yn}";
 	var adminCheck = "${sessionScope.adminId}";
             $("#toMain").on("click", function() {
-            	var fromAdminRoot = "${sessionScope.fromAdminAskPage}";
+            	var fromAdminRoot = "${sessionScope.fromAdminAskPage}";            	
             	console.log(fromAdminRoot);
-            	if(fromAdminRoot!=""){
+            	if(fromAdminRoot=="new"){
             		location.href="newList.ask";
-            	}else{
-                    location.href = "list.ask";//일대일 리스트 페이지 컨트롤러
+            	}else if(fromAdminRoot=="entire"){
+                    location.href = "allList.ask";
+            	}else if(fromAdminRoot==""){
+            		location.href = "list.ask";
             	}
             });
 
@@ -297,8 +299,6 @@
             });                    
 
         </script>
-
-
 </body>
 </html>
 
