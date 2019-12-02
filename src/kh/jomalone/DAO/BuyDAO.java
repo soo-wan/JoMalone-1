@@ -124,4 +124,15 @@ public class BuyDAO {
 			con.commit();
 		}
 	}
+	
+	public int deleteOrder(int seq) throws Exception{ // 주문 선택 삭제
+		String sql = "delete from cart where seq=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 }

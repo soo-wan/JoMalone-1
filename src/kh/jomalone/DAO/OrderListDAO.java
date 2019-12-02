@@ -1,6 +1,7 @@
 package kh.jomalone.DAO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 

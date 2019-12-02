@@ -9,7 +9,7 @@
 
 #check-delete {margin-bottom: 100px;}
 #check-btn {width: 80px; height: 20px; font-size: 11px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}
-
+#updateBtn {margin-top: 8px; width: 40px; height: 20px; font-size: 11px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}
 #return {width: 100px; height: 20px; font-size: 11px; background-color: white; color: dimgray; border: 1px solid lightgray; border-radius: 5px;}
 
 #delevery-info {margin-bottom: 100px;}
