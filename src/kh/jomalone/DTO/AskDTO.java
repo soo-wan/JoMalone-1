@@ -98,16 +98,6 @@ public class AskDTO {
 		this.email_yn = email_yn;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public String getFormedFullDate() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return sdf.format(this.getWrite_date());

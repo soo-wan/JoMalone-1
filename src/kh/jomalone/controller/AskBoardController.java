@@ -33,6 +33,8 @@ public class AskBoardController extends HttpServlet {
 		/* ajax 한글깨짐 방지 */
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=UTF-8");
+		
+		System.out.println(cmd);
 
 		// String id = (String) request.getSession().getAttribute("loginInfo");
 		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
@@ -106,10 +108,9 @@ public class AskBoardController extends HttpServlet {
 			}
 		} else if (cmd.contentEquals("/write.ask")) {// 문의글 등록	
 			String askCode = request.getParameter("askMenu");
-			String title = request.getParameter("title");
+			String title = request.getParameter("askTitle");
 			String contents = request.getParameter("contents");
 			String emailCheck = request.getParameter("emailCheck");
-			
 			
 			if (emailCheck == null) {
 				emailCheck = "N";
@@ -147,7 +148,7 @@ public class AskBoardController extends HttpServlet {
 			try {
 				AskDTO result = dao.selectAskBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("/Question/enquiry_modify.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/enquiry_modify_call.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
