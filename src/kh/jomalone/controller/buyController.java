@@ -101,27 +101,27 @@ public class buyController extends HttpServlet {
 				response.getWriter().append(Json);
 			}else if(cmd.contentEquals("/buyComplet.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
-				MembersDAO mdao = MembersDAO.getInstance();
 				System.out.println("결제성공하고 controller 이동!");
 				String merchant_uid = request.getParameter("merchant_uid");
 				System.out.println(merchant_uid + "코드번호 ");
 				bdao.updateBuyComplete(merchant_uid);
-				
 				System.out.println("Y로 변경완료!");
-				
-				
-				
-			}else if (cmd.contentEquals("/refund.buy")) {
+			}else if(cmd.contentEquals("/buyFailed.buy")) {
+				BuyDAO bdao = BuyDAO.getInstance();
+				System.out.println("결제 실패 controller 이동!" );
+				String merchant_uid = request.getParameter("merchant_uid");
+				bdao.deleteOrderByMerchantuid(merchant_uid);
+				System.out.println("삭제완료!");
+			}
+			else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
-				
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
-				String test_already_cancelled_merchant_uid = "ORD0007";			// 환불할 ID
-				CancelData cancel_data = new CancelData(test_already_cancelled_merchant_uid, false);
+				String merchant_uid = request.getParameter("merchant_uid");
+				CancelData cancel_data = new CancelData(merchant_uid, false);
 				cancel_data.setEscrowConfirmed(true);
 				
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
-					System.out.println("�Ϸ�!");
 				} catch (IamportResponseException e) {
 					System.out.println(e.getMessage());
 //					switch(e.getHttpStatusCode()) {
