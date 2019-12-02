@@ -73,7 +73,7 @@ public class MembersDAO {
 			pstat.setString(12, dto.getAgree_p());
 
 			int result = pstat.executeUpdate();
-			return result;
+			return 1;
 		}
 	}
 	
@@ -329,6 +329,7 @@ public class MembersDAO {
 		System.out.println(dto.phone());
 		System.out.println(dto.birth());
 		System.out.println(dto.email());
+		System.out.println(pstat);
 			int result = pstat.executeUpdate();
 			return result;
 		}

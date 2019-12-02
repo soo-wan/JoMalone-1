@@ -53,7 +53,7 @@
             	</c:when>
             	<c:otherwise>
             	<div id="info-box2" style="float:left;">
-            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a id='logout' class='b-tag' href='logout.log'><h6>로그아웃</h6></a></div>">
+            		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${sessionScope.name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a id='logout' class='b-tag' href='logout.log'><h6>로그아웃</h6></a></div>">
             	</div>
             	</c:otherwise>
             	</c:choose>
