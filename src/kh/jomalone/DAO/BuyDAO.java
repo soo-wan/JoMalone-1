@@ -58,7 +58,7 @@ public class BuyDAO {
 	}
 
 	public int selectMaxBuySeq() throws Exception {
-		int maxSeq = 1;
+		int maxSeq = 1157;
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
 			try (ResultSet rs = pstat.executeQuery()) {
@@ -116,7 +116,7 @@ public class BuyDAO {
 	public void updateBuyComplete(String merchant_uid) throws Exception{
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("update prod_buy set buy_success ='Y' where merchant_uid= ?"); 
-				PreparedStatement pstat2 = con.prepareStatement("ubdate order_list set buy_success ='Y' where merchant_uid= ?");){
+				PreparedStatement pstat2 = con.prepareStatement("update order_list set buy_success ='Y' where merchant_uid= ?");){
 			pstat.setString(1, merchant_uid);
 			pstat2.setString(1, merchant_uid);
 			pstat.executeUpdate();
@@ -130,6 +130,17 @@ public class BuyDAO {
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, seq);
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int deleteOrderByMerchantuid(String merchantuid) throws Exception{
+		String sql = "delete from order_list where merchant_uid=?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, merchantuid);
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;

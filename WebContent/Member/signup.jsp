@@ -290,7 +290,9 @@
 		// 핸드폰번호 유효성검사 없음
 		// 이름 유효성검사가 없음
 		// 이메일 유효성검사 없음
-		
+	$("#email3").on("change",function(){
+         $("#email2").val($("#email3").val());
+      })
 		$(document).ready(function() {
 			setDateBox();
 		});

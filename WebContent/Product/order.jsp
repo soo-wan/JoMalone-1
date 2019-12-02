@@ -44,11 +44,13 @@
 								<tr class="my-item">
 						  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck" data-cartNum="${dto.seq}">
 						  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
-						  	  		<td style="width: 400px;">${dto.prod_name} 
-						  	  		<td style="width: 130px;">${dto.price} 		
-						  	  		<td style="width: 130px;">
-						  	  		<span style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}">${dto.prod_quantity}</span>						  	  		
-						  	  		<td style="width: 130px;">2,000
+						  	  		<td style="width: 400px;"><span class=buy_name>${dto.prod_name}</span> 
+						  	  		<td style="width: 130px;"><span class=prices>${dto.price}</span> 		
+						  	  		<td style="width: 130px;"><span style="width: 35px; height: 20px; text-align: center;" class=prod_quantitys>${dto.prod_quantity}</span>
+						  	  		<input type=hidden class="count${dto.seq}" value ="${dto.prod_quantity}" >
+						  	  		
+				  	  		
+						  	  		<td style="width: 130px;">20
 						  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 									<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
 						  	  	</tr>
@@ -63,8 +65,8 @@
 	    	<h6 style="float:right; width: 335px; text-align: right; font-size: 13px;">
 	    	<div style="float:left; margin-left:5px;">상품구매금액 </div>
 	    	<div style="float:left; margin-left:5px;"> <fmt:formatNumber value="${sum}" pattern="#,###" /> </div>
-	    	<div style="float:left; margin-left:5px;"> + 배송비 2,000 = TOTAL </div>
-	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+2000}" pattern="#,###" /></div></h6></div>
+	    	<div style="float:left; margin-left:5px;"> + 배송비 20 = TOTAL </div>
+	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" /></div></h6></div>
 	    </div>
 	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
 		<div class="row" style="height: 25px;">
@@ -89,9 +91,9 @@
 				<tr style="border-bottom: 1px solid lightgray;">
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">배송지 선택</h6>
 					<td style="padding: 6px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;">
-						<input type="checkbox" style="float: left; margin-top: 1px;" id="memberSame">
+						<input type="radio" style="float: left; margin-top: 1px;" id="memberSame" name= selectinfo>
 						<h6 style="float: left; margin-left: 10px; font-size: 13px;">회원정보와 동일</h6>
-						<input type="checkbox" style="float: left; margin: 1px 0px 0px 20px;" id="memberNew">
+						<input type="radio" style="float: left; margin: 1px 0px 0px 20px;" id="memberNew" name= selectinfo>
 						<h6 style="float: left; margin-left: 9px; font-size: 13px;">새로운 배송지</h6>
 				</tr>
 				<tr style="border-bottom: 1px solid lightgray;">
@@ -158,9 +160,9 @@
 						<input  id="email2"type="text" placeholder="직접입력" name="writeEmail" style="margin-left: 0px; padding-left: 7px; width: 130px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 						<select id="email3" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 20px; border-radius: 5px; border: 1px solid lightgray; font-size: 13px;">
 							<option value="input">-- 선택없음</option>
-							<option value="@naver.com">naver.com</option>
-							<option value="@daum.net">daum.net</option>
-							<option value="@gmail.com">gmail.com</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="gmail.com">gmail.com</option>
 						</select>
 						<br>
 						<h6 style="line-height: 25px; font-size: 11px;">이메일을 통해 결제완료내역을 보내드립니다.</h6>
@@ -168,7 +170,7 @@
 				<tr>
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">배송메시지</h6>
 					<td style="padding: 5px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;">
-						<textarea cols="50" rows="2" style="resize: none; border: 1px solid lightgray; border-radius: 5px; font-size: 13px;" id="textA"></textarea>
+						<textarea cols="50" rows="2" style="resize: none; border: 1px solid lightgray; border-radius: 5px; font-size: 13px;" id="textA">부재시 경비실에 맡겨주세요.</textarea>
 				</tr>
 			</table>
 		</div>
@@ -186,8 +188,8 @@
 				</tr>
 				<tr style="height: 100px; border-bottom: 1px solid lightgray;">
 					<td><fmt:formatNumber value="${sum}" pattern="#,###" />
-					<td>+2,000
-					<td>=<fmt:formatNumber value="${sum+2000}" pattern="#,###" />
+					<td>+20
+					<td>=<fmt:formatNumber value="${sum+20}" pattern="#,###" />
 				</tr>
 			</table>
 		</div>
@@ -201,7 +203,7 @@
 			</div>
 			<div style="width: 350px; height: 130px; border: 1px solid lightgray; border-radius: 0px 5px 5px 0px;">
 				<div style="width: 350px; height: 70px;">
-					<h6 style="padding: 30px 0px 0px 0px; text-align: center;">최종결제금액 <span style="margin-left: 30px;"><fmt:formatNumber value="${sum+2000}" pattern="#,###" />원</span></h6>
+					<h6 style="padding: 30px 0px 0px 0px; text-align: center;">최종결제금액 <span style="margin-left: 30px;"><fmt:formatNumber value="${sum+20}" pattern="#,###" />원</span></h6>
 				</div>
 				<div style="width: 350px; height: 60px;">
 					<div style="padding: 10px 0px 0px 0px; text-align: center;"><input id="buy" type="button" value="결제하기" style="width: 300px; height: 30px; background-color: lightgray; border: 0px; border-radius: 5px; text-align: center; font-size: 14px;"></div>
@@ -243,7 +245,7 @@
 			console.log(prices);
 			console.log(prod_quantitys);
 			$.ajax({
-				url:"../callMerchantuid.buy",
+				url:"callMerchantuid.buy",
 				type:"post",
 				data:{
 					name : $("#name").val(),
@@ -275,8 +277,8 @@
 					buyer_postcode : data.buyer_postcode,
 				}, function(rsp) { // callback
 					console.log(rsp);
+					console.log("callback 시작!")
 					if (rsp.success) {
-						console.log("callback 시작!")
 						$.ajax({
 							url:"buyComplet.buy",
 							type:"post",
@@ -284,10 +286,20 @@
 							dataType:"json"
 						}).done(function(){
 							alert("결제가 완료되었습니다.");
-							location.href= "../home.jsp";
+							location.href= "home.jsp";
 						})
 					}
 					 else {
+						 console.log("실패함");
+						$.ajax({
+							url:"buyFailed.buy",
+							type:"post",
+							data:rsp,
+							dataType:"json"
+						}).done(function(){
+							alert("결제가 취소되었습니다.");
+							location.href= "home.jsp";
+						}) 
 					}
 				});
 			}).fail(function(){
@@ -300,7 +312,7 @@
 		})
 		
 		function updateCart(seq){
-			var countval = $(".count"+seq).val();
+			var countval = $(".count"+seq).html();
 			location.href="orderUpdate.or?prod_quantity="+countval+"&seq="+seq;
         }
 		
@@ -343,6 +355,8 @@
 		    	$("#phone1").val(data.phone1);
 		    	$("#phone2").val(data.phone2);
 		    	$("#phone3").val(data.phone3);
+		    	$("#email1").val(data.email1);
+		    	$("#email2").val(data.email2);
 	    	});
 	    }
 	    else{
@@ -369,6 +383,9 @@
 	        //Uncheck event
 	    }
 	});
+		$("#email3").on("change",function(){
+			$("#email2").val($("#email3").val());
+		})
 		
 		$("#check-btn").on("click",function(){ 
 			if(confirm("선택 상품을 삭제하시겠습니까?")){

@@ -28,7 +28,7 @@
 			</tr>
 			<tr align=center>
 				<td>가격</td>
-				<td><input type=hidden name=price value="18200">18,200</td>
+				<td><input type=hidden name=price value="200">200</td>
 			</tr>
 			<tr align=center>
 				<td>수량</td>

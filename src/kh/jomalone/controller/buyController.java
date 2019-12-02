@@ -33,8 +33,9 @@ public class buyController extends HttpServlet {
 		System.out.println("ContextPath : " + ctxPath); 
 		String cmd = requestURI.substring(ctxPath.length());
 		System.out.println(cmd);
-		
-		request.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("UTF8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		try {
 			if(cmd.contentEquals("/callMerchantuid.buy")){
 				BuyDAO bdao = BuyDAO.getInstance();
@@ -45,8 +46,11 @@ public class buyController extends HttpServlet {
 				String mem_name = request.getParameter("name");
 				String pg = "inicis";
 				String pay_method = "card";
-				String buy_name = request.getParameter("buy_name");					
-				int totalprice = Integer.parseInt(request.getParameter("totalPirce"));
+				String buy_name = request.getParameter("buy_name");
+				String pricetemp =  request.getParameter("totalPirce");
+				System.out.println(pricetemp);
+				int totalprice = Integer.parseInt(pricetemp.replace(",", ""));
+				System.out.println(totalprice);
 				String mem_phone = request.getParameter("phone");
 				String full_address = request.getParameter("address");
 				String zip_code = request.getParameter("zip_code");
@@ -55,11 +59,18 @@ public class buyController extends HttpServlet {
 				String price_buf = request.getParameter("prices");
 				String quantitys_buf = request.getParameter("prod_quantitys");
 				System.out.println(buy_name);
-				System.out.println(mem_phone);
-				System.out.println(mem_email + "와같이 정보 받아오기 완료 ");
+				System.out.println(quantitys_buf);
+//				System.out.println(buy_name);
+//				System.out.println(mem_phone);
+//				System.out.println(mem_email + "와같이 정보 받아오기 완료 ");
 				String[] prod_names = name_buf.split(",");
+//				
 				String[] prices = price_buf.split(",");
 				String[] prod_quantitys = quantitys_buf.split(",");
+				for (int i = 0; i < prices.length; i++) {
+					System.out.println(prices[i]);
+					System.out.println(prod_quantitys[i]);
+				}
 				
 				System.out.println("버퍼에 값 담기 완료" );
 				
@@ -88,29 +99,29 @@ public class buyController extends HttpServlet {
 				String Json = gson.toJson(object);
 				System.out.println(Json + "과같이 정보담기 완료");
 				response.getWriter().append(Json);
-			}else if(cmd.contentEquals("/Product/buyComplet.buy")) {
+			}else if(cmd.contentEquals("/buyComplet.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
-				MembersDAO mdao = MembersDAO.getInstance();
 				System.out.println("결제성공하고 controller 이동!");
 				String merchant_uid = request.getParameter("merchant_uid");
 				System.out.println(merchant_uid + "코드번호 ");
 				bdao.updateBuyComplete(merchant_uid);
-				
 				System.out.println("Y로 변경완료!");
-				
-				
-				
-			}else if (cmd.contentEquals("/refund.buy")) {
+			}else if(cmd.contentEquals("/buyFailed.buy")) {
+				BuyDAO bdao = BuyDAO.getInstance();
+				System.out.println("결제 실패 controller 이동!" );
+				String merchant_uid = request.getParameter("merchant_uid");
+				bdao.deleteOrderByMerchantuid(merchant_uid);
+				System.out.println("삭제완료!");
+			}
+			else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
-				
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
-				String test_already_cancelled_merchant_uid = "ORD0007";			// 환불할 ID
-				CancelData cancel_data = new CancelData(test_already_cancelled_merchant_uid, false);
+				String merchant_uid = request.getParameter("merchant_uid");
+				CancelData cancel_data = new CancelData(merchant_uid, false);
 				cancel_data.setEscrowConfirmed(true);
 				
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
-					System.out.println("�Ϸ�!");
 				} catch (IamportResponseException e) {
 					System.out.println(e.getMessage());
 //					switch(e.getHttpStatusCode()) {

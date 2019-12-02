@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/JoMalone/Resource/css/profile22.css?log=2">
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body>
@@ -19,10 +20,20 @@
 			<div id="signup-inputbox" class="row">
 				<div id="su-id"><h5><span>*</span>아이디 : </h5><input type="text" placeholder="Input Your ID" style="width: 200px; height: 30px;" id="id" name="id" value="${dto.id }" readonly></div>
 				<br>
+				<c:choose>
+				<c:when test="${dto.logintype == 'normal'}">
 				<div id="su-pw"><h5><span>*</span>패스워드 : </h5><input type="password" placeholder="Input Your PW" style="width: 200px; height: 30px;" id="pw" name="pw"></div>
 				<div class="pw regex" style="padding-left: 135px; height: 20px; font-size: 13px;">영어대소문자 및 숫자 8-12자리를 입력하세요.</div>
 				<div id="su-pw-check"><h5><span>*</span>패스워드 확인 : </h5><input type="password" placeholder="Input Your PW Check" style="width: 200px; height: 30px;" id="repw"></div>
 				<div class="repw regex" style="padding-left: 135px; height: 20px; font-size: 13px;"></div>
+				</c:when>
+				<c:otherwise>
+				<div id="su-pw"><h5><span>*</span>패스워드 : </h5><input type="password" style="width: 200px; height: 30px; background-color:lightgray;" id="pw" name="pw" readonly ></div>
+				<br>
+				<div id="su-pw-check"><h5><span>*</span>패스워드 확인 : </h5><input type="password"  style="width: 200px; height: 30px; background-color: lightgray;" id="repw" readonly></div>
+				<br>
+				</c:otherwise>
+				</c:choose>
 				<div id="su-name"><h5><span>*</span>이름 : </h5><input type="text" placeholder="Input Your Name" style="width: 200px; height: 30px;" name="name" value="${dto.name }" readonly></div>
 				<div id="su-phone">
 					<h5><span>*</span>전화번호 : </h5>
@@ -85,6 +96,7 @@
 	</form>
 	
 	<!-- Modal -->
+
 <form action="check.sign" method="post" id="pwform">
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -95,10 +107,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <c:choose>
+      <c:when test="${dto.logintype == 'normal' }">
       <div class="modal-body">
+      탈퇴하시겠습니까?<br>
         비빌번호를 입력해주세요<br>
         <input type="password" placeholder="비밀번호입력" id="pw" name="pw">
       </div>
+      </c:when>
+      <c:otherwise>
+      <div class="modal-body">
+        	탈퇴하시겠습니까?<br>
+      </div>
+      </c:otherwise>
+      </c:choose>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         <button type="button" class="btn btn-primary" id="check" >확인</button>
@@ -107,7 +129,22 @@
   </div>
 </div>
 </form>
+
+
 	<script>
+	// 주소찾기	
+    function postcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+            	var roadAddr = data.roadAddress;
+                var extraRoadAddr = '';
+                document.getElementById("zip_code").value = data.zonecode;
+                document.getElementById("address1").value = roadAddr;
+            }
+        }).open();
+    }
+	
+	
 	// 비밀번호유효성검사 영어대소문자 및 숫자 8-12자리
 	$("#pw").on("focusout", function() {
 		var regex = /^[A-Za-z\d]{8,12}$/;
@@ -163,35 +200,43 @@
 			var pwregex = /^[A-Za-z\d]{8,12}$/;
 			var phoneregex = /^\d{3,4}$/;
 			
-			if(pw == ""){
-				alert("비밀번호 항목은 필수 입력값입니다.")
-				return;
+			if("${dto.logintype == 'normal'}"){
+				if(pw == ""){
+					alert("비밀번호 항목은 필수 입력값입니다.")
+					return;
+				}
+				if(pwregex.exec(pw) == null){
+					alert("비밀번호 양식을 다시 확인해주세요.");
+					$("#pw").focus();
+					return;
+				}
+				
+				if(repw == ""){
+					alert("비밀번호 확인을 다시 확인해주세요.");
+					$("#repw").focus();
+					return;
+				}
+				if(repw != pw){
+					alert("비밀번호가 일치하지 않습니다.");
+					$("#repw").focus();
+					return;
+				}
+		
 			}
 			
-			if(pwregex.exec(pw) == null){
-				alert("비밀번호 양식을 다시 확인해주세요.");
-				$("#pw").focus();
-				return;
-			}
-			
-			if(repw == ""){
-				alert("비밀번호 확인을 다시 확인해주세요.");
-				$("#repw").focus();
-				return;
-			}
-			
-			if(repw != pw){
-				alert("비밀번호가 일치하지 않습니다.");
-				$("#repw").focus();
-				return;
-			}
 			
 			$("#profileform").submit();
 	})
 	
 	$("#check").on("click",function(){
-		$("#pwform").submit();
-	})
+		if(${dto.logintype == 'normal'}){
+			$("#pwform").submit();			
+			
+		}else{
+			location.href = "del.sign"
+		}
+		
+	});
 	</script>
 </body>
 </html>

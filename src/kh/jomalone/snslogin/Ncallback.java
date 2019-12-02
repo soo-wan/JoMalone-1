@@ -100,7 +100,6 @@ public class Ncallback extends HttpServlet {
 				      }
 				      br.close();
 				      if(responseCode==200) {
-				    	  //����� ������ ��ȸ ��û�� �����ϸ� ������ ���� JSON �������� �� ������� ��ȯ
 
 							JsonParser parser = new JsonParser();
 							JsonElement el = parser.parse(res.toString());
@@ -117,8 +116,7 @@ public class Ncallback extends HttpServlet {
 							String birthday="";
 							String gender="";
 							if(respobj.get("birthday") != null) {
-								birthday = respobj.get("birthday").toString().replaceAll("\"", "");
-								
+								birthday = "yyyy-"+respobj.get("birthday").toString().replaceAll("\"", "");
 							}else {
 								birthday = null;
 							}
