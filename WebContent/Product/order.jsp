@@ -46,8 +46,8 @@
 						  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
 						  	  		<td style="width: 400px;">${dto.prod_name} 
 						  	  		<td style="width: 130px;">${dto.price} 		
-						  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
-						  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
+						  	  		<td style="width: 130px;">
+						  	  		<span style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}">${dto.prod_quantity}</span>						  	  		
 						  	  		<td style="width: 130px;">2,000
 						  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 									<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
