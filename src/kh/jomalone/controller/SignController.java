@@ -77,7 +77,6 @@ public class SignController extends HttpServlet {
 				
 				if(pw.contentEquals(checkpw)) {
 					int result = dao.delete(id);
-					dao.updatedel_yn(id);
 					request.getSession().invalidate();
 					request.setAttribute("result", result);
 					request.getRequestDispatcher("delresult.jsp").forward(request, response);
@@ -88,7 +87,6 @@ public class SignController extends HttpServlet {
 			}else if(cmd.contentEquals("/Member/del.sign")) {
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				int result = dao.delete(id);
-				dao.updatedel_yn(id);
 				request.getSession().invalidate();
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("delresult.jsp").forward(request, response);
