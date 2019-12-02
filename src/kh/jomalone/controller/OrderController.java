@@ -95,10 +95,8 @@ public class OrderController extends HttpServlet {
 				object.addProperty("phone1", dto.getPhone1());
 				object.addProperty("phone2", dto.getPhone2());
 				object.addProperty("phone3", dto.getPhone3());
-				System.out.println(dto.getPhone());
 				request.setAttribute("dto", dto);
 				String Json = gson.toJson(object);
-				System.out.println(Json);
 				response.getWriter().append(Json);
 			}
 			else if(cmd.contentEquals("/orderUpdate.or")) {
