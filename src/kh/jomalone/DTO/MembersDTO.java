@@ -58,7 +58,7 @@ public class MembersDTO {
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
 		this.deletedate = deletedate;
-<<<<<<< HEAD
+
 		String[] array = phone.split("-");
 		phone1 = array[0];
 		phone2 = array[1];
@@ -70,9 +70,7 @@ public class MembersDTO {
 		year = birtharray[0];
 		month = birtharray[1];
 		day = birtharray[2];
-=======
-		
->>>>>>> e57cf2d827789ef2a3477804bbaa79b05fc4bab0
+
 	}
 	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,
