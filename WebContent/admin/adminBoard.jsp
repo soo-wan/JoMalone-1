@@ -34,7 +34,9 @@
 </head>
 <body>
 	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
+
 	<div class=Wrap>
+		<h4>게시판 관리</h4>
             <div class=Menus>
                 <div class=Menu>1:1 문의 New</div>
                 <div class=Menu>1:1 문의 전체</div>

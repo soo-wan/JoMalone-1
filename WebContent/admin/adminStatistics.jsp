@@ -35,6 +35,7 @@
 <body>
 	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
 	<div class=Wrap>
+		<h4>통계 페이지</h4>
             <div class=Menus>
                 <div class=Menu id=member>통계</div>
             </div>

@@ -35,6 +35,8 @@
 <body>
 	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
 	<div class=Wrap>
+		<h4>회원 관리</h4>
+			<ul></ul>
             <div class=Menus>
                 <div class=Menu id=member>회원관리</div>
             </div>
