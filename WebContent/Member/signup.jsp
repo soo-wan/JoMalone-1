@@ -48,9 +48,9 @@
 					<input type="text" placeholder="직접입력" name="writeemail" style="margin-left: 0px; width: 90px; height: 30px;">
 					<select name="email2" id="email2" style="margin-left: 10px; padding-left: 5px; width: 105px; height: 30px; border-radius: 5px; font-size: 13px;">
 						<option value="input">-- 선택없음</option>
-						<option value="@naver.com">naver.com</option>
-						<option value="@daum.net">daum.net</option>
-						<option value="@gmail.com">gmail.com</option>
+						<option value="naver.com">naver.com</option>
+						<option value="daum.net">daum.net</option>
+						<option value="gmail.com">gmail.com</option>
 					</select>
 				</div>
 				<div id="su-address" style="height: 110px;">

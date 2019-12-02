@@ -1,9 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의글 작성</title>
+<title>Enquiry Write | Jo Malone</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 <script src="../Resource/lang/summernote-ko-KR.js"></script>
@@ -16,12 +17,7 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-
-	<form action="../write.ask" method="post" id="writeFrm">
-=======
 	<form action="../write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
->>>>>>> 4b8f91bdc1fafc11a821fbe6c2f6c509b01eb849
 		<div class=container>
 			<div class="row" style="text-align: center;" id="headDiv">
 				<div class="col-12">1:1 문의글 작성</div>
@@ -75,7 +71,6 @@
 		$("#cancel").on("click", function() {
 			var check = confirm("정말 취소하시겠습니까?");
 			if(check){
-				$('.summernote').summernote('reset');
 				location.href = "../list.ask";//1대1문의 리스트페이지				
 			}
 		});

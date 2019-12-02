@@ -62,15 +62,12 @@ public class MembersDAO {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPw());
 			pstat.setString(3, dto.getName());
-				String phone = dto.getPhone1()+dto.getPhone2()+dto.getPhone3();
-			pstat.setString(4, phone);
-				String email = dto.getEmail1()+dto.getEmail2();
-			pstat.setString(5, email);
+			pstat.setString(4, dto.phone());
+			pstat.setString(5, dto.email());
 			pstat.setString(6, dto.getZip_code());
 			pstat.setString(7, dto.getAddress1());
 			pstat.setString(8, dto.getAddress2());
-				String birth = dto.getYear()+dto.getMonth()+dto.getDay();
-			pstat.setString(9, birth);
+			pstat.setString(9, dto.birth());
 			pstat.setString(10, dto.getGender());
 			pstat.setString(11, dto.getAgree_s());
 			pstat.setString(12, dto.getAgree_p());
@@ -220,7 +217,7 @@ public class MembersDAO {
 		}
 	}
 	
-	//아이디에 맞는 정보 가져오기.
+	//아이디에 맞는 정보 가져오는데 디비 양식과 동일하게.
 	public MembersDTO selectById(String loginInfo) throws Exception {
 		String sql = "select * from members where mem_id = ?";
 		try(
@@ -256,6 +253,7 @@ public class MembersDAO {
 			}
 		}
 	}
+	
 	//이름과 핸드폰번호가 일치하는 아이디 가져오기
 	public String findid(String name, String phone)throws Exception {
 		String sql = "select mem_id from members where mem_name=? and mem_phone=?";

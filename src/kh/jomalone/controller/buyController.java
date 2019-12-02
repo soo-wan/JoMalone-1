@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -34,52 +36,70 @@ public class buyController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf8");
 		try {
-			if(cmd.contentEquals("/Product/callMerchantuid.buy")){
-				BuyDAO bdao = BuyDAO.getInstance();
-				MembersDAO mdao = MembersDAO.getInstance();
-				String merchant_uid = "ORD"+String.format("%05d", bdao.selectMaxBuySeq()+1);
-				String mem_id = (String)request.getSession().getAttribute("loginInfo");
-				String mem_name = mdao.selectById(mem_id).getName();//
+			if(cmd.contentEquals("/callMerchantuid.buy")){
 				
-				response.getWriter().append("{\"merchant_uid\" : \""+ merchant_uid +"\","
-						+ " \"name\" : \""+ mem_name+ "\"}");
-			}else if(cmd.contentEquals("/buyComplet.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
 				MembersDAO mdao = MembersDAO.getInstance();
-				String pg = "inicis";//													//결제사 받아와야함
+				int nextSeq = bdao.selectMaxBuySeq()+1;
+				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
+				String mem_id = "test111"; //(String)request.getSession().getAttribute("loginInfo");
+				String mem_name = request.getParameter("name");
+				String pg = "inicis";//	
 				String pay_method = "card";//
-				String prod_name = request.getParameter("name");//						// 처음것외 몇개로  
-				int totalprice = Integer.parseInt("totalPrice");//						//가격 받아와야함.
-				String mem_id = (String)request.getSession().getAttribute("loginInfo"); // 세션에서 로그인 정보 받아옴
+				String buy_name = request.getParameter("buy_name");//						
+				int totalprice = Integer.parseInt(request.getParameter("totalPirce"));//
+				String mem_phone = request.getParameter("phone");
+				String full_address = request.getParameter("address");
+				String zip_code = request.getParameter("zip_code");
+				String mem_email = request.getParameter("email");
+				String name_buf = request.getParameter("buy_name");
+				String price_buf = request.getParameter("prices");
+				String quantitys_buf = request.getParameter("prod_quantitys");
+				System.out.println(buy_name);
+				System.out.println(mem_phone);
+				System.out.println(mem_email + "와같이 정보 받아오기 완료 ");
+				String[] prod_names = name_buf.split(",");
+				String[] prices = price_buf.split(",");
+				String[] prod_quantitys = quantitys_buf.split(",");
 				
+				System.out.println("버퍼에 값 담기 완료" );
 				
-				String phone1 = request.getParameter("phone1");//
-				String phone2 = request.getParameter("phone2");//
-				String phone3 = request.getParameter("phone3");//
-				String mem_phone = phone1 + phone2 + phone3;//
-				
-				String address1 = request.getParameter("address1");//
-				String address2 = request.getParameter("address2");//
-				String full_address = address1 + address2;//
-				String zip_code = request.getParameter("zip_code");//
-				String[] prod_names = request.getParameterValues("prod_names");//			//전체 이름 목록 한클래스이름으로 받아와야함
-				String[] prices = request.getParameterValues("prices");//				//전체 가격 목록 한클래스로 받아와야함
-				String[] prod_quantitys = request.getParameterValues("prod_quantitys");//		//전체 수량 목록 한클래스로 받아와야함.
-				String[] prod_codes = request.getParameterValues("prod_codes");//			//전체 품목 코드 받아와야함
-				
-				String endEmail = request.getParameter("writeEmail");
-				String merchant_uid = "ORD"+String.format("%05d", bdao.selectMaxBuySeq());//
-				
-				String mem_name = mdao.selectById(mem_id).getName();//
-				String mem_email = request.getParameter("emailID")+endEmail;//
 				List<OrderListDTO> list = new ArrayList<>();
 				for (int i = 0; i < prod_names.length; i++) {
 					int price = Integer.parseInt(prices[i]);
 					int prod_quantity = Integer.parseInt(prod_quantitys[i]);
-					list.add(new OrderListDTO(0,null,merchant_uid,prod_codes[i],prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null));
+					list.add(new OrderListDTO(0,null,merchant_uid,prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null,"N"));
 				}
 				bdao.insertOrderList(list);
-				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,prod_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code));
+				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
+				System.out.println("DB에 정보담기 완료");
+				Gson gson = new Gson();
+				JsonObject object = new JsonObject();
+				object.addProperty("pg", pg);
+				object.addProperty("pay_method", pay_method);
+				object.addProperty("merchant_uid", merchant_uid);
+				object.addProperty("name", buy_name);
+				object.addProperty("amount", totalprice);
+				object.addProperty("buyer_email", mem_email);
+				object.addProperty("buyer_name", mem_name);
+				object.addProperty("buyer_tel", mem_phone);
+				object.addProperty("buyer_addr", full_address);
+				object.addProperty("buyer_postcode", zip_code );
+				
+				String Json = gson.toJson(object);
+				System.out.println(Json + "과같이 정보담기 완료");
+				response.getWriter().append(Json);
+			}else if(cmd.contentEquals("/Product/buyComplet.buy")) {
+				BuyDAO bdao = BuyDAO.getInstance();
+				MembersDAO mdao = MembersDAO.getInstance();
+				System.out.println("결제성공하고 controller 이동!");
+				String merchant_uid = request.getParameter("merchant_uid");
+				System.out.println(merchant_uid + "코드번호 ");
+				bdao.updateBuyComplete(merchant_uid);
+				
+				System.out.println("Y로 변경완료!");
+				
+				
 				
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
