@@ -308,7 +308,32 @@ public class MembersDAO {
 		
 	}
 
-	
+	public int modifyInfo(MembersDTO dto)throws Exception {
+		
+		String sql = "update members set mem_pw=?,mem_phone=?,mem_email=?,zip_code=?,address1=?,address2=?,mem_birth=?,mem_gender=? where mem_id =?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1,dto.getPw());
+			pstat.setString(2,dto.phone());
+			pstat.setString(3,dto.email());
+			pstat.setString(4,dto.getZip_code());
+			pstat.setString(5,dto.getAddress1());
+			pstat.setString(6,dto.getAddress2());
+			pstat.setString(7,dto.birth());
+			pstat.setString(8,dto.getGender());
+			pstat.setString(9,dto.getId());
+			System.out.println(sql);
+			System.out.println(dto.getPw());
+		System.out.println(dto.phone());
+		System.out.println(dto.birth());
+		System.out.println(dto.email());
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+		
 
 	
 	

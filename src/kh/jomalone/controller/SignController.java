@@ -42,7 +42,7 @@ public class SignController extends HttpServlet {
 					email2 = request.getParameter("writeemail");
 				}
 				System.out.println(email2);
-				String zip_code = request.getParameter("zipcode");
+				String zip_code = request.getParameter("zip_code");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");
 				String year = request.getParameter("year");
