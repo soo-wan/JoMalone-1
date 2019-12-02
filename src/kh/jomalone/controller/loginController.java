@@ -52,7 +52,7 @@ public class loginController extends HttpServlet {
 				}else {
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				}
-			}else if(cmd.contentEquals("${pageContext.request.contextPath}/logout.log")) {
+			}else if(cmd.contentEquals("/logout.log")) {
 				request.getSession().invalidate();
 				response.sendRedirect("/JoMalone/home.jsp");
 				

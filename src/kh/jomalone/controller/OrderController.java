@@ -89,13 +89,15 @@ public class OrderController extends HttpServlet {
 				MembersDTO dto = daoO.selectById(mem_id);
 				JsonObject object = new JsonObject();
 				object.addProperty("name", dto.getName());
-				object.addProperty("zip_code", dto.getName());
+				object.addProperty("zip_code", dto.getZip_code());
 				object.addProperty("address1", dto.getAddress1());
 				object.addProperty("address2", dto.getAddress2());
 				object.addProperty("phone1", dto.getPhone1());
 				object.addProperty("phone2", dto.getPhone2());
 				object.addProperty("phone3", dto.getPhone3());
-				request.setAttribute("dto", dto);
+				object.addProperty("email1", dto.getEmail1());
+				object.addProperty("email2", dto.getEmail2());
+//				request.setAttribute("dto", dto);
 				String Json = gson.toJson(object);
 				response.getWriter().append(Json);
 			}
