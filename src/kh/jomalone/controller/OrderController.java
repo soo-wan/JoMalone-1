@@ -73,11 +73,6 @@ public class OrderController extends HttpServlet {
 					CartDTO listSelect = dao.selectOrder(seq);
 					list.add(listSelect);
 				}
-				for (CartDTO dto : list) {
-					System.out.println(dto.getMem_id());
-					System.out.println(dto.getProd_name());
-					System.out.println(dto.getProd_quantity());
-				}
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/order.jsp").forward(request, response);		
 			}
@@ -104,7 +99,6 @@ public class OrderController extends HttpServlet {
 			else if(cmd.contentEquals("/orderUpdate.or")) {
 					int prod_quantity = Integer.parseInt(request.getParameter("prod_quantity"));
 					int seq = Integer.parseInt(request.getParameter("seq"));
-					System.out.println(prod_quantity + " : " + seq);
 					dao.updateProdQuantity(prod_quantity, seq);
 					response.sendRedirect("Product/order.jsp");
 				}
