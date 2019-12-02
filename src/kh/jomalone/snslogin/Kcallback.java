@@ -121,6 +121,9 @@ public class Kcallback extends HttpServlet {
 						
 						if(a_obj.get("birthday") != null) {
 							birthday = a_obj.get("birthday").toString().replaceAll("\"", "");
+							StringBuffer sb = new StringBuffer(birthday);
+							sb.insert(2, "-");
+							birthday = "yyyy-"+sb;
 						}else {
 							birthday = null;
 						}
@@ -133,6 +136,11 @@ public class Kcallback extends HttpServlet {
 
 						if(a_obj.get("gender") != null) {
 							gender = a_obj.get("gender").toString().replaceAll("\"", "");
+							if(gender.contentEquals("female")) {
+								gender = "F";
+							}else {
+								gender = "M";
+							}
 						}else {
 							gender = null;
 						}
