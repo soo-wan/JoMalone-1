@@ -37,6 +37,7 @@ public class MembersDTO {
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
 		this.deletedate = deletedate;
+		
 	}
 	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,

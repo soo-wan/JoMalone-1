@@ -105,29 +105,29 @@ public class CartController extends HttpServlet {
 				dao.deleteAllCart(mem_id);
 				response.sendRedirect("list.ca");
 			}
-			else if(cmd.contentEquals("/orderAll.ca")) {
-				String mem_id = (String)request.getSession().getAttribute("loginInfo");
-				List<CartDTO> list = dao.selectCart(mem_id); 
-				request.setAttribute("list",list);
-				request.getRequestDispatcher("Product/order.jsp").forward(request, response);				
-			}
-			else if(cmd.contentEquals("/orderSelect.ca")) {
-				String[] seqs = request.getParameterValues("seq");
-				seqs[0]=seqs[0].replaceAll("\"", "");
-				String regex = "(\\d+)"; 
-				Pattern p = Pattern.compile(regex);
-				Matcher m = p.matcher(seqs[0]);
-				int seq=0;
-				List<CartDTO> list = new ArrayList<>();
-				while(m.find()) {
-					seq = Integer.parseInt(m.group());
-					System.out.println(seq);
-					CartDTO listSelect = dao.selectOrder(seq);
-					list.add(listSelect);
-				}
-				request.setAttribute("list",list);
-				request.getRequestDispatcher("Product/order.jsp").forward(request, response);	
-			}
+//			else if(cmd.contentEquals("/orderAll.ca")) {
+//				String mem_id = (String)request.getSession().getAttribute("loginInfo");
+//				List<CartDTO> list = dao.selectCart(mem_id); 
+//				request.setAttribute("list",list);
+//				request.getRequestDispatcher("Product/order.jsp").forward(request, response);				
+//			}
+//			else if(cmd.contentEquals("/orderSelect.ca")) {
+//				String[] seqs = request.getParameterValues("seq");
+//				seqs[0]=seqs[0].replaceAll("\"", "");
+//				String regex = "(\\d+)"; 
+//				Pattern p = Pattern.compile(regex);
+//				Matcher m = p.matcher(seqs[0]);
+//				int seq=0;
+//				List<CartDTO> list = new ArrayList<>();
+//				while(m.find()) {
+//					seq = Integer.parseInt(m.group());
+//					System.out.println(seq);
+//					CartDTO listSelect = dao.selectOrder(seq);
+//					list.add(listSelect);
+//				}
+//				request.setAttribute("list",list);
+//				request.getRequestDispatcher("Product/order.jsp").forward(request, response);	
+//			}
 		}
 		catch(Exception e){
 			e.printStackTrace();

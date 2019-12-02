@@ -62,14 +62,13 @@
 				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
 				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
 				  	  		<td style="width: 130px;">2,000
-				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity+2000}" pattern="#,###" />
+				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
 				  	  	</tr>
 				  	</c:forEach>
 					</c:otherwise>
 			  	  	</c:choose>
 			  	  </table>
-			  	 
 			    </div>
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
@@ -253,20 +252,7 @@
 	                $("input[name='checks']:checked").each(function(){
 	                    checkArr.push($(this).attr("data-cartNum"));
 	                });
-	                	console.log(checkArr);
-						$.ajax({
-							url:"orderSelect.ca",
-							type:"post",		
-							data:{
-								seq:JSON.stringify(checkArr) 
-							}
-						}).done(function(data){
-							console.log("왔음");
-							//location.href="${pageContext.request.contextPath}/Product/order.jsp";
-							location.href="orderSelect.ca";
-						}).fail(function(){
-							console.log("실패");
-						});
+	               	 	location.href="orderSelect.or?seq="+checkArr;
 				}
 			else{
 				location.href = "${pageContext.request.contextPath}/list.ca";
@@ -275,7 +261,7 @@
         
        $("#allOrder").on("click",function(){
         	if(confirm("전체 주문 하시겠습니까?")){
-            	location.href="orderAll.ca";
+            	location.href="orderAll.or";
         	}
         	else{
         		location.href = "${pageContext.request.contextPath}/list.ca";
