@@ -60,6 +60,7 @@ public class MembersDTO {
 		this.agree_s = agree_s;
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
+<<<<<<< HEAD
 		this.blackdate = blackdate;
 		if(phone != null) {
 			String[] array = phone.split("-");
@@ -80,6 +81,23 @@ public class MembersDTO {
 		}
 	}
 	//회원가입생성자
+=======
+		this.deletedate = deletedate;
+
+		String[] array = phone.split("-");
+		phone1 = array[0];
+		phone2 = array[1];
+		phone3 = array[2];
+		String[] emailarray = email.split("@");
+		email1 = emailarray[0];
+		email2 = emailarray[1];
+		String[] birtharray = birth.split("-");
+		year = birtharray[0];
+		month = birtharray[1];
+		day = birtharray[2];
+
+	}
+>>>>>>> 49fed9758f42c4b5b92b5e20ce96491fa19f7235
 	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,
 			String address2,  String year, String month, String day, String gender,

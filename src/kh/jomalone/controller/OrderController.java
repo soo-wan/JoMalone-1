@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kh.jomalone.DAO.CartDAO;
-import kh.jomalone.DAO.OrderDAO;
+import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.CartDTO;
 import kh.jomalone.DTO.MembersDTO;
 
@@ -30,7 +30,7 @@ public class OrderController extends HttpServlet {
 		String contextPath = request.getContextPath();
 		String cmd = requestURI.substring(contextPath.length());
 		CartDAO dao = CartDAO.getInstance();
-		OrderDAO daoO = OrderDAO.getInstance(); 
+		MembersDAO daoO = MembersDAO.getInstance(); 
 		try {
 			// 주문 선택 삭제
 			if(cmd.contentEquals("/orderSelectDelete.or")) { 
@@ -86,19 +86,19 @@ public class OrderController extends HttpServlet {
 			else if(cmd.contentEquals("/memberSame.or")) { 
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				Gson gson = new Gson();
-				MembersDTO dto = daoO.selectMember(mem_id);
+				MembersDTO dto = daoO.selectById(mem_id);
 				JsonObject object = new JsonObject();
 				object.addProperty("name", dto.getName());
-				object.addProperty("zip_code", dto.getName());
+				object.addProperty("zip_code", dto.getZip_code());
 				object.addProperty("address1", dto.getAddress1());
 				object.addProperty("address2", dto.getAddress2());
-				String[] p = dto.phonesplit(dto.getPhone());
-				object.addProperty("phone1", p[0]);
-				object.addProperty("phone2", p[1]);
-				object.addProperty("phone3", p[2]);
-				request.setAttribute("dto", dto);
+				object.addProperty("phone1", dto.getPhone1());
+				object.addProperty("phone2", dto.getPhone2());
+				object.addProperty("phone3", dto.getPhone3());
+				object.addProperty("email1", dto.getEmail1());
+				object.addProperty("email2", dto.getEmail2());
+//				request.setAttribute("dto", dto);
 				String Json = gson.toJson(object);
-				System.out.println(Json);
 				response.getWriter().append(Json);
 			}
 			else if(cmd.contentEquals("/orderUpdate.or")) {
