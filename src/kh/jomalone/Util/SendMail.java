@@ -61,15 +61,15 @@ public class SendMail {
 	
 	
 	public void sendMail(String toEmail, String subject, String msg) {	//받는사람  / 제목 / 내용 
-		final String user = "asdf@naver.com"; 					// 보내는사람 아이디
-		final String password = ""; 							// 보내는사람 비밀번호
+		final String user = "jomalonechoi@gmail.com"; 					// 보내는사람 아이디
+		final String password = "jomalone123!@#"; 							// 보내는사람 비밀번호
 		
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.naver.com");			//구글계정이면  smtp.gmail.com
+		prop.put("mail.smtp.host", "smtp.gmail.com");			//구글계정이면  smtp.gmail.com
 		prop.put("mail.smtp.port", 465);
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.ssl.enable", "true");
-		prop.put("mail.smtp.ssl.trust", "smtp.naver.com");
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 		
 		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
