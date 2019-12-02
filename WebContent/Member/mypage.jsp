@@ -38,7 +38,7 @@
 		})
 		
 		$("#my-enquiry").on("click", function() {
-			location.href = "/JoMalone/Question/enquiry.jsp";
+			location.href = "/JoMalone/list.ask";
 		})
 		
 		$("#my-delevery").on("click", function() {

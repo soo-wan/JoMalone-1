@@ -34,9 +34,9 @@ public class AskBoardController extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=UTF-8");
 
-		// String id = (String) request.getSession().getAttribute("loginId");
+		// String id = (String) request.getSession().getAttribute("loginInfo");
 		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
-		String id = "TestID";
+		String id = "aaaaaaaa";
 		
 		//String id = "TestID2";
 		//String id = "TestID3";
@@ -46,7 +46,7 @@ public class AskBoardController extends HttpServlet {
 
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
 			request.getSession().invalidate();
-			request.getSession().setAttribute("loginId", id);
+			request.getSession().setAttribute("loginInfo", id);
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
@@ -59,7 +59,7 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"list.ask","byId",id);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("askboard/AskList.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/enquiry.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -80,7 +80,7 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"newList.ask","notYetAnswer",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("askboard/NewAskList.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/admin_new_asklist.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -100,7 +100,7 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"allList.ask","entire",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("askboard/AllAskList.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/admin_all_asklist.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -147,7 +147,7 @@ public class AskBoardController extends HttpServlet {
 				List<AskCommentsDTO> coResult = dao.selectCommentsByAskSeq(seq);				
 				request.setAttribute("coList", coResult);
 
-				request.getRequestDispatcher("askboard/AskDetailView.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/enquiry_detail.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -158,7 +158,7 @@ public class AskBoardController extends HttpServlet {
 			try {
 				AskDTO result = dao.selectAskBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("askboard/AskModify.jsp").forward(request, response);
+				request.getRequestDispatcher("/Question/enquiry_modify.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,15 +11,18 @@
 	* {box-sizing: border-box;}
 	#titleBox {margin-top: 5px; margin-bottom: 5px;}
 	input[type=text], textarea {margin-top: 3px; margin-bottom: 3px; font-size: 15px;}
-	#headDiv {padding: 0px; margin: 0px; padding-top: 20px; padding-bottom: 20px;}
-	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
+	#write-page {margin-top: 80px; height: 900px;}
+	#write-title {margin-bottom: 35px; padding: 0px; height: 50px;}
+	#write-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 <body>
-	<form action="../write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
-		<div class=container>
-			<div class="row" style="text-align: center;" id="headDiv">
-				<div class="col-12">1:1 문의글 작성</div>
+	<form action="/JoMalone/write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
+		<div id="write-page" class=container>
+			<div id="write-title" class="row">
+				<h4>1:1 ENQUIRY WRITE</h4>
 			</div>
 			<div class="row" id=askMenuBox>
 				<div class="col-12 p-0">
@@ -39,11 +41,8 @@
 				</div>
 			</div>
 
-			<div class="row" id=titleBox>
-				<div class="col-12 p-0">
-					<input type=text placeholder="제목을 입력해주세요." id="title" name="title"
-						style="width: 100%;">
-				</div>
+			<div class="row" id=titleBox style="height: 30px;">
+				<input type=text placeholder="제목을 입력해주세요." id="title" name="title" style="margin: 0px; padding: 0px 0px 0px 7px; width: 100%; height: 30px; text-align: left;">
 			</div>
 			<div class="row" id=contentsBox>
 				<div class="col-12 p-0">
@@ -59,9 +58,9 @@
 			</div>
 			<hr>
 			<div class="row" id=btnBox>
-				<div class="col-12 p-0" style="text-align: right;">
-					<input type="button" value="취소" id="cancel"> <input
-						type="button" value="글쓰기" id="toWrite">
+				<div class="col-12 p-0" style="text-align: center;">
+					<input type="button" value="Cencle" id="cancel">
+					<input type="button" value="Write" id="toWrite">
 				</div>
 			</div>
 		</div>
@@ -71,7 +70,7 @@
 		$("#cancel").on("click", function() {
 			var check = confirm("정말 취소하시겠습니까?");
 			if(check){
-				location.href = "../list.ask";//1대1문의 리스트페이지				
+				location.href = "/JoMalone/list.ask";//1대1문의 리스트페이지				
 			}
 		});
 		
@@ -83,7 +82,7 @@
 				return false;
 			}
 			
-			if ($("#title").val() == "") {
+			if ($("#titlebox").val() == "") {
 				alert("제목을 입력해주세요.");
 				return false;
 			}

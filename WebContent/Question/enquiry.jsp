@@ -5,10 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1 Enquiry | Jo Malone</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/enquiry.css">
 <style>
 	.article{padding-bottom: 10px;}
@@ -16,6 +12,7 @@
 	a:link{color: black;}
 	a:visited{color: #887f7f;}
 	a:hover{text-decoration: none;}
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 <body>
@@ -58,25 +55,25 @@
 			<div class="col-12 naviBar">${pageNavi }</div>
 		</div>
 		<div class="row">
-			<div class="col-12" style="text-align: right;">
-				<input type="button" value="메인으로" id="toIndex"> 
-				<input type="button" value="마이페이지로" id="toMyPage">
-				<input type="button" value="글쓰기" id="toWrite">
+			<div class="col-12">
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="Home" id="toIndex"></div> 
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="MyPage" id="toMyPage"></div>
+				<div style="float:right;"><input type="button" value="Write" id="toWrite"></div>
 			</div>
 		</div>
 	</div>
 	
 	<script>
 		$("#toIndex").on("click", function() {
-			location.href = "index.jsp";
+			location.href = "/JoMalone/home.jsp";
 		});
 		
-		//마이페이지
+		// 마이 페이지
 		$("#toMyPage").on("click", function() {
-			location.href = "";
+			location.href = "/JoMalone/Member/mypage.jsp";
 		});
 		
-		//일대일문의글쓰기 페이지
+		// 1:1 문의글 쓰기 페이지
 		$("#toWrite").on("click", function() {
 			location.href = "/JoMalone/Question/enquiry_call.jsp";
 		});

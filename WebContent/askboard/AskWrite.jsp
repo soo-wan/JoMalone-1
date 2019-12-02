@@ -16,6 +16,8 @@
 </style>
 </head>
 <body>
+	
+	
 	<form action="../write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
 		<div class=container>
 			<div class="row" style="text-align: center;" id="headDiv">
