@@ -277,8 +277,8 @@
 					buyer_postcode : data.buyer_postcode,
 				}, function(rsp) { // callback
 					console.log(rsp);
+					console.log("callback 시작!")
 					if (rsp.success) {
-						console.log("callback 시작!")
 						$.ajax({
 							url:"buyComplet.buy",
 							type:"post",
@@ -290,6 +290,16 @@
 						})
 					}
 					 else {
+						 console.log("실패함");
+						$.ajax({
+							url:"buyFailed.buy",
+							type:"post",
+							data:rsp,
+							dataType:"json"
+						}).done(function(){
+							alert("결제가 취소되었습니다.");
+							location.href= "home.jsp";
+						}) 
 					}
 				});
 			}).fail(function(){
