@@ -46,7 +46,7 @@
             		<img src="/JoMalone/Resource/img/notice.png" style="width:50px; height: 50px; cursor:pointer;">
             	</div>
             	<c:choose>
-            	<c:when test="${sessionScope.loginInfo == null}">
+            	<c:when test="${sessionScope.loginInfo == null }">
             	<div id="info-box" style="float:left;">
             		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title'>로그인이 필요한 서비스입니다.<h6>" data-html="true" data-content="<div id='con-div'><a class='a-tag' href='/JoMalone/Member/login.jsp'><h6>로그인</h6></a><a id='logout' class='a-tag' href='/JoMalone/Member/signup.jsp'><h6>회원가입</h6></a></div>">
             	</div>
@@ -56,6 +56,7 @@
             		<img src="/JoMalone/Resource/img/info.png" style="width:50px; height: 50px; cursor:pointer;" id="information" tabindex="0" data-trigger="focus" data-toggle="popover" data-placement="bottom" title="<h6 id='lo-title2'>${sessionScope.name } 회원님 환영합니다.<h6>" data-html="true" data-content="<div id='con-div2'><a class='b-tag' href='/JoMalone/Member/mypage.jsp'><h6>마이페이지</h6></a><a id='logout' class='b-tag' href='logout.log'><h6>로그아웃</h6></a></div>">
             	</div>
             	</c:otherwise>
+            	
             	</c:choose>
                 <div style="float:left;">
                 	<img src="/JoMalone/Resource/img/cart.png" style="width:50px; height: 50px; cursor:pointer;" id="cart">

@@ -24,14 +24,7 @@ span {color: crimson;}
 #su-genter>input, #su-gender>h6 {float: left; line-height: 30px;}
 #su-gender>input {margin: 0px 5px 0px 15px; width: 15px; height: 30px;}
 
-#signup-consent {margin: auto; width: 900px; height: 480px; margin-top: 30px;}
-#consent-one {padding-left: 10px; display: block; overflow: auto; width: 100%; height: 150px; border: 1px solid gray; font-size: 13px;}
-#signup-consent>input[type=checkbox] {height: 27px;}
-#consent-two {padding-left: 10px; display: block; overflow: auto; width: 100%; height: 150px; border: 1px solid gray; font-size: 13px;}
 
-#consent-all {margin: auto; width: 900px; height: 50px;}
 
-.ec-base-box.typeThinBg {display: block;}
-
-#signup-btn {margin: 40px auto auto auto; width: 900px; height: 100px; text-align: center;}
-#sign-join, #sign-reset {width: 100px; height: 30px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}
+#myprofile-btn {margin: 40px auto auto auto; width: 900px; height: 100px; text-align: center;}
+#profile-modi, #profile-del, #profile-back {width: 100px; height: 30px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}

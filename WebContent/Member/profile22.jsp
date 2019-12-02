@@ -6,35 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/JoMalone/Resource/css/profile22.css?log=2">
 </head>
+
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
-	<form action="modi.my" method="post" id="signform">
+	<form action="modi.my" method="post" id="profileform">
 	
 		<div id="signup-page" class="container">
-			<div id="signup-title" class="row"><h4>SIGN UP</h4></div>
+			<div id="signup-title" class="row"><h4>Profile Edit</h4></div>
 			<div id="signup-inputbox" class="row">
 				<div id="su-id"><h5><span>*</span>아이디 : </h5><input type="text" placeholder="Input Your ID" style="width: 200px; height: 30px;" id="id" name="id" value="${dto.id }" readonly></div>
 				<br>
 				<div id="su-pw"><h5><span>*</span>패스워드 : </h5><input type="password" placeholder="Input Your PW" style="width: 200px; height: 30px;" id="pw" name="pw"></div>
-				<br>
+				<div class="pw regex" style="padding-left: 135px; height: 20px; font-size: 13px;">영어대소문자 및 숫자 8-12자리를 입력하세요.</div>
 				<div id="su-pw-check"><h5><span>*</span>패스워드 확인 : </h5><input type="password" placeholder="Input Your PW Check" style="width: 200px; height: 30px;" id="repw"></div>
-				<br>
+				<div class="repw regex" style="padding-left: 135px; height: 20px; font-size: 13px;"></div>
 				<div id="su-name"><h5><span>*</span>이름 : </h5><input type="text" placeholder="Input Your Name" style="width: 200px; height: 30px;" name="name" value="${dto.name }" readonly></div>
 				<div id="su-phone">
 					<h5><span>*</span>전화번호 : </h5>
-					<input type="text" name="phone1" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone1 }">
+					<input type="text" name="phone1" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${dto.phone1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
-					<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone2 }">
+					<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${dto.phone2 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
-					<input type="text" name="phone3" id="phone3" style="margin-left: 0px; width: 70px; height: 30px;" value="${phone3 }">
+					<input type="text" name="phone3" id="phone3" style="margin-left: 0px; width: 70px; height: 30px;" value="${dto.phone3 }">
 				</div>
 				<div id="su-email">
 					<h5><span>*</span>이메일 : </h5>
-					<input type="text" name="email1" id="email1" style="width: 80px; height: 30px;" value="${email1 }">
+					<input type="text" name="email1" id="email1" style="width: 80px; height: 30px;" value="${dto.email1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;">@</span>
-					<input type="text" name="email2" style="margin-left: 0px; width: 90px; height: 30px;" value="${email2 }">
+					<input type="text" name="email2" style="margin-left: 0px; width: 90px; height: 30px;" value="${dto.email2 }">
 					
 				</div>
 				<div id="su-address" style="height: 110px;">
@@ -45,19 +47,19 @@
 				<div id="su-birth">
 					<h5>생년월일 : </h5>
 					<select name="year" id="year" style="margin-left: 15px; padding-left: 5px; height: 30px;">
-						<option value="${year }">${year }</option>
+						<option value="${dto.year }">${dto.year }</option>
 					</select>
 					<select name="month" id="month" style="margin-left: 8px; padding-left: 5px; height: 30px;">
-						<option value="${month }">${month }</option>
+						<option value="${dto.month }">${dto.month }</option>
 					</select>
 					<select name="day" id="day" style="margin-left: 8px; padding-left: 5px; height: 30px;">
-						<option value="${day }">${day }</option>
+						<option value="${dto.day }">${dto.day }</option>
 					</select>
 				</div>
 				<div id="su-gender">
 					<h5>성별 : </h5>
 					<c:choose>
-					<c:when test="${dto.gender == M}">
+					<c:when test="${dto.gender == 'M'}">
 					<input type="radio" value="M" name="gender" id="gender" checked><h6>남</h6>
 					<input type="radio" value="F" name="gender" id="gender"><h6>여</h6>
 					</c:when>
@@ -71,14 +73,64 @@
 			
 			
 			<div id="myprofile-btn">
-				<input id="profile-modi" type="submit" value="수정하기">
-				<input id="profile-del" type="reset" value="탈퇴하기">
-				<input id="profile-back" type="reset" value="뒤로가기">
+				<input id="profile-modi" type="button" value="수정하기">
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="profile-del">
+  				탈퇴하기
+				</button>
+				<input id="profile-back" type="button" value="뒤로가기">
 			</div>
 		</div>
 
 	</form>
+	
+	<!-- Modal -->
+<form action="check.sign" method="post" id="pwform">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">비밀번호입력</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        비빌번호를 입력해주세요<br>
+        <input type="password" placeholder="비밀번호입력" id="pw" name="pw">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-primary" id="check" >확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
 	<script>
+	// 비밀번호유효성검사 영어대소문자 및 숫자 8-12자리
+	$("#pw").on("focusout", function() {
+		var regex = /^[A-Za-z\d]{8,12}$/;
+		var result = regex.exec($("#pw").val())
+		if (result == null) {
+			$(".pw.regex").html("영어대소문자 및 숫자 8-12자리를 입력하세요.")
+
+		} else {
+			$(".pw.regex").html("사용 가능한 비밀번호입니다.")
+		}
+
+	})
+	// 비밀번호 확인
+	$("#repw").on("focusout", function() {
+		var pw = $("#pw").val();
+		var repw = $("#repw").val();
+		if (pw == repw) {
+			$(".repw.regex").html("비밀번호가 일치 합니다.")
+		} else {
+			$(".repw.regex").html("비밀번호가 일치하지 않습니다.")
+		}
+	})
+	
 	$(document).ready(function() {
 		setDateBox();
 	});
@@ -102,6 +154,44 @@
 				"<option value='"+ i +"'>" + i + "일" + "</option>");
 		}
 	}
+	$("#profile-modi").on("click",function(){
+			var pw = $("#pw").val();
+			var repw = $("#repw").val();
+			var phone2 = $("#phone2").val();
+			var phone3 = $("#phone3").val();
+
+			var pwregex = /^[A-Za-z\d]{8,12}$/;
+			var phoneregex = /^\d{3,4}$/;
+			
+			if(pw == ""){
+				alert("비밀번호 항목은 필수 입력값입니다.")
+				return;
+			}
+			
+			if(pwregex.exec(pw) == null){
+				alert("비밀번호 양식을 다시 확인해주세요.");
+				$("#pw").focus();
+				return;
+			}
+			
+			if(repw == ""){
+				alert("비밀번호 확인을 다시 확인해주세요.");
+				$("#repw").focus();
+				return;
+			}
+			
+			if(repw != pw){
+				alert("비밀번호가 일치하지 않습니다.");
+				$("#repw").focus();
+				return;
+			}
+			
+			$("#profileform").submit();
+	})
+	
+	$("#check").on("click",function(){
+		$("#pwform").submit();
+	})
 	</script>
 </body>
 </html>

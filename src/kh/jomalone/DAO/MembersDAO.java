@@ -62,18 +62,18 @@ public class MembersDAO {
 			pstat.setString(1, dto.getId());
 			pstat.setString(2, dto.getPw());
 			pstat.setString(3, dto.getName());
-			pstat.setString(4, dto.phone());
-			pstat.setString(5, dto.email());
+			pstat.setString(4, dto.getPhone());
+			pstat.setString(5, dto.getEmail());
 			pstat.setString(6, dto.getZip_code());
 			pstat.setString(7, dto.getAddress1());
 			pstat.setString(8, dto.getAddress2());
-			pstat.setString(9, dto.birth());
+			pstat.setString(9, dto.getBirth());
 			pstat.setString(10, dto.getGender());
 			pstat.setString(11, dto.getAgree_s());
 			pstat.setString(12, dto.getAgree_p());
 
 			int result = pstat.executeUpdate();
-			return 1;
+			return result;
 		}
 	}
 	
@@ -310,26 +310,21 @@ public class MembersDAO {
 
 	public int modifyInfo(MembersDTO dto)throws Exception {
 		
-		String sql = "update members set mem_pw=?,mem_phone=?,mem_email=?,zip_code=?,address1=?,address2=?,mem_birth=?,mem_gender=? where mem_id =?";
+		String sql = "update members set mem_pw=?,mem_phone=?,mem_email=?,zip_code=?,address1=?,address2=?,mem_birth=?,mem_gender=? where mem_id=?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
-			pstat.setString(1,dto.getPw());
-			pstat.setString(2,dto.phone());
-			pstat.setString(3,dto.email());
-			pstat.setString(4,dto.getZip_code());
-			pstat.setString(5,dto.getAddress1());
-			pstat.setString(6,dto.getAddress2());
-			pstat.setString(7,dto.birth());
-			pstat.setString(8,dto.getGender());
-			pstat.setString(9,dto.getId());
-			System.out.println(sql);
-			System.out.println(dto.getPw());
-		System.out.println(dto.phone());
-		System.out.println(dto.birth());
-		System.out.println(dto.email());
-		System.out.println(pstat);
+			pstat.setString(1, dto.getPw());
+			pstat.setString(2, dto.getPhone());
+			pstat.setString(3, dto.getEmail());
+			pstat.setString(4, dto.getZip_code());
+			pstat.setString(5, dto.getAddress1());
+			pstat.setString(6, dto.getAddress2());
+			pstat.setString(7, dto.getBirth());
+			pstat.setString(8, dto.getGender());
+			pstat.setString(9, dto.getId());
+		System.out.println(dto.getPhone());
 			int result = pstat.executeUpdate();
 			return result;
 		}

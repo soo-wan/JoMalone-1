@@ -20,6 +20,7 @@ public class MembersDTO {
 	public MembersDTO() {};
 	public MembersDTO(String id, String pw, String phone1, String phone2, String phone3, String email1, String email2,
 			String zip_code, String address1, String address2, String year, String month, String day, String gender) {
+		this.id = id;
 		this.pw = pw;
 		this.phone1 = phone1;
 		this.phone2 = phone2;
@@ -33,7 +34,10 @@ public class MembersDTO {
 		this.month = month;
 		this.day = day;
 		this.gender = gender;
-		
+		phone = phone1+"-"+phone2+"-"+phone3;
+		email = email1+"@"+email2;
+		birth = year+"-"+month+"-"+day;
+
 	}
 	public MembersDTO(String id, String logintype, String pw,String name, String phone, String email, String zip_code,
 			String address1, String address2, String birth, String gender,Timestamp enrolldate,String del_yn,Timestamp deletedate,String agree_s, String agree_p) {
@@ -54,7 +58,21 @@ public class MembersDTO {
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
 		this.deletedate = deletedate;
+<<<<<<< HEAD
+		String[] array = phone.split("-");
+		phone1 = array[0];
+		phone2 = array[1];
+		phone3 = array[2];
+		String[] emailarray = email.split("@");
+		email1 = emailarray[0];
+		email2 = emailarray[1];
+		String[] birtharray = birth.split("-");
+		year = birtharray[0];
+		month = birtharray[1];
+		day = birtharray[2];
+=======
 		
+>>>>>>> e57cf2d827789ef2a3477804bbaa79b05fc4bab0
 	}
 	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,
@@ -82,6 +100,10 @@ public class MembersDTO {
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
 		this.deletedate = deletedate;
+		phone = phone1+"-"+phone2+"-"+phone3;
+		email = email1+"@"+email2;
+		birth = year+"-"+month+"-"+day;
+		
 	}
 	public String getId() {
 		return id;
@@ -209,19 +231,11 @@ public class MembersDTO {
 	public void setDeletedate(Timestamp deletedate) {
 		this.deletedate = deletedate;
 	}
-	public String phone() {
-		phone = phone1+"-"+phone2+"-"+phone3;
-		return phone;
-	}
 	public String getPhone() {
 		return phone;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;	
-	}
-	public String email() {
-		email = email1+"@"+email2;
-		return email;
 	}
 	public String getEmail() {
 		return email;
@@ -230,10 +244,6 @@ public class MembersDTO {
 		this.email = email;
 		
 	}
-	public String birth() {
-		birth = year+"-"+month+"-"+day;
-		return birth;
-	}
 	public String getBirth() {
 		return birth;
 	}
@@ -241,20 +251,6 @@ public class MembersDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 		
-	}
-	
-	public String[] phonesplit(String text) {
-		String[] array = text.split("-");
-		return array;
-	}
-	
-	public String[] emailsplit(String text) {
-		String[] array = text.split("@");
-		return array;
-	}
-	public String[] birthsplit(String text) {
-		String[] array = text.split("-");
-		return array;
 	}
 	
 //	public String dateform(String birth) {
