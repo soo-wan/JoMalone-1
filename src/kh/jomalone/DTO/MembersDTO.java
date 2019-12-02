@@ -1,17 +1,14 @@
 package kh.jomalone.DTO;
 
 
-import java.sql.Array;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 
 public class MembersDTO {
-	private String id, logintype, pw, name, phone1, phone2, phone3, email1, email2, zip_code, address1, address2, gender, del_yn;
+	private String id, logintype, pw, name, phone1, phone2, phone3, email1, email2, zip_code, address1, address2, gender, blackcount;
 	private String year, month, day, agree_s, agree_p;
-	private Timestamp enrolldate,deletedate;
+	private Timestamp enrolldate,blackdate;
 	private String phone;
 	private String email;
 	private String birth;
@@ -34,13 +31,19 @@ public class MembersDTO {
 		this.month = month;
 		this.day = day;
 		this.gender = gender;
-		phone = phone1+"-"+phone2+"-"+phone3;
-		email = email1+"@"+email2;
-		birth = year+"-"+month+"-"+day;
+		if(phone1 != null || phone2 != null || phone3 != null) {
+			phone = phone1+"-"+phone2+"-"+phone3;			
+		}
+		if(email1 != null || email2 != null) {
+			email = email1+"@"+email2;			
+		}
+		if(year != null || month != null || day != null) {
+			birth = year+"-"+month+"-"+day;			
+		}
 
 	}
 	public MembersDTO(String id, String logintype, String pw,String name, String phone, String email, String zip_code,
-			String address1, String address2, String birth, String gender,Timestamp enrolldate,String del_yn,Timestamp deletedate,String agree_s, String agree_p) {
+			String address1, String address2, String birth, String gender,Timestamp enrolldate,String blackcount,Timestamp blackdate,String agree_s, String agree_p) {
 		super();
 		this.id = id;
 		this.logintype = logintype;
@@ -52,32 +55,35 @@ public class MembersDTO {
 		this.address1 = address1;
 		this.address2 = address2;
 		this.gender = gender;
-		this.del_yn = del_yn;
+		this.blackcount = blackcount;
 		this.birth = birth;
 		this.agree_s = agree_s;
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
-		this.deletedate = deletedate;
-<<<<<<< HEAD
-		String[] array = phone.split("-");
-		phone1 = array[0];
-		phone2 = array[1];
-		phone3 = array[2];
-		String[] emailarray = email.split("@");
-		email1 = emailarray[0];
-		email2 = emailarray[1];
-		String[] birtharray = birth.split("-");
-		year = birtharray[0];
-		month = birtharray[1];
-		day = birtharray[2];
-=======
-		
->>>>>>> e57cf2d827789ef2a3477804bbaa79b05fc4bab0
+		this.blackdate = blackdate;
+		if(phone != null) {
+			String[] array = phone.split("-");
+			phone1 = array[0];
+			phone2 = array[1];
+			phone3 = array[2];
+		}
+		if(email != null) {
+			String[] emailarray = email.split("@");
+			email1 = emailarray[0];
+			email2 = emailarray[1];
+		}	
+		if(birth != null) {
+			String[] birtharray = birth.split("-");
+			year = birtharray[0];
+			month = birtharray[1];
+			day = birtharray[2];	
+		}
 	}
+	//회원가입생성자
 	public MembersDTO(String id, String logintype, String pw, String name, String phone1,
 			String phone2, String phone3, String email1, String email2, String zip_code, String address1,
 			String address2,  String year, String month, String day, String gender,
-			Timestamp enrolldate, String del_yn, Timestamp deletedate, String agree_s, String agree_p) {
+			Timestamp enrolldate, String blackcount, Timestamp blackdate, String agree_s, String agree_p) {
 		super();
 		this.id = id;
 		this.logintype = logintype;
@@ -92,17 +98,23 @@ public class MembersDTO {
 		this.address1 = address1;
 		this.address2 = address2;
 		this.gender = gender;
-		this.del_yn = del_yn;
+		this.blackcount = blackcount;
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.agree_s = agree_s;
 		this.agree_p = agree_p;
 		this.enrolldate = enrolldate;
-		this.deletedate = deletedate;
-		phone = phone1+"-"+phone2+"-"+phone3;
-		email = email1+"@"+email2;
-		birth = year+"-"+month+"-"+day;
+		this.blackdate = blackdate;
+		if(phone1 != null || phone2 != null || phone3 != null) {
+			phone = phone1+"-"+phone2+"-"+phone3;			
+		}
+		if(email1 != null || email2 != null) {
+			email = email1+"@"+email2;			
+		}
+		if(year != null || month != null || day != null) {
+			birth = year+"-"+month+"-"+day;			
+		}
 		
 	}
 	public String getId() {
@@ -183,11 +195,11 @@ public class MembersDTO {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getDel_yn() {
-		return del_yn;
+	public String getBlackcount() {
+		return blackcount;
 	}
-	public void setDel_yn(String del_yn) {
-		this.del_yn = del_yn;
+	public void setBlackcount(String Blackcount) {
+		this.blackcount = blackcount;
 	}
 	public String getYear() {
 		return year;
@@ -225,11 +237,11 @@ public class MembersDTO {
 	public void setEnrolldate(Timestamp enrolldate) {
 		this.enrolldate = enrolldate;
 	}
-	public Timestamp getDeletedate() {
-		return deletedate;
+	public Timestamp getBlackdate() {
+		return blackdate;
 	}
-	public void setDeletedate(Timestamp deletedate) {
-		this.deletedate = deletedate;
+	public void setBlackedate(Timestamp Blackdate) {
+		this.blackdate = blackdate;
 	}
 	public String getPhone() {
 		return phone;

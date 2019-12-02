@@ -131,12 +131,12 @@ public class MembersDAO {
 					String birth=rs.getString(10);
 					String gender=rs.getString(11);
 					Timestamp enrolldate =rs.getTimestamp(12);
-					String del_yn=rs.getString(13);
-					Timestamp deletedate=rs.getTimestamp(14);
+					String blackcount=rs.getString(13);
+					Timestamp blackdate=rs.getTimestamp(14);
 					String agree_s=rs.getString(15);
 					String agree_p=rs.getString(16);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
-							address1,address2,birth,gender,enrolldate,del_yn,deletedate,agree_s,agree_p);
+							address1,address2,birth,gender,enrolldate,blackcount,blackdate,agree_s,agree_p);
 					list.add(dto);
 					return list;	
 				}
@@ -241,12 +241,12 @@ public class MembersDAO {
 					String birth=rs.getString(10);
 					String gender=rs.getString(11);
 					Timestamp enrolldate =rs.getTimestamp(12);
-					String del_yn=rs.getString(13);
-					Timestamp deletedate=rs.getTimestamp(14);
+					String blackcount=rs.getString(13);
+					Timestamp blackdate=rs.getTimestamp(14);
 					String agree_s=rs.getString(15);
 					String agree_p=rs.getString(16);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
-							address1,address2,birth,gender,enrolldate,del_yn,deletedate,agree_s,agree_p);
+							address1,address2,birth,gender,enrolldate,blackcount,blackdate,agree_s,agree_p);
 					return dto;
 				}
 				return null;
@@ -324,12 +324,23 @@ public class MembersDAO {
 			pstat.setString(7, dto.getBirth());
 			pstat.setString(8, dto.getGender());
 			pstat.setString(9, dto.getId());
-		System.out.println(dto.getPhone());
 			int result = pstat.executeUpdate();
 			return result;
 		}
 	}
-		
+	
+	public int updatedel_yn(String id)throws Exception {
+		String sql = "update members set blackcount=? ,deletedate=sysdate where mem_id=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+		pstat.setString(1, id);
+			int result = pstat.executeUpdate();
+			return result;
+		}
+	}
+	
 
 	
 	
