@@ -53,8 +53,7 @@
 	<div class=Wrap>
 		<h4>회원 관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="#">회원관리</a></li>
-             
+			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'>회원관리</a></li>
 			</ul>
       </div>
 	<div id="container">

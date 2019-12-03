@@ -53,14 +53,14 @@
 				<h1>Jo Malone</h1>
 				<h5>관 리 자</h5>
 			</div>
-			<div class="who">${sessionScope.loginInfoId} 관리자님  
+			<div class="who">${sessionScope.AdminId}님  
               <div class="who"><button id="logoutBtn" >로그아웃</button></div>
 			</div>
         </div>     
     
 		
 			<ul class="navi">
-				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/admin.jsp">회원관리</a></li>
+				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin.mem">회원관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminProduct.jsp">상품관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminBoard.jsp">게시판관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminDelivery.jsp">배송관리</a></li>
@@ -87,6 +87,9 @@
     			location.href= "${pageContext.request.contextPath}/list.ca";
     		</c:otherwise>
     		</c:choose>
+    	})
+    	$("#logoutBtn").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/adminlogout.mem"
     	})
     </script>
 </body>
