@@ -110,6 +110,7 @@
 				$("#check").html("아이디 및 비밀번호를 확인해주세요.");
 			}else{
 				alert("로그인되었습니다.")
+				
 				location.href="${pageContext.request.contextPath}/home.jsp"
 			}
 			

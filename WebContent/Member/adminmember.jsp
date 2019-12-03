@@ -15,7 +15,9 @@
         table,tr,th,td{
             border:1px solid black;
         }
-        
+        tr{
+        background-color:#cfd7e3;
+        }
       	table{
       		width:1500px;
       		margin:auto;
@@ -31,6 +33,7 @@
 </head>
 <body>
 	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
+	<br>
 <div id="container">
     <table>
         <tr cols=14>
