@@ -29,7 +29,7 @@
 			</tr>
 			<tr align=center>
 				<td>가격</td>
-				<td><input type=hidden name=price value="38000">38,000</td>
+				<td><input type=hidden name=price value="250">250</td>
 			</tr>
 			<tr align=center>
 				<td>수량</td>
@@ -41,12 +41,15 @@
 		</table>
 	</form>
 	<script>      
-        $("#btnCart").on("click",function(){
-        	var cf = confirm("장바구니 담을까요?");
-            if(cf){
-                $("#frm").submit();
-            }
-        })
+    $("#btnCart").on("click",function(){
+    	var cf = confirm("계속 쇼핑하시겠습니까?");
+        if(cf){
+            
+        }
+        else{
+        	$("#frm").submit();
+        }
+    })
     </script>
 </body>
 </html>

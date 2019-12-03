@@ -28,7 +28,7 @@
 			    <a class="nav-link" id="country-title" data-toggle="tab" href="#country" role="tab"><h6>해외 배송상품</h6></a>
 			  </li>
 			  <li>
-			  	<h6 style="width: 875px; line-height: 50px; text-align: right; font-size: 12px;">장바구니에 담긴 상품은 30일 동안 보관됩니다.</h6> 
+			  	<h6 style="width: 760px; line-height: 50px; text-align: right; font-size: 12px;">장바구니에 담긴 상품은 30일 동안 보관됩니다.</h6> 
 			  </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">

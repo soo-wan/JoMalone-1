@@ -53,7 +53,7 @@
 	
 	<div class="top">
 		<ul class="navi">
-			<li class="navi-item"><a href="member.admin">회원관리</a></li>
+			<li class="navi-item"><a href="#">회원관리</a></li>
 			<li class="navi-item"><a href="#">상품관리</a></li>
 			<li class="navi-item"><a href="#">게시판관리</a></li>
 			<li class="navi-item"><a href="#">배송관리</a></li>
