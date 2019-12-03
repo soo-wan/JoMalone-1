@@ -11,6 +11,9 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import kh.jomalone.DTO.AskDTO;
 import kh.jomalone.DTO.ReportDTO;
 import kh.jomalone.DTO.ReviewDTO;
+import kh.jomalone.configuration.Configuration;
+
+
 
 public class SearchDAO {
 	private static SearchDAO instance;
@@ -33,116 +36,252 @@ public class SearchDAO {
 
 	private Connection getConnection() throws Exception {
 		return bds.getConnection();
+	}	
+	
+	
+	private int getArticleCountLike(String boardName, String columnName, String target) throws Exception {
+		String sql = "select count(*) from "+boardName+" where "+columnName+" like '%' || ? || '%'";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				) {
+			pstat.setString(1, target);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);				
+			}
+		}
 	}
 	
-	public List<AskDTO> searchAskBoardByTitle (String title) throws Exception {
-		List<AskDTO> list = new ArrayList<>();
+	private int getArticleCountInMyPage(String boardName, String columnName, String target, String id) throws Exception {
+		String sql = "select count(*) from "+boardName+" where "+columnName+" like '%' || ? || '%' and mem_id=?";
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from AskBoard where title like '%' || ? || '%'")) {
-				pstat.setString(1, title);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new AskDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7),rs.getString(8)));
-				}
+				PreparedStatement pstat = con.prepareStatement(sql);
+				) {
+			pstat.setString(1, target);
+			pstat.setString(2, id);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);				
+			}
 		}
-		return list;
 	}
-	public List<AskDTO> searchAskBoardByContents (String contents) throws Exception {
-		List<AskDTO> list = new ArrayList<>();
+	
+	private int getArticleCountExactId(String boardName, String id) throws Exception {
+		String sql = "select count(*) from "+boardName+" where mem_id = ?";
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from AskBoard where contents like '%' || ? || '%'")) {
-				pstat.setString(1, contents);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new AskDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7),rs.getString(8)));
-				}
+				PreparedStatement pstat = con.prepareStatement(sql);
+				) {
+			pstat.setString(1, id);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);				
+			}
 		}
-		return list;
 	}
-	public List<AskDTO> searchAskBoardByMemID (String memID) throws Exception {
-		List<AskDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from AskBoard where mem_ID like '%' || ? || '%'")) {
-				pstat.setString(1, memID);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new AskDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getTimestamp(7),rs.getString(8)));
-				}
+	
+	public String getPageNavi(int currentPage, String linkURL, String boardName, String columnName, String target, String rootPage, String id) throws Exception {
+		int recordTotalCount = 0;
+		
+		if(rootPage.contentEquals("member")) {
+			recordTotalCount=this.getArticleCountInMyPage(boardName, columnName, target, id);
+		}else {
+			if(columnName.contentEquals("mem_id")) {
+				recordTotalCount = this.getArticleCountExactId(boardName, id);
+			}else {
+				recordTotalCount = this.getArticleCountLike(boardName, columnName, target);
+			}
 		}
-		return list;
-	}
-	public List<ReviewDTO> searchReviewBoardByProdName (String prodName) throws Exception {
-		List<ReviewDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReviewBoard where prod_name like '%' || ? || '%'")) {
-				pstat.setString(1, prodName);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReviewDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getTimestamp(8),rs.getString(9)));
-				}
+		
+		int pageTotalCount = 0;
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
 		}
-		return list;
-	}
-	public List<ReviewDTO> searchReviewBoardByTitle (String Title) throws Exception {
-		List<ReviewDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReviewBoard where Title like '%' || ? || '%'")) {
-				pstat.setString(1, Title);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReviewDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getTimestamp(8),rs.getString(9)));
-				}
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
 		}
-		return list;
-	}
-	public List<ReviewDTO> searchReviewBoardByContents (String contents) throws Exception {
-		List<ReviewDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReviewBoard where contents like '%' || ? || '%'")) {
-				pstat.setString(1, contents);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReviewDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getTimestamp(8),rs.getString(9)));
-				}
+
+		int startNavi = (currentPage - 1) / Configuration.naviCountPerPage * Configuration.naviCountPerPage + 1;
+		int endNavi = startNavi + (Configuration.naviCountPerPage - 1);
+
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
 		}
-		return list;
-	}
-	public List<ReviewDTO> searchReviewBoardByMemID (String memID) throws Exception {
-		List<ReviewDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReviewBoard where mem_id like '%' || ? || '%'")) {
-				pstat.setString(1, memID);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReviewDTO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getInt(7),rs.getTimestamp(8),rs.getString(9)));
-				}
+
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
 		}
-		return list;
-	}
-	public List<ReportDTO> searchReportBoardByMemID (String memID) throws Exception {
-		List<ReportDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReportBoard where mem_id like '%' || ? || '%'")) {
-				pstat.setString(1, memID);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReportDTO(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getTimestamp(6),rs.getString(7),rs.getString(8),rs.getTimestamp(9),rs.getString(10)));
-				}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
 		}
-		return list;
-	}
-	public List<ReportDTO> searchReportBoardByContents (String contents) throws Exception {
-		List<ReportDTO> list = new ArrayList<>();
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from ReportBoard where contents like '%' || ? || '%'")) {
-				pstat.setString(1, contents);
-				ResultSet rs = pstat.executeQuery();
-				while(rs.next()) {
-					list.add(new ReportDTO(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getTimestamp(6),rs.getString(7),rs.getString(8),rs.getTimestamp(9),rs.getString(10)));
-				}
+
+		StringBuilder sb = new StringBuilder();
+		if (needPrev) {
+			sb.append("<a href='" + linkURL + "?currentPage=" + (startNavi - 1) + "'>< </a>");
 		}
-		return list;
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a href='" + linkURL + "?currentPage=" + i + "'>");
+			sb.append(i);
+			sb.append("</a> ");
+		}
+		if (needNext) {
+			sb.append("<a href='" + linkURL + "?currentPage=" + (endNavi + 1) + "'>></a>");
+		}
+		return sb.toString();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<ReviewDTO> selectReviewPageByOption(int start, int end, String option, String target) throws Exception {
+		String sql = "select * from (select reviewboard.*, row_number() over (order by review_seq desc) article from ReviewBoard where "+option+" like '%' || ? || '%') where article between ? and ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, target);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<ReviewDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					ReviewDTO dto = new ReviewDTO();
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setOrder_seq(rs.getInt("order_seq"));
+					dto.setProd_name(rs.getString("prod_name"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContents(rs.getString("contents"));
+					dto.setGrade(rs.getInt("grade"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					dto.setBlind_yn(rs.getString("blind_yn"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	
+	public List<AskDTO> selectAskPageByOption(int start, int end, String option, String target) throws Exception {
+		String sql = "select * from (select askboard.*, row_number() over (order by ask_seq desc) article from askboard where "+option+" like '%' || ? || '%') where article between ? and ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, target);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<AskDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					AskDTO dto = new AskDTO();
+					dto.setAsk_seq(rs.getInt("ask_seq"));
+					dto.setAsk_code(rs.getString("ask_code"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContents(rs.getString("contents"));
+					dto.setAnswer_yn(rs.getString("answer_yn"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	public List<ReportDTO> selectReportPageByOption(int start, int end, String option, String target) throws Exception {
+		String sql = "select * from (select reportboard.*, row_number() over (order by report_seq desc) article from reportboard where "+option+" like '%' || ? || '%') where article between ? and ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, target);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<ReportDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					ReportDTO dto = new ReportDTO();
+					dto.setReport_seq(rs.getInt("report_seq"));
+					dto.setReport_type(rs.getString("report_type"));
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setContents(rs.getString("contents"));
+					dto.setReport_date(rs.getTimestamp("report_date"));
+					dto.setCheck_YN(rs.getString("check_yn"));
+					dto.setCheck_comments(rs.getString("check_comments"));
+					dto.setCheck_date(rs.getTimestamp("check_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	public List<AskDTO> selectMyAskPageByOption(int start, int end, String option, String target, String id) throws Exception {
+		String sql = "select * from (select askboard.*, row_number() over (order by ask_seq desc) article from askboard where "+option+" like '%' || ? || '%' and mem_id=?) where article between ? and ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, target);
+			pstat.setString(2, id);
+			pstat.setInt(3, start);
+			pstat.setInt(4, end);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<AskDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					AskDTO dto = new AskDTO();
+					dto.setAnswer_yn(rs.getString("answer_yn"));
+					dto.setAsk_code(rs.getString("ask_code"));
+					dto.setAsk_seq(rs.getInt("ask_seq"));
+					dto.setContents(rs.getString("contents"));
+					dto.setEmail_yn(rs.getString("email_yn"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setTitle(rs.getString("title"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	public List<ReviewDTO> selectMyReviewPageByOption(int start, int end, String option, String target, String id) throws Exception {
+		String sql = "select * from (select reviewboard.*, row_number() over (order by review_seq desc) article from reviewboard where "+option+" like '%' || ? || '%' and mem_id=?) where article between ? and ?";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
+			pstat.setString(1, target);
+			pstat.setString(2, id);
+			pstat.setInt(3, start);
+			pstat.setInt(4, end);
+
+			try (ResultSet rs = pstat.executeQuery();) {
+				List<ReviewDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					ReviewDTO dto = new ReviewDTO();
+					dto.setBlind_yn(rs.getString("blind_yn"));
+					dto.setContents(rs.getString("contents"));
+					dto.setGrade(rs.getInt("grade"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setOrder_seq(rs.getInt("order_seq"));
+					dto.setProd_name(rs.getString("prod_name"));
+					dto.setReview_seq(rs.getInt("review_seq"));
+					dto.setTitle(rs.getString("title"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+
+	
+		
 }
 
 
