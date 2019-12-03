@@ -105,13 +105,17 @@
 			},
 			dataType:"json"
 		}).done(function(data){
-			console.log(data.result);
+			console.log(data.id);
 			if(data.result == "false"){
 				$("#check").html("아이디 및 비밀번호를 확인해주세요.");
 			}else{
 				alert("로그인되었습니다.")
-				
+				if(data.id == "admin1"){
+					location.href="${pageContext.request.contextPath}/admin.mem"	
+				}else{
 				location.href="${pageContext.request.contextPath}/home.jsp"
+					
+				}
 			}
 			
 		})

@@ -35,23 +35,31 @@ public class loginController extends HttpServlet {
 				
 				//아이디,패스워드 맞으면 로그인.하고 ajax
 				if(result) {
+					if(id.contentEquals("admin1")) {
+						request.getSession().setAttribute("AdminId", id);
+						String adminid = (String)request.getSession().getAttribute("AdminId");
+						MembersDTO dto = dao.selectById(adminid);
+						dao.lastlogin(id);
+						String name = dto.getName();
+						request.getSession().setAttribute("name", name);
+					}
+					else{
 						request.getSession().setAttribute("loginInfo", id);
 						String info = (String)request.getSession().getAttribute("loginInfo");
 						MembersDTO dto = dao.selectById(info);
 						dao.lastlogin(id);
 						String name = dto.getName();
 						request.getSession().setAttribute("name", name);
+					}
 						
-						System.out.println(name);
-				
-						response.getWriter().append("{\"result\" : \""+ result +"\"}");
+						response.getWriter().append("{\"result\" : \""+result+ "\"  , \"id\" : \""+ id +"\"}");
 	
 				}else { // 로그인안되면 ajax
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				}
 			}else if(cmd.contentEquals("/logout.log")) {
 				request.getSession().invalidate();
-				response.sendRedirect("/JoMalone/home.jsp");
+				response.sendRedirect("home.jsp");
 				
 			}
 

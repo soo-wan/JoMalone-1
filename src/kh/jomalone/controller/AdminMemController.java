@@ -13,7 +13,7 @@ import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.MembersDTO;
 
 
-@WebServlet("*.admin")
+@WebServlet("*.mem")
 public class AdminMemController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -22,17 +22,26 @@ public class AdminMemController extends HttpServlet {
 		MembersDAO dao = MembersDAO.getInstance();
 		request.setCharacterEncoding("UTF8");
 		
-		if(cmd.contentEquals("/member.admin")) {
-			try {
-			List<MembersDTO> list = dao.selectAll();
-			for(MembersDTO dto : list) {
-				System.out.println(dto.getId());
+		try {
+		if(cmd.contentEquals("/admin.mem")) {
+			String adminid = (String)request.getSession().getAttribute("AdminId");
+			if(adminid != null) {
+				List<MembersDTO> list = dao.selectAll();
+				for(MembersDTO dto : list) {
+					System.out.println(dto.getId());
+				}
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
+			}else {
+				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
 			}
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("Member/adminmember.jsp").forward(request, response);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			
+		}else if(cmd.contentEquals("/adminlogout.mem")) {
+			request.getSession().invalidate();
+			response.sendRedirect("home.jsp");
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
