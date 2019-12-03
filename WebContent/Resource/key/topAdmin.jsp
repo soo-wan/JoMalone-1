@@ -40,7 +40,7 @@
 	
     .who{ float:right; padding:0px 5px;}
     #logoutBtn{text-align: center; background-color:transparent;
-    border: 1px solid black}
+    border: 1px solid black; border-radius:3px;}
      
 </style>
 </head>
