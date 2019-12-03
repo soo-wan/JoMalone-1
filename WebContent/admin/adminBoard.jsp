@@ -50,11 +50,12 @@
 	<div class=Wrap>
 		<h4>게시판관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="#">1:1 문의 전체</a></li>
+			    <li class="menu"><a href="#">공지</a></li>
+			    <li class="menu" id="askAll"><a href="#">신규 1:1 문의</a></li>
+			    <li class="menu" id="askAll"><a href="#">전체 1:1 문의</a></li>
+                <li class="menu"><a href="#">신규 신고글</a></li>
+                <li class="menu"><a href="#">전체 신고글</a></li>
                 <li class="menu"><a href="#">리뷰</a></li>
-                <li class="menu"><a href="#">신고글</a></li>
-                <li class="menu"><a href="#">신고글 전체</a></li>
-                <li class="menu"><a href="#">공지</a></li>
 			</ul>
       </div>
 	<div id="container">
