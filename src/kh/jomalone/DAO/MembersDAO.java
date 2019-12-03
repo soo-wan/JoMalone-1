@@ -54,7 +54,7 @@ public class MembersDAO {
 	};
 	//일반회원 회원가입
 	public int signup (MembersDTO dto) throws Exception {
-		String sql = "insert into members values(?,'normal',?,?,?,?,?,?,?,?,?,sysdate,null,null,?,?)";
+		String sql = "insert into members values(?,'normal',?,?,?,?,?,?,?,?,?,sysdate,null,null,null,?,?)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
@@ -118,7 +118,8 @@ public class MembersDAO {
 					ResultSet rs = pstat.executeQuery();
 					){
 					List<MembersDTO> list = new ArrayList<>();
-				while(rs.next()) {
+					
+				while(rs.next()){
 					String id = rs.getString(1);
 					String logintype = rs.getString(2);
 					String pw = rs.getString(3);
@@ -131,16 +132,18 @@ public class MembersDAO {
 					String birth=rs.getString(10);
 					String gender=rs.getString(11);
 					Timestamp enrolldate =rs.getTimestamp(12);
-					String del_yn=rs.getString(13);
-					Timestamp deletedate=rs.getTimestamp(14);
-					String agree_s=rs.getString(15);
-					String agree_p=rs.getString(16);
+					Timestamp lastlogin = rs.getTimestamp(13);
+					String black_yn=rs.getString(14);
+					Timestamp blackdate=rs.getTimestamp(15);
+					String agree_s=rs.getString(16);
+					String agree_p=rs.getString(17);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
-							address1,address2,birth,gender,enrolldate,del_yn,deletedate,agree_s,agree_p);
+							address1,address2,birth,gender,enrolldate,lastlogin,black_yn,blackdate,agree_s,agree_p);
 					list.add(dto);
-					return list;	
 				}
-				return null; 
+				
+				return list;	
+				
 			}
 		}
 	}
@@ -241,12 +244,13 @@ public class MembersDAO {
 					String birth=rs.getString(10);
 					String gender=rs.getString(11);
 					Timestamp enrolldate =rs.getTimestamp(12);
-					String del_yn=rs.getString(13);
-					Timestamp deletedate=rs.getTimestamp(14);
-					String agree_s=rs.getString(15);
-					String agree_p=rs.getString(16);
+					Timestamp lastlogin = rs.getTimestamp(13);
+					String black_yn=rs.getString(14);
+					Timestamp blackdate=rs.getTimestamp(15);
+					String agree_s=rs.getString(16);
+					String agree_p=rs.getString(17);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
-							address1,address2,birth,gender,enrolldate,del_yn,deletedate,agree_s,agree_p);
+							address1,address2,birth,gender,enrolldate,lastlogin,black_yn,blackdate,agree_s,agree_p);
 					return dto;
 				}
 				return null;
@@ -329,6 +333,19 @@ public class MembersDAO {
 		}
 	}
 	
+	public int lastlogin(String id)throws Exception{
+		String sql = "update members set lastlogin =sysdate where mem_id=?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, id);
+		
+			int result = pstat.executeUpdate();
+			return result;
+		}
+		
+	}
 	//블랙리스트
 //	public int updatedel_yn(String id)throws Exception {
 //		String sql = "update members set blackcount=? ,deletedate=sysdate where mem_id=?";
