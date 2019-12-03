@@ -23,7 +23,7 @@
 		background-color:black;
 		color:white;
 	}
-	a:visited, a:link{
+	#writeA:visited, #writeA:link{
 		color:white;	
 	}
 	#cjInfo:hover{
@@ -50,6 +50,9 @@
 				<li class="nav-item"><a class="nav-link" id="country-title"
 					data-toggle="tab" href="#country" role="tab"><h6>취소/반품/교환
 							내역</h6></a></li>
+				<li>
+			  	<h6 style="width: 760px; line-height: 50px; text-align: right; font-size: 12px;">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</h6> 
+			  </li>
 
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -79,8 +82,9 @@
 										<td style="width: 100px;">${dto.prod_quantity}
 										<td style="width: 130px;">${dto.price }
 										<td style="width: 160px;">CJ 대한통운 <br>
-										<div id="cjInfo">[<a class="button view" id="cj2" style="cursor: pointer;">626978391140</a>]</div>
-										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}">리뷰쓰기</a></button>
+										
+										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
+										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}" id="writeA">리뷰쓰기</a></button>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -115,9 +119,7 @@
 
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false" />
 	<script>
-		$("#cj2").click(function() {
-			window.open("https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo="+$("#cj2").html());
-		});
+
 
 	</script>
 </body>
