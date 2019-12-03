@@ -226,7 +226,7 @@
 			
 			
 			$("#profileform").submit();
-	})
+	});
 	
 	$("#check").on("click",function(){
 		if(${dto.logintype == 'normal'}){

@@ -21,6 +21,7 @@ public class SignController extends HttpServlet {
 		request.setCharacterEncoding("UTF8");
 		MembersDAO dao = MembersDAO.getInstance();
 		try {
+			//아이디 중복확인 ajax
 			if(cmd.contentEquals("/Member/dupl.sign")) {
 				System.out.println(request.getParameter("id"));
 				String id = request.getParameter("id");
@@ -28,7 +29,7 @@ public class SignController extends HttpServlet {
 				boolean result = dao.isIdExist(id);
 				System.out.println(result);
 				response.getWriter().append("{\"result\" : \""+ result +"\"}");
-				
+			//회원가입
 			}else if(cmd.contentEquals("/Member/signup.sign")) {
 				String id = request.getParameter("id");
 				String name  = request.getParameter("name");
@@ -58,11 +59,11 @@ public class SignController extends HttpServlet {
 				System.out.println(agree_s);
 				System.out.println(agree_p);
 				MembersDTO dto = new MembersDTO(id,"normal",pw,name,phone1,phone2,phone3,email1,email2,
-						zip_code,address1,address2,year,month,day,gender,null,null,null,agree_s,agree_p);
+						zip_code,address1,address2,year,month,day,gender,null,null,null,null,agree_s,agree_p);
 				int result = dao.signup(dto);
 				request.setAttribute("result", result);
 				request.getRequestDispatcher("/Member/login.jsp").forward(request, response);
-				
+			//탈퇴시 비빌번호 확인	
 			}else if(cmd.contentEquals("/Member/check.sign")) {
 				String pw = encrypt.encrypt(request.getParameter("pw"));
 				System.out.println(pw);
@@ -74,7 +75,7 @@ public class SignController extends HttpServlet {
 				System.out.println("checkpw : " + checkpw);
 				System.out.println(id);
 				System.out.println(loginInfo);
-				
+				//패스워드가 같으면 탈퇴시킨다.
 				if(pw.contentEquals(checkpw)) {
 					int result = dao.delete(id);
 					request.getSession().invalidate();
@@ -83,7 +84,7 @@ public class SignController extends HttpServlet {
 				}else {
 					request.getRequestDispatcher("delresult.jsp").forward(request, response);
 				}
-			
+			//sns탈퇴
 			}else if(cmd.contentEquals("/Member/del.sign")) {
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				int result = dao.delete(id);

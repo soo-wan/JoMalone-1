@@ -23,6 +23,7 @@ public class loginController extends HttpServlet {
 		request.setCharacterEncoding("UTF8");
 		
 		try {
+			//로그인
 			if(cmd.contentEquals("/Member/login.log")) {
 				String id = request.getParameter("id");
 				String pw = encrypt.encrypt(request.getParameter("pw"));
@@ -32,24 +33,20 @@ public class loginController extends HttpServlet {
 				boolean result = dao.login(id, pw);
 				System.out.println(result);
 				
-				
+				//아이디,패스워드 맞으면 로그인.하고 ajax
 				if(result) {
-					if(id.contentEquals("admin1")) {
-						request.getSession().setAttribute("AdminId", id);
-						String admin = (String)request.getSession().getAttribute("AdminId");
-						System.out.println(admin);
-					}else {
 						request.getSession().setAttribute("loginInfo", id);
 						String info = (String)request.getSession().getAttribute("loginInfo");
 						MembersDTO dto = dao.selectById(info);
+						dao.lastlogin(id);
 						String name = dto.getName();
 						request.getSession().setAttribute("name", name);
 						
 						System.out.println(name);
-					}
-					response.getWriter().append("{\"result\" : \""+ result +"\"}");
+				
+						response.getWriter().append("{\"result\" : \""+ result +"\"}");
 	
-				}else {
+				}else { // 로그인안되면 ajax
 					response.getWriter().append("{\"result\" : \""+ result +"\"}");
 				}
 			}else if(cmd.contentEquals("/logout.log")) {

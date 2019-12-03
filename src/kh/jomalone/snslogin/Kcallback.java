@@ -155,17 +155,18 @@ public class Kcallback extends HttpServlet {
 						System.out.println(result);
 						
 					
-						if(result) { //이미 아이디가 있으면
+						if(result) { //이미 아이디가 있으면 그냥 로그인
 							
 							request.getSession().setAttribute("loginInfo", id);
+							dao.lastlogin(id);
 							request.getSession().setAttribute("name", name);
 							request.getRequestDispatcher("home.jsp").forward(request, response);
 							
 					
-						}else { //아이디가 없으면 db에 저장.
+						}else { //아이디가 없으면 db에 저장.후 로그인
 							NMembersDTO ndto = new NMembersDTO(id,null,name,email,birthday,gender);
 							dao.kakaoFirLogin(ndto);
-							
+							dao.lastlogin(id);
 							request.getSession().setAttribute("loginInfo", id);
 							request.getSession().setAttribute("name", name);
 							request.getRequestDispatcher("home.jsp").forward(request, response);
