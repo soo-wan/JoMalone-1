@@ -45,8 +45,6 @@ public class OrderListDTO {
 		this.refund = refund;
 		this.processed = processed;
 		this.buy_success = buy_success;
-		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-mm-dd hh:mm:ss"); 
-		date = sdf.format(order_date); 
 	}
 	
 	

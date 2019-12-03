@@ -103,18 +103,19 @@ public class buyController extends HttpServlet {
 				bdao.deleteOrderByMerchantuid(merchant_uid);
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
-			}else if(cmd.contentEquals("/Product/buylist.buy")) {
+			}else if(cmd.contentEquals("/buylist.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
 				List<OrderListDTO> list = new ArrayList<>();
 				System.out.println("도착!");
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				list = bdao.selectBuyListByID(id);
-				request.setAttribute("list",list);
-				request.getRequestDispatcher("buylist.jsp").forward(request, response);	
-				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-mm-dd hh:mm:ss"); 
+				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
+					System.out.println(dto.getDate());
 				}
+				request.setAttribute("list",list);
+				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
 				 
 //				Gson gson = new Gson();
 //				JsonObject object = new JsonObject();
