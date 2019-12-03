@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class ReviewDTO {
 	private int review_seq;
-	private String merchant_uid;
+	private int order_seq;
 	private String prod_name;
 	private String mem_id;
 	private String title;
@@ -18,11 +18,11 @@ public class ReviewDTO {
 		super();
 	}
 	
-	public ReviewDTO(int review_seq, String merchant_uid, String prod_name, String mem_id, String title,
-			String contents, int grade, Timestamp write_date, String blind_yn) {
+	public ReviewDTO(int review_seq, int order_seq, String prod_name, String mem_id, String title, String contents,
+			int grade, Timestamp write_date, String blind_yn) {
 		super();
 		this.review_seq = review_seq;
-		this.merchant_uid = merchant_uid;
+		this.order_seq = order_seq;
 		this.prod_name = prod_name;
 		this.mem_id = mem_id;
 		this.title = title;
@@ -40,12 +40,12 @@ public class ReviewDTO {
 		this.review_seq = review_seq;
 	}
 
-	public String getMerchant_uid() {
-		return merchant_uid;
+	public int getOrder_seq() {
+		return order_seq;
 	}
 
-	public void setMerchant_uid(String merchant_uid) {
-		this.merchant_uid = merchant_uid;
+	public void setOrder_seq(int order_seq) {
+		this.order_seq = order_seq;
 	}
 
 	public String getProd_name() {
@@ -103,16 +103,13 @@ public class ReviewDTO {
 	public void setBlind_yn(String blind_yn) {
 		this.blind_yn = blind_yn;
 	}
+	
+	
+	
+	
+	
+	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public String getBlindId() {
 		String result = this.getMem_id().substring(0, 3);
 		result+="***";
