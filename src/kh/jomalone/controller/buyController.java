@@ -1,6 +1,7 @@
 package kh.jomalone.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class buyController extends HttpServlet {
 				MembersDAO mdao = MembersDAO.getInstance();
 				int nextSeq = bdao.selectMaxBuySeq()+1;
 				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
-				String mem_id = "test111"; //(String)request.getSession().getAttribute("loginInfo");
+				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				String mem_name = request.getParameter("name");
 				String pg = "inicis";
 				String pay_method = "card";
@@ -58,21 +59,9 @@ public class buyController extends HttpServlet {
 				String name_buf = request.getParameter("buy_name");
 				String price_buf = request.getParameter("prices");
 				String quantitys_buf = request.getParameter("prod_quantitys");
-				System.out.println(buy_name);
-				System.out.println(quantitys_buf);
-//				System.out.println(buy_name);
-//				System.out.println(mem_phone);
-//				System.out.println(mem_email + "와같이 정보 받아오기 완료 ");
 				String[] prod_names = name_buf.split(",");
-//				
 				String[] prices = price_buf.split(",");
 				String[] prod_quantitys = quantitys_buf.split(",");
-				for (int i = 0; i < prices.length; i++) {
-					System.out.println(prices[i]);
-					System.out.println(prod_quantitys[i]);
-				}
-				
-				System.out.println("버퍼에 값 담기 완료" );
 				
 				List<OrderListDTO> list = new ArrayList<>();
 				for (int i = 0; i < prod_names.length; i++) {
@@ -82,7 +71,6 @@ public class buyController extends HttpServlet {
 				}
 				bdao.insertOrderList(list);
 				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
-				System.out.println("DB에 정보담기 완료");
 				Gson gson = new Gson();
 				JsonObject object = new JsonObject();
 				object.addProperty("pg", pg);
@@ -106,14 +94,32 @@ public class buyController extends HttpServlet {
 				System.out.println(merchant_uid + "코드번호 ");
 				bdao.updateBuyComplete(merchant_uid);
 				System.out.println("Y로 변경완료!");
+				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buyFailed.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
 				System.out.println("결제 실패 controller 이동!" );
 				String merchant_uid = request.getParameter("merchant_uid");
 				bdao.deleteOrderByMerchantuid(merchant_uid);
 				System.out.println("삭제완료!");
-			}
-			else if (cmd.contentEquals("/refund.buy")) {
+				response.getWriter().append("{}");
+			}else if(cmd.contentEquals("/Product/buylist.buy")) {
+				BuyDAO bdao = BuyDAO.getInstance();
+				List<OrderListDTO> list = new ArrayList<>();
+				System.out.println("도착!");
+				String id = (String)request.getSession().getAttribute("loginInfo");
+				list = bdao.selectBuyListByID(id);
+				request.setAttribute("list",list);
+				request.getRequestDispatcher("buylist.jsp").forward(request, response);	
+				
+//				Gson gson = new Gson();
+//				JsonObject object = new JsonObject();
+//				object.addProperty("pg", pg);
+//				
+//				
+//				String Json = gson.toJson(object);
+//				System.out.println(Json + "과같이 정보담기 완료");
+//				response.getWriter().append(Json);
+			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
 				String merchant_uid = request.getParameter("merchant_uid");

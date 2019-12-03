@@ -1,6 +1,7 @@
 package kh.jomalone.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class OrderListDTO {
 	private int order_seq;
@@ -19,6 +20,8 @@ public class OrderListDTO {
 	private String refund;
 	private String processed;
 	private String buy_success;
+	private String date;
+
 	public OrderListDTO() {
 		super();
 	}
@@ -42,7 +45,11 @@ public class OrderListDTO {
 		this.refund = refund;
 		this.processed = processed;
 		this.buy_success = buy_success;
+		SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-mm-dd hh:mm:ss"); 
+		date = sdf.format(order_date); 
 	}
+	
+	
 	public int getOrder_seq() {
 		return order_seq;
 	}
@@ -139,7 +146,12 @@ public class OrderListDTO {
 	public void setBuy_success(String buy_success) {
 		this.buy_success = buy_success;
 	}
-	
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
 	
 }
