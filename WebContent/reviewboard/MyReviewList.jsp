@@ -183,7 +183,7 @@ a:hover {
 		location.href = "home.jsp";
 	});
 	$("#toMyPage").on("click", function(){
-		location.href = "member/mypage.jsp";
+		location.href = "Member/mypage.jsp";
 	});
 	$("#toSearch").on("click", function(){
 		$("#searchFrm").submit();
