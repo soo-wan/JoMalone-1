@@ -40,8 +40,7 @@
 			  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 			  	  		<td style="width: 50px;"><input type="checkbox" id="ck_all">	
 			  	  		<td style="width: 130px;">IMAGE
-			  	  		<td style="width: 400px;"
-			  	  		>ITEM
+			  	  		<td style="width: 400px;">ITEM
 			  	  		<td style="width: 130px;">PRICE
 			  	  		<td style="width: 130px;">QTY
 			  	  		<td style="width: 130px;">CHARGE

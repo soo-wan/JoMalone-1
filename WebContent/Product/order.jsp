@@ -285,8 +285,8 @@
 							data:rsp,
 							dataType:"json"
 						}).done(function(){
-							alert("결제가 완료되었습니다.");
-							location.href= "home.jsp";
+							console.log("결제 완료!");
+							location.href= "buylist.buy";
 						})
 					}
 					 else {
@@ -298,7 +298,6 @@
 							dataType:"json"
 						}).done(function(){
 							alert("결제가 취소되었습니다.");
-							location.href= "home.jsp";
 						}) 
 					}
 				});
