@@ -162,6 +162,7 @@ a:hover {
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="메인으로" id="toIndex">
+				<input type="button" value="마이페이지" id="toMyPage">
 			</div>
 		</div>
 	</div>
@@ -179,7 +180,10 @@ a:hover {
     });
    
 	$("#toIndex").on("click", function() {
-		location.href = "index.jsp";
+		location.href = "home.jsp";
+	});
+	$("#toMyPage").on("click", function(){
+		location.href = "member/mypage.jsp";
 	});
 	$("#toSearch").on("click", function(){
 		$("#searchFrm").submit();
