@@ -13,9 +13,9 @@
 <div id="cjInfo">[<a class="button view" id="cj2" style="cursor: pointer;">626978391140</a>]</div>
 
 
-<span id="err">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</span><br>
+<span id="msg">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</span><br>
 <script>
-$("#err").css({'color':'darkgray','font-size':'12px'});
+$("#msg").css({'color':'darkgray','font-size':'12px'});
 $( "#cj" ).click(function() {
 	window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#cj").html());
 });
