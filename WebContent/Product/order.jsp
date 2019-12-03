@@ -25,13 +25,13 @@
 	    <div id="order-list" class="row">
 	    	<table class="order-table">
 				<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-			  	 	<td style="width: 50px;"><input type="checkbox" id="ck_all">
-			  	  	<td style="width: 130px;">IMAGE
-			  	  	<td style="width: 400px;">ITEM
-			  	  	<td style="width: 130px;">PRICE
-			  	  	<td style="width: 130px;">QTY
-			  	  	<td style="width: 130px;">CHARGE
-			  	  	<td>TOTAL
+			  	 	<td style="width: 100px;"><input type="checkbox" id="ck_all">
+			  	  		<td style="width: 180px;">상품이미지
+			  	  		<td style="width: 300px;">상품명
+			  	  		<td style="width: 130px;">가격
+			  	  		<td style="width: 130px;">수량
+			  	  		<td style="width: 130px;">배송비
+			  	  		<td>총 가격
 			  	</tr>
 			  		<c:choose>
 			  	  		<c:when test="${fn:length(list) == 0}">
@@ -64,9 +64,9 @@
 	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;">
 	    	<h6 style="float:right; width: 335px; text-align: right; font-size: 13px;">
 	    	<div style="float:left; margin-left:5px;">상품구매금액 </div>
-	    	<div style="float:left; margin-left:5px;"> <fmt:formatNumber value="${sum}" pattern="#,###" /> </div>
-	    	<div style="float:left; margin-left:5px;"> + 배송비 20 = TOTAL </div>
-	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" /></div></h6></div>
+	    	<div style="float:left; margin-left:5px;"> <fmt:formatNumber value="${sum}" pattern="#,###" />원 </div>
+	    	<div style="float:left; margin-left:5px;"> + 배송비 20원 = 총 가격 = </div>
+	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" />원</div></h6></div>
 	    </div>
 	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
 		<div class="row" style="height: 25px;">

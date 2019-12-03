@@ -18,7 +18,7 @@
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 
 	<div id="cart-page" class="container">
-		<div id="cart-title" class="row"><h4>CART</h4></div>
+		<div id="cart-title" class="row"><h4>장바구니</h4></div>
 		<div id="cart-list" class="row">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 			  <li class="nav-item">
@@ -38,13 +38,13 @@
 			    <div class="tab-pane fade show active" id="korea" role="tabpanel">
 			  	  <table class="cart-table">
 			  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-			  	  		<td style="width: 50px;"><input type="checkbox" id="ck_all">	
-			  	  		<td style="width: 130px;">IMAGE
-			  	  		<td style="width: 400px;">ITEM
-			  	  		<td style="width: 130px;">PRICE
-			  	  		<td style="width: 130px;">QTY
-			  	  		<td style="width: 130px;">CHARGE
-			  	  		<td>TOTAL
+			  	  		<td style="width: 100px;"><input type="checkbox" id="ck_all">	
+			  	  		<td style="width: 180px;">상품이미지
+			  	  		<td style="width: 300px;">상품명
+			  	  		<td style="width: 130px;">가격
+			  	  		<td style="width: 130px;">수량
+			  	  		<td style="width: 130px;">배송비
+			  	  		<td>총 가격
 			  	  	</tr>
 			  	  	<c:choose>
 			  	  		<c:when test="${list.size() == 0}">
@@ -72,13 +72,13 @@
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
 				  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-				  	  		<td style="width: 50px;"><input type="checkbox">
-				  	  		<td style="width: 130px;">IMAGE
-				  	  		<td style="width: 400px;">ITEM
-				  	  		<td style="width: 130px;">PRICE
-				  	  		<td style="width: 130px;">QTY
-				  	  		<td style="width: 130px;">CHARGE
-				  	  		<td>TOTAL
+			  	  		<td style="width: 100px;"><input type="checkbox" id="ck_all">	
+			  	  		<td style="width: 180px;">상품이미지
+			  	  		<td style="width: 300px;">상품명
+			  	  		<td style="width: 130px;">가격
+			  	  		<td style="width: 130px;">수량
+			  	  		<td style="width: 130px;">배송비
+			  	  		<td>총 가격
 				  	  	</tr>
 				  	  	<tr>
 				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
