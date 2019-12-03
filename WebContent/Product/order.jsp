@@ -377,7 +377,7 @@
 	    	$("#phone6").val("");
 	    	$("#email1").val("");
 	    	$("#email2").val("");
-	    	$("#textA").val("");
+	    	//$("#textA").val("");
 	    }
 	    else{
 	        //Uncheck event

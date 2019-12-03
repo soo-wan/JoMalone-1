@@ -8,23 +8,23 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>		
-<input type="text" id="cjInfo" style="width: 300px;" placeholder="송장번호입력">								
-<a class="button view" id="cj" style="cursor: pointer;">택배조회</a>
+<div>CJ 대한통운</div>								
+<div id="cjInfo">[<a class="button view" id="cj" style="cursor: pointer;">626978391140</a>]</div>
+<div id="cjInfo">[<a class="button view" id="cj2" style="cursor: pointer;">626978391140</a>]</div>
 
-<span id="err">( - )제외한 숫자만 입력해주세요.</span><br>
-<span>※ 배송이 시작되면 주문 정보에서 송장번호를 확인 후 조회 가능합니다. </span>
 
+<span id="err">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</span><br>
 <script>
 $("#err").css({'color':'darkgray','font-size':'12px'});
 $( "#cj" ).click(function() {
-	if(!$("#cjInfo").val()){
-		$("#err").text("송장번호를 입력해 주세요!").css({'color':'red','font-size':'12px'});
-		return false;
-	}
-	$("#err").text("");
-	
-	window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#cjInfo").val());
+	window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#cj").html());
 });
+
+
+$( "#cj2" ).click(function() {
+	window.open("https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo="+$("#cj").html());
+});
+
 </script>
 </body>
 </html>
