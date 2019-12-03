@@ -15,6 +15,24 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/buylist.css">
+<style>
+*{
+	    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+	#writereview{
+		background-color:black;
+		color:white;
+	}
+	a:visited, a:link{
+		color:white;	
+	}
+	#cjInfo:hover{
+		color:red;
+	}
+	#writereview:hover{
+		color:red;
+	}
+</style>
 
 </head>
 <body>
@@ -60,8 +78,9 @@
 										<td style="width: 150px;">${dto.prod_name}
 										<td style="width: 100px;">${dto.prod_quantity}
 										<td style="width: 130px;">${dto.price }
-										<td style="width: 160px;">CJ대한통운 <br>[626978391140]<br>
-										<button id=writereview>리뷰쓰기</button>
+										<td style="width: 160px;">CJ 대한통운 <br>
+										<div id="cjInfo">[<a class="button view" id="cj2" style="cursor: pointer;">626978391140</a>]</div>
+										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}">리뷰쓰기</a></button>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -95,5 +114,11 @@
 	</div>
 
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false" />
+	<script>
+		$("#cj2").click(function() {
+			window.open("https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo="+$("#cj2").html());
+		});
+
+	</script>
 </body>
 </html>
