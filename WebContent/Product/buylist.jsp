@@ -55,7 +55,7 @@
 							<c:otherwise>
 								<c:forEach items="${list}" var="dto">
 									<tr class="my-item">
-										<td style="width: 150px;">${dto.order_date}
+										<td style="width: 150px;">${dto.date}
 										<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
 										<td style="width: 150px;">${dto.prod_name}
 										<td style="width: 100px;">${dto.prod_quantity}
