@@ -94,6 +94,7 @@ public class buyController extends HttpServlet {
 				System.out.println(merchant_uid + "코드번호 ");
 				bdao.updateBuyComplete(merchant_uid);
 				System.out.println("Y로 변경완료!");
+				
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buyFailed.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
@@ -110,7 +111,11 @@ public class buyController extends HttpServlet {
 				list = bdao.selectBuyListByID(id);
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("buylist.jsp").forward(request, response);	
-				
+				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-mm-dd hh:mm:ss"); 
+				for (OrderListDTO dto : list) {
+					dto.setDate(sdf.format(dto.getOrder_date()));;
+				}
+				 
 //				Gson gson = new Gson();
 //				JsonObject object = new JsonObject();
 //				object.addProperty("pg", pg);
