@@ -166,4 +166,19 @@ public class ReportDTO {
 			return this.getCheck_comments();
 		}
 	}
+	
+	public String getReportTypeKor() {
+		String code = this.getReport_type();
+		if(code.contentEquals("r1")) {
+			return "부적절한 홍보";
+		}else if(code.contentEquals("r2")) {
+			return "명예훼손/사생활 침해";
+		}else if(code.contentEquals("r3")) {
+			return "저작권 침해";
+		}else if(code.contentEquals("r4")) {
+			return "스팸";
+		}else if(code.contentEquals("r5")) {
+			return "기타";
+		}return code;
+	}
 }
