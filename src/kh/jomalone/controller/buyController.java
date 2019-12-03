@@ -105,6 +105,17 @@ public class buyController extends HttpServlet {
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
+//				int cpage = 1;
+//				String page = request.getParameter("cpage");
+//				if(page != null) {
+//					cpage = Integer.parseInt(page);
+//				}
+//				String pageNavi = dao.getPageNavi(cpage);		
+//				
+//				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1);
+//				int end = cpage * Configuration.recordCountPerPage;
+//				List<BoardDTO> list = dao.selectByPage(start, end);
+				
 				BuyDAO bdao = BuyDAO.getInstance();
 				CartDAO cdao = CartDAO.getInstance();
 				List<OrderListDTO> list = new ArrayList<>();

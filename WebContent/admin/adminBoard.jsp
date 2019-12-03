@@ -11,14 +11,12 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <style>
-
        .Menu:hover{
             background-color: red;
         }
-
         table,tr,th,td{
             border:1px solid black;
-        }
+        } 
         tr{
         background-color:#e3e3e3;
         }

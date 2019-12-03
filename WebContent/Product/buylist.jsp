@@ -32,6 +32,9 @@
 	#writereview:hover{
 		color:red;
 	}
+	#styleA:visited, #styleA:link{
+		color:black;
+	}
 </style>
 
 </head>
@@ -48,8 +51,7 @@
 					id="korea-title" data-toggle="tab" href="#korea" role="tab"><h6>주문
 							내역 조회</h6></a></li>
 				<li class="nav-item"><a class="nav-link" id="country-title"
-					data-toggle="tab" href="#country" role="tab"><h6>취소/반품/교환
-							내역</h6></a></li>
+					data-toggle="tab" href="#country" role="tab"><h6>취소/반품 내역</h6></a></li>
 				<li>
 			  	<h6 style="width: 760px; line-height: 50px; text-align: right; font-size: 12px;">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</h6> 
 			  </li>
@@ -60,11 +62,12 @@
 					<table class="cart-table">
 						<tr
 							style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-							<td style="width: 150px;">ORDER DATE
-							<td colspan="2" style="width: 280px;">ITEM
-							<td style="width: 100px;">QTY
-							<td style="width: 130px;">PRICE
-							<td style="width: 160px;">ORDER STATE
+			  	  		<td style="width: 130px;">주문날짜
+			  	  		<td style="width: 200px;">상품이미지
+			  	  		<td style="width: 330px;">상품명
+			  	  		<td style="width: 130px;">수량
+			  	  		<td style="width: 130px;">가격
+			  	  		<td>배송상태
 						</tr>
 						<c:choose>
 							<c:when test="${fn:length(list) == 0}">
@@ -77,8 +80,8 @@
 								<c:forEach items="${list}" var="dto">
 									<tr class="my-item">
 										<td style="width: 150px;">${dto.date}
-										<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
-										<td style="width: 150px;">${dto.prod_name}
+										<td style="width: 130px;"><a href="#"><img class="item-img" src="/JoMalone/Resource/img/img.jpg"></a> <!-- 상품 이미지 href -->
+										<td style="width: 150px;"><a href="#" id="styleA">${dto.prod_name}</a> <!-- 상품명 href -->
 										<td style="width: 100px;">${dto.prod_quantity}
 										<td style="width: 130px;">${dto.price }
 										<td style="width: 160px;">CJ 대한통운 <br>
@@ -95,13 +98,12 @@
 					<table class="cart-table">
 						<tr
 							style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
-							<td style="width: 50px;"><input type="checkbox">
-							<td style="width: 130px;">IMAGE
-							<td style="width: 400px;">ITEM
-							<td style="width: 130px;">PRICE
-							<td style="width: 130px;">QTY
-							<td style="width: 130px;">CHARGE
-							<td>TOTAL
+			  	  		<td style="width: 130px;">주문날짜
+			  	  		<td style="width: 200px;">상품이미지
+			  	  		<td style="width: 330px;">상품명
+			  	  		<td style="width: 130px;">수량
+			  	  		<td style="width: 130px;">가격
+			  	  		<td>배송상태
 						</tr>
 						<tr>
 							<td colspan="7"
@@ -112,15 +114,12 @@
 				</div>
 			</div>
 			<div id="page-navi"></div>
-
-
 		</div>
 	</div>
 
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false" />
 	<script>
-
-
+		
 	</script>
 </body>
 </html>
