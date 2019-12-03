@@ -346,6 +346,57 @@ public class MembersDAO {
 		}
 		
 	}
+	public List<MembersDTO> search(String mem_id, String mem_name, String mem_phone)throws Exception{
+		String sql = "select * from members where 1=1 ";
+		if(mem_id != "") {
+			sql += "and mem_id= '"+mem_id+"'" ;
+		}
+		if(mem_name != "") {
+			sql += "and mem_name= '"+mem_name+"'";
+		}
+		if(mem_phone != "") {
+			sql += "and mem_phone= '"+mem_phone+"'";
+		}
+			try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+				try(
+					ResultSet rs = pstat.executeQuery();
+					){
+					List<MembersDTO> list = new ArrayList<>();
+					
+				while(rs.next()){
+					String id = rs.getString(1);
+					String logintype = rs.getString(2);
+					String pw = rs.getString(3);
+					String name =rs.getString(4);
+					String phone =rs.getString(5);
+					String email =rs.getString(6);
+					String zip_code=rs.getString(7);
+					String address1=rs.getString(8);
+					String address2=rs.getString(9);
+					String birth=rs.getString(10);
+					String gender=rs.getString(11);
+					Timestamp enrolldate =rs.getTimestamp(12);
+					Timestamp lastlogin = rs.getTimestamp(13);
+					String black_yn=rs.getString(14);
+					Timestamp blackdate=rs.getTimestamp(15);
+					String agree_s=rs.getString(16);
+					String agree_p=rs.getString(17);
+					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
+							address1,address2,birth,gender,enrolldate,lastlogin,black_yn,blackdate,agree_s,agree_p);
+					list.add(dto);
+				}
+				
+				return list;	
+				
+			}
+		}
+	}
+
+	
+	
 	//블랙리스트
 //	public int updatedel_yn(String id)throws Exception {
 //		String sql = "update members set blackcount=? ,deletedate=sysdate where mem_id=?";

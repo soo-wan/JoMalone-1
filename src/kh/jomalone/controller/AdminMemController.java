@@ -32,6 +32,7 @@ public class AdminMemController extends HttpServlet {
 				}
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
+				
 			}else {
 				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
 			}
@@ -39,6 +40,28 @@ public class AdminMemController extends HttpServlet {
 		}else if(cmd.contentEquals("/adminlogout.mem")) {
 			request.getSession().invalidate();
 			response.sendRedirect("home.jsp");
+			
+			
+		}else if(cmd.contentEquals("/search.mem")) {
+			String id = request.getParameter("id");
+			String name = request.getParameter("name");
+			String phone = request.getParameter("phone");
+			
+			System.out.println(id + name + phone);
+				List<MembersDTO> list = dao.search(id,name,phone);	
+				for(MembersDTO dto : list) {
+					System.out.println(dto.getLogintype());
+				}
+				request.setAttribute("list", list);
+				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 		}catch(Exception e) {
 			e.printStackTrace();

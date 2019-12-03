@@ -11,31 +11,6 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <style>
-
-       .Menu:hover{
-            background-color: red;
-        }
-
-        table,tr,th,td{
-            border:1px solid black;
-        }
-        tr{
-        background-color:#e3e3e3;
-        }
-      	table{
-      		width:1500px;
-      		margin:auto;
-      	text-align:center;
-      	}
-       #container{
-       	height:800px;
-     	width:1300px;
-     	float:left;
-     	padding: 20px;
-     	overflow-x:scroll;
-     
-       }
-  
 	#sidebar{ float:left; width:150px; margin:0px; padding:0px; }
     #sidebar .menu{ list-style-type: none; text-align: right; margin:15px 0px; color:#1e2d47; width:100%;}
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif;}
@@ -43,12 +18,39 @@
     h4{margin:0px; padding:20px 10px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
     }
     .menu>a{text-decoration: none; color:#1e2d47}
-    
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
+   
+	#searchbar{float:left; width:1300px; heigth:30px; text-align:center; margin:auto; padding:0 0 10px 0;
+	text-align:center;}
+	
+    #container{
+     height:600px;
+     width:1300px;
+     float:left;
+     padding: 20px;
+     overflow-x:scroll;
+     background-color:#f2f2f2;}
+     
+    th {background-color:#1e2d47; color:white;}
+    
+    table{
+	    width:1800px;
+	    border-collapse: collapse; 
+		border-spacing: 0;		
+	    margin:auto;
+	    height:30px;
+	    text-align:center;
+      	}
+	
+	td{overflow:hidden; white-space : nowrap;}
+   .contents{height:600px;}
+   #search,#all{background-color:transparent; border:1px solid black; border-radius:2px;}
+   
 </style>
 </head>
 <body>
 <jsp:include page="Resource/key/topAdmin.jsp" flush="false"/>
+
 <div id="wrapper">
 	<div class=Wrap>
 		<h4>회원 관리</h4>
@@ -56,9 +58,19 @@
 			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'>회원관리</a></li>
 			</ul>
       </div>
+      
+      <div id="searchbar">
+    	<form action="${pageContext.request.contextPath}/search.mem" method="post">
+	    	아이디  <input type="text" placeholder="아이디입력" id="id" name="id">
+	    	이름  <input type="text" placeholder="이름입력" id="name" name="name">
+	    	전화번호  <input type="text" placeholder="전화번호 '-' 붙혀서 입력" id="phone" name="phone">
+	    	<input type="submit" value="검색" id="search">
+	    	<input type="button" value="전체보기" id="all">
+    	</form>
+    	</div>
 	<div id="container">
-    <table>
-        <tr cols=14>
+    	<table id="table" border=1px;>
+    	<tr>
             <th>아이디</th>
             <th>로그인타입</th>
             <th>이름</th>
@@ -74,26 +86,41 @@
             <th>블랙여부</th>
             <th>블랙날짜</th>
         </tr>
+        <c:choose>
+        <c:when  test="${AdminId == null }">
+        <tr class="contents">
+        <td colspan=14>정보가 없습니다.
+        </tr>
+        </c:when>
+        <c:otherwise>
         <c:forEach items="${list }" var="dto">
         <tr>
-            <td>${dto.id}</td>
-            <td>${dto.logintype}</td>
-            <td>${dto.name}</td>
-            <td>${dto.phone}</td>
-            <td>${dto.email}</td>
-            <td>${dto.zip_code}</td>
-            <td>${dto.address1}</td>
-            <td>${dto.address2}</td>
-            <td>${dto.birth}</td>
-            <td>${dto.gender}</td>
-            <td>${dto.enrolldate}</td>
-            <td>${dto.lastlogin}</td>
-            <td>${dto.black_yn}</td>
-            <td>${dto.blackdate}</td>
+            <td> ${dto.id} </td>
+            <td> ${dto.logintype} </td>
+            <td> ${dto.name} </td>
+            <td> ${dto.phone} </td>
+            <td> ${dto.email} </td>
+            <td> ${dto.zip_code} </td>
+            <td> ${dto.address1} </td>
+            <td> ${dto.address2} </td>
+            <td> ${dto.birth} </td>
+            <td> ${dto.gender} </td>
+            <td> ${dto.enrolldate} </td>
+            <td> ${dto.lastlogin} </td>
+            <td> ${dto.black_yn} </td>
+            <td> ${dto.blackdate}</td>
         </tr>
         </c:forEach>
+        </c:otherwise>
+        </c:choose>
+        
     	</table>
     </div>
     </div>
+    <script>
+  $("#all").on("click",function(){
+	  location.href="${pageContext.request.contextPath}/admin.mem"
+  })
+    </script>
 </body>
 </html>
