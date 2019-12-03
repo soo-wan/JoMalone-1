@@ -34,7 +34,7 @@
 		})
 		
 		$("#my-buylist").on("click", function() {
-			location.href = "/JoMalone/Product/buylist.buy";
+			location.href = "${pageContext.request.contextPath}/buylist.buy";
 		})
 		
 		$("#my-enquiry").on("click", function() {

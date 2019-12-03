@@ -286,7 +286,7 @@
 							dataType:"json"
 						}).done(function(){
 							console.log("결제 완료!");
-							location.href= "buylist.buy";
+							location.href= "${pageContext.request.contextPath}/buylist.buy";
 						})
 					}
 					 else {
