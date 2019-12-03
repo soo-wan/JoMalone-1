@@ -292,7 +292,7 @@
 					 else {
 						 console.log("실패함");
 						$.ajax({
-							url:"buyFailed.buy",
+							url:"${pageContext.request.contextPath}/buyFailed.buy",
 							type:"post",
 							data:rsp,
 							dataType:"json"

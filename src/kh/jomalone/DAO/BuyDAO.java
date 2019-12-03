@@ -56,20 +56,6 @@ public class BuyDAO {
 			return result;
 		}
 	}
-
-	public int selectMaxBuySeq() throws Exception {
-		int maxSeq = 1157;
-		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
-			try (ResultSet rs = pstat.executeQuery()) {
-				if (rs.next()) {
-					maxSeq = rs.getInt(1);
-				}
-			}
-		}
-		return maxSeq;
-	}
-
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
@@ -93,6 +79,18 @@ public class BuyDAO {
 	
 	
 	
+	public int selectMaxBuySeq() throws Exception {
+		int maxSeq = 1157;
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
+			try (ResultSet rs = pstat.executeQuery()) {
+				if (rs.next()) {
+					maxSeq = rs.getInt(1);
+				}
+			}
+		}
+		return maxSeq;
+	}
 
 	public List<OrderListDTO> selectBuyListByID(String id) throws Exception {
 		List<OrderListDTO> list = new ArrayList<>();
@@ -110,6 +108,7 @@ public class BuyDAO {
 		}
 		return list;
 	}
+	
 	
 
 	
@@ -146,4 +145,10 @@ public class BuyDAO {
 			return result;
 		}
 	}
+
 }
+
+
+
+
+

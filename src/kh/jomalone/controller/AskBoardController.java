@@ -36,18 +36,10 @@ public class AskBoardController extends HttpServlet {
 		
 		System.out.println(cmd);
 
-		// String id = (String) request.getSession().getAttribute("loginInfo");
-		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
-		String id = "aaaaaaaa";
-		//String id = "TestID";
-		//String id = "TestID2";
-		//String id = "TestID3";
-		//request.getSession().setAttribute("adminId", "admin");
-		//request.getSession().invalidate();
+		 String id = (String) request.getSession().getAttribute("loginInfo");
 		AskDAO dao = AskDAO.getInstance();
 
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
-			request.getSession().setAttribute("loginInfo", id);
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");

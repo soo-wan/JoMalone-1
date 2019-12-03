@@ -14,12 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 
 import kh.jomalone.DAO.BuyDAO;
+import kh.jomalone.DAO.CartDAO;
+import kh.jomalone.DAO.CartDAO;
 import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
@@ -105,6 +106,7 @@ public class buyController extends HttpServlet {
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
+				CartDAO cdao = CartDAO.getInstance();
 				List<OrderListDTO> list = new ArrayList<>();
 				System.out.println("도착!");
 				String id = (String)request.getSession().getAttribute("loginInfo");
@@ -113,10 +115,13 @@ public class buyController extends HttpServlet {
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
 					System.out.println(dto.getDate());
+					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
+				
+				
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
-				 
+				
 //				Gson gson = new Gson();
 //				JsonObject object = new JsonObject();
 //				object.addProperty("pg", pg);
@@ -131,17 +136,8 @@ public class buyController extends HttpServlet {
 				String merchant_uid = request.getParameter("merchant_uid");
 				CancelData cancel_data = new CancelData(merchant_uid, false);
 				cancel_data.setEscrowConfirmed(true);
-				
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
-				} catch (IamportResponseException e) {
-					System.out.println(e.getMessage());
-//					switch(e.getHttpStatusCode()) {
-//					case 401 :
-//						break;
-//					case 500 :
-//						break;
-//					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
