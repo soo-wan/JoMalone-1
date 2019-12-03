@@ -40,12 +40,15 @@
 		</table>
 	</form>
 	<script>      
-        $("#btnCart").on("click",function(){
-        	var cf = confirm("장바구니 담을까요?");
-            if(cf){
-                $("#frm").submit();
-            }
-        })
+    $("#btnCart").on("click",function(){
+    	var cf = confirm("계속 쇼핑하시겠습니까?");
+        if(cf){
+            
+        }
+        else{
+        	$("#frm").submit();
+        }
+    })
     </script>
 </body>
 </html>
