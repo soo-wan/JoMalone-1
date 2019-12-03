@@ -42,12 +42,12 @@
 	</form>
 	<script>      
     $("#btnCart").on("click",function(){
-    	var cf = confirm("계속 쇼핑하시겠습니까?");
+    	var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
         if(cf){
-            
+        	$("#frm").submit();
         }
         else{
-        	$("#frm").submit();
+        	 return false;
         }
     })
     </script>
