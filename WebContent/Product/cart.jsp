@@ -19,7 +19,7 @@
 
 <form action="orderSelect.or" method="post" id="frm">
 	<div id="cart-page" class="container">
-		<div id="cart-title" class="row"><h4>장바구니</h4></div>
+		<div id="cart-title" class="row"><h4>CART</h4></div>
 		<div id="cart-list" class="row">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 			  <li class="nav-item">

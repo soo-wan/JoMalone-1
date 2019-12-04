@@ -42,9 +42,9 @@ public class OrderController extends HttpServlet {
 				int seq=0;
 				while(m.find()) {
 					seq = Integer.parseInt(m.group());
-					dao.deleteCart(seq);
+					dao.deleteCart(seq);	
 				}
-				response.sendRedirect("list.ca");
+				response.sendRedirect("Product/order.jsp");
 			}
 			
 			// 전체 주문
