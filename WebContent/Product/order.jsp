@@ -64,9 +64,9 @@
 	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;">
 	    	<h6 style="float:right; width: 335px; text-align: right; font-size: 13px;">
 	    	<div style="float:left; margin-left:5px;">상품구매금액 </div>
-	    	<div style="float:left; margin-left:5px;" id=ok><fmt:formatNumber value="${sum}" pattern="#,###" />원</div>
+	    	<div style="float:left; margin-left:5px;" id=ok><fmt:formatNumber value="${sum}" pattern="#,###" /></div>
 	    	<div style="float:left; margin-left:5px;"> + 배송비 20원 = 총 가격 = </div>
-	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" />원</div></h6></div>
+	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" /></div></h6></div>
 	    </div>
 	    <div class="row" style="padding: 5px 0px 1px 5px;"><h6 style="font-size: 11px;">** 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.</h6></div>
 		<div class="row" style="height: 25px;">
@@ -410,7 +410,7 @@
 							}
 						}).done(function(data){
 							console.log("왔음");
-							location.href="Product/order.jsp";
+							location.href="orderAll.or";
 						}).fail(function(){
 							console.log("실패");
 						});
