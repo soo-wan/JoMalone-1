@@ -9,6 +9,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/mypage.css">
+<style>
+	#mypage-menu>div {margin: auto; width: 180px; height: 200px; text-align: center; cursor: pointer;}
+	#mypage-menu>div>img {width: 150px; height: 150px; text-align: center;}
+</style>
 </head>
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
@@ -20,6 +24,7 @@
 			<div id="my-cart"><img src="/JoMalone/Resource/img/my-cart.png"><h5>CART</h5></div>
 			<div id="my-buylist"><img src="/JoMalone/Resource/img/my-buylist.png"><h5>BUY LIST</h5></div>
 			<div id="my-enquiry"><img src="/JoMalone/Resource/img/my-enquiry.png"><h5>1:1 ENQUIRY</h5></div>
+			<div id="my-review"><img src="/JoMalone/Resource/img/my-review.png"><h5>MY REVIEW</h5></div>
 			<div id="my-delevery"><img src="/JoMalone/Resource/img/my-delevery.png"><h5>DELEVERY</h5></div>
 		</div>
 	</div>
@@ -39,6 +44,11 @@
 		
 		$("#my-enquiry").on("click", function() {
 			location.href = "/JoMalone/list.ask";
+		})
+		
+		// 수인언니 여기여기 고치셔야되요!!!!!!!!!
+		$("#my-review").on("click", function() {
+			location.href = "";
 		})
 		
 		$("#my-delevery").on("click", function() {

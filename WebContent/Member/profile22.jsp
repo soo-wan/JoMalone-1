@@ -228,13 +228,16 @@
 	
 	$("#check").on("click",function(){
 		if(${dto.logintype == 'normal'}){
-			$("#pwform").submit();			
-			
+			$("#pwform").submit();
 		}else{ 
-			location.href = "del.sign"
+			location.href = "del.sign";
 		}
 		
 	});
+	
+	$("#profile-back").on("click", function() {
+		location.href = "/JoMalone/Member/mypage.jsp";
+	})
 	</script>
 </body>
 </html>
