@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
 <style>
 	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
@@ -45,9 +45,10 @@
       	}
 	
 	td{overflow:hidden; white-space : nowrap;}
-   .contents{height:600px;}
-   #search,#all{background-color:transparent; border:1px solid black; border-radius:2px;}
-   
+  	 .contents{height:600px;}
+  	 #search,#all{background-color:transparent; border:1px solid black; border-radius:2px;}
+     #id, #name, #phone, #logintype{ border-radius:3px; border:1px solid black;}
+     input[type=text]{margin: 0 5px 0 0;}
 </style>
 </head>
 <body>
@@ -63,9 +64,10 @@
       
       <div id="searchbar">
     	<form action="${pageContext.request.contextPath}/search.mem" method="post">
-	    	아이디  <input type="text" placeholder="아이디입력" id="id" name="id">
-	    	이름  <input type="text" placeholder="이름입력" id="name" name="name">
-	    	전화번호  <input type="text" placeholder="전화번호 '-' 붙혀서 입력" id="phone" name="phone">
+    		Logintype  <input type="text" placeholder=" normal/kakao/naver" id="logintype" name="logintype">
+	    	ID  <input type="text" placeholder=" 아이디입력" id="id" name="id">
+	    	Name <input type="text" placeholder=" 이름입력" id="name" name="name">
+	    	Phone <input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
 	    	<input type="submit" value="검색" id="search">
 	    	<input type="button" value="전체보기" id="all">
     	</form>

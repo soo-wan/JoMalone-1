@@ -21,9 +21,11 @@
         height: 100%;
         display:block;
         text-decoration: none;
+        font-family: 'Alata', sans-serif;
         
     }
 	.navi-item{
+		
             float: left;
             list-style-type: none;
             width:300px;
@@ -36,6 +38,7 @@
     #title{
         margin:auto;
         text-align: center;
+        text-decoration: none;
     }
 	
     .who{ float:right; padding:0px 5px;}
@@ -74,20 +77,10 @@
 	    })
     	    
     	$("#title").on("click", function() {
-    		location.href= "/JoMalone/admin/admin.jsp";
+    		location.href= "${pageContext.request.contextPath}/admin.jsp";
     	})
 		
-    	$("#cart").on("click", function() {
-    		<c:choose>
-    		<c:when test="${loginInfo == null}">
-	    		alert("로그인이 필요한 서비스 입니다.");
-    			location.href = "/JoMalone/Member/login.jsp";
-    		</c:when>
-    		<c:otherwise>
-    			location.href= "${pageContext.request.contextPath}/list.ca";
-    		</c:otherwise>
-    		</c:choose>
-    	})
+    	
     	$("#logoutBtn").on("click",function(){
     		location.href="${pageContext.request.contextPath}/adminlogout.mem"
     	})

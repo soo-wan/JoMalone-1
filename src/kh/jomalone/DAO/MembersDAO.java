@@ -347,10 +347,13 @@ public class MembersDAO {
 		}
 		
 	}
-	public List<MembersDTO> search(String mem_id, String mem_name, String mem_phone)throws Exception{
+	public List<MembersDTO> search(String logintype, String mem_id, String mem_name, String mem_phone)throws Exception{
 		String sql = "select * from members where 1=1 ";
 		if(mem_id != "") {
 			sql += "and mem_id= '"+mem_id+"'" ;
+		}
+		if(logintype != "") {
+			sql += "and logintype= '"+logintype+"'";
 		}
 		if(mem_name != "") {
 			sql += "and mem_name= '"+mem_name+"'";
@@ -369,7 +372,7 @@ public class MembersDAO {
 					
 				while(rs.next()){
 					String id = rs.getString(1);
-					String logintype = rs.getString(2);
+					String type = rs.getString(2);
 					String pw = rs.getString(3);
 					String name =rs.getString(4);
 					String phone =rs.getString(5);
@@ -385,7 +388,7 @@ public class MembersDAO {
 					Timestamp blackdate=rs.getTimestamp(15);
 					String agree_s=rs.getString(16);
 					String agree_p=rs.getString(17);
-					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
+					MembersDTO dto = new MembersDTO(id,type,pw,name,phone,email,zip_code,
 							address1,address2,birth,gender,enrolldate,lastlogin,black_yn,blackdate,agree_s,agree_p);
 					list.add(dto);
 				}

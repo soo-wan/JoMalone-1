@@ -39,10 +39,6 @@ public class SignController extends HttpServlet {
 				String phone3 = request.getParameter("phone3");
 				String email1 = request.getParameter("email1");
 				String email2 = request.getParameter("email2");
-				if(email2.contentEquals("input")) {
-					email2 = request.getParameter("writeemail");
-				}
-				System.out.println(email2);
 				String zip_code = request.getParameter("zip_code");
 				String address1 = request.getParameter("address1");
 				String address2 = request.getParameter("address2");

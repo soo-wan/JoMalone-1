@@ -120,6 +120,43 @@
 			
 		})
 	})
+	$(document).ready(function() {
+            $("#pw").keydown(function(key) {
+                if (key.keyCode == 13) {
+                	$.ajax({
+            			url:"login.log",
+            			type:"post",
+            			data:{
+            				id : $("#id").val(),
+            				pw : $("#pw").val()
+            				
+            			},
+            			dataType:"json"
+            		}).done(function(data){
+            			console.log(data.id);
+            			if(data.result == "false"){
+            				$("#check").html("아이디 및 비밀번호를 확인해주세요.");
+            			}else{
+            				alert("로그인되었습니다.")
+            				if(data.id == "admin1"){
+            					location.href="${pageContext.request.contextPath}/admin.mem"	
+            				}else{
+            				location.href="${pageContext.request.contextPath}/home.jsp"
+            					
+            				}
+            			}
+            			
+            		})
+                	
+                	
+                	
+                }
+            });
+        });
+
+
+출처: https://alpreah.tistory.com/101 [생각에 취하는날]
+	
  		$("#naver").on("click",function(){
 	 		location.href = "<%=napiURL%>"
 		})
