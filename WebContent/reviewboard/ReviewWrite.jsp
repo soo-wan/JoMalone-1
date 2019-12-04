@@ -122,7 +122,8 @@ input[type=text], textarea {
                 $("#cancel").on("click", function() {
                     var check = confirm("정말 취소하시겠습니까?");
         			if(check){
-        				location.href = "buylist.buy";//구매내역으로 이동.
+        				//location.href = "";//마이페이지				
+        				location.href = "index.jsp";//테스트는 인덱스로가기.
         			}
                 });
                 

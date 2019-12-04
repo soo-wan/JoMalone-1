@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
@@ -37,7 +38,6 @@ public class NoticeController extends HttpServlet {
 		try {
 
 			if (cmd.contentEquals("/list.notice")) {// 공지게시판
-				request.getSession().setAttribute("adminId", "admin1");
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
 				if (page != null) {
@@ -108,6 +108,12 @@ public class NoticeController extends HttpServlet {
 					list.add(obj);
 				}
 				response.getWriter().append(list.toString());
+				
+			} else if (cmd.contentEquals("/home.notice")) {
+				List<NoticeDTO> latestNotices = dao.latestNotices();
+				Gson g = new Gson();
+				String data = g.toJson(latestNotices);
+				response.getWriter().append(data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

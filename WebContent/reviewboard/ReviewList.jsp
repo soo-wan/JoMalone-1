@@ -138,7 +138,7 @@ a:hover {
 			alert("해당 리뷰는 신고 접수되어 블라인드처리되었습니다.");		
 		}
 		$("#toIndex").on("click", function() {
-			location.href = "home.jsp";
+			location.href = "index.jsp";
 		});
 		$("#toSearch").on("click", function(){
 			$("#searchFrm").submit();
