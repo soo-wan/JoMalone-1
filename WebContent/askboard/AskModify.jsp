@@ -7,7 +7,7 @@
 <title>EnQuiry Modify | Jo Malone</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="Resource/lang/summernote-ko-KR.js"></script>
+<script src="/JoMalone/Resource/lang/summernote-ko-KR.js"></script>
 
 
 <style>
@@ -111,6 +111,7 @@
 			document.getElementById("modifyFrm").submit();
 		});
 
+		(function($) {
 		$(".summernote").summernote({
 			lang : 'ko-KR',
 			minHeight: 500,
@@ -153,6 +154,7 @@
 				}
 			}
 		});
+		})(jQuery);
 	</script>
 </body>
 </html>

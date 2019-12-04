@@ -42,12 +42,6 @@
 	#toCoModifyConfirm, #toCoModifyCancel {margin-top: 3.5px; width: 100%; height: 40%;	line-height: 30px;}
 	.coWritingDiv {padding-top: 20px;}
 	#emailCheck{font-size: 15px;}
-
-	#detail-page {margin-top: 80px;}
-
-	#detail-title {margin-bottom: 30px; padding: 0px; height: 50px;}
-	#detail-title>h4 {width: 100%; line-height: 45px; text-align: center;}
-	
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
@@ -63,9 +57,9 @@
 			    <li class="menu"><a href="list.notice">공지</a></li>
 			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
 			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
-                <li class="menu"><a href="#">신규 신고글</a></li>
-                <li class="menu"><a href="#">전체 신고글</a></li>
-                <li class="menu"><a href="#">리뷰</a></li>
+                <li class="menu"><a href="newList.report">신규 신고글</a></li>
+                <li class="menu"><a href="allList.report">전체 신고글</a></li>
+                <li class="menu"><a href="allList.review">리뷰</a></li>
 			</ul>
       </div>
 	</c:when>
@@ -78,7 +72,7 @@
 
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">1:1 문의</div>
+			<div class="col-12"><h3>1:1 문의</h3></div>
 		</div>
 
 		<!--                    문의제목-->
@@ -241,12 +235,17 @@
                 console.log("${readDTO.ask_seq}");
 
                 $.ajax({
-                    url : "writeComment.ask",
+                    url : "/JoMalone/writeComment.ask",
                     type : "post",
                     dataType : "json",
                     data : {
-                        writingSeq : "${readDTO.ask_seq}",
-                        contents : $("#commentWriting").val()
+                    	 writingSeq : "${readDTO.ask_seq}",
+                         askType : "${readDTO.askCodeKor }",
+                         askTitle : "${readDTO.title }",
+                         askDate : "${readDTO.formedFullDate }",
+                         contents : $("#commentWriting").val(),
+                         memId : "${readDTO.mem_id}",
+                         emailOk : "${readDTO.email_yn}"
                     }
                 }).done(function(upload) {
                     $("#commentWriting").val("");

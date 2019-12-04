@@ -10,21 +10,30 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
+#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+    #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
+    padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
+    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
+    
+    .Wrap{height:800px;  width:200px; margin:0px; float:left; }
+    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
+    }
+    .menu>a{text-decoration: none; color:white;}
+    #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
+    #container{
+       	height:800px;
+     	width:1300px;
+     	float:left;
+     	padding: 20px;
+     	overflow-x:scroll;
+     	border:1px solid black;
+    }
+    
+    
+    
+    
 #titleBox {margin-top: 5px; margin-bottom: 5px;}
-	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}
-	#coBtn {height: 93%; width: 100%;}
-	.commentBox { /*border-bottom: 1px solid #49498690;*/
-		border: 1px solid #49498660; padding-top: 15px; padding-bottom: 15px; margin-left: 10px; margin-right: 10px; margin-bottom: 2px;}
-	#toCoModify, #toCoDelete {font-size: 13px; line-height: 20px;}
-	#toCoModifyConfirm, #toCoModifyCancel {margin-top: 3.5px; width: 100%; height: 40%;	line-height: 30px;}
-	.coWritingDiv {padding-top: 20px;}
-	#emailCheck{font-size: 15px;}
-
-	#detail-page {margin-top: 80px;}
-
-	#detail-title {margin-bottom: 30px; padding: 0px; height: 50px;}
-	#detail-title>h4 {width: 100%; line-height: 45px; text-align: center;}
-	
+	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}	
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 #toReport {
 	border-style: none;
@@ -47,10 +56,32 @@
 </head>
 
 <body>
+	
+	
+	<c:choose>
+	<c:when test="${sessionScope.adminId !=null}">
+	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
+	<div id="wrapper">
+	<div class=Wrap>
+		<h4>게시판관리</h4>
+			<ul id="sidebar">
+			    <li class="menu"><a href="list.notice">공지</a></li>
+			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
+			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
+                <li class="menu"><a href="newList.report">신규 신고글</a></li>
+                <li class="menu"><a href="allList.report">전체 신고글</a></li>
+                <li class="menu"><a href="allList.review">리뷰</a></li>
+			</ul>
+      </div>
+	</c:when>
+	<c:otherwise>
 	<jsp:include page="/Resource/key/top.jsp" flush="true" />
-	<div class=container id="detail-page">
-		<div id="detail-title" class="row">
-			<h4>REVIEW DETAIL</h4>
+	</c:otherwise>
+</c:choose>
+
+		<div class=container>
+		<div class="row" style="text-align: center;" id="headDiv">
+			<div class="col-12">상품 후기</div>
 		</div>
 		<div class="row" id=orderProdBox>
 	          <div class="col-12"><span style="font-weight:bold;">${readDTO.prod_name}</span></div>
@@ -107,39 +138,47 @@
 		<br>
 	</div>
 
+	<c:choose>
+		<c:when test="${sessionScope.adminId !=null}">
+		</div>
+		</c:when>
+		<c:otherwise>
+		<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
+		</c:otherwise>
+	</c:choose>
+	
 	<script>
 	
-		$(".star_rating a:nth-child(${readDTO.grade})").prevAll("a").addClass("on");
-		$(".star_rating a:nth-child(${readDTO.grade})").addClass("on");
-		$("#toMain").on("click", function() {
-			/*
-			var fromSearch = "${search}";
-			if(fromSearch=="yes"){
-				location.href = "review.search?rootPage=${rootPage}&reviewSearch=${reviewSearch}&searchInput=${searchInput}";
-			}
-			*/
-        	var root = "${root}";
-            if(root=="adminReviews"||root=="report"){
-            	location.href = "allList.review";            	
-            }else if(root=="allReviews"){
-            	location.href = "list.review";
-            }else{
-            	location.href = "myList.review";
-            }
-        });
-        $("#toModify").on("click", function() {
-        	document.getElementById("modifyFrm").submit();
-        });
-        $("#toDelete").on("click", function() {
-            var check = confirm("정말 삭제하시겠습니까?");
-            if (check) {
-               location.href = "${pageContext.request.contextPath}/delete.review?no=${readDTO.review_seq}&location=${root}";
-            }
-        });        
-        $("#toReport").on("click",function(){
-           location.href = "write.report?no=${readDTO.review_seq}";
-        });
+	$(".star_rating a:nth-child(${readDTO.grade})").prevAll("a").addClass("on");
+	$(".star_rating a:nth-child(${readDTO.grade})").addClass("on");
+	$("#toMain").on("click", function() {
+		
+		var fromSearch = "${search}";
+		if(fromSearch=="yes"){
+			location.href = "review.search?rootPage=${rootPage}&reviewSearch=${reviewSearch}&searchInput=${searchInput}";
+		}
+		
+    	var root = "${root}";
+        if(root=="adminReviews"||root=="report"){
+        	location.href = "allList.review";            	
+        }else if(root=="allReviews"){
+        	location.href = "list.review";
+        }else{
+        	location.href = "myList.review";
+        }
+    });
+    $("#toModify").on("click", function() {
+    	document.getElementById("modifyFrm").submit();
+    });
+    $("#toDelete").on("click", function() {
+        var check = confirm("정말 삭제하시겠습니까?");
+        if (check) {
+           location.href = "${pageContext.request.contextPath}/delete.review?no=${readDTO.review_seq}&location=${root}";
+        }
+    });        
+    $("#toReport").on("click",function(){
+       location.href = "write.report?no=${readDTO.review_seq}";
+    });
     </script>
-<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>

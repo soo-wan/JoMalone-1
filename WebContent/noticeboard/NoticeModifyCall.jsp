@@ -6,8 +6,7 @@
 <title>Notice Modify | Jo Malone</title>
 </head>
 <body>
-	<jsp:include page="/Resource/key/top.jsp" flush="true" />
-	<jsp:include page="/noticeboard/NoticeModify.jsp" flush="true" />
-	<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
+	<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
+	<jsp:include page="/noticeboard/NoticeModify.jsp" flush="true" />	
 </body>
 </html>
