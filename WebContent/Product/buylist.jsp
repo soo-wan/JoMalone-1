@@ -114,7 +114,19 @@
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false" />
 	<script>
 		$("#first").on("click",function(){
-			location.href= "orderUpdate.or?period="+1
+			location.href= "search.buy?period=0"
+		});
+		$("#second").on("click",function(){
+			location.href= "search.buy?period=7"
+		});
+		$("#third").on("click",function(){
+			location.href= "search.buy?period=30"
+		});
+		$("#four").on("click",function(){
+			location.href= "search.buy?period=90"
+		});
+		$("#last").on("click",function(){
+			location.href= "search.buy?period=180"
 		});
 	</script>
 </body>
