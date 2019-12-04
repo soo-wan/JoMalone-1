@@ -21,7 +21,7 @@ public class CartDAO {
 		bds.setPassword("jomalone");
 		bds.setInitialSize(30);
 	}
-
+    
 	public synchronized static CartDAO getInstance() {
 		if (instance == null) {
 			instance = new CartDAO();

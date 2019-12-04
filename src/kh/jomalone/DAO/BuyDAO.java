@@ -3,7 +3,6 @@ package kh.jomalone.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
+import kh.jomalone.configuration.Configuration;
 
 public class BuyDAO {
 	private static BuyDAO instance;
@@ -56,6 +56,7 @@ public class BuyDAO {
 			return result;
 		}
 	}
+	
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
@@ -75,8 +76,6 @@ public class BuyDAO {
 			}
 		}
 	}
-	
-	
 	
 	
 	public int selectMaxBuySeq() throws Exception {
@@ -144,6 +143,73 @@ public class BuyDAO {
 			con.commit();
 			return result;
 		}
+	}
+	
+	//페이지 내비게이터
+	public String getPageNavi(int currentPage,String id) throws Exception {
+		//설정 값들은 지역변수로 말고 Static으로 만들어서 나중에 쓸때 쓰는게 좋다. 
+		
+		int recordTotalCount = this.selectBuyListByID(id).size();  // 알아야할점 1 : 게시판 내의 총 글의 개수     ***DB에서 값 받아 오는 값 / 레코드 개수를 불러오는 함수 부르기
+							// this.getArticleCount();
+		//int recordCountPerPage = 10; // 알아야할점 2 : 한페이지에서 몇개의 글을 보여줄 지 설정
+		//int naviCountPerPage = 10;   // 알아야할점 3 : 한페이지에서 몇개의 네비게이터를 보여줄 지 설정
+		int pageTotalCount = 0; // 총 몇개의 페이지 인가
+		
+		if(recordTotalCount % Configuration.recordCountPerPage > 0) {
+			//총 글의 개수를 페이지당 보여줄 개수로 나누었을때, 나머지가 생기면 총 페이지의 개수 +1을 한다.(143/10=15여야함)
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		}else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+		//int currentPage = 7; // 현재 내가 위치하는 페이지,클릭하면 서블릿한테 전송해서 dao로 받아야함.
+		
+		// 페이지 1이하 숫자가 나올수가 없음, 보안 강화 
+		if(currentPage < 1) { 
+			currentPage = 1;
+		}
+		else if(currentPage > pageTotalCount) {  // 현재 페이지 번호 비정상적인 숫자를 가질 때에 대한 보안 코드
+			currentPage = pageTotalCount;
+		}
+		
+		//현재 내가 위치하고 있는 페이지에 따라 네비게이터 시작 페이지 값을 구하는 공식
+		int startNavi = (currentPage - 1) / Configuration.naviCountPerPage * Configuration.naviCountPerPage + 1 ;
+		// (30-1) / 10 * 10 +1 = 21
+		int endNavi = startNavi + Configuration.naviCountPerPage - 1; // 21 + 10 -1 = 30
+		
+		// 페이지 끝 값이 비정상 값일 때 조정하는 보안 코드
+		if(endNavi > pageTotalCount) { 
+			endNavi = pageTotalCount;
+		}
+//		System.out.println("현재 페이지 번호 : " + currentPage);
+//		System.out.println("네비게이터 시작 번호 : " + startNavi);
+//		System.out.println("네비게이터 끝 번호 : " + endNavi);
+		
+		//아래(StringBuilder)랑 같은 코드
+//		String navi ="";
+//		for(int i = startNavi; i<=endNavi; i++) {
+//			navi += i + " ";
+//		}
+//		System.out.println(navi);
+		
+		boolean needPrev = true; // 이전이 필요한가
+		boolean needNext = true; // 다음이 필요한가
+		
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+		StringBuilder sb = new StringBuilder(); // 문자열 연결할때 플러스말고 세련되게 하기. ( 클래스로 만들어둠 )
+		if(needPrev) {sb.append("<a href='buylist.buy?cpage="+(startNavi-1)+"'> < </a>");};
+		for(int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='page' href='buylist.buy?cpage="+i+"'>");
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if(needNext) {sb.append("<a class='page' href='buylist.buy?cpage="+(endNavi+1)+"'> > </a>");};
+		return sb.toString();
+	//------페이지 내비게이터
 	}
 
 }
