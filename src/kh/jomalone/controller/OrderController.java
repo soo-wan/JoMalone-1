@@ -42,9 +42,9 @@ public class OrderController extends HttpServlet {
 				int seq=0;
 				while(m.find()) {
 					seq = Integer.parseInt(m.group());
-					dao.deleteCart(seq);
+					dao.deleteCart(seq);	
 				}
-				response.sendRedirect("list.ca");
+				response.sendRedirect("Product/order.jsp");
 			}
 			
 			// 전체 주문
@@ -57,26 +57,36 @@ public class OrderController extends HttpServlet {
 			
 			// 선택 주문
 			else if(cmd.contentEquals("/orderSelect.or")) { 
-				String[] seqs = request.getParameterValues("seq");
-				for (int i = 0;  i < seqs.length; i++) {
-					System.out.println(seqs[i]);
-				}
-				seqs[0]=seqs[0].replaceAll("\"", "");
-				String regex = "(\\d+)"; 
-				Pattern p = Pattern.compile(regex);
-				Matcher m = p.matcher(seqs[0]);
+//				String check = request.getParameter("checkReal2");
+//				System.out.println(check);
+//				if(check==null) {
+//					System.out.println("장바구니에 상품없음");
+//				}
+				String[] seqs = request.getParameterValues("checks");
+				if(seqs==null) {
+					System.out.println("없어");
+				}else {
 				int seq=0;
 				List<CartDTO> list = new ArrayList<>();
-				while(m.find()) {
-					seq = Integer.parseInt(m.group());
-					//System.out.println(seq);
-					CartDTO listSelect = dao.selectOrder(seq);
-					list.add(listSelect);
+				for (int i = 0;  i < seqs.length; i++) {
+					System.out.println(seqs[i]);
+					int seqInt = Integer.parseInt(seqs[i]);
+					list.add(dao.selectOrder(seqInt));
 				}
+//				seqs[0]=seqs[0].replaceAll("\"", "");
+//				String regex = "(\\d+)"; 
+//				Pattern p = Pattern.compile(regex);
+//				Matcher m = p.matcher(seqs[0]);
+//				while(m.find()) {
+//					seq = Integer.parseInt(m.group());
+//					//System.out.println(seq);
+//					CartDTO listSelect = dao.selectOrder(seq);
+//					list.add(listSelect);
+//				}
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/order.jsp").forward(request, response);		
 			}
-			
+			}
 			//회원정보 일치
 			else if(cmd.contentEquals("/memberSame.or")) { 
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");

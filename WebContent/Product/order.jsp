@@ -410,7 +410,7 @@
 							}
 						}).done(function(data){
 							console.log("왔음");
-							location.href="list.ca";
+							location.href="Product/order.jsp";
 						}).fail(function(){
 							console.log("실패");
 						});

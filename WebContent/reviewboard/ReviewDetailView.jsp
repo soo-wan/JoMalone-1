@@ -111,7 +111,7 @@
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="게시글신고" id="toReport"> <input
-					type="button" value="리뷰목록" id="toMain">
+					type="button" value="목록" id="toMain">
 				<c:choose>
 					<c:when test="${sessionScope.loginInfo == readDTO.mem_id}">
 						<input type="button" value="수정" id="toModify">
@@ -124,6 +124,7 @@
 	</div>
 
 	<script>
+	
 		$(".star_rating a:nth-child(${readDTO.grade})").prevAll("a").addClass("on");
 		$(".star_rating a:nth-child(${readDTO.grade})").addClass("on");
 		$("#toMain").on("click", function() {

@@ -125,22 +125,32 @@ public class buyController extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
-					System.out.println(dto.getDate());
+					cdao.deleteOrderByProdName(dto.getProd_name());
+				}
+				request.setAttribute("list",list);
+				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
+			}else if(cmd.contentEquals("/search.buy")){
+				BuyDAO bdao = BuyDAO.getInstance();
+				CartDAO cdao = CartDAO.getInstance();
+				
+				
+				List<OrderListDTO> list = new ArrayList<>();
+				System.out.println("도착!");
+				int period = Integer.parseInt(request.getParameter("period"));
+				String id = (String)request.getSession().getAttribute("loginInfo");
+				System.out.println( period +" : " + id);
+				list = bdao.selectBuyListByPeriod(id,period);
+				
+				
+				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
+				for (OrderListDTO dto : list) {
+					dto.setDate(sdf.format(dto.getOrder_date()));;
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
 				
 				
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
-				
-//				Gson gson = new Gson();
-//				JsonObject object = new JsonObject();
-//				object.addProperty("pg", pg);
-//				
-//				
-//				String Json = gson.toJson(object);
-//				System.out.println(Json + "과같이 정보담기 완료");
-//				response.getWriter().append(Json);
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");

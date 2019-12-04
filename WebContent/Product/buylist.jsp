@@ -47,9 +47,9 @@
 			  </li>
 			</ul>
 			<input id="first" class="date" type="button" value="오늘">
-			<input class="date" type="button" value="일주일">
-			<input class="date" type="button" value="1개월">
-			<input class="date" type="button" value="3개월">
+			<input id="second" class="date" type="button" value="일주일">
+			<input id="third"class="date" type="button" value="1개월">
+			<input id="four"class="date" type="button" value="3개월">
 			<input id="last" class="date" type="button" value="6개월">
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="korea" role="tabpanel">
@@ -113,7 +113,21 @@
 
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false" />
 	<script>
-		
+		$("#first").on("click",function(){
+			location.href= "search.buy?period=0"
+		});
+		$("#second").on("click",function(){
+			location.href= "search.buy?period=7"
+		});
+		$("#third").on("click",function(){
+			location.href= "search.buy?period=30"
+		});
+		$("#four").on("click",function(){
+			location.href= "search.buy?period=90"
+		});
+		$("#last").on("click",function(){
+			location.href= "search.buy?period=180"
+		});
 	</script>
 </body>
 </html>

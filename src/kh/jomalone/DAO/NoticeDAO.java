@@ -9,7 +9,6 @@ import java.util.List;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import kh.jomalone.DTO.NoticeDTO;
-import kh.jomalone.DTO.ReportDTO;
 import kh.jomalone.configuration.Configuration;
 
 public class NoticeDAO {
@@ -115,7 +114,7 @@ public class NoticeDAO {
 	}
 	
 	public int insertNotice(NoticeDTO dto) throws Exception{
-		String sql = "insert into noticeboard values(notice_seq.nextval,?,?,sysdate,'N')";
+		String sql = "insert into noticeboard values(notice_seq.nextval,?,?,sysdate)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getTitle());
 			pstat.setString(2, dto.getContents());
@@ -131,7 +130,7 @@ public class NoticeDAO {
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getTitle());
 			pstat.setString(2, dto.getContents());
-			pstat.setInt(4, dto.getNotice_seq());
+			pstat.setInt(3, dto.getNotice_seq());
 			
 			int result = pstat.executeUpdate();
 			con.commit();
@@ -188,6 +187,19 @@ public class NoticeDAO {
 			int result = 0;
 			if(rs.next()) {
 				result=rs.getInt(1);
+			}return result;
+		}
+	}
+	
+	public List<NoticeDTO> latestNotices() throws Exception{
+		String sql = "SELECT title,notice_seq FROM noticeboard WHERE ROWNUM <= 4 order by notice_seq desc";
+		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);ResultSet rs = pstat.executeQuery();) {
+			List<NoticeDTO> result = new ArrayList<>();
+			while(rs.next()) {
+				NoticeDTO dto = new NoticeDTO();
+				dto.setTitle(rs.getString("title"));
+				dto.setNotice_seq(rs.getInt("notice_seq"));
+				result.add(dto);
 			}return result;
 		}
 	}
