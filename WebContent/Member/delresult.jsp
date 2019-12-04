@@ -11,13 +11,13 @@
 <c:choose>
 <c:when test="${result >0 }">
 <script>
-alert("탈퇴되었습니다.");
+alert("정상적으로 탈퇴되었습니다.");
 location.href="${pageContext.request.contextPath}/home.jsp"
 </script>
 </c:when>
 <c:otherwise>
 <script>
-alert("비밀번호가 일치하지않습니다.");
+alert("비밀번호가 일치하지 않습니다.");
 history.back()
 </script>
 </c:otherwise>

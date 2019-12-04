@@ -18,18 +18,6 @@
 		<div id="profile" class="container">
 			<div id="profile-title" class="row"><h4>MY PROFILE</h4></div>
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
 			<div id="modify-btn" class="">
 				<input id="profile-modi" type="button" value="modify">
 				<input id="profile-re" type="button" value="backward">

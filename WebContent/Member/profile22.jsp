@@ -108,9 +108,9 @@
       <c:choose>
       <c:when test="${dto.logintype == 'normal' }">
       <div class="modal-body">
-      탈퇴하시겠습니까?<br>
-        비빌번호를 입력해주세요<br>
-        <input type="password" placeholder="비밀번호입력" id="pw" name="pw">
+	    탈퇴하시겠습니까?<br>
+	    비빌번호를 입력해주세요.<br><br>
+      <input type="password" placeholder="비밀번호입력" id="pw" name="pw" style="text-align: center;">
       </div>
       </c:when>
       <c:otherwise>
