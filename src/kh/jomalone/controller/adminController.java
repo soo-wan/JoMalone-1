@@ -234,24 +234,24 @@ public class adminController extends HttpServlet {
 				}				
 			
 			//여기서부터 front쪽	
-			}else if(cmd.contentEquals("/prodPerCategory.admini")) {
-				String category = request.getParameter("category");
-				List<ProductDTO> list = dao.productListPerCategory(category);
-				request.setAttribute("list", list);
-				
-				if(category.contentEquals("Citrus")) {
-					request.getRequestDispatcher("/adminFront/prodPerCategory.jsp").forward(request, response);
-				}else if(category.contentEquals("Fruits")) {
-					request.getRequestDispatcher("").forward(request, response);
-				}else if(category.contentEquals("Woody")) {
-					request.getRequestDispatcher("").forward(request, response);
-				}else if(category.contentEquals("Spicy")) {
-					request.getRequestDispatcher("").forward(request, response);
-				}else if(category.contentEquals("Floral")) {
-					request.getRequestDispatcher("").forward(request, response);
-				}else if(category.contentEquals("Light Floral")) {
-					request.getRequestDispatcher("").forward(request, response);
-				}
+//			}else if(cmd.contentEquals("/prodPerCategory.admini")) {
+//				String category = request.getParameter("category");
+//				List<ProductDTO> list = dao.productListPerCategory(category);
+//				request.setAttribute("list", list);
+//				
+//				if(category.contentEquals("Citrus")) {
+//					request.getRequestDispatcher("/adminFront/prodPerCategory.jsp").forward(request, response);
+//				}else if(category.contentEquals("Fruits")) {
+//					request.getRequestDispatcher("").forward(request, response);
+//				}else if(category.contentEquals("Woody")) {
+//					request.getRequestDispatcher("").forward(request, response);
+//				}else if(category.contentEquals("Spicy")) {
+//					request.getRequestDispatcher("").forward(request, response);
+//				}else if(category.contentEquals("Floral")) {
+//					request.getRequestDispatcher("").forward(request, response);
+//				}else if(category.contentEquals("Light Floral")) {
+//					request.getRequestDispatcher("").forward(request, response);
+//				}
 				
 			}else if(cmd.contentEquals("/eachProduct.admini")) {
 				String productCode = request.getParameter("productCode");

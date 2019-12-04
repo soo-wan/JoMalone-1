@@ -41,6 +41,10 @@
 		$(".look").on("click", function() {
 			location.href = "/JoMalone/Goods/goods_detail.jsp";
 		})
+		
+		$("button").on("click",function(){
+			location.href = "/JoMalone/eachProduct.admini?productCode=Wo003";
+		})
 	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
