@@ -64,10 +64,8 @@ public class CartController extends HttpServlet {
 			else if(cmd.contentEquals("/delete.ca")) {
 				//PrintWriter pwr = response.getWriter();
 				String seqString = request.getParameter("seq");
-				System.out.println(seqString);
 				seqString = seqString.substring(5);
 				int seq = Integer.parseInt(seqString);
-				System.out.println(seq);
 				List<Integer> list = new ArrayList<>();
 				list.add(seq);
 				for(int i : list) {
