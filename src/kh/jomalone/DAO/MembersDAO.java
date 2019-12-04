@@ -280,13 +280,14 @@ public class MembersDAO {
 		}
 	}
 	//존재하는 이메일인가?
-	public boolean isEmailExist(String email)throws Exception {
-		String sql = "select * from members where mem_email = ?";
+	public boolean isEmailExist(String email, String id)throws Exception {
+		String sql = "select * from members where mem_email = ? and mem_id = ?";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);
 				){
 			pstat.setString(1, email);
+			pstat.setString(2, id);
 			
 			try(
 					ResultSet rs = pstat.executeQuery();

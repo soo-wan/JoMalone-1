@@ -14,21 +14,17 @@
 
 <style>
 
-       .Menu:hover{
-            background-color: red;
-        }
-
-        table,tr,th,td{
-            border:1px solid black;
-        }
-        tr{
-        background-color:#e3e3e3;
-        }
-      	table{
-      		width:1500px;
-      		margin:auto;
-      	text-align:center;
-      	}
+ 	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+    #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
+    padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
+    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
+    
+    .Wrap{height:800px;  width:200px; margin:0px; float:left; }
+    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
+    }
+    .menu>a{text-decoration: none; color:white;}
+    #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
+    
        #container{
        	height:800px;
      	width:1300px;
@@ -37,15 +33,6 @@
      	overflow-x:scroll;
      	border:1px solid black;
        }
-  
-	#sidebar{ float:left; width:150px; margin:0px; padding:0px; }
-    #sidebar .menu{ list-style-type: none; text-align: right; margin:15px 0px; color:#1e2d47; width:100%;}
-    .menu{height:30px; width:100%;}
-    .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-    h4{margin:0px; padding:20px 10px; text-align: right; font-size: 20px;  }
-    .menu>a{text-decoration: none; color:#1e2d47}
-    
-    #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
 </style>
 </head>
 <body>
