@@ -91,7 +91,7 @@
             <th>블랙날짜</th>
         </tr>
         <c:choose>
-        <c:when  test="${AdminId == null }">
+        <c:when  test="${adminId == null }">
         <tr class="contents">
         <td colspan=14>정보가 없습니다.
         </tr>
