@@ -36,8 +36,8 @@ public class loginController extends HttpServlet {
 				//아이디,패스워드 맞으면 로그인.하고 ajax
 				if(result) {
 					if(id.contentEquals("admin1")) {
-						request.getSession().setAttribute("AdminId", id);
-						String adminid = (String)request.getSession().getAttribute("AdminId");
+						request.getSession().setAttribute("adminId", id);
+						String adminid = (String)request.getSession().getAttribute("adminId");
 						MembersDTO dto = dao.selectById(adminid);
 						dao.lastlogin(id);
 						String name = dto.getName();

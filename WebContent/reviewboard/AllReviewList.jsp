@@ -134,7 +134,6 @@ a:hover {
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="메인으로" id="toIndex">
-				<input type="button" value="관리자페이지로" id="toAdminPage">
 			</div>
 		</div>
 	</div>
@@ -142,13 +141,10 @@ a:hover {
 
 	<script>
 		$("#toIndex").on("click", function() {
-			location.href = "home.jsp";
+			location.href = "index.jsp";
 		});
 		$("#toSearch").on("click", function(){
 			$("#searchFrm").submit();
-		});
-		$("#toAdminPage").on("click",function(){
-			location.href="";
 		});
 	</script>
 </body>

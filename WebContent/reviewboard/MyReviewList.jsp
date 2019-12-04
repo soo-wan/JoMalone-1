@@ -162,7 +162,6 @@ a:hover {
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="메인으로" id="toIndex">
-				<input type="button" value="마이페이지" id="toMyPage">
 			</div>
 		</div>
 	</div>
@@ -170,20 +169,18 @@ a:hover {
 
 	<script>
 	var blindCheck = "${blind}";
+	
 	if(blindCheck!=""){
 		alert("해당 리뷰는 신고 접수되어 블라인드처리되었습니다.");		
 	}
 	
 	$('#myModal').show();
     $("#closeBtn").on("click",function(){
-        $('#myModal').hide();
+        $('#myModal').hide();        
     });
    
 	$("#toIndex").on("click", function() {
-		location.href = "home.jsp";
-	});
-	$("#toMyPage").on("click", function(){
-		location.href = "Member/mypage.jsp";
+		location.href = "index.jsp";
 	});
 	$("#toSearch").on("click", function(){
 		$("#searchFrm").submit();
