@@ -31,22 +31,21 @@
 		</div>
 		
 		<div class="row" style="margin-bottom: 130px; border: 1px solid green;">
-
+			<c:forEach items="${list}" var="dto">
 				<div style="margin: 10px auto 20px auto; width: 300px; height: 300px; border: 1px solid red; text-align: center;">
 					<img src="/JoMalone/Resource/img/Ci001.jpg">
 					<h5 style="margin: 10px 0px 10px 0px; font-size: 17px;">라임 바질 앤 만다린 코롱</h5>
 					<h6 style="margin: 5px 0px 5px 0px; font-size: 14px;">$94,000 - $188,000</h6>
-					<button class =look type=button onclick="function(){alert(asdf);}">자세히보기</button>
-
+					<button class =look type=button onclick="toDetail()">자세히보기</button>
 				</div>
-					
-
-			
+			</c:forEach>
 		</div>
 	</div>
 	
 	<script>
-		
+		function toDetail(seq){
+			location.href="address?seq="+seq;
+		}
 	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>

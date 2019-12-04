@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/JoMalone/Resource/css/buylist.css">
 <style>
 	*{font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
-	#writereview{background-color:black; color:white;}
+	#writereview,#refund{background-color:black; color:white;}
 	#writeA:visited, #writeA:link{color:white;}
 	#cjInfo:hover{color:red;}
 	#writereview:hover{color:red;}
@@ -53,15 +53,16 @@
 			<input id="last" class="date" type="button" value="6개월">
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="korea" role="tabpanel">
+					
 					<table class="cart-table">
-						<tr
-							style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
+						<tr	style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 			  	  		<td style="width: 130px;">주문날짜
 			  	  		<td style="width: 200px;">상품이미지
 			  	  		<td style="width: 330px;">상품명
 			  	  		<td style="width: 130px;">수량
 			  	  		<td style="width: 130px;">가격
-			  	  		<td>배송상태
+			  	  		<td style="width: 130px;">배송상태
+			  	  		<td style="width: 130px;">기타
 						</tr>
 						<c:choose>
 							<c:when test="${fn:length(list) == 0}">
@@ -79,8 +80,9 @@
 										<td style="width: 100px;">${dto.prod_quantity}
 										<td style="width: 130px;">${dto.price }
 										<td style="width: 160px;">CJ 대한통운 <br>
-										
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
+										<td style="width: 160px;">
+										<button id=refund onclick="refund(${dto.order_seq})">환불하기 </button>
 										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}" id="writeA">리뷰쓰기</a></button>
 									</tr>
 								</c:forEach>
@@ -101,7 +103,7 @@
 						</tr>
 						<tr>
 							<td colspan="7"
-								style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">취소/반품/교환
+								style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">취소/반품
 								내역이 없습니다.
 						</tr>
 					</table>
@@ -128,6 +130,9 @@
 		$("#last").on("click",function(){
 			location.href= "search.buy?period=180"
 		});
+		function refund(order_seq){
+			location.href= "${pageContext.request.contextPath}/refund.buy";
+		}
 	</script>
 </body>
 </html>

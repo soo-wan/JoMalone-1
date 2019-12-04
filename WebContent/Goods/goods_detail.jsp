@@ -65,13 +65,20 @@
 	
 	<script>
 	    $("#btnCart").on("click",function(){
-	    	var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
-	        if(cf){
-	        	$("#frm").submit();
-	        }
-	        else{
-	        	 return false;
-	        }
+	    	$("#frm").submit();
+	    	$.ajax({
+	    		url:"../insert.ca",
+	    		type:"post",
+	    		data:{}
+	    	}).done(function(){
+	    		var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
+		        if(cf){
+		        	location.href="${pageContext.request.contextPath}/list.ca";
+		        }
+		        else{
+		        	location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
+		        }
+	    	})
 	    })
 	</script>
 </body>
