@@ -10,6 +10,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
+import kh.jomalone.DTO.RankDTO;
 import kh.jomalone.configuration.Configuration;
 
 public class BuyDAO {
@@ -89,6 +90,19 @@ public class BuyDAO {
 			}
 		}
 		return maxSeq;
+	}
+	
+	public List<RankDTO> selectBuyRank() throws Exception {
+		List<RankDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select sum(prod_quantity) as quantity,prod_name from order_list group by prod_name order by 1 desc;")) {
+			try (ResultSet rs = pstat.executeQuery()) {
+				if (rs.next()) {
+					list.add(new RankDTO(rs.getInt(1),rs.getString(2)));
+				}
+			}
+		}
+		return list;
 	}
 
 	public List<OrderListDTO> selectBuyListByID(String id) throws Exception {
