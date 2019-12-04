@@ -42,6 +42,7 @@ public class loginController extends HttpServlet {
 						dao.lastlogin(id);
 						String name = dto.getName();
 						request.getSession().setAttribute("name", name);
+						System.out.println("관리자 : " + id + name);
 					}
 					else{
 						request.getSession().setAttribute("loginInfo", id);
@@ -50,6 +51,7 @@ public class loginController extends HttpServlet {
 						dao.lastlogin(id);
 						String name = dto.getName();
 						request.getSession().setAttribute("name", name);
+						System.out.println("일반인 : " + id + name);
 					}
 						
 						response.getWriter().append("{\"result\" : \""+result+ "\"  , \"id\" : \""+ id +"\"}");

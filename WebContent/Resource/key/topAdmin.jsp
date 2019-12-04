@@ -56,7 +56,7 @@
 				<h1>Jo Malone</h1>
 				<h5>관 리 자</h5>
 			</div>
-			<div class="who">${sessionScope.AdminId}님  
+			<div class="who">${name}님  
               <div class="who"><button id="logoutBtn" >로그아웃</button></div>
 			</div>
         </div>     
