@@ -37,8 +37,7 @@ public class AskBoardController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 
 		String id = (String) request.getSession().getAttribute("loginInfo");
-		AskDAO dao = AskDAO.getInstance();
-		Util u = new Util();
+		AskDAO dao = AskDAO.getInstance();		
 		
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
 			try {
@@ -202,8 +201,10 @@ public class AskBoardController extends HttpServlet {
 		} else if (cmd.contentEquals("/writeComment.ask")) {// 댓글작성 ajax
 			int originSeq = Integer.parseInt(request.getParameter("writingSeq"));
 			//String contents = request.getParameter("contents");
-			String contents = u.ProtectXSS(request.getParameter("contents"));
+			String contents = Util.ProtectXSS(request.getParameter("contents"));
 			String emailOk = request.getParameter("emailOk");
+			
+			System.out.println(originSeq+":"+contents+":"+emailOk);
 			PrintWriter pWriter = response.getWriter();
 			try {
 				dao.insertAskComment(new AskCommentsDTO(0,originSeq,contents,null));

@@ -59,9 +59,9 @@
 			    <li class="menu"><a href="list.notice">공지</a></li>
 			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
 			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
-                <li class="menu"><a href="#">신규 신고글</a></li>
-                <li class="menu"><a href="#">전체 신고글</a></li>
-                <li class="menu"><a href="#">리뷰</a></li>
+                <li class="menu"><a href="newList.report">신규 신고글</a></li>
+                <li class="menu"><a href="allList.report">전체 신고글</a></li>
+                <li class="menu"><a href="allList.review">리뷰</a></li>
 			</ul>
       </div>
 	<c:choose>
@@ -123,6 +123,9 @@
 	<script>
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
+		});
+		$("#toAdminPage").on("click", function() {
+			location.href = "/JoMalone/admin.jsp";//관리자페이지메인
 		});
 	</script>
 	
