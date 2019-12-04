@@ -36,21 +36,14 @@
 <jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
 <div id="wrapper">
 	<div class=Wrap>
-		<h4>상품관리</h4>
+		<h4>배송관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="${pageContext.request.contextPath}/adminBack/insertProduct.jsp">상품등록</a></li>
-                <li class="menu"><a href="${pageContext.request.contextPath}/productList.admini">상품 수정/삭제</a></li>
-                <li class="menu"><a href="${pageContext.request.contextPath}/adminBack/insertDetail.jsp">상세 정보 등록</a></li>
-                <li class="menu"><a href="${pageContext.request.contextPath}/detailBoard.admini">상세 정보 수정</a></li>
+			    <li class="menu"><a href="${pageContext.request.contextPath}/orderManagement.admini">배송관리</a></li>
 			</ul>
       </div>
 	<div id="container">
-	                
-	                
- 
- 			 
- 			 
- 			 
+	
+ 			
  			 
     </div>
     </div>
