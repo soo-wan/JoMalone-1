@@ -208,9 +208,9 @@ public class BuyDAO {
 		if(endNavi > pageTotalCount) { 
 			endNavi = pageTotalCount;
 		}
-		System.out.println("현재 페이지 번호 : " + currentPage);
-		System.out.println("네비게이터 시작 번호 : " + startNavi);
-		System.out.println("네비게이터 끝 번호 : " + endNavi);
+//		System.out.println("현재 페이지 번호 : " + currentPage);
+//		System.out.println("네비게이터 시작 번호 : " + startNavi);
+//		System.out.println("네비게이터 끝 번호 : " + endNavi);
 		
 		//아래(StringBuilder)랑 같은 코드
 //		String navi ="";
