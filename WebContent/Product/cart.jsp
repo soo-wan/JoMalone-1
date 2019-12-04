@@ -17,6 +17,7 @@
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 
+<form action="orderSelect.or" method="post" id="frm">
 	<div id="cart-page" class="container">
 		<div id="cart-title" class="row"><h4>장바구니</h4></div>
 		<div id="cart-list" class="row">
@@ -46,27 +47,32 @@
 			  	  		<td style="width: 130px;">배송비
 			  	  		<td>총 가격
 			  	  	</tr>
-			  	  	<c:choose>
-			  	  		<c:when test="${list.size() == 0}">
-				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
-				  	  	</tr>
-						</c:when>
-					<c:otherwise>
-					<c:forEach items="${list}" var="dto">
-						<tr class="my-item">
-				  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" class="delcheck" data-cartNum="${dto.seq}">
-				  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
-				  	  		<td style="width: 400px;">${dto.prod_name}
-				  	  		<td style="width: 130px;">${dto.price} 		
-				  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
-				  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
-				  	  		<td style="width: 130px;">20
-				  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
-							<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>	
-				  	  	</tr>
-				  	</c:forEach>
-					</c:otherwise>
-			  	  	</c:choose>
+			  	  	
+				  	  	<c:choose>
+				  	  		<c:when test="${list.size() == 0}">
+				  	  		<tr>
+					  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
+					  	  		<input type=hidden name="checkReal2" value="check">
+					  	  	</tr>
+							</c:when>
+						<c:otherwise>
+						<c:forEach items="${list}" var="dto">
+							<tr class="my-item" id="listVal">
+					  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" value="${dto.seq}" class="delcheck" data-cartNum="${dto.seq}">
+					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+					  	  		<td style="width: 400px;">${dto.prod_name}
+					  	  		<td style="width: 130px;">${dto.price} 		
+					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
+					  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
+					  	  		<td style="width: 130px;">20
+					  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
+								<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>
+								<input type=hidden name="checkReal" value="check">	
+					  	  	</tr>
+					  	</c:forEach>
+						</c:otherwise>
+				  	  	</c:choose>
+			
 			  	  </table>
 			    </div>
 			    <div class="tab-pane fade" id="country" role="tabpanel">
@@ -136,7 +142,7 @@
 			</div>
 		</div>
 	</div>
-	
+	  	  	</form>
 	<script>
 		$(".select-btn").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/Product/order.jsp";
@@ -190,29 +196,36 @@
 //		});
 		
 		//마지막 최종 소스 // 배열로 컨트롤러로 보내기, 그냥 하면 안보내짐
-		$("#check-btn").on("click",function(){ // 선택 체크 삭제 최종 
-			if(confirm("선택 상품을 삭제하시겠습니까?")){
-	                var checkArr = new Array();
-	                $("input[name='checks']:checked").each(function(){
-	                    checkArr.push($(this).attr("data-cartNum"));
-	                });
-	                	console.log(checkArr);
-						$.ajax({
-							url:"deletes.ca",
-							type:"post",		
-							data:{
-								seq:JSON.stringify(checkArr) 
-							}
-						}).done(function(data){
-							console.log("왔음");
-							location.href="list.ca";
-						}).fail(function(){
-							console.log("실패");
-						});
-				}
+		$("#check-btn").on("click",function(){ // 선택 체크 삭제 최종
+			var listSize = '${list.size()}';
+			if(listSize==0){
+				alert("장바구니에 담긴 상품이 없습니다.");
+				return false;
+			}
 			else{
-	            return false;
-	        }
+					if(confirm("선택 상품을 삭제하시겠습니까?")){
+		                var checkArr = new Array();
+		                $("input[name='checks']:checked").each(function(){
+		                    checkArr.push($(this).attr("data-cartNum"));
+		                });
+		                	console.log(checkArr);
+							$.ajax({
+								url:"deletes.ca",
+								type:"post",		
+								data:{
+									seq:JSON.stringify(checkArr) 
+								}
+							}).done(function(data){
+								console.log("왔음");
+								location.href="list.ca";
+							}).fail(function(){
+								console.log("실패");
+							});
+					}
+				else{
+		            return false;
+		        }
+			}
 		});
 		
 //        $("#check-btn").on("click",function(){
@@ -240,31 +253,72 @@
 //         });
 		
         $("#all-btn").on("click",function(){
-        	if(confirm("정말로 전체 삭제하시겠습니까?")){
-            	location.href="deleteAll.ca";
-        	}
+			var listSize = '${list.size()}';
+			if(listSize==0){
+				alert("장바구니에 담긴 상품이 없습니다.");
+				return false;
+			}
+			else{
+	        	if(confirm("정말로 전체 삭제하시겠습니까?")){
+	            	location.href="deleteAll.ca";
+	        	}
+			}
         })
         
-       $("#selectOrder").on("click",function(){   
-			if(confirm("선택 상품을 주문하시겠습니까?")){
-	                var checkArr = new Array();
-	                $("input[name='checks']:checked").each(function(){
-	                    checkArr.push($(this).attr("data-cartNum"));
-	                });
-	       			location.href="orderSelect.or?seq="+checkArr;
-				}
+       $("#selectOrder").on("click",function(){
+			/*
+    	   var listSize = '${list.size()}';
+			console.log(listSize);
+			if(listSize==0){
+				console.log("하기전");
+				alert("장바구니에 담긴 상품이 없습니다.");
+				console.log("확인1");
+				return false;
+			}
 			else{
-				location.href = "${pageContext.request.contextPath}/list.ca";
-	        }
+					if(confirm("선택 상품을 주문하시겠습니까?")){
+		                var checkArr = new Array();
+		                $("input[name='checks']:checked").each(function(){
+		                    checkArr.push($(this).attr("data-cartNum"));
+		                });
+		                $("#frm").submit();
+		               		 console.log("확인2");
+		               	 	//location.href="orderSelect.or?seq="+checkArr;
+					}
+				else{
+					location.href = "${pageContext.request.contextPath}/list.ca";
+		        }
+			}
+			*/
+			
+			var checkItem = $(".delcheck").prop("checked");
+			if(checkItem){
+				if(confirm("선택 상품을 주문하시겠습니까?")){
+					$("#frm").submit();
+				}else{
+					location.href = "${pageContext.request.contextPath}/list.ca";
+				}
+			}
+			else{
+					alert("선택된 상품이 없습니다.");
+					location.href = "${pageContext.request.contextPath}/list.ca";
+			}
 		});
         
        $("#allOrder").on("click",function(){
-        	if(confirm("전체 주문 하시겠습니까?")){
-            	location.href="orderAll.or";
-        	}
-        	else{
-        		location.href = "${pageContext.request.contextPath}/list.ca";
-        	}
+    	   var listSize = '${list.size()}';
+			if(listSize!=0){
+				if(confirm("전체 주문 하시겠습니까?")){
+		           	location.href="orderAll.or";
+		       	}
+		       	else{
+		       		location.href = "${pageContext.request.contextPath}/list.ca";
+		       	}
+			}
+			else{
+				alert("장바구니에 담긴 상품이 없습니다.");
+				location.href = "${pageContext.request.contextPath}/list.ca";
+			}
         })
 	</script>
 	
