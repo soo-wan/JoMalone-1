@@ -125,11 +125,8 @@ public class buyController extends HttpServlet {
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
-					System.out.println(dto.getDate());
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
-				
-				
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
 			}else if(cmd.contentEquals("/search.buy")){
@@ -139,16 +136,15 @@ public class buyController extends HttpServlet {
 				
 				List<OrderListDTO> list = new ArrayList<>();
 				System.out.println("도착!");
-				String period = request.getParameter("period");
+				int period = Integer.parseInt(request.getParameter("period"));
 				String id = (String)request.getSession().getAttribute("loginInfo");
-				
-				list = bdao.selectBuyListByID(id);
+				System.out.println( period +" : " + id);
+				list = bdao.selectBuyListByPeriod(id,period);
 				
 				
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
-					System.out.println(dto.getDate());
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
 				
