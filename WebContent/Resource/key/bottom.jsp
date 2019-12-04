@@ -29,7 +29,7 @@
 				<h5>게시판 상담</h5>
 				<h6>평일 09:00 ~ 18:00</h6>
 			</div>
-			<div id="latestNotices" class="col-3">
+			<div id="latestNotices" class="col-3" style="padding:20px;">
 				<h5>NOTICE</h5>
 				<hr>
 			</div>
@@ -68,7 +68,7 @@
     			data : {}
     		}).done(function(data){
     			if(data.length==0){
-    				$("#latestNotices").append('<p>최신 공지가 없습니다.</p><hr>');
+    				$("#latestNotices").append('<div><p>최신 공지가 없습니다.</p></div><hr>');
     			}else{
     			for(var i=0;i<data.length;i++){
     				var titleBox = '<div>'+'<a href="read.notice?no='+data[i].notice_seq+'">'+data[i].title+'</div>';
@@ -76,7 +76,7 @@
     			}$("#latestNotices").append('<hr>');
     			}
     		}).fail(function(data){
-    			$("#latestNotices").append('<p>최신 공지가 없습니다.</p><hr>');
+    			$("#latestNotices").append('<div><p>최신 공지가 없습니다.</p></div><hr>');
     		})   	
     	});
     </script>

@@ -16,20 +16,12 @@
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-	
-	
-=======
-<<<<<<< HEAD
+
 
 	<form action="../write.ask" method="post" id="writeFrm">
-=======
->>>>>>> 1a9c2a9478b2afc85afee57120e7e5a8d55398ef
-	<form action="../write.ask" method="post" id="writeFrm" enctype="multipart/form-data">
->>>>>>> 4b8f91bdc1fafc11a821fbe6c2f6c509b01eb849
-		<div class=container>
-			<div class="row" style="text-align: center;" id="headDiv">
-				<div class="col-12">1:1 문의글 작성</div>
+		<div id="write-page" class=container>
+			<div id="write-title" class="row">
+				<h4>1:1 ENQUIRY WRITE</h4>
 			</div>
 			<div class="row" id=askMenuBox>
 				<div class="col-12 p-0">

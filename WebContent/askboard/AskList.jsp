@@ -5,51 +5,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>문의글 목록</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<title>1:1 Enquiry | Jo Malone</title>
+<link rel="stylesheet" href="/JoMalone/Resource/css/enquiry.css">
 <style>
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;	
+	.article{padding-bottom: 10px;}
+	.article:hover{background-color: #cbe7ff90;}
+	.a:link{color: black;}
+	.a:visited{color: black;}
+	.a:hover{color: gray; text-decoration: none;}
 	
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-.article{
-	padding-bottom: 10px;
-}
-.article:hover{
-	background-color: #cbe7ff90;
-}
-a:link{
-	color: black;
-}
-a:visited{
-	color: #887f7f;
-}
-a:hover{
-	text-decoration: none;
-}
-
+	.b:link{color: black;}
+	.b:visited{color: black;}
+	.b:hover{color: gray;}
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 
 <body>
-	<div class=container>
-		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">1:1 문의</div>
+	<jsp:include page="/Resource/key/top.jsp" flush="true" />
+	
+	<div id="enquiry-page" class="container">
+		<div id="enquiry-title" class="row">
+			<h4>1:1 ENQUIRY</h4>
 		</div>
-		<div class="row" style="text-align: center;">
+		<div class="row" style="margin-top: 60px; text-align: center;">
 			<div class="col-3 d-none d-sm-block">문의종류</div>
 			<div class="col-7 d-none d-sm-block">제목</div>
 			<div class="col-2 d-none d-sm-block">날짜</div>
@@ -85,9 +64,9 @@ a:hover{
 		</div>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<input type="button" value="메인으로" id="toIndex"> 
-				<input type="button" value="마이페이지로" id="toMyPage">
-				<input type="button" value="글쓰기" id="toWrite">
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="Home" id="toIndex"></div> 
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="MyPage" id="toMyPage"></div>
+				<div style="float:right;"><input type="button" value="Write" id="toWrite"></div>
 			</div>
 		</div>
 	</div>
@@ -95,14 +74,17 @@ a:hover{
 
 	<script>
 		$("#toIndex").on("click", function() {
-			location.href = "index.jsp";
+			location.href = "/JoMalone/home.jsp";
 		});
+		
+		// 마이 페이지
 		$("#toMyPage").on("click", function() {
-			location.href = "";//마이페이지
+			location.href = "/JoMalone/Member/mypage.jsp";
 		});
 		$("#toWrite").on("click", function() {
-			location.href = "askboard/AskWrite.jsp";//일대일문의글쓰기 페이지
+			location.href = "/JoMalone/askboard/AskWriteCall.jsp";//일대일문의글쓰기 페이지
 		});
 	</script>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>

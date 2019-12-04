@@ -5,74 +5,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 문의글 보기</title>
+<title>Enquiry Detail | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-#contents {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	min-height: 500px;
-}
+	#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}
+	#coBtn {height: 93%; width: 100%;}
+	.commentBox { /*border-bottom: 1px solid #49498690;*/
+		border: 1px solid #49498660; padding-top: 15px; padding-bottom: 15px; margin-left: 10px; margin-right: 10px; margin-bottom: 2px;}
+	#toCoModify, #toCoDelete {font-size: 13px; line-height: 20px;}
+	#toCoModifyConfirm, #toCoModifyCancel {margin-top: 3.5px; width: 100%; height: 40%;	line-height: 30px;}
+	.coWritingDiv {padding-top: 20px;}
+	#emailCheck{font-size: 15px;}
 
-#coBtn {
-	height: 93%;
-	width: 100%;
-}
+	#detail-page {margin-top: 80px;}
 
-.commentBox {
-	/*border-bottom: 1px solid #49498690;*/
-	border: 1px solid #49498660;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 2px;
-}
-
-#toCoModify, #toCoDelete {
-	font-size: 13px;
-	line-height: 20px;
-}
-
-#toCoModifyConfirm, #toCoModifyCancel {
-	margin-top: 3.5px;
-	width: 100%;
-	height: 40%;
-	line-height: 30px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-
-.coWritingDiv {
-	padding-top: 20px;
-}
-#emailCheck{
-	font-size: 15px;
-}
+	#detail-title {margin-bottom: 30px; padding: 0px; height: 50px;}
+	#detail-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
-
-
 </head>
 <body>
+<jsp:include page="/Resource/key/top.jsp" flush="true" />
 
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
@@ -299,6 +256,7 @@
             });                    
 
         </script>
+        <jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>
 

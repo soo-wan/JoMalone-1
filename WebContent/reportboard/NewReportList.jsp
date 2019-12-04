@@ -5,41 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신규 신고 내역</title>
+<title>Admin | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;	
-	
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-.article{
-	padding-bottom: 10px;
-}
-.article:hover{
-	background-color: #cbe7ff90;
-}
-a:link{
-	color: black;
-}
-a:visited{
-	color: #887f7f;
-}
-a:hover{
-	text-decoration: none;
-}
+	#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
+	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
+	.article {padding-bottom: 10px;}
+	.article:hover {background-color: #cbe7ff90;}
+	a:link {color: black;}
+	a:visited {color: #887f7f;}
+	a:hover {text-decoration: none;}
 .naviBar{
 	font-size: 20px;
     word-spacing: 5px;
@@ -121,7 +98,7 @@ a:hover{
 			location.href = "index.jsp";
 		});
 		$("#toAdminPage").on("click", function() {
-			location.href = "";//관리자페이지메인
+			location.href = "/JoMalone/admin.jsp";//관리자페이지메인
 		});
 
 	</script>
