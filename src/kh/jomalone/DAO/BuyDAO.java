@@ -11,7 +11,7 @@ import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
 import kh.jomalone.DTO.RankDTO;
-import kh.jomalone.configuration.Configuration;
+import kh.jomalone.configuration.ConfigurationBuylist;
 
 public class BuyDAO {
 	private static BuyDAO instance;
@@ -140,14 +140,6 @@ public class BuyDAO {
 		return list;
 	}
 	
-	
-	
-	
-	
-	
-	
-
-	
 	public void updateBuyComplete(String merchant_uid) throws Exception{
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("update prod_buy set buy_success ='Y' where merchant_uid= ?"); 
@@ -185,18 +177,17 @@ public class BuyDAO {
 	//페이지 내비게이터
 	public String getPageNavi(int currentPage,String id) throws Exception {
 		//설정 값들은 지역변수로 말고 Static으로 만들어서 나중에 쓸때 쓰는게 좋다. 
-		
 		int recordTotalCount = this.selectBuyListByID(id).size();  // 알아야할점 1 : 게시판 내의 총 글의 개수     ***DB에서 값 받아 오는 값 / 레코드 개수를 불러오는 함수 부르기
 							// this.getArticleCount();
 		//int recordCountPerPage = 10; // 알아야할점 2 : 한페이지에서 몇개의 글을 보여줄 지 설정
 		//int naviCountPerPage = 10;   // 알아야할점 3 : 한페이지에서 몇개의 네비게이터를 보여줄 지 설정
 		int pageTotalCount = 0; // 총 몇개의 페이지 인가
 		
-		if(recordTotalCount % Configuration.recordCountPerPage > 0) {
+		if(recordTotalCount % ConfigurationBuylist.recordCountPerPage > 0) {
 			//총 글의 개수를 페이지당 보여줄 개수로 나누었을때, 나머지가 생기면 총 페이지의 개수 +1을 한다.(143/10=15여야함)
-			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+			pageTotalCount = recordTotalCount / ConfigurationBuylist.recordCountPerPage + 1;
 		}else {
-			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+			pageTotalCount = recordTotalCount / ConfigurationBuylist.recordCountPerPage;
 		}
 		//int currentPage = 7; // 현재 내가 위치하는 페이지,클릭하면 서블릿한테 전송해서 dao로 받아야함.
 		
@@ -209,17 +200,17 @@ public class BuyDAO {
 		}
 		
 		//현재 내가 위치하고 있는 페이지에 따라 네비게이터 시작 페이지 값을 구하는 공식
-		int startNavi = (currentPage - 1) / Configuration.naviCountPerPage * Configuration.naviCountPerPage + 1 ;
+		int startNavi = (currentPage - 1) / ConfigurationBuylist.naviCountPerPage * ConfigurationBuylist.naviCountPerPage + 1 ;
 		// (30-1) / 10 * 10 +1 = 21
-		int endNavi = startNavi + Configuration.naviCountPerPage - 1; // 21 + 10 -1 = 30
+		int endNavi = startNavi + ConfigurationBuylist.naviCountPerPage - 1; // 21 + 10 -1 = 30
 		
 		// 페이지 끝 값이 비정상 값일 때 조정하는 보안 코드
 		if(endNavi > pageTotalCount) { 
 			endNavi = pageTotalCount;
 		}
-//		System.out.println("현재 페이지 번호 : " + currentPage);
-//		System.out.println("네비게이터 시작 번호 : " + startNavi);
-//		System.out.println("네비게이터 끝 번호 : " + endNavi);
+		System.out.println("현재 페이지 번호 : " + currentPage);
+		System.out.println("네비게이터 시작 번호 : " + startNavi);
+		System.out.println("네비게이터 끝 번호 : " + endNavi);
 		
 		//아래(StringBuilder)랑 같은 코드
 //		String navi ="";
@@ -247,6 +238,27 @@ public class BuyDAO {
 		if(needNext) {sb.append("<a class='page' href='buylist.buy?cpage="+(endNavi+1)+"'> > </a>");};
 		return sb.toString();
 	//------페이지 내비게이터
+	}
+	
+	public List<OrderListDTO> selectByPage(String mem_id,int start,int end) throws Exception{
+		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
+				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and row_nb between ? and ?";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, mem_id);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<OrderListDTO> list = new ArrayList<>();
+				while (rs.next()) {
+					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
+							rs.getString(14), rs.getString(15), rs.getString(16)));
+				}
+				return list;
+			}
+		}
 	}
 
 }

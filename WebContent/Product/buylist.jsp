@@ -107,7 +107,7 @@
 					</table>
 				</div>
 			</div>
-			<div id="page-navi"></div>
+			<div id="page-navi" align="center">${pageNavi}</div>
 		</div>
 	</div>
 

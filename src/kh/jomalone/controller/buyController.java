@@ -20,10 +20,10 @@ import com.siot.IamportRestClient.response.Payment;
 
 import kh.jomalone.DAO.BuyDAO;
 import kh.jomalone.DAO.CartDAO;
-import kh.jomalone.DAO.CartDAO;
 import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
+import kh.jomalone.configuration.ConfigurationBuylist;
 
 @WebServlet("*.buy")
 public class buyController extends HttpServlet {
@@ -105,31 +105,32 @@ public class buyController extends HttpServlet {
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
-//				int cpage = 1;
-//				String page = request.getParameter("cpage");
-//				if(page != null) {
-//					cpage = Integer.parseInt(page);
-//				}
-//				String pageNavi = dao.getPageNavi(cpage);		
-//				
-//				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage-1);
-//				int end = cpage * Configuration.recordCountPerPage;
-//				List<BoardDTO> list = dao.selectByPage(start, end);
-				
 				BuyDAO bdao = BuyDAO.getInstance();
 				CartDAO cdao = CartDAO.getInstance();
-				List<OrderListDTO> list = new ArrayList<>();
-				System.out.println("도착!");
 				String id = (String)request.getSession().getAttribute("loginInfo");
-				list = bdao.selectBuyListByID(id);
+				int cpage = 1;
+				String page = request.getParameter("cpage");
+				if(page != null) {
+					cpage = Integer.parseInt(page);
+				}
+				String pageNavi = bdao.getPageNavi(cpage,id);		
+				
+				int start = cpage * ConfigurationBuylist.recordCountPerPage - (ConfigurationBuylist.recordCountPerPage-1);
+				int end = cpage * ConfigurationBuylist.recordCountPerPage;
+				
+				List<OrderListDTO> list = bdao.selectByPage(id,start, end);
+				
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
 				request.setAttribute("list",list);
+				request.setAttribute("pageNavi",pageNavi);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
-			}else if(cmd.contentEquals("/search.buy")){
+				
+			}
+			else if(cmd.contentEquals("/search.buy")){
 				BuyDAO bdao = BuyDAO.getInstance();
 				CartDAO cdao = CartDAO.getInstance();
 				
