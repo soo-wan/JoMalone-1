@@ -32,13 +32,13 @@ public class CartController extends HttpServlet {
 				String[] prod_quantityString = request.getParameterValues("prod_quantity");
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				String mem_name = (String)request.getSession().getAttribute("name"); 
-				//String mem_id = "test";
 				int seq = 0;
 				int price = 0;
 				int prod_quantity = 0 ;
 				List<CartDTO> list = new ArrayList<>();
 				for (int i = 0; i < priceString.length; i++) {
 					seq = Integer.parseInt(seqString[i]);
+					System.out.println(seq);
 					price = Integer.parseInt(priceString[i]);
 					prod_quantity = Integer.parseInt(prod_quantityString[i]);
 					CartDTO dto = new CartDTO(mem_id,seq,mem_name,prod_name[i],prod_quantity,price);				
@@ -55,7 +55,6 @@ public class CartController extends HttpServlet {
 			}
 			else if(cmd.contentEquals("/list.ca")) {
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
-				//String mem_id = "test"; 
 				List<CartDTO> list = dao.selectCart(mem_id); 
 				//int seq = dao.checkboxSeq(seq);
 				request.setAttribute("list",list);

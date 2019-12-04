@@ -59,7 +59,7 @@
 						<c:forEach items="${list}" var="dto">
 							<tr class="my-item" id="listVal">
 					  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" value="${dto.seq}" class="delcheck" data-cartNum="${dto.seq}">
-					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg">
+					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg"> <!-- 상품코드받기 -->
 					  	  		<td style="width: 400px;">${dto.prod_name}
 					  	  		<td style="width: 130px;">${dto.price} 		
 					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
@@ -266,31 +266,25 @@
         })
         
        $("#selectOrder").on("click",function(){
-			/*
     	   var listSize = '${list.size()}';
-			console.log(listSize);
-			if(listSize==0){
-				console.log("하기전");
-				alert("장바구니에 담긴 상품이 없습니다.");
-				console.log("확인1");
-				return false;
-			}
-			else{
+			if(listSize!=0){
 					if(confirm("선택 상품을 주문하시겠습니까?")){
 		                var checkArr = new Array();
 		                $("input[name='checks']:checked").each(function(){
 		                    checkArr.push($(this).attr("data-cartNum"));
 		                });
-		                $("#frm").submit();
-		               		 console.log("확인2");
-		               	 	//location.href="orderSelect.or?seq="+checkArr;
+		                //$("#frm").submit();
+		               	location.href="orderSelect.or?seq="+checkArr;
 					}
 				else{
 					location.href = "${pageContext.request.contextPath}/list.ca";
 		        }
 			}
-			*/
-			
+			else{
+				alert("장바구니에 담긴 상품이 없습니다.");
+				location.href = "${pageContext.request.contextPath}/list.ca";
+			}
+			/*
 			var checkItem = $(".delcheck").prop("checked");
 			if(checkItem){
 				if(confirm("선택 상품을 주문하시겠습니까?")){
@@ -303,6 +297,7 @@
 					alert("선택된 상품이 없습니다.");
 					location.href = "${pageContext.request.contextPath}/list.ca";
 			}
+			*/
 		});
         
        $("#allOrder").on("click",function(){
