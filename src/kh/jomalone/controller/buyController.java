@@ -71,7 +71,7 @@ public class buyController extends HttpServlet {
 				for (int i = 0; i < prod_names.length; i++) {
 					int price = Integer.parseInt(prices[i]);
 					int prod_quantity = Integer.parseInt(prod_quantitys[i]);
-					list.add(new OrderListDTO(0,null,merchant_uid,prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null,"N"));
+					list.add(new OrderListDTO(0,null,merchant_uid,prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null,"N",null));
 				}
 				bdao.insertOrderList(list);
 				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
@@ -96,10 +96,12 @@ public class buyController extends HttpServlet {
 				System.out.println("결제성공하고 controller 이동!");
 				String merchant_uid = request.getParameter("merchant_uid");
 				System.out.println(merchant_uid + "코드번호 ");
-				bdao.updateBuyComplete(merchant_uid);
+				String imp_uid = request.getParameter("imp_uid");
+				System.out.println("imp_uid :" + imp_uid);
+				bdao.updateBuyComplete(merchant_uid, imp_uid);
 				System.out.println("Y로 변경완료!");
-				
 				response.getWriter().append("{}");
+				
 			}else if(cmd.contentEquals("/buyFailed.buy")) {
 				BuyDAO bdao = BuyDAO.getInstance();
 				System.out.println("결제 실패 controller 이동!" );
@@ -166,9 +168,14 @@ public class buyController extends HttpServlet {
 				}
 			}else if(cmd.contentEquals("/partrefund.buy")){
 				System.out.println("refund arrive");
+				
+				String imp_uid = request.getParameter("imp_uid");
+				int price = Integer.parseInt(request.getParameter("price"));
+				int prod_quantity = Integer.parseInt(request.getParameter("prod_quantity"));
+				System.out.println(prod_quantity + " : " + price + " : " + imp_uid);
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
 				String test_already_cancelled_imp_uid = "imp_601383791362";
-				CancelData cancel_data = new CancelData(test_already_cancelled_imp_uid, true, BigDecimal.valueOf(100)); //imp_uid를 통한 500원 부분취소
+				CancelData cancel_data = new CancelData(test_already_cancelled_imp_uid, true, BigDecimal.valueOf(price*prod_quantity)); //imp_uid를 통한 500원 부분취소
 
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);

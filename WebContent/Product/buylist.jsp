@@ -82,7 +82,7 @@
 										<td style="width: 160px;">CJ 대한통운 <br>
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
 										<td style="width: 160px;">
-										<button id=refund onclick="refund(${dto.order_seq})">환불하기 </button>
+										<button id=refund onclick="refund( ${dto.imp_uid} , ${dto.price} , ${dto.prod_quantity} )">환불하기 </button>
 										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}" id="writeA">리뷰쓰기</a></button>
 									</tr>
 								</c:forEach>
@@ -130,8 +130,8 @@
 		$("#last").on("click",function(){
 			location.href= "search.buy?period=180"
 		});
-		function refund(order_seq){
-			location.href= "${pageContext.request.contextPath}/refund.buy";
+		function refund(imp_uid,price,prod_quantity){
+			location.href= "${pageContext.request.contextPath}/refund.buy?imp_uid ="+imp_uid+"&price="price+"&prod_quantity="+prod_quantity;
 		}
 	</script>
 </body>
