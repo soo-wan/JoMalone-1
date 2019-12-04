@@ -85,8 +85,9 @@ public class OrderController extends HttpServlet {
 //				}
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/order.jsp").forward(request, response);		
+				}
 			}
-			}
+
 			//회원정보 일치
 			else if(cmd.contentEquals("/memberSame.or")) { 
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
