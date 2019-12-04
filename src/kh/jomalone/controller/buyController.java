@@ -1,6 +1,9 @@
 package kh.jomalone.controller;
 
+import static org.junit.Assert.assertNull;
+
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,8 +136,6 @@ public class buyController extends HttpServlet {
 			else if(cmd.contentEquals("/search.buy")){
 				BuyDAO bdao = BuyDAO.getInstance();
 				CartDAO cdao = CartDAO.getInstance();
-				
-				
 				List<OrderListDTO> list = new ArrayList<>();
 				System.out.println("도착!");
 				int period = Integer.parseInt(request.getParameter("period"));
@@ -163,6 +164,22 @@ public class buyController extends HttpServlet {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+			}else if(cmd.contentEquals("/partrefund.buy")){
+				System.out.println("refund arrive");
+				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
+				String test_already_cancelled_imp_uid = "imp_601383791362";
+				CancelData cancel_data = new CancelData(test_already_cancelled_imp_uid, true, BigDecimal.valueOf(100)); //imp_uid를 통한 500원 부분취소
+
+				try {
+					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
+					
+					assertNull(payment_response.getResponse()); // 이미 취소된 거래는 response가 null이다
+					System.out.println(payment_response.getMessage());
+				}  catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

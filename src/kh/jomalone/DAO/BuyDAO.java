@@ -95,7 +95,7 @@ public class BuyDAO {
 	public List<RankDTO> selectBuyRank() throws Exception {
 		List<RankDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select sum(prod_quantity) as quantity,prod_name from order_list group by prod_name order by 1 desc;")) {
+				PreparedStatement pstat = con.prepareStatement("select sum(prod_quantity) as quantity,prod_name from order_list group by prod_name order by 1 desc")) {
 			try (ResultSet rs = pstat.executeQuery()) {
 				if (rs.next()) {
 					list.add(new RankDTO(rs.getInt(1),rs.getString(2)));
@@ -125,7 +125,7 @@ public class BuyDAO {
 	public List<OrderListDTO> selectBuyListByPeriod(String id,int period) throws Exception {
 		List<OrderListDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("SELECT * FROM order_list WHERE mem_id=? and buy_success='Y' and TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD')")) {
+				PreparedStatement pstat = con.prepareStatement("SELECT * FROM order_list WHERE mem_id=? and buy_success='Y' and TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD') AND refund='N'")) {
 			pstat.setString(1, id);
 			pstat.setInt(2, period);
 			try (ResultSet rs = pstat.executeQuery();) {
@@ -139,6 +139,25 @@ public class BuyDAO {
 		}
 		return list;
 	}
+	
+	public List<OrderListDTO> selectRefundListByID(String id) throws Exception {
+		List<OrderListDTO> list = new ArrayList<>();
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("SELECT * FROM order_list WHERE mem_id=? and buy_success='Y' (refund='Y' or refund='P')")) {
+			pstat.setString(1, id);
+			try (ResultSet rs = pstat.executeQuery();) {
+				while (rs.next()) {
+					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
+							rs.getString(14), rs.getString(15), rs.getString(16)));
+				}
+			}
+		}
+		return list;
+	}
+	
+	
 	
 	public void updateBuyComplete(String merchant_uid) throws Exception{
 		try (Connection con = this.getConnection();

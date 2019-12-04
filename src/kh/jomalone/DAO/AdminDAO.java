@@ -19,7 +19,7 @@ public class AdminDAO {
 	private BasicDataSource bds = new BasicDataSource(); 
 	private AdminDAO() {
 		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@192.168.60.20:1521:xe");
+		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
 		bds.setUsername("semitest");
 		bds.setPassword("semitest");
 		bds.setInitialSize(30); 

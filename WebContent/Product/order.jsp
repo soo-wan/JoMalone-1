@@ -217,7 +217,6 @@
 		</div>
 	</div>
 	</form>
-
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 	
 	<script>
