@@ -5,42 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체 구매 후기</title>
+<title>Admin Review | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-div{
-	font-size: 15px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-
-.article {
-	padding-bottom: 10px;
-}
-
-.article:hover {
-	background-color: #cbe7ff90;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
+	#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
+	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
+	.article {padding-bottom: 10px;}
+	.article:hover {background-color: #cbe7ff90;}	
+	a:link {color: black;}
+	a:visited {color: #887f7f;}
+	a:hover {text-decoration: none;}
 .naviBar {
 	font-size: 20px;
 	word-spacing: 5px;
@@ -141,7 +117,7 @@ a:hover {
 
 	<script>
 		$("#toIndex").on("click", function() {
-			location.href = "index.jsp";
+			location.href = "home.jsp";
 		});
 		$("#toSearch").on("click", function(){
 			$("#searchFrm").submit();

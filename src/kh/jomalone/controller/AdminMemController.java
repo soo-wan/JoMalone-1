@@ -24,7 +24,7 @@ public class AdminMemController extends HttpServlet {
 		
 		try {
 		if(cmd.contentEquals("/admin.mem")) {
-			String adminid = (String)request.getSession().getAttribute("AdminId");
+			String adminid = (String)request.getSession().getAttribute("adminId");
 			if(adminid != null) {
 				List<MembersDTO> list = dao.selectAll();
 				for(MembersDTO dto : list) {

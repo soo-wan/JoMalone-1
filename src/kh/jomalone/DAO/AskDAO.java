@@ -36,6 +36,8 @@ public class AskDAO {
 	}
 	
 	
+	
+	
 	public List<AskDTO> selectByPageNotYetAnswer(int start, int end) throws Exception{
 		String sql = "select * from (select askboard.*, row_number() over (order by ask_seq) article from askboard where answer_YN = 'N') where article between ? and ?";
 		try(
@@ -197,13 +199,13 @@ public class AskDAO {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		if(needPrev) {sb.append("<a class='b' href='"+linkURL+"?currentPage="+(startNavi-1)+"'></a>");}
+		if(needPrev) {sb.append("<a href='"+linkURL+"?currentPage="+(startNavi-1)+"'>< </a>");}
 		for(int i=startNavi;i<=endNavi;i++) {
-			sb.append("<a class='b' href='"+linkURL+"?currentPage="+i+"'>");
+			sb.append("<a href='"+linkURL+"?currentPage="+i+"'>");
 			sb.append(i);
-			sb.append("</a>");
+			sb.append("</a> ");
 		}
-		if(needNext) {sb.append("<a class='b' href='"+linkURL+"?currentPage="+(endNavi+1)+"'></a>");}
+		if(needNext) {sb.append("<a href='"+linkURL+"?currentPage="+(endNavi+1)+"'>></a>");}
 		return sb.toString();
 	}
 	
@@ -453,4 +455,88 @@ public class AskDAO {
 			}
 		}
 	}
+	
+	public List<String> findMemNameEmailById(String memId) throws Exception{
+		String sql = "select mem_name, mem_email from members where mem_id=?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, memId);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<String> result = new ArrayList<>();
+				if(rs.next()) {
+					result.add(rs.getString("mem_name"));
+					result.add(rs.getString("mem_email"));
+				}return result;
+			}
+		}
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	//신규문의글 검색
+	public List<AskDTO> selectByPageNotYetAnswerBySearch(int start, int end, String column, String target) throws Exception{
+		String sql = "select * from (select askboard.*, row_number() over (order by ask_seq) article from askboard where answer_YN = 'N' and "+column+"=?) where article between ? and ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+			){
+			pstat.setString(1, target);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<AskDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					AskDTO dto = new AskDTO();
+					dto.setAsk_seq(rs.getInt("ask_seq"));
+					dto.setAsk_code(rs.getString("ask_code"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContents(rs.getString("contents"));
+					dto.setAnswer_yn(rs.getString("answer_yn"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	
+	//전체문의글 검색
+	public List<AskDTO> selectByPageBySearch(int start, int end, String column, String target) throws Exception{
+		String sql = "select * from (select askboard.*, row_number() over (order by ask_seq desc) article from askboard where "+column+"=?) where article between ? and ?";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+			){
+			pstat.setString(1, target);
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+			
+			try(ResultSet rs = pstat.executeQuery();){
+				List<AskDTO> result = new ArrayList<>();
+				while (rs.next()) {
+					AskDTO dto = new AskDTO();
+					dto.setAsk_seq(rs.getInt("ask_seq"));
+					dto.setAsk_code(rs.getString("ask_code"));
+					dto.setTitle(rs.getString("title"));
+					dto.setContents(rs.getString("contents"));
+					dto.setAnswer_yn(rs.getString("answer_yn"));
+					dto.setMem_id(rs.getString("mem_id"));
+					dto.setWrite_date(rs.getTimestamp("write_date"));
+					result.add(dto);
+				}
+				return result;
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
 }

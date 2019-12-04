@@ -4,52 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지 수정</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="../Resource/lang/summernote-ko-KR.js"></script>
+<title>Notice | Jo Malone</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="Resource/lang/summernote-ko-KR.js"></script>
 
 
 <style>
-* {
-	box-sizing: border-box;
-}
-
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-input[type=text], textarea {
-	margin-top: 3px;
-	margin-bottom: 3px;
-	font-size: 15px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
+* {box-sizing: border-box;}
+	#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	input[type=text], textarea {margin-top: 3px; margin-bottom: 3px; font-size: 15px;}
+	
+	#modify-page {margin-top: 80px; height: 900px;}
+	#modify-title {margin-bottom: 35px; padding: 0px; height: 50px;}
+	#modify-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 
 
@@ -57,9 +27,9 @@ input[type=text], textarea {
 </head>
 <body>
 	<form action="modifyConfirm.notice" method="post" id="modifyFrm">
-		<div class=container>
-			<div class="row" style="text-align: center;" id="headDiv">
-				<div class="col-12">공지 수정</div>
+		<div class=container id="modify-page">
+			<div id="modify-title" class="row">
+				<h4>NOTICE MODIFY</h4>
 			</div>
 			<div class="row" id=titleBox>
 				<div class="col-12 p-0">

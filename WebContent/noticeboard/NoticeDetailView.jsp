@@ -5,45 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항</title>
+<title>Notice Detail | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-#contents {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	min-height: 500px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-
+	#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}
+	#detail-page {margin-top: 80px;}
+	#detail-title {margin-bottom: 30px; padding: 0px; height: 50px;}
+	#detail-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 
 
 </head>
 <body>
-
-	<div class=container>
-		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">공지사항</div>
+	<jsp:include page="/Resource/key/top.jsp" flush="true" />
+	<div class=container id="detail-page">
+		<div id="detail-title" class="row">
+			<h4>NOTICE DETAIL</h4>
 		</div>
 
 		<div class="row" id="titleBox">
@@ -92,6 +74,7 @@
             });
                       
         </script>
+        <jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>
 

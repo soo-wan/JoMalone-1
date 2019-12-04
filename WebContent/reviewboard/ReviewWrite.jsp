@@ -5,50 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매 후기 작성</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="Resource/lang/summernote-ko-KR.js"></script>
+<title>Review Write | Jo Malone</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="../Resource/lang/summernote-ko-KR.js"></script>
 <style>
-* {
-	box-sizing: border-box;
-}
-
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-input[type=text], textarea {
-	margin-top: 3px;
-	margin-bottom: 3px;
-	font-size: 15px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
+* {box-sizing: border-box;}
+	#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	input[type=text], textarea {margin-top: 3px; margin-bottom: 3px; font-size: 15px;}
+	#write-page {margin-top: 80px; height: 900px;}
+	#write-title {margin-bottom: 35px; padding: 0px; height: 50px;}
+	#write-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 .star_rating {font-size:0; letter-spacing:-4px; padding-top: 10px;}
 .star_rating a {
     font-size:15px;
@@ -65,9 +34,9 @@ input[type=text], textarea {
 </head>
 <body>
 	<form action="writeConfirm.review" method="post" id="writeFrm">
-		<div class=container>
-			<div class="row" style="text-align: center;" id="headDiv">
-				<div class="col-12">상품 후기 작성</div>
+		<div id="write-page" class=container>
+			<div id="write-title" class="row">
+				<h4>REVIEW WRITE</h4>
 			</div>
 			<div class="row" id=orderNumBox>
 				<input type=hidden name=buySeq id=buySeq value="${order_seq }">
@@ -145,6 +114,7 @@ input[type=text], textarea {
                     
                 });
                 
+                (function($) {
                 $(".summernote").summernote({
         			lang : 'ko-KR',
         			minHeight: 500,
@@ -186,6 +156,7 @@ input[type=text], textarea {
         				}
         			}
         		});
+                })(jQuery);
     </script>
 
 </body>

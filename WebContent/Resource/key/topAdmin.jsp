@@ -62,7 +62,7 @@
 			<ul class="navi">
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin.mem">회원관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminProduct.jsp">상품관리</a></li>
-				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminBoard.jsp">게시판관리</a></li>
+				<li class="navi-item"><a href="${pageContext.request.contextPath}/list.notice">게시판관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminDelivery.jsp">배송관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminStatistics.jsp">통계</a></li>
 			</ul>

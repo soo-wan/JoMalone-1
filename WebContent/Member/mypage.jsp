@@ -46,9 +46,8 @@
 			location.href = "/JoMalone/list.ask";
 		})
 		
-		// 수인언니 여기여기 고치셔야되요!!!!!!!!!
 		$("#my-review").on("click", function() {
-			location.href = "";
+			location.href = "/JoMalone/myList.review";
 		})
 		
 		$("#my-delevery").on("click", function() {

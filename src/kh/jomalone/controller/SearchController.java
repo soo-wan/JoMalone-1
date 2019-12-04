@@ -28,8 +28,6 @@ public class SearchController extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=UTF-8");
 		String id = (String)request.getSession().getAttribute("loginInfo");
-		String adminId = (String)request.getSession().getAttribute("adminId");
-		
 		
 		SearchDAO dao = SearchDAO.getInstance();
 		AskDAO askDao = AskDAO.getInstance();
