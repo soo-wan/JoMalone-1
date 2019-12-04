@@ -14,7 +14,7 @@
 
 <style>
 
- 	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
     padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}

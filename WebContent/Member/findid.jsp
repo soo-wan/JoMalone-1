@@ -6,7 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<link rel="stylesheet" href="/JoMalone/Resource/css/find.css?log=1">
+<link rel="stylesheet" href="/JoMalone/Resource/css/find.css?log=2">
+<style>
+
+</style>
 </head>
 <body>
 <jsp:include page="/Resource/key/top.jsp" flush="false"/>
@@ -17,6 +20,7 @@
 <div id="findinputbox">
 이름을 입력해주세요<br>
 <input type="text" id="name" name="name"><br>
+<br>
 '-'를 붙혀 핸드폰번호를 입력해주세요<br>
 <input type="text" id="phone" name="phone" placeholder="'-'를 붙혀 번호를 입력해주세요"><br>
 <br>

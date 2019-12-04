@@ -43,12 +43,13 @@ public class AdminMemController extends HttpServlet {
 			
 			
 		}else if(cmd.contentEquals("/search.mem")) {
+			String logintype = request.getParameter("logintype");
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String phone = request.getParameter("phone");
 			
 			System.out.println(id + name + phone);
-				List<MembersDTO> list = dao.search(id,name,phone);	
+				List<MembersDTO> list = dao.search(logintype,id,name,phone);	
 				for(MembersDTO dto : list) {
 					System.out.println(dto.getLogintype());
 				}
