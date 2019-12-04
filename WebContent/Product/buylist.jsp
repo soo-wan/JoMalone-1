@@ -16,25 +16,15 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/buylist.css">
 <style>
-*{
-	    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-}
-	#writereview{
-		background-color:black;
-		color:white;
-	}
-	#writeA:visited, #writeA:link{
-		color:white;	
-	}
-	#cjInfo:hover{
-		color:red;
-	}
-	#writereview:hover{
-		color:red;
-	}
-	#styleA:visited, #styleA:link{
-		color:black;
-	}
+	*{font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
+	#writereview{background-color:black; color:white;}
+	#writeA:visited, #writeA:link{color:white;}
+	#cjInfo:hover{color:red;}
+	#writereview:hover{color:red;}
+	#styleA:visited, #styleA:link{color:black;}
+	.date {margin: 10px 0px 0px 0px; width: 50px; border: 0px; boakground-color: #F6F6F6; font-size: 13px; text-align: center;}
+	#first {border-radius: 5px 0px 0px 5px;}
+	#last {border-radius: 0px 5px 5px 0px;}
 </style>
 
 </head>
@@ -55,8 +45,12 @@
 				<li>
 			  	<h6 style="width: 760px; line-height: 50px; text-align: right; font-size: 12px;">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</h6> 
 			  </li>
-
 			</ul>
+			<input id="first" class="date" type="button" value="오늘">
+			<input class="date" type="button" value="일주일">
+			<input class="date" type="button" value="1개월">
+			<input class="date" type="button" value="3개월">
+			<input id="last" class="date" type="button" value="6개월">
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="korea" role="tabpanel">
 					<table class="cart-table">
