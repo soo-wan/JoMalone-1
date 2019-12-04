@@ -251,7 +251,7 @@
 	                $("input[name='checks']:checked").each(function(){
 	                    checkArr.push($(this).attr("data-cartNum"));
 	                });
-	               	 	location.href="orderSelect.or?seq="+checkArr;
+	       			location.href="orderSelect.or?seq="+checkArr;
 				}
 			else{
 				location.href = "${pageContext.request.contextPath}/list.ca";

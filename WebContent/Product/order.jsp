@@ -64,7 +64,7 @@
 	    	<div style="float: left; margin-top: 10px; padding-right: 5px; width: 1070px; text-align: right;">
 	    	<h6 style="float:right; width: 335px; text-align: right; font-size: 13px;">
 	    	<div style="float:left; margin-left:5px;">상품구매금액 </div>
-	    	<div style="float:left; margin-left:5px;"> <fmt:formatNumber value="${sum}" pattern="#,###" />원 </div>
+	    	<div style="float:left; margin-left:5px;" id=ok><fmt:formatNumber value="${sum}" pattern="#,###" />원</div>
 	    	<div style="float:left; margin-left:5px;"> + 배송비 20원 = 총 가격 = </div>
 	    	<div style="float:left; margin-left:5px;" name="totalPrice" id="totalPrice"><fmt:formatNumber value="${sum+20}" pattern="#,###" />원</div></h6></div>
 	    </div>
@@ -222,88 +222,97 @@
 	
 	<script>
 		$("#buy").on("click",function(){
-			var email = $("#email1").val()+"@"+$("#email2").val();
-			var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
-			var address = $("#address1").val()+ $("#address2").val();
+			console.log(${list.size()});
 			console.log($("#name").val());
-			console.log(email);
-			console.log(phone);
-			console.log(address);
-			var buy_name = "";
-	        $(".buy_name").each(function(){
-	        	buy_name = buy_name  + $(this).text()+",";
-	        });
-	        var prices = "";
-	        $(".prices").each(function(){
-	        	prices = prices  + $(this).text()+",";
-	        });
-	        var prod_quantitys = "";
-	        $(".prod_quantitys").each(function(){
-	        	prod_quantitys = prod_quantitys  + $(this).text()+",";
-	        });
-			console.log("시작!");
-			console.log(prices);
-			console.log(prod_quantitys);
-			$.ajax({
-				url:"callMerchantuid.buy",
-				type:"post",
-				data:{
-					name : $("#name").val(),
-					buy_name : buy_name ,
-					totalPirce : $("#totalPrice").html() ,
-					phone : phone ,
-					address : address ,
-					zip_code : $("#zip_code").val() ,
-					email : email ,
-					prices : prices ,
-					prod_quantitys : prod_quantitys
-				},
-				dataType:"json"
-			}).done(function(data){
-				console.log(data);
-				var IMP = window.IMP;
-		        IMP.init("imp97337518");
-                console.log(buy_name);
-				IMP.request_pay({
-					pg : data.pg,
-					pay_method : data.pay_method,
-					merchant_uid : data.merchant_uid,
-					name : data.name,
-					amount : data.amount,
-					buyer_email : data.buyer_email,
-					buyer_name : data.buyer_name,
-					buyer_tel : data.buyer_tel,
-					buyer_addr : data.buyer_addr,
-					buyer_postcode : data.buyer_postcode,
-				}, function(rsp) { // callback
-					console.log(rsp);
-					console.log("callback 시작!")
-					if (rsp.success) {
-						$.ajax({
-							url:"buyComplet.buy",
-							type:"post",
-							data:rsp,
-							dataType:"json"
-						}).done(function(){
-							console.log("결제 완료!");
-							location.href= "${pageContext.request.contextPath}/buylist.buy";
-						})
-					}
-					 else {
-						 console.log("실패함");
-						$.ajax({
-							url:"${pageContext.request.contextPath}/buyFailed.buy",
-							type:"post",
-							data:rsp,
-							dataType:"json"
-						}).done(function(){
-							alert("결제가 취소되었습니다.");
-						}) 
-					}
-				});
-			}).fail(function(){
-				console.log("fail");
-			})
+			if(${list.size()}=='0'){
+				alert("구매할 상품이 없습니다.");
+			}else if($("#name").val()=="" || $("#zip_code").val()==""|| $("#address1").val()=="" || $("#address2").val()=="" || $("#phone2").val()=="" ||$("#phone3").val()==""){
+				alert("필수 입력사항이 입력되지 않았습니다.");
+			}else{
+				var email = $("#email1").val()+"@"+$("#email2").val();
+				var phone = $("#phone1").val()+$("#phone2").val()+$("#phone3").val();
+				var address = $("#address1").val()+ $("#address2").val();
+				console.log($("#name").val());
+				console.log(email);
+				console.log(phone);
+				console.log(address);
+				var buy_name = "";
+		        $(".buy_name").each(function(){
+		        	buy_name = buy_name  + $(this).text()+",";
+		        });
+		        var prices = "";
+		        $(".prices").each(function(){
+		        	prices = prices  + $(this).text()+",";
+		        });
+		        var prod_quantitys = "";
+		        $(".prod_quantitys").each(function(){
+		        	prod_quantitys = prod_quantitys  + $(this).text()+",";
+		        });
+				console.log("시작!");
+				console.log(prices);
+				console.log(prod_quantitys);
+				$.ajax({
+					url:"callMerchantuid.buy",
+					type:"post",
+					data:{
+						name : $("#name").val(),
+						buy_name : buy_name ,
+						totalPirce : $("#totalPrice").html() ,
+						phone : phone ,
+						address : address ,
+						zip_code : $("#zip_code").val() ,
+						email : email ,
+						prices : prices ,
+						prod_quantitys : prod_quantitys
+					},
+					dataType:"json"
+				}).done(function(data){
+					console.log(data);
+					var IMP = window.IMP;
+			        IMP.init("imp97337518");
+	                console.log(buy_name);
+					IMP.request_pay({
+						pg : data.pg,
+						pay_method : data.pay_method,
+						merchant_uid : data.merchant_uid,
+						name : data.name,
+						amount : data.amount,
+						buyer_email : data.buyer_email,
+						buyer_name : data.buyer_name,
+						buyer_tel : data.buyer_tel,
+						buyer_addr : data.buyer_addr,
+						buyer_postcode : data.buyer_postcode,
+					}, function(rsp) { // callback
+						console.log(rsp);
+						console.log("callback 시작!")
+						if (rsp.success) {
+							$.ajax({
+								url:"buyComplet.buy",
+								type:"post",
+								data:rsp,
+								dataType:"json"
+							}).done(function(){
+								console.log("결제 완료!");
+								location.href= "${pageContext.request.contextPath}/buylist.buy";
+							})
+						}
+						 else {
+							 console.log("실패함");
+							$.ajax({
+								url:"${pageContext.request.contextPath}/buyFailed.buy",
+								type:"post",
+								data:rsp,
+								dataType:"json"
+							}).done(function(){
+								alert("결제가 취소되었습니다.");
+							}) 
+						}
+					});
+				}).fail(function(){
+					console.log("fail");
+				})
+			}
+			
 		})
 	
 		$("#return").on("click", function() {
