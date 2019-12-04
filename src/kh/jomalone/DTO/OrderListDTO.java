@@ -21,13 +21,15 @@ public class OrderListDTO {
 	private String processed;
 	private String buy_success;
 	private String date;
-
+	private String imp_uid;
 	public OrderListDTO() {
 		super();
 	}
+	
 	public OrderListDTO(int order_seq, Timestamp order_date, String merchant_uid, String prod_name, String pay_method,
 			String mem_id, String mem_name, String order_state, int prod_quantity, int price, String full_address,
-			String zip_code, String delivery_check, String refund, String processed, String buy_success) {
+			String zip_code, String delivery_check, String refund, String processed, String buy_success,
+			String imp_uid) {
 		super();
 		this.order_seq = order_seq;
 		this.order_date = order_date;
@@ -45,9 +47,9 @@ public class OrderListDTO {
 		this.refund = refund;
 		this.processed = processed;
 		this.buy_success = buy_success;
+		this.imp_uid = imp_uid;
 	}
-	
-	
+
 	public int getOrder_seq() {
 		return order_seq;
 	}
@@ -150,6 +152,13 @@ public class OrderListDTO {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public String getImp_uid() {
+		return imp_uid;
+	}
+	public void setImp_uid(String imp_uid) {
+		this.imp_uid = imp_uid;
+	}
+
 	
 	
 }
