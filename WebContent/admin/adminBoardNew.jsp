@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
 <style>
-#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
     padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
@@ -43,8 +43,10 @@
 	.naviPage:visited{
 	color: black;
 	}
+
 </style>
 </head>
+
 <body>
 <jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
 
@@ -52,16 +54,16 @@
 	<div class=Wrap>
 		<h4>게시판관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="list.notice">공지</a></li>
-			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
-			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
+			    <li class="menu"><a href="#">공지</a></li>
+			    <li class="menu" id="askAll"><a href="#">신규 1:1 문의</a></li>
+			    <li class="menu" id="askAll"><a href="#">전체 1:1 문의</a></li>
                 <li class="menu"><a href="#">신규 신고글</a></li>
                 <li class="menu"><a href="#">전체 신고글</a></li>
                 <li class="menu"><a href="#">리뷰</a></li>
 			</ul>
       </div>
-	<div id="container">
-				<div class="row" style="text-align: center;" id="headDiv">
+	<div class=container>
+		<div class="row" style="text-align: center;" id="headDiv">
 			<div class="col-12">공지사항</div>
 		</div>
 		<div class="row" style="text-align: center;">
@@ -104,15 +106,16 @@
                 </c:choose>			
 			</div>
 		</div>
-    </div>
-</div>
-    <script>
-    $("#toIndex").on("click", function() {
-		location.href = "home.jsp";
-	});	
-	$("#toWrite").on("click", function(){
-		location.href = "/JoMalone/noticeboard/NoticeWriteCall.jsp";
-	});
-    </script>
+	</div>
+    </div>	
+
+	<script>
+		$("#toIndex").on("click", function() {
+			location.href = "home.jsp";
+		});	
+		$("#toWrite").on("click", function(){
+			location.href = "../noticeboard/NoticeWriteCall.jsp";
+		});
+	</script>	
 </body>
 </html>

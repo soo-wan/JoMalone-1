@@ -109,7 +109,7 @@ public class ReviewBoardController extends HttpServlet {
 			if(blank) {
 				request.setAttribute("order_seq", order_seq);
 				request.setAttribute("prodName", prodName);
-				request.getRequestDispatcher("reviewboard/ReviewWrite.jsp").forward(request, response);	
+				request.getRequestDispatcher("reviewboard/ReviewWriteCall.jsp").forward(request, response);	
 			}else {
 				request.setAttribute("overLimit", "yes");
 				request.getRequestDispatcher("myList.review").forward(request, response);

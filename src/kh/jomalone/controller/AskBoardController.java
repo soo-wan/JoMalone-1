@@ -19,10 +19,12 @@ import com.google.gson.JsonObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import kh.jomalone.configuration.Configuration;
 import kh.jomalone.DAO.AskDAO;
 import kh.jomalone.DTO.AskCommentsDTO;
 import kh.jomalone.DTO.AskDTO;
+import kh.jomalone.Util.SendMail;
+import kh.jomalone.Util.Util;
+import kh.jomalone.configuration.Configuration;
 
 @WebServlet("*.ask")
 public class AskBoardController extends HttpServlet {
@@ -33,12 +35,11 @@ public class AskBoardController extends HttpServlet {
 		/* ajax 한글깨짐 방지 */
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=UTF-8");
-		
-		System.out.println(cmd);
 
-		 String id = (String) request.getSession().getAttribute("loginInfo");
+		String id = (String) request.getSession().getAttribute("loginInfo");
 		AskDAO dao = AskDAO.getInstance();
-
+		Util u = new Util();
+		
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
 			try {
 				int currentPage = 1;
@@ -52,14 +53,13 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"list.ask","byId",id);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("/Question/enquiry.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AskList.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
 			}
 			
 		}else if (cmd.contentEquals("/newList.ask")) {//(관리자)신규문의게시판
-			request.getSession().setAttribute("adminId", "admin");
 			request.getSession().setAttribute("fromAdminAskPage", "new");
 			try {
 				int currentPage = 1;
@@ -73,13 +73,12 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"newList.ask","notYetAnswer",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("/Question/admin_new_asklist.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/NewAskList.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
 			}
 		}else if (cmd.contentEquals("/allList.ask")) {//(관리자)전체문의게시판
-			request.getSession().setAttribute("adminId", "admin");
 			request.getSession().setAttribute("fromAdminAskPage", "entire");
 			try {
 				int currentPage = 1;
@@ -93,16 +92,17 @@ public class AskBoardController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage,"allList.ask","entire",null);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
-				request.getRequestDispatcher("/Question/admin_all_asklist.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AllAskList.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
 			}
 		} else if (cmd.contentEquals("/write.ask")) {// 문의글 등록	
 			String askCode = request.getParameter("askMenu");
-			String title = request.getParameter("askTitle");
+			String title = request.getParameter("title");
 			String contents = request.getParameter("contents");
 			String emailCheck = request.getParameter("emailCheck");
+			
 			
 			if (emailCheck == null) {
 				emailCheck = "N";
@@ -129,7 +129,7 @@ public class AskBoardController extends HttpServlet {
 				List<AskCommentsDTO> coResult = dao.selectCommentsByAskSeq(seq);				
 				request.setAttribute("coList", coResult);
 
-				request.getRequestDispatcher("/Question/enquiry_detail.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AskDetailView.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -140,7 +140,7 @@ public class AskBoardController extends HttpServlet {
 			try {
 				AskDTO result = dao.selectAskBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("/Question/enquiry_modify_call.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AskModify.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -201,21 +201,33 @@ public class AskBoardController extends HttpServlet {
 			response.getWriter().append(list.toString());
 		} else if (cmd.contentEquals("/writeComment.ask")) {// 댓글작성 ajax
 			int originSeq = Integer.parseInt(request.getParameter("writingSeq"));
-			String contents = request.getParameter("contents");
+			//String contents = request.getParameter("contents");
+			String contents = u.ProtectXSS(request.getParameter("contents"));
+			String emailOk = request.getParameter("emailOk");
 			PrintWriter pWriter = response.getWriter();
 			try {
 				dao.insertAskComment(new AskCommentsDTO(0,originSeq,contents,null));
 				dao.AnswerAskCondition("Y", originSeq);
 				List<AskCommentsDTO> result = dao.selectCommentsByAskSeq(originSeq);				
+				
 				Gson g = new Gson();
 				String dtoList = g.toJson(result);
 				pWriter.append(dtoList);
-
+				if(emailOk.contentEquals("Y")) {
+					String memId = request.getParameter("memId");
+					String askType = request.getParameter("askType");
+					String askTitle = request.getParameter("askTitle");
+					String askDate = request.getParameter("askDate");
+					List<String> nameEmail = dao.findMemNameEmailById(memId);
+					String subject = "[조말론]"+nameEmail.get(0)+"님 문의 내용에 대한 답변입니다.";
+					String msg = "문의종류 : "+askType+"\n문의제목 : "+askTitle+"\n문의일 : "+askDate+"\n\n"+"[답변내용]\n"+contents;
+					new SendMail().sendMail(nameEmail.get(1), subject, msg);										
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
 			}
-
+			
 		} else if (cmd.contentEquals("/deleteComment.ask")) {
 			int originSeq = Integer.parseInt(request.getParameter("no"));
 			int seq = Integer.parseInt(request.getParameter("coNo"));			

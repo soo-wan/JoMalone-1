@@ -136,23 +136,18 @@ textarea {
 				</c:choose>
 			</div>
 		</div>
-
-		<!-- 
-		</form>
-		 -->
-
 		<!-- 버튼 -->
 		<hr>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<input type="button" value="목록" id="toMain">
+				<input type="button" value="목록" id="toList">
 			</div>
 		</div>
 
 	</div>
 
 	<script>	
-		$("#toMain").on("click", function() {
+		$("#toList").on("click", function() {
 			var root = "${root}";
             if(root=="newReports"){
             	location.href = "newList.report";
@@ -235,7 +230,7 @@ textarea {
 						});
 	</script>
 
-
+<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>
 

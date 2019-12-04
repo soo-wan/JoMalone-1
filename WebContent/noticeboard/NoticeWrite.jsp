@@ -4,66 +4,32 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지 작성</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="../Resource/lang/summernote-ko-KR.js"></script>
+<title>Notice Write | Jo Malone</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="Resource/lang/summernote-ko-KR.js"></script>
 
 
 <style>
-* {
-	box-sizing: border-box;
-}
-
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-input[type=text], textarea {
-	margin-top: 3px;
-	margin-bottom: 3px;
-	font-size: 15px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
+* {box-sizing: border-box;}
+	#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	input[type=text], textarea {margin-top: 3px; margin-bottom: 3px; font-size: 15px;}
+	#write-page {margin-top: 80px; height: 900px;}
+	#write-title {margin-bottom: 35px; padding: 0px; height: 50px;}
+	#write-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 <body>
 
-	<form action="../write.notice" method="post" id="writeFrm">
-		<div class=container>
-			<div class="row" style="text-align: center;" id="headDiv">
-				<div class="col-12">공지 작성</div>
+	<form action="/JoMalone/write.notice" method="post" id="writeFrm">
+		<div id="write-page" class=container>
+			<div id="write-title" class="row">
+				<h4>NOTICE WRITE</h4>
 			</div>
-			<div class="row" id=titleBox>
-				<div class="col-12 p-0">
-					<input type=text placeholder="제목을 입력해주세요." id="title" name="title"
-						style="width: 100%;">
-				</div>
+			<div class="row" id=titleBox style="height: 30px;">
+				<input type=text placeholder="제목을 입력해주세요." id="askTitle" name="askTitle" style="margin: 0px; padding: 0px 0px 0px 7px; width: 100%; height: 30px; text-align: left;">
 			</div>
 			<div class="row" id=contentsBox>
 				<div class="col-12 p-0">
@@ -87,7 +53,7 @@ input[type=text], textarea {
 			var check = confirm("정말 취소하시겠습니까?");
 			if(check){
 				$('.summernote').summernote('reset');
-				location.href = "../list.notice";			
+				location.href = "/JoMalone/list.notice";			
 			}
 		});
 		$("#toWrite").on("click", function() {
@@ -102,6 +68,7 @@ input[type=text], textarea {
 			document.getElementById("writeFrm").submit();
 		});
 
+		(function($) {
 		$(".summernote").summernote({
 			lang : 'ko-KR',
 			minHeight: 500,
@@ -143,6 +110,7 @@ input[type=text], textarea {
 				}
 			}
 		});
+		})(jQuery);
 	</script>
 </body>
 </html>

@@ -5,42 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>나의 구매 후기</title>
+<title>My Review | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-div{
-	font-size: 15px;
-}
-
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-
-.article {
-	padding-bottom: 10px;
-}
-
-.article:hover {
-	background-color: #cbe7ff90;
-}
-
-a:hover {
-	text-decoration: none;
-}
-
+#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
+	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
+	.article {padding-bottom: 10px;}
+	.article:hover {background-color: #cbe7ff90;}
+	a:link {color: black;}
+	a:visited {color: #887f7f;}
+	a:hover {text-decoration: none;}
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 .naviBar {
 	font-size: 20px;
 	word-spacing: 5px;
@@ -88,7 +65,7 @@ a:hover {
 </head>
 
 <body>
-
+<jsp:include page="/Resource/key/top.jsp" flush="true" />
 	<div class=container>
 	
 	<c:if test="${overLimit!=null }">
@@ -180,11 +157,13 @@ a:hover {
     });
    
 	$("#toIndex").on("click", function() {
-		location.href = "index.jsp";
+		location.href = "home.jsp";
 	});
 	$("#toSearch").on("click", function(){
 		$("#searchFrm").submit();
 	});
 	</script>
+	
+	<jsp:include page="../Resource/key/bottom.jsp" flush="true"/>
 </body>
 </html>

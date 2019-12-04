@@ -5,44 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매 후기</title>
+<title>Review Detail | Jo Malone</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-#titleBox {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
+#titleBox {margin-top: 5px; margin-bottom: 5px;}
+	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}
+	#coBtn {height: 93%; width: 100%;}
+	.commentBox { /*border-bottom: 1px solid #49498690;*/
+		border: 1px solid #49498660; padding-top: 15px; padding-bottom: 15px; margin-left: 10px; margin-right: 10px; margin-bottom: 2px;}
+	#toCoModify, #toCoDelete {font-size: 13px; line-height: 20px;}
+	#toCoModifyConfirm, #toCoModifyCancel {margin-top: 3.5px; width: 100%; height: 40%;	line-height: 30px;}
+	.coWritingDiv {padding-top: 20px;}
+	#emailCheck{font-size: 15px;}
 
-#contents {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	min-height: 500px;
-}
+	#detail-page {margin-top: 80px;}
 
-#headDiv {
-	padding: 0px;
-	margin: 0px;
-	padding-top: 20px;
-	padding-bottom: 20px;
-}
-
-#headDiv>div {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-	font-size: 20px;
-	line-height: 30px;
-}
-
-.coWritingDiv {
-	padding-top: 20px;
-}
-
-#emailCheck {
-	font-size: 15px;
-}
+	#detail-title {margin-bottom: 30px; padding: 0px; height: 50px;}
+	#detail-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 #toReport {
 	border-style: none;
 	background-color: crimson;
@@ -64,9 +47,10 @@
 </head>
 
 <body>
-	<div class=container>
-		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">상품 후기</div>
+	<jsp:include page="/Resource/key/top.jsp" flush="true" />
+	<div class=container id="detail-page">
+		<div id="detail-title" class="row">
+			<h4>REVIEW DETAIL</h4>
 		</div>
 		<div class="row" id=orderProdBox>
 	          <div class="col-12"><span style="font-weight:bold;">${readDTO.prod_name}</span></div>
@@ -156,6 +140,6 @@
            location.href = "write.report?no=${readDTO.review_seq}";
         });
     </script>
-
+<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>

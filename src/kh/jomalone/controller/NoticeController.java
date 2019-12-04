@@ -37,7 +37,7 @@ public class NoticeController extends HttpServlet {
 		
 		try {
 
-			if (cmd.contentEquals("/list.notice")) {// 공지게시판
+			if (cmd.contentEquals("/list.notice")) {// 공지게시판				
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
 				if (page != null) {
@@ -50,7 +50,17 @@ public class NoticeController extends HttpServlet {
 				String pageNavi = dao.getPageNavi(currentPage);
 				request.setAttribute("selectResult", result);
 				request.setAttribute("pageNavi", pageNavi);
+				
+				
+				
 				request.getRequestDispatcher("noticeboard/Notice.jsp").forward(request, response);
+//				if(request.getSession().getAttribute("adminId")==null) {
+//					request.getRequestDispatcher("noticeboard/Notice.jsp").forward(request, response);
+//				}else {
+//					request.getRequestDispatcher("admin/adminBoard.jsp").forward(request, response);
+//				}
+				
+				
 				
 			} else if (cmd.contentEquals("/read.notice")) {// 공지읽기
 				int seq = Integer.parseInt(request.getParameter("no"));
@@ -69,7 +79,7 @@ public class NoticeController extends HttpServlet {
 				int seq = Integer.parseInt(request.getParameter("noticeSeq"));
 				NoticeDTO result = dao.selectNotice(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("noticeboard/NoticeModify.jsp").forward(request, response);
+				request.getRequestDispatcher("noticeboard/NoticeModifyCall.jsp").forward(request, response);
 				
 			} else if (cmd.contentEquals("/modifyConfirm.notice")) {// 공지수정완료
 				int seq = Integer.parseInt(request.getParameter("noticeSeq"));

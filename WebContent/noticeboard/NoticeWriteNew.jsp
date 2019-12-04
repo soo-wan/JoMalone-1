@@ -9,7 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
+
 <style>
 #sidebar{ float:left; width:200px; margin:0px; padding:0px; }
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
@@ -52,59 +52,41 @@
 	<div class=Wrap>
 		<h4>게시판관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="list.notice">공지</a></li>
-			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
-			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
+			    <li class="menu"><a href="#">공지</a></li>
+			    <li class="menu" id="askAll"><a href="#">신규 1:1 문의</a></li>
+			    <li class="menu" id="askAll"><a href="#">전체 1:1 문의</a></li>
                 <li class="menu"><a href="#">신규 신고글</a></li>
                 <li class="menu"><a href="#">전체 신고글</a></li>
                 <li class="menu"><a href="#">리뷰</a></li>
 			</ul>
       </div>
-	<div id="container">
+	
+	<form action="/JoMalone/write.notice" method="post" id="writeFrm">
+		<div id="container">
 				<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">공지사항</div>
+			<div class="col-12">공지작성</div>
 		</div>
-		<div class="row" style="text-align: center;">
-			<div class="col-1">번호</div>
-			<div class="col-8">제목</div>
-			<div class="col-3">등록일</div>			
-		</div>
-		<hr>
-		<c:choose>
-			<c:when test="${selectResult.size()==0 }">
-				<div class="row">
-					<div class="col-12"
-						style="text-align: center; height: 500px; line-height: 500px;">등록된 공지가 없습니다.</div>
+			<div class="row" id=titleBox style="height: 30px;">
+				<input type=text placeholder="제목을 입력해주세요." id="askTitle" name="askTitle" style="margin: 0px; padding: 0px 0px 0px 7px; width: 100%; height: 30px; text-align: left;">
+			</div>
+			<div class="row" id=contentsBox>
+				<div class="col-12 p-0">
+					<textarea class="summernote" style="width: 100%;" id="contents"
+						name="contents"></textarea>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${selectResult }" var="dto">
-					<div class="row article p-1" style="text-align: center;">
-						<div class="col-1">${dto.notice_seq }</div>
-						<div class="col-8" style="text-align: left;">
-							<a href="read.notice?no=${dto.notice_seq }">${dto.title }</a>							
-						</div>
-						<div class="col-3">${dto.formedFullDate }</div>						
-					</div>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		<hr>
-		
-		<div class="row" style="text-align: center;">
-			<div class="col-12 naviBar" style="color:black;">${pageNavi }</div>
-		</div>
-		<div class="row">
-			<div class="col-12" style="text-align: right;">
-				<input type="button" value="메인으로" id="toIndex"> 
-				<c:choose>
-	                <c:when test="${sessionScope.adminId != null}">
-	                    <input type="button" value="공지쓰기" id="toWrite">	                  
-	                </c:when>
-                </c:choose>			
+			</div>
+			<hr>
+			<div class="row" id=btnBox>
+				<div class="col-12 p-0" style="text-align: right;">
+					<input type="button" value="취소" id="cancel"> <input
+						type="button" value="글쓰기" id="toWrite">
+				</div>
 			</div>
 		</div>
-    </div>
+	</form>
+	
+	
+	
 </div>
     <script>
     $("#toIndex").on("click", function() {

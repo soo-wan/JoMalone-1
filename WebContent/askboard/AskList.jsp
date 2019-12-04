@@ -6,17 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1 Enquiry | Jo Malone</title>
-<link rel="stylesheet" href="/JoMalone/Resource/css/enquiry.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-	.article{padding-bottom: 10px;}
-	.article:hover{background-color: #cbe7ff90;}
-	.a:link{color: black;}
-	.a:visited{color: black;}
-	.a:hover{color: gray; text-decoration: none;}
-	
-	.b:link{color: black;}
-	.b:visited{color: black;}
-	.b:hover{color: gray;}
+	#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
+	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
+	.article {padding-bottom: 10px;}
+	.article:hover {background-color: #cbe7ff90;}	
+	a:link {color: black;}
+	a:visited {color: #887f7f;}
+	a:hover {text-decoration: none;}
+.naviBar {
+	font-size: 20px;
+	word-spacing: 5px;
+	font-weight: bold;
+}
+
+.naviPage:visited {
+	color: black;
+}
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
