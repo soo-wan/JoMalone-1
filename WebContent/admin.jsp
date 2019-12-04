@@ -11,13 +11,15 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 <style>
-	#sidebar{ float:left; width:150px; margin:0px; padding:0px; }
-    #sidebar .menu{ list-style-type: none; text-align: right; margin:15px 0px; color:#1e2d47; width:100%;}
-    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif;}
+	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+    #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
+    padding:0px 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
+    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
+    
     .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-    h4{margin:0px; padding:20px 10px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
+    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
     }
-    .menu>a{text-decoration: none; color:#1e2d47}
+    .menu>a{text-decoration: none; color:white;}
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
    
 	#searchbar{float:left; width:1300px; heigth:30px; text-align:center; margin:auto; padding:0 0 10px 0;
@@ -55,7 +57,7 @@
 	<div class=Wrap>
 		<h4>회원 관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'>회원관리</a></li>
+			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'> 회원관리</a></li>
 			</ul>
       </div>
       
