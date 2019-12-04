@@ -16,7 +16,7 @@
 	<form action="modi.my" method="post" id="profileform">
 	
 		<div id="signup-page" class="container">
-			<div id="signup-title" class="row"><h4>Profile Edit</h4></div>
+			<div id="signup-title" class="row"><h4>MY PROFILE</h4></div>
 			<div id="signup-inputbox" class="row">
 				<div id="su-id"><h5><span>*</span>아이디 : </h5><input type="text" placeholder="Input Your ID" style="width: 200px; height: 30px;" id="id" name="id" value="${dto.id }" readonly></div>
 				<br>
@@ -37,7 +37,7 @@
 				<div id="su-name"><h5><span>*</span>이름 : </h5><input type="text" placeholder="Input Your Name" style="width: 200px; height: 30px;" name="name" value="${dto.name }" readonly></div>
 				<div id="su-phone">
 					<h5><span>*</span>전화번호 : </h5>
-					<input type="text" name="phone1" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${dto.phone1 }">
+					<input type="text" name="phone1" id="phone2" style="margin-left: 15px; width: 70px; height: 30px;" value="${dto.phone1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
 					<input type="text" name="phone2" id="phone2" style="margin-left: 0px; width: 70px; height: 30px;" value="${dto.phone2 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;"> - </span>
@@ -45,7 +45,7 @@
 				</div>
 				<div id="su-email">
 					<h5><span>*</span>이메일 : </h5>
-					<input type="text" name="email1" id="email1" style="width: 80px; height: 30px;" value="${dto.email1 }">
+					<input type="text" name="email1" id="email1" style="padding-left: 5px; width: 80px; height: 30px;" value="${dto.email1 }">
 					<span style="margin: 0px 5px 0px 5px; height:30px; color: black;">@</span>
 					<input type="text" name="email2" style="margin-left: 0px; width: 90px; height: 30px;" value="${dto.email2 }">
 					
@@ -86,9 +86,7 @@
 			<div id="myprofile-btn">
 				<input id="profile-modi" type="button" value="수정하기">
 				<!-- Button trigger modal -->
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" id="profile-del">
-  				탈퇴하기
-				</button>
+				<button type="button" data-toggle="modal" data-target="#exampleModalCenter" id="profile-del">탈퇴하기</button>
 				<input id="profile-back" type="button" value="뒤로가기">
 			</div>
 		</div>

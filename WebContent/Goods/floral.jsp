@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +36,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$(".look").on("click", function() {
+			location.href = "/JoMalone/Goods/goods_detail.jsp";
+		})
+	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>

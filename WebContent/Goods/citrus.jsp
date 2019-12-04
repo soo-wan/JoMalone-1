@@ -37,6 +37,12 @@
 		</div>
 	</div>
 	
+	<script>
+		$(".look").on("click", function() {
+			location.href = "/JoMalone/Goods/goods_detail.jsp";
+		})
+	</script>
+	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>
