@@ -17,6 +17,10 @@
 <link rel="stylesheet" href="/JoMalone/Resource/css/bottom.css">
 </head>
 <body>
+
+
+
+
 	<div id="bottom-one" class="container">
 		<div id="others" class="row">
 			<div id="customer" class="col-3">
