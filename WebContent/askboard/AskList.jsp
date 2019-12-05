@@ -66,6 +66,24 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			</c:otherwise>
 		</c:choose>
 		<hr>
+		
+		
+				<form action="/JoMalone/ask.search" method="get" id="searchFrm">
+					<div class="row" style="text-align: center;">
+						<div class="col-12 searchBar">
+							<input type="hidden" name="rootPage" value="myPage"> <select
+								name="askSearch" id="askSearch">
+								<option value="title">제목</option>
+								<option value="contents">내용</option>
+								<option value="ask_code">문의종류</option>
+							</select> <input id="searchInput" name="searchInput" type=text> <input
+								type="button" value="검색" id="toSearch">
+						</div>
+					</div>
+		</form>
+		
+		
+		
 		<div class="row" style="text-align: center;">
 			<div class="col-12 naviBar">${pageNavi }</div>
 		</div>
@@ -93,6 +111,29 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		});
 		$("#toWrite").on("click", function() {
 			location.href = "/JoMalone/askboard/AskWriteCall.jsp";//일대일문의글쓰기 페이지
+		});
+		$("#askSearch").on("change",function(){
+			if($("#askSearch").val()=="ask_code"){
+				var askKor = [null,"배송","주문","반품/교환","회원정보","상품정보","결제","사이트장애","매장문의","기타"];
+				$("#searchInput").remove();
+				var subSelect ='<select name="askCodeSearch" id="askCodeSearch"></select>';
+				$("#askSearch").after(subSelect);
+				
+				for(var i=1;i<askKor.length;i++){
+					var option = $('<option value="a'+i+'">'+askKor[i]+'</option>');
+					$("#askCodeSearch").append(option);
+				}
+				
+			}else{
+				if($("#askCodeSearch").length){
+					$("#askCodeSearch").remove();
+					$("#askSearch").after('<input id="searchInput" name="searchInput" type=text>');
+				}
+			}	
+		});
+		
+		$("#toSearch").on("click", function(){			
+			$("#searchFrm").submit();
 		});
 	</script>
 	

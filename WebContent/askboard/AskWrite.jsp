@@ -75,8 +75,7 @@
 		$("#cancel").on("click", function() {
 			var check = confirm("정말 취소하시겠습니까?");
 			if(check){
-				$('.summernote').summernote('reset');
-				location.href = "../list.ask";//1대1문의 리스트페이지				
+				location.href = "/JoMalone/list.ask";//1대1문의 리스트페이지				
 			}
 		});
 		
