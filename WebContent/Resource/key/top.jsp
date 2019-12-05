@@ -82,25 +82,25 @@
             </div>
    
     
-    <div id="top-two" class="container"">
+    <div id="top-two" class="container">
 			<ul id="nav-ul">
 				 <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/citrus.jsp">Citrus</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=Citrus&url=citrus.jsp">Citrus</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/fruits.jsp">Fruits</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=Fruits&url=fruits.jsp">Fruits</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/woody.jsp">Woody</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=Woody&url=woody.jsp">Woody</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/spicy.jsp">Spicy</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=Spicy&url=spicy.jsp">Spicy</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/floral.jsp">Floral</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=Floral&url=floral.jsp">Floral</a>
 	            </li>
 	            <li class="nav-item">
-	                <a class="nav-link2" href="/JoMalone/Goods/light_floral.jsp">Light Floral</a>
+	                <a class="nav-link2" href="${pageContext.request.contextPath}/prod.prod?prod_Category=LightFloral&url=lightfloral.jsp">Light Floral</a>
 	            </li>
 			</ul>
         </div>
