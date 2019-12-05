@@ -20,11 +20,11 @@
                     h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
                     }
                     .menu>a{text-decoration: none; color:white;}
-                    #wrapper{width:1500px; border:1px solid black; overflow:hidden; margin:auto; }
+                    #wrapper{width:1500px; overflow:hidden; margin:auto; }
 
                     #container{
                         height:800px;
-                        width:1300px;
+                        width:1297px;
                         float:left;
                         padding: 20px;
                         overflow-x:scroll;
