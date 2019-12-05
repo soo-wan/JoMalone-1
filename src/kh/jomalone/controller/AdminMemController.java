@@ -55,13 +55,10 @@ public class AdminMemController extends HttpServlet {
 				}
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/admin.jsp").forward(request, response);	
-			
-			
-			
-			
-			
-			
-			
+	
+		}else if(cmd.contentEquals("/modi.mem")){
+			String id = request.getParameter("id");
+			System.out.println(id);
 			
 		}
 		}catch(Exception e) {
