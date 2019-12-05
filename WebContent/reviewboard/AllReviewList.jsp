@@ -104,7 +104,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${selectResult }" var="dto">
-					<div class="row article p-1" style="text-align: center;  font-size:15px;">
+					<div class="row article p-1" style="text-align: center; height: 55px;  font-size:15px;" id="reviewItemsRow">
 						<div class="col-3">${dto.prod_name }</div>
 						<div class="col-2">
 							<p class="star_rating">
@@ -159,6 +159,9 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 </div>
 
 	<script>
+
+		$("#reviewItemsRow").children("div").css("line-height","50px");
+
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
 		});

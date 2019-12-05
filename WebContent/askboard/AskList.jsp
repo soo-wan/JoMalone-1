@@ -25,7 +25,7 @@
 .naviPage:visited {
 	color: black;
 }
-	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
+input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 
@@ -72,9 +72,9 @@
 		</div>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="Home" id="toIndex"></div> 
-				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="MyPage" id="toMyPage"></div>
-				<div style="float:right;"><input type="button" value="Write" id="toWrite"></div>
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="메인으로" id="toIndex"></div> 
+				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="마이페이지로" id="toMyPage"></div>
+				<div style="float:right;"><input type="button" value="문의하기" id="toWrite"></div>
 			</div>
 		</div>
 	</div>

@@ -52,12 +52,12 @@
 	<div class=Wrap>
 		<h4>게시판관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href="list.notice">공지</a></li>
-			    <li class="menu" id="askNew"><a href="newList.ask">신규 1:1 문의</a></li>
-			    <li class="menu" id="askAll"><a href="allList.ask">전체 1:1 문의</a></li>
-                <li class="menu"><a href="newList.report">신규 신고글</a></li>
-                <li class="menu"><a href="allList.report">전체 신고글</a></li>
-                <li class="menu"><a href="allList.review">리뷰</a></li>
+			    <li class="menu"><a href="/JoMalone/list.notice">공지</a></li>
+			    <li class="menu" id="askNew"><a href="/JoMalone/newList.ask">신규 1:1 문의</a></li>
+			    <li class="menu" id="askAll"><a href="/JoMalone/allList.ask">전체 1:1 문의</a></li>
+                <li class="menu"><a href="/JoMalone/newList.report">신규 신고글</a></li>
+                <li class="menu"><a href="/JoMalone/allList.report">전체 신고글</a></li>
+                <li class="menu"><a href="/JoMalone/allList.review">리뷰</a></li>
 			</ul>
       </div>
 	<div id="container">
