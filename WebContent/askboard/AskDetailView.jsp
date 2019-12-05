@@ -16,8 +16,7 @@
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
     
     .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
-    }
+    h4{margin:0px; padding:20px 20px; text-align: center; font-size: 20px;}
     .menu>a{text-decoration: none; color:white;}
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
     #container{
@@ -28,10 +27,6 @@
      	overflow-x:scroll;
      	border:1px solid black;
     }
-    
-    
-    
-    
     
 	#titleBox {margin-top: 5px; margin-bottom: 5px;}
 	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}
@@ -72,7 +67,7 @@
 
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12"><h3>1:1 문의</h3></div>
+			<div class="col-12"><h4>1:1 ENQUIRY DETAIL</h4></div>
 		</div>
 
 		<!--                    문의제목-->
@@ -162,11 +157,11 @@
 		<hr>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<input type="button" value="목록" id="toMain"> 
+				<div style="float: right;"><input type="button" value="목록" id="toMain"></div> 
 				<c:choose>
 	                <c:when test="${sessionScope.loginInfo == readDTO.mem_id}">
-	                    <input type="button" value="수정" id="toModify">
-	                    <input type="button" value="삭제" id="toDelete">
+	                    <div style="float: left; margin: 0px 5px 0px 0px;"><input type="button" value="수정" id="toModify"></div>
+	                    <div style="float: left; margin: 0px 0px 0px 5px;"><input type="button" value="삭제" id="toDelete"></div>
 	                </c:when>
                 </c:choose>				
 			</div>
