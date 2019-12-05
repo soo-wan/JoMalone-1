@@ -14,7 +14,7 @@
 	#top_bar, .top {margin: auto; width: 1500px; height: 25px; background-color:#1e2d47}
 	#middle_bar {margin: 0px; height: 160px;}
 	#title {padding: 0; text-align: center; font-family: 'Alata', sans-serif;}
-	.navi{ float:left ; width:1500px;;background-color: #1e2d47; margin:auto;  height:40px; padding:0px;}
+	.navi{ float:left ; width:1500px; background-color: #1e2d47; margin:auto;  height:40px; padding:0px;}
     .navi-item > a {
         width:100%;
         color:#ebebeb;
@@ -42,7 +42,7 @@
     }
 	
     .who{ float:right; padding:0px 5px;}
-    #logoutBtn{text-align: center; background-color:transparent;
+    #logoutBtn,#homeBtn{text-align: center; background-color:transparent;
     border: 1px solid black; border-radius:3px;}
      
 </style>
@@ -58,6 +58,7 @@
 			</div>
 			<div class="who">${name}님  
               <div class="who"><button id="logoutBtn" >로그아웃</button></div>
+              <div class="who"><button id="homeBtn" >홈으로</button></div>
 			</div>
         </div>     
     
@@ -65,7 +66,7 @@
 			<ul class="navi">
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin.mem">회원관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminProduct.jsp">상품관리</a></li>
-				<li class="navi-item"><a href="${pageContext.request.contextPath}/list.notice">게시판관리</a></li>
+				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminBoard.jsp">게시판관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminDelivery.jsp">배송관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminStatistics.jsp">통계</a></li>
 			</ul>
@@ -83,6 +84,10 @@
     	
     	$("#logoutBtn").on("click",function(){
     		location.href="${pageContext.request.contextPath}/adminlogout.mem"
+    	})
+    	
+    	$("#homeBtn").on("click",function(){
+    		location.href="${pageContext.request.contextPath}/home.jsp"
     	})
     </script>
 </body>
