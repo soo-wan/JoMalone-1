@@ -204,28 +204,34 @@
 				return false;
 			}
 			else{
-					if(confirm("선택 상품을 삭제하시겠습니까?")){
-		                var checkArr = new Array();
-		                $("input[name='checks']:checked").each(function(){
-		                    checkArr.push($(this).attr("data-cartNum"));
-		                });
-		                	console.log(checkArr);
-							$.ajax({
-								url:"deletes.ca",
-								type:"post",		
-								data:{
-									seq:JSON.stringify(checkArr) 
-								}
-							}).done(function(data){
-								console.log("왔음");
-								location.href="list.ca";
-							}).fail(function(){
-								console.log("실패");
-							});
-					}
+				var check = $("input[name='checks']").is(':checked');
+				if(!check){
+					alert("선택된게 없습니다. 다시 확인해주세요.");
+				}
 				else{
-		            return false;
-		        }
+						if(confirm("선택 상품을 삭제하시겠습니까?")){
+			                var checkArr = new Array();
+			                $("input[name='checks']:checked").each(function(){
+			                    checkArr.push($(this).attr("data-cartNum"));
+			                });
+			                	console.log(checkArr);
+								$.ajax({
+									url:"deletes.ca",
+									type:"post",		
+									data:{
+										seq:JSON.stringify(checkArr) 
+									}
+								}).done(function(data){
+									console.log("왔음");
+									location.href="list.ca";
+								}).fail(function(){
+									console.log("실패");
+								});
+						}
+					else{
+			            return false;
+			        }
+				}
 			}
 		});
 		
@@ -269,17 +275,24 @@
        $("#selectOrder").on("click",function(){
     	   var listSize = '${list.size()}';
 			if(listSize!=0){
-					if(confirm("선택 상품을 주문하시겠습니까?")){
-		                var checkArr = new Array();
-		                $("input[name='checks']:checked").each(function(){
-		                    checkArr.push($(this).attr("data-cartNum"));
-		                });
-		                //$("#frm").submit();
-		               	location.href="orderSelect.or?seq="+checkArr;
-					}
-				else{
+				var check = $("input[name='checks']").is(':checked');
+				if(!check){
+					alert("선택된게 없습니다. 다시 확인해주세요.");
 					location.href = "${pageContext.request.contextPath}/list.ca";
-		        }
+				}
+				else{
+						if(confirm("선택 상품을 주문하시겠습니까?")){
+			                var checkArr = new Array();
+			                $("input[name='checks']:checked").each(function(){
+			                    checkArr.push($(this).attr("data-cartNum"));
+			                });
+			                //$("#frm").submit();
+			               	location.href="orderSelect.or?seq="+checkArr;
+						}
+					else{
+						location.href = "${pageContext.request.contextPath}/list.ca";
+			        }
+				}
 			}
 			else{
 				alert("장바구니에 담긴 상품이 없습니다.");
