@@ -114,16 +114,22 @@
     		location.href= "/JoMalone/home.jsp";
     	})
 		
-    	$("#cart").on("click", function() {
-    		<c:choose>
-    		<c:when test="${loginInfo == null}">
+    	$("#cart").on("click", function() {	
+    		console.log("회원" + "${sessionScope.loginInfo}"); //회원아이디
+    		console.log("관리자" + "${sessionScope.adminId}"); //admin1
+    		var mem = "${sessionScope.loginInfo}";
+    		var admin = "${sessionScope.adminId}";
+    		if(mem == null || admin == null){
 	    		alert("로그인이 필요한 서비스 입니다.");
-    			location.href = "/JoMalone/Member/login.jsp";
-    		</c:when>
-    		<c:otherwise>
+				location.href = "/JoMalone/Member/login.jsp";
+    		}
+    		else if(admin !=null){
+  				alert("지금 로그인 계정은 관리자 계정입니다.");
+    			location.href = "${pageContext.request.contextPath}/home.jsp"; 
+    		}
+    		else{
     			location.href= "${pageContext.request.contextPath}/list.ca";
-    		</c:otherwise>
-    		</c:choose>
+    		}
     	})
     </script>
 </body>
