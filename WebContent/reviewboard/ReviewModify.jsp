@@ -20,7 +20,7 @@
 	
 	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 .star_rating {font-size:0; letter-spacing:-4px; padding-top: 10px;}
-.star_rating a {
+.star_rating span {
     font-size:15px;
     letter-spacing:0;
     display:inline-block;
@@ -28,8 +28,11 @@
     color:#ccc;
     text-decoration:none;
 }
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffd800;}
+.star_rating span:first-child {margin-left:0;}
+.star_rating span.on {color:#ffd800;}
+.star_rating span:hover{
+	cursor:pointer
+}
 </style>
 
 </head>
@@ -50,11 +53,11 @@
 			<div class="row" id=starBox>
 				<div class="col-12 p-0">
 				<p class="star_rating">
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
-					    <a href="#">★</a>
+					    <span>★</span>
+					    <span>★</span>
+					    <span>★</span>
+					    <span>★</span>
+					    <span>★</span>
 					</p>
 				</div>
 				<input type=hidden name="grade" id="grade">
@@ -83,11 +86,11 @@
 
 
 	<script>
-	$(".star_rating a:nth-child(${readDTO.grade})").prevAll("a").addClass("on");
-	$(".star_rating a:nth-child(${readDTO.grade})").addClass("on");
-			    $( ".star_rating a" ).click(function() {
-				    $(this).parent().children("a").removeClass("on");
-				    $(this).addClass("on").prevAll("a").addClass("on");
+	$(".star_rating span:nth-child(${readDTO.grade})").prevAll("span").addClass("on");
+	$(".star_rating span:nth-child(${readDTO.grade})").addClass("on");
+			    $( ".star_rating span" ).click(function() {
+				    $(this).parent().children("span").removeClass("on");
+				    $(this).addClass("on").prevAll("span").addClass("on");
 				    return false;
 				});
 	            var prodMenu = "${readDTO.prod_name}";

@@ -84,7 +84,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			<c:when test="${selectResult.size()==0 }">
 				<div class="row">
 					<div class="col-12"
-						style="text-align: center; height: 500px; line-height: 500px;">새로 등록된 신고글이
+						style="text-align: center; height: 500px; line-height: 500px;">신고글이
 						없습니다.</div>
 				</div>
 			</c:when>

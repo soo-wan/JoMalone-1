@@ -139,7 +139,7 @@ public class AskBoardController extends HttpServlet {
 			try {
 				AskDTO result = dao.selectAskBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("askboard/AskModify.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AskModifyCall.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
