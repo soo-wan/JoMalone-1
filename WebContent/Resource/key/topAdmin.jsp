@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Top</title>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">    <!-- Jo Malone / Korea -->
 <style>
     #top-one {margin: auto; width: 1500px; height:280px; }

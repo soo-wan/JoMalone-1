@@ -15,9 +15,8 @@
 <title>Enquiry Write | Jo Malone</title>
 </head>
 <body>
-	<jsp:include page="/Resource/key/top.jsp" flush="true" />
+	<jsp:include page="../Resource/key/topAdmin.jsp" flush="true" />
 	<jsp:include page="/adminBack/insertDetail.jsp" flush="true" />
-	<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 </body>
 </html>
 </body>

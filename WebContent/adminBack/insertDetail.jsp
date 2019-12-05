@@ -1,160 +1,226 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <!DOCTYPE html>
-        <html>
-            <head>
-                <meta charset="UTF-8">
-                <title>adminPage</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>adminPage</title>
 
-
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-<script src="../Resource/lang/summernote-ko-KR.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="/JoMalone/Resource/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
-              
+<style>
+#sidebar {
+	float: left;
+	width: 200px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#sidebar>.menu {
+	list-style-type: none;
+	text-align: right;
+	margin: auto;
+	color: #1e2d47;
+	text-align: center;
+	padding: 0px 10px;
+	margin: 10px;
+	width: 80%;
+	line-height: 30px;
+	background-color: #1e2d47;
+	color: white;
+}
+
+.menu {
+	height: 30px;
+	width: 100%;
+	font-family: 'Alata', sans-serif;
+	border: 1px solid black;
+	border-radius: 3px;
+}
+
+.Wrap {
+	height: 800px;
+	width: 200px;
+	margin: 0px;
+	float: left;
+}
+
+h4 {
+	margin: 0px;
+	padding: 20px 20px;
+	text-align: right;
+	font-size: 20px;
+	font-family: 'Alata', sans-serif;
+}
+
+.menu>a {
+	text-decoration: none;
+	color: white;
+}
+
+#wrapper {
+	width: 1500px;
+	bolder: 1px solid black;
+	overflow: hidden;
+	margin: auto;
+}
+
+#container {
+	height: 800px;
+	width: 1300px;
+	float: left;
+	padding: 20px;
+	overflow-x: scroll;
+	border: 1px solid black;
+}
+
+[name=prod_code] {
+	display: none;
+}
+
+.firstCol {
+	background-color: #1e2d47;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	width: 100px;
+}
+
+.secondCol {
+	width: 250px;
+}
+
+#container {
+	height: 800px;
+	width: 1300px;
+	float: left;
+	padding: 20px;
+	overflow-x: scroll;
+	border: 1px solid black;
+}
+
+.secondCol_inner {
+	width: 100%;
+}
+
+#summernote {
+	width: 350px;
+}
+</style>
+</head>
+<body>
+<jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
+
+	<div id="wrapper">
+		<div class=Wrap>
+			<h4>상품관리</h4>
+			<ul id="sidebar">
+				<li class="menu"><a
+					href="${pageContext.request.contextPath}/adminBack/insertProduct.jsp">상품등록</a></li>
+				<li class="menu"><a
+					href="${pageContext.request.contextPath}/productList.admini">상품
+						수정/삭제</a></li>
+				<li class="menu"><a
+					href="${pageContext.request.contextPath}/adminBack/insertDetail.jsp">상세
+						정보 등록</a></li>
+				<li class="menu"><a
+					href="${pageContext.request.contextPath}/detailBoard.admini">상세
+						정보 수정</a></li>
+			</ul>
+		</div>
+		<div id="container" style="width: 1257px;">
 
 
 
+			<form action="${pageContext.request.contextPath}/insertDetail.admini"
+				method="post" id="frm" enctype="multipart/form-data">
+				<table>
+					<tr>
+						<td class=firstCol>상품분류
+						<td class=secondCol><select name="" id="category"
+							class=secondCol_inner>
+								<option value="" selected disabled>카테고리</option>
+								<option value="Citrus">Citrus</option>
+								<option value="Fruits">Fruits</option>
+								<option value="Light Floral">Light Floral</option>
+								<option value="Floral">Floral</option>
+								<option value="Spicy">Spicy</option>
+								<option value="Woody">Woody</option>
+								<option value="Others">Others</option>
+						</select>
+						<td rowspan="11"><img id="img">
+					</tr>
+					<tr>
+						<td class=firstCol>상품코드
+						<td class=secondCol><select name="" id="codeSelectBox"
+							class=secondCol_inner>
+								<option id='optionLabel' class='option' value='' selected
+									disabled>상품코드</option>
+						</select> <input name="prod_code">
+					</tr>
+					<tr>
+						<td class=firstCol>상품명
+						<td class=secondCol><input id="prod_name" disabled="disabled"
+							class=secondCol_inner>
+					</tr>
+					<tr>
+						<td class=firstCol>가격
+						<td class=secondCol><input id="prod_price"
+							disabled="disabled" class=secondCol_inner>
+					</tr>
+					<tr>
+						<td class=firstCol>수량
+						<td class=secondCol><input id="prod_quantity"
+							disabled="disabled" class=secondCol_inner>
+					</tr>
+					<tr>
+						<td class=firstCol>전성분
+						<td class=secondCol><textarea id="ingredients"
+								name=ingredients class=secondCol_inner></textarea>
+					</tr>
+					<tr>
+						<td class=firstCol>상품 정보
+						<td class=secondCol><textarea id="prod_description"
+								disabled="disabled" class=secondCol_inner></textarea>
+					</tr>
+					<tr>
+						<td class=firstCol>spring</td>
+						<td class=secondCol><input type="text" id="spring"
+							disabled="disabled" class=secondCol_inner></td>
+					</tr>
+					<tr>
+						<td class=firstCol>summer</td>
+						<td class=secondCol><input type="text" id="summer"
+							disabled="disabled" class=secondCol_inner></td>
+					</tr>
+					<tr>
+						<td class=firstCol>fall</td>
+						<td class=secondCol><input type="text" id="fall"
+							disabled="disabled" class=secondCol_inner></td>
+					</tr>
+					<tr>
+						<td class=firstCol>winter</td>
+						<td class=secondCol><input type="text" id="winter"
+							disabled="disabled" class=secondCol_inner></td>
+					</tr>
+				</table>
+				<textarea display="hidden" name="content" class="summernote"></textarea>
 
-
-                <style>
-                    #sidebar{ float:left; width:200px; margin:0px; padding:0px; }
-                    #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
-                        padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
-                    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
-
-                    .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-                    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
-                    }
-                    .menu>a{text-decoration: none; color:white;}
-                    #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
-
-                    #container{
-                        height:800px;
-                        width:1300px;
-                        float:left;
-                        padding: 20px;
-                        overflow-x:scroll;
-                        border:1px solid black;
-                    }
-
-
-
-                    [name=prod_code]{display:none;}
-
-
-
-
-                    .firstCol{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; width:100px;}
-                    .secondCol{width:250px;}
-
-
-
-                    #container{
-                        height:800px;
-                        width:1300px;
-                        float:left;
-                        padding: 20px;
-                        overflow-x:scroll;
-                        border:1px solid black;
-                    }     
-
-                    .secondCol_inner{width:100%;}
-                    #summernote{width:350px;}
-
-
-
-
-
-                </style>
-            </head>
-            <body>
-                <jsp:include page="../Resource/key/topAdmin.jsp" flush="false"/>
-                <div id="wrapper">
-                    <div class=Wrap>
-                        <h4>상품관리</h4>
-                        <ul id="sidebar">
-                            <li class="menu"><a href="${pageContext.request.contextPath}/adminBack/insertProduct.jsp">상품등록</a></li>
-                            <li class="menu"><a href="${pageContext.request.contextPath}/productList.admini">상품 수정/삭제</a></li>
-                            <li class="menu"><a href="${pageContext.request.contextPath}/adminBack/insertDetail.jsp">상세 정보 등록</a></li>
-                            <li class="menu"><a href="${pageContext.request.contextPath}/detailBoard.admini">상세 정보 수정</a></li>
-                        </ul>
-                    </div>
-                    <div id="container">
-
-
-
-                        <form action="${pageContext.request.contextPath}/insertDetail.admini" method="post" id="frm" enctype="multipart/form-data">
-                            <table>
-                                <tr>
-                                    <td class=firstCol>상품분류
-                                    <td class=secondCol>
-                                        <select name="" id="category" class=secondCol_inner>
-                                            <option value="" selected disabled>카테고리</option> 
-                                            <option value="Citrus">Citrus</option>
-                                            <option value="Fruits">Fruits</option>
-                                            <option value="Light Floral">Light Floral</option>
-                                            <option value="Floral">Floral</option>
-                                            <option value="Spicy">Spicy</option>
-                                            <option value="Woody">Woody</option>
-                                            <option value="Others">Others</option>
-                                        </select>
-                                    <td rowspan="11"><img id="img">
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>상품코드
-                                    <td class=secondCol>
-                                        <select name="" id="codeSelectBox" class=secondCol_inner>
-                                            <option id='optionLabel' class='option' value='' selected disabled>상품코드</option>
-                                        </select>
-                                        <input name="prod_code">
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>상품명
-                                    <td class=secondCol><input id="prod_name" disabled="disabled" class=secondCol_inner>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>가격
-                                    <td class=secondCol><input id="prod_price" disabled="disabled" class=secondCol_inner>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>수량
-                                    <td class=secondCol><input id="prod_quantity" disabled="disabled" class=secondCol_inner>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>전성분
-                                    <td class=secondCol><textarea id="ingredients" name=ingredients class=secondCol_inner></textarea>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>상품 정보
-                                    <td class=secondCol><textarea id="prod_description" disabled="disabled" class=secondCol_inner></textarea>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>spring</td>
-                                    <td class=secondCol><input type="text" id="spring" disabled="disabled" class=secondCol_inner></td>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>summer</td>
-                                    <td class=secondCol><input type="text" id="summer" disabled="disabled" class=secondCol_inner></td>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>fall</td>
-                                    <td class=secondCol><input type="text" id="fall" disabled="disabled" class=secondCol_inner></td>
-                                </tr>
-                                <tr>
-                                    <td class=firstCol>winter</td>
-                                    <td class=secondCol><input type="text" id="winter" disabled="disabled" class=secondCol_inner></td>
-                                </tr>
-                            </table>
-                            <textarea display="hidden" name="content" class="summernote"></textarea>
-
-                            <!--
+				<!--
 <input type="button" id="prePageBtn" value="이전페이지">
 -->
 
-                            <input type="button" id="enterBtn" value="등록">
-                        </form>
-                        <script>
+				<input type="button" id="enterBtn" value="등록">
+			</form>
+			<script>
+			 
                             $("#category").on("change",function(){
                                 $(".option").remove();
                                 $.ajax({
@@ -214,7 +280,6 @@
                             })
 
 
-                       (function($) {
                                 $(".summernote").summernote({
                                     height : 500,
                                     width : 800,
@@ -244,18 +309,12 @@
                                             })
                                         }
                                     }
-                                });
-                       })(jQuery);   
+                                });  
 
                         </script>
 
 
-
-
-
-
-
-                    </div>
-                </div>
-            </body>
-        </html>
+		</div>
+	</div>
+</body>
+</html>
