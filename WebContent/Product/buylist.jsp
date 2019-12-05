@@ -21,7 +21,6 @@
 	#writereview:visited,#refund:visited{color:white;}
 	#writereview:link,#refund:link{color:white;}
 	#cjInfo:hover{color:red;}
-	#writereview:hover{color:red;}
 	#styleA:visited, #styleA:link{color:black;}
 	.date {margin: 10px 0px 10px 0px; width: 50px; border:0px; boakground-color: #F6F6F6; font-size: 13px; text-align: center; float:left;}
 	#first {border-radius: 5px 0px 0px 5px;}
@@ -84,7 +83,7 @@
 										<td style="width: 160px;">CJ 대한통운 <br>
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
 										<td style="width: 160px;">
-										<button id=refund onclick="refund(${dto.price},${dto.prod_quantity},'${dto.imp_uid}')">환불하기 </button>
+										<button id=refund onclick="refund('${dto.prod_name}',${dto.price},${dto.prod_quantity},'${dto.imp_uid}')">환불하기 </button>
 										<button id=writereview onclick="writereview(${dto.order_seq},'${dto.prod_name}')">리뷰쓰기</button>
 									</tr>
 								</c:forEach>
@@ -104,13 +103,32 @@
 			  	  		<td style="width: 330px;">상품명
 			  	  		<td style="width: 130px;">수량
 			  	  		<td style="width: 130px;">가격
-			  	  		<td>배송상태
+			  	  		<td style="width: 130px;">환불 상태
 						</tr>
-						<tr>
-							<td colspan="7"
-								style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">취소/반품
-								내역이 없습니다.
-						</tr>
+						<c:choose>
+							<c:when test="${fn:length(list) == 0}">
+								<td colspan="7"
+									style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">주문
+									내역이 없습니다.
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${list2}" var="dto">
+									<tr class="my-item">
+										<td style="width: 150px;">${dto.date}
+										<td style="width: 130px;"><a href="#"><img class="item-img" src="/JoMalone/Resource/img/img.jpg"></a> <!-- 상품 이미지 href -->
+										<td style="width: 150px;"><a href="#" id="styleA">${dto.prod_name}</a> <!-- 상품명 href -->
+										<td style="width: 100px;">${dto.prod_quantity}
+										<td style="width: 130px;">${dto.price }
+										<td style="width: 130px;">
+										<c:choose>
+											<c:when test ="${dto.refund=='P'}">환불 검토중</c:when>
+											<c:otherwise> 환불 완료</c:otherwise>
+										</c:choose>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</table>
 				</div>
 			</div>
@@ -134,8 +152,8 @@
 		$("#last").on("click",function(){
 			location.href= "search.buy?period=180"
 		});
-		function refund(price,prod_quantity,imp_uid){
-			location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid;
+		function refund(prod_name,price,prod_quantity,imp_uid){
+			location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid+"&prod_name="+prod_name;
 		}
 		function writereview(order_seq,prod_name){
 			location.href= "${pageContext.request.contextPath}/write.review?seq="+order_seq+"&prodName="+prod_name;

@@ -173,6 +173,20 @@ public class BuyDAO {
 		}
 	}
 	
+	public void updateRefund(String imp_uid, String prod_name) throws Exception{
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("update order_list set refund ='P' where imp_uid=? and prod_name = ?");){
+			pstat.setString(1, imp_uid);
+			pstat.setString(2, prod_name);
+			pstat.executeUpdate();
+			con.commit();
+		}
+	}
+	
+	
+	
+	
+	
 	public int deleteOrder(int seq) throws Exception{ // 주문 선택 삭제
 		String sql = "delete from cart where seq=?";
 		try(Connection con = this.getConnection();
@@ -263,12 +277,31 @@ public class BuyDAO {
 	
 	public List<OrderListDTO> selectByPage(String mem_id,int start,int end) throws Exception{
 		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
-				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and row_nb between ? and ?";
+				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, mem_id);
 			pstat.setInt(2, start);
 			pstat.setInt(3, end);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<OrderListDTO> list = new ArrayList<>();
+				while (rs.next()) {
+					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
+							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
+							rs.getString(14), rs.getString(15), rs.getString(16),rs.getString(17)));
+				}
+				return list;
+			}
+		}
+	}
+	
+	public List<OrderListDTO> selectRefundList(String mem_id) throws Exception{
+		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
+				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and (refund ='Y' or refund = 'P')";
+		try(Connection con = this.getConnection();
+			PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, mem_id);
 			try(ResultSet rs = pstat.executeQuery();){
 				List<OrderListDTO> list = new ArrayList<>();
 				while (rs.next()) {
