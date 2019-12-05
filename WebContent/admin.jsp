@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alata&display=swap">
 <style>
-	#sidebar{ float:left; width:200px; margin:0px; padding:0px; }
+	#sidebar{ float:left; width:200px; margin:0px; padding:0px;}
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
     padding:0px 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
@@ -63,7 +63,7 @@
 			</ul>
       </div>
       
-    	<form action="${pageContext.request.contextPath}/search.mem" method="post">
+    	<form action="${pageContext.request.contextPath}/search.mem" method="post" >
     	
       	<fieldset id="searchbar">
  			검색 ▶ 
@@ -103,21 +103,21 @@
         </c:when>
         <c:otherwise>
         <c:forEach items="${list }" var="dto">
-        <tr>
-            <td class="info"> ${dto.id} </td>
-            <td> ${dto.logintype} </td>
-            <td class="info"> ${dto.name} </td>
-            <td class="info"> ${dto.phone} </td>
-            <td class="info"> ${dto.email} </td>
-            <td> ${dto.zip_code} </td>
-            <td> ${dto.address1} </td>
-            <td> ${dto.address2} </td>
-            <td class="info"> ${dto.birth} </td>
-            <td class="info"> ${dto.gender} </td>
-            <td> ${dto.enrolldate} </td>
-            <td> ${dto.lastlogin} </td>
-            <td class="info"> ${dto.black_yn} </td>
-            <td class="info"> ${dto.blackdate}</td>
+        <tr class="data">
+            <td>${dto.id}</td>
+            <td>${dto.logintype}</td>
+            <td>${dto.name} </td>
+            <td>${dto.phone} </td>
+            <td>${dto.email} </td>
+            <td>${dto.zip_code} </td>
+            <td>${dto.address1} </td>
+            <td>${dto.address2} </td>
+            <td>${dto.birth} </td>
+            <td>${dto.gender} </td>
+            <td>${dto.enrolldate} </td>
+            <td>${dto.lastlogin} </td>
+            <td>${dto.black_yn} </td>
+            <td>${dto.blackdate}</td>
         </tr>
         </c:forEach>
         </c:otherwise>
@@ -126,14 +126,55 @@
     	</table>
     </div>
     </div>
+    	<c:choose>
+<c:when test="${result>0 }">
+<script>
+alert("수정되었습니다.");
+window.close();
+</script>
+</c:when>
+</c:choose>
     <script>
   $("#all").on("click",function(){
 	  location.href="${pageContext.request.contextPath}/admin.mem"
   })
-  $(".info").on("click",function(){
-	  window.open("modi.mem?id="+ ${dto.id},"width=500px,height=800px,top=300px,left=200px");
-	
-  })
+ 
+  // 테이블의 Row 클릭시 값 가져오기
+		$(".data").click(function(){ 	
+
+			var str = ""
+			var tdArr = new Array();	// 배열 선언
+			
+			// 현재 클릭된 Row(<tr>)
+			var tr = $(this);
+			var td = tr.children();
+			
+			// tr.text()는 클릭된 Row 즉 tr에 있는 모든 값을 가져온다.
+			console.log("클릭한 Row의 모든 데이터 : "+tr.text());
+			
+
+			// 반복문을 이용해서 배열에 값을 담아 사용할 수 도 있다.
+			td.each(function(i){
+				tdArr.push(td.eq(i).text());
+			});
+			
+			console.log("배열에 담긴 값 : "+tdArr);
+			
+			// td.eq(index)를 통해 값을 가져올 수도 있다.
+			var id = td.eq(0).text();
+			var name = td.eq(2).text();
+			var phone = td.eq(3).text();
+			var email = td.eq(4).text();
+			var zip_code = td.eq(5).text();
+			var address1 = td.eq(6).text();
+			var address2 = td.eq(7).text();
+			var birth = td.eq(8).text();
+			var gender = td.eq(9).text();
+			var black_yn = td.eq(12).text();
+			var blackdate = td.eq(13).text();
+			window.name="pwin";
+			window.open("modi.mem?id="+id,"","width=610px,height=800px,top=300px,left=200px");
+		});
     </script>
 </body>
 </html>

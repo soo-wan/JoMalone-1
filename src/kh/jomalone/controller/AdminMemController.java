@@ -58,7 +58,10 @@ public class AdminMemController extends HttpServlet {
 	
 		}else if(cmd.contentEquals("/modi.mem")){
 			String id = request.getParameter("id");
-			System.out.println(id);
+			MembersDTO dto = dao.selectById(id);
+			System.out.println(dto.getName());
+			request.setAttribute("dto", dto);
+			request.getRequestDispatcher("/Member/adminmodi.jsp").forward(request, response);
 			
 		}
 		}catch(Exception e) {
