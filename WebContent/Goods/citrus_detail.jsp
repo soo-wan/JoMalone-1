@@ -25,7 +25,7 @@
                 <input type=hidden name=seq value="1"> <!-- value값을 seq -->
                 <div class="container" style="margin: 70px auto 70px auto; height: 600px; background-color: #FAECC5;">
                     <div class="row" style="margin: auto;">
-                        <img src="/JoMalone/Resource/img/DCi001.jpg" style="margin: 30px auto auto auto; border-radius: 30px;">
+                        <img src="/JoMalone/Resource/img/D${dto.productCode }.jpg" style="margin: 30px auto auto auto; border-radius: 30px;">
                         <div style="padding: 10px 30px 10px 30px; position: relative; left: 600px; bottom: 520px; width: 400px; height: 500px; border: 1px solid darkgray; border-radius: 10px; text-align: center;">
                             <h4 style="margin: 30px 0px 30px 0px;">${dto.productName }</h4> 
                             <input type=hidden name=prod_name value=${dto.productName }> <!-- value값을 list형 이름으로 -->
