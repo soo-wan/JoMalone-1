@@ -36,11 +36,11 @@
 			<div id="info" class="col-3">
 				<p>
 					<a href="https://www.facebook.com/JoMaloneLondon/" target="_blank">
-					<img src="/JoMalone/Resource/img/facebook.png"></a>
+					<img src="/JoMalone/Resource/img/facebook2.png"></a>
 					<a href="https://twitter.com/JoMaloneLondon/" target="_blank">
-					<img src="/JoMalone/Resource/img/twitter.png"></a>
+					<img src="/JoMalone/Resource/img/twitter2.png"></a>
 					<a href="https://www.instagram.com/jomalonelondon/" target="_blank">
-					<img src="/JoMalone/Resource/img/insta.png"></a>
+					<img src="/JoMalone/Resource/img/insta2.png"></a>
 				</p>
 				<h5>GUIDE</h5>
 				<h6>이용약관</h6>

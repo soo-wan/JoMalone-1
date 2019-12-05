@@ -13,6 +13,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/cart.css">
+<style>
+	#korea-title, #country-title {color: black;}
+</style>
 </head>
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
@@ -62,7 +65,7 @@
 					  	  		<td style="width: 400px;">${dto.prod_name}
 					  	  		<td style="width: 130px;">${dto.price} 		
 					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
-					  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})" type="button">변경</button></td>
+					  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})" type="button" style="padding: 0px; width: 40px; height: 22px;">변경</button></td>
 					  	  		<td style="width: 130px;">20
 					  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 								<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>

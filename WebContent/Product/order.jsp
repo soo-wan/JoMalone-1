@@ -170,7 +170,7 @@
 				<tr>
 					<td style="width: 100px; height: 20px; text-align: center;"><h6 style="padding-top: 5px;; font-size: 13px;">배송메시지</h6>
 					<td style="padding: 5px 0px 0px 10px; width: 1040px; height: 20px; text-align: left;">
-						<textarea cols="50" rows="2" style="resize: none; border: 1px solid lightgray; border-radius: 5px; font-size: 13px;" id="textA">부재시 경비실에 맡겨주세요.</textarea>
+						<textarea cols="50" rows="2" style="resize: none; border: 1px solid lightgray; padding-left: 10px; border-radius: 5px; font-size: 12px;" id="textA">부재시 경비실에 맡겨주세요.</textarea>
 				</tr>
 			</table>
 		</div>

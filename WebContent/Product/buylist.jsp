@@ -25,6 +25,8 @@
 	.date {margin: 10px 0px 10px 0px; width: 50px; border:0px; boakground-color: #F6F6F6; font-size: 13px; text-align: center; float:left;}
 	#first {border-radius: 5px 0px 0px 5px;}
 	#last {border-radius: 0px 5px 5px 0px;}
+	
+	#korea-title, #country-title {color: black;}
 </style>
 
 </head>
