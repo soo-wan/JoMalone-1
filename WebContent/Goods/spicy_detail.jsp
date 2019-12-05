@@ -45,7 +45,7 @@
                             </div>
                             <div style="margin: 80px 0px 10px 0px; width: 100%;">
                                 <input type="button" id="btnCart" value="장바구니" style="margin: 0px 10px 0px 0px; width: 130px; height: 25px; font-size: 14px; border: 0px; background-color: lightgray;">
-                                <input type="button" value="구매하기" style="margin: 0px 0px 0px 10px; width: 130px; height: 25px; font-size: 14px; border: 0px; background-color: lightgray;">
+                                <input type="button" value="리뷰보기" style="margin: 0px 0px 0px 10px; width: 130px; height: 25px; font-size: 14px; border: 0px; background-color: lightgray;">
                             </div>
                         </div>
                     </div>
