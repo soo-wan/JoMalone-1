@@ -38,12 +38,11 @@
 	.article {padding-bottom: 10px;}
 	.article:hover {background-color: #cbe7ff90;}	
 	a:hover {text-decoration: none;}
-	.naviBar {
+.naviBar {
 	font-size: 20px;
 	word-spacing: 5px;
 	font-weight: bold;
 }
-
 .naviPage:visited {
 	color: black;
 }

@@ -19,7 +19,7 @@
 	
 	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 
-#notice{
+#noticeMsg{
 	color: crimson;
 }
 .clickEdit{
@@ -34,7 +34,7 @@
 	<form action="writeConfirm.report" method="post" id="writeFrm">
 		<div id="write-page" class=container>
 			<div id="write-title" class="row">
-				<div class="col-12"><h4>REPORT WRITE</h4></div>
+				<div class="col-12 p-0"><h4>REPORT WRITE</h4></div>
 			</div>
 			<div class="row" id=reportType>
 				<div class="col-12 p-0">
@@ -46,7 +46,7 @@
 						type="radio" name="reportType" value="r4"> 스팸<br> <input
 						type="radio" name="reportType" value="r5"> 기타<br>
 						<p></p>
-				<p id=notice>모든 신고는 관리자 검토 후 처리되며, 신고에 대한 조치내용은 별도 통보되지 않습니다.</p>
+				<p id=noticeMsg>모든 신고는 관리자 검토 후 처리되며, 신고에 대한 조치내용은 별도 통보되지 않습니다.</p>
 				</div>
 			</div>
 			<div class="row">

@@ -10,7 +10,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
+	#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
 	.article {padding-bottom: 10px;}
 	.article:hover {background-color: #cbe7ff90;}
@@ -23,7 +23,9 @@
 	word-spacing: 5px;
 	font-weight: bold;
 }
-
+.naviPage:visited {
+	color: black;
+}
 .modal {
     display: none;
     position: fixed;
@@ -80,10 +82,10 @@
     	</div>
 	</c:if>
 	
-		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">나의 구매 후기</div>
+		<div class="row">
+			<div class="col-12"><h4>MY REVEIWS</h4></div>
 		</div>
-		<div class="row" style="text-align: center;">
+		<div class="row" style="margin-top: 60px; text-align: center;">
 			<div class="col-3 d-none d-sm-block">구매상품</div>
 			<div class="col-2 d-none d-sm-block">별점</div>
 			<div class="col-4 d-none d-sm-block">제목</div>
@@ -139,6 +141,7 @@
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="메인으로" id="toIndex">
+				<input type="button" value="마이페이지로" id="toMyPage">
 			</div>
 		</div>
 	</div>
@@ -158,6 +161,9 @@
    
 	$("#toIndex").on("click", function() {
 		location.href = "home.jsp";
+	});
+	$("#toMyPage").on("click", function() {
+		location.href = "/JoMalone/Member/mypage.jsp";
 	});
 	$("#toSearch").on("click", function(){
 		$("#searchFrm").submit();

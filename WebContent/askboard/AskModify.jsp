@@ -52,13 +52,13 @@
 			<div class="row" id=titleBox>
 				<div class="col-12 p-0">
 							<input type=hidden name=askSeq id=askSeq value=${readDTO.ask_seq }>
-					<input type=text placeholder="제목을 입력해주세요." id="title" name="title"
+					<input type=text placeholder="제목을 입력해주세요." id="titleAsk" name="title"
 						style="width: 100%;" value="${readDTO.title }">
 				</div>
 			</div>
 			<div class="row" id=contentsBox>
 				<div class="col-12 p-0">
-					<textarea class="summernote" style="width: 100%;" id="contents" name="contents">${readDTO.contents }</textarea>
+					<textarea class="summernote" style="width: 100%;" id="contentsAsk" name="contents">${readDTO.contents }</textarea>
 				</div>
 			</div>
 			<div class="row" id=emailAlarmBox>
@@ -100,11 +100,11 @@
 				return false;
 			}
 			
-			if ($("#title").val() == "") {
+			if ($("#titleAsk").val() == "") {
 				alert("제목을 입력해주세요.");
 				return false;
 			}
-			if ($("#contents").val() == "") {
+			if ($("#contentsAsk").val() == "" || $("#contentsAsk").val()=="<p><br></p>") {
 				alert("내용을 입력해주세요.");
 				return false;
 			}

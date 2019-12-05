@@ -29,6 +29,10 @@
 }
 .star_rating a:first-child {margin-left:0;}
 .star_rating a.on {color:#ffd800;}
+.star_rating a:hover{
+	text-decoration:none;
+	color: #ccc;
+}
 </style>
 
 </head>
@@ -36,7 +40,7 @@
 	<form action="writeConfirm.review" method="post" id="writeFrm">
 		<div id="write-page" class=container>
 			<div id="write-title" class="row">
-				<h4>REVIEW WRITE</h4>
+				<div class="col-12 p-0"><h4>REVIEW WRITE</h4></div>
 			</div>
 			<div class="row" id=orderNumBox>
 				<input type=hidden name=buySeq id=buySeq value="${order_seq }">
@@ -59,13 +63,13 @@
 			</div>
 			<div class="row p-0" id=titleBox>
 				<div class="col-12 p-0">
-					<input type=text placeholder="제목을 입력하세요." id="title" name="title"
+					<input type=text placeholder="제목을 입력하세요." id="titleReview" name="title"
 						style="width: 100%;">
 				</div>
 			</div>
 			<div class="row" id=contentsBox>
 				<div class="col-12 p-0">
-					<textarea class="summernote" style="width: 100%;" id="contents"
+					<textarea class="summernote" style="width: 100%;" id="contentsReview"
 						name="contents"></textarea>
 				</div>
 			</div>
@@ -97,11 +101,11 @@
                 });
                 
                 $("#toWrite").on("click", function() {
-        			if ($("#title").val() == "") {
+        			if ($("#titleReview").val() == "") {
                         alert("제목을 입력해주세요.");
                         return false;
                     }
-                    if ($("#contents").val() == "") {
+                    if ($("#contentsReview").val() == "" || $("#contentsReview").val()=="<p><br></p>") {
                         alert("내용을 입력해주세요.");
                         return false;
                     }                    

@@ -91,7 +91,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			<c:otherwise>
 				<c:forEach items="${selectResult }" var="dto">
 					<div class="row article p-1" style="text-align: center;">
-						<div class="col-3">${dto.report_type }</div>
+						<div class="col-3">${dto.reportTypeKor }</div>
 						<div class="col-3" style="text-align: left;">
 						<c:if test="${dto.check_YN eq 'Y' }">
 							<span>[확인완료]</span>
