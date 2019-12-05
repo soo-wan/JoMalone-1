@@ -65,7 +65,7 @@
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminProduct.jsp">상품관리</a></li>
 				<li class="navi-item"><a href="/JoMalone/list.notice">게시판관리</a></li>
 				<li class="navi-item"><a href="${pageContext.request.contextPath}/orderManagement.admini">배송관리</a></li>
-				<li class="navi-item"><a href="${pageContext.request.contextPath}/admin/adminStatistics.jsp">통계</a></li>
+				<li class="navi-item"><a href="${pageContext.request.contextPath}/rank.chart">통계</a></li>
 			</ul>
 	
 		</div>
