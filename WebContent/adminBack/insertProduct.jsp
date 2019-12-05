@@ -153,6 +153,11 @@
                                         $("#category").val(category);
 
                                         if(confirm("등록하시겠습니까?")){
+                                        	
+                                        	if($("#categorySel").prop("selected","false")){console.log(11);}
+                                        	
+                                        	//console.log($("#category").val(category));
+                                        	
                                             $("#frm").submit();
                                         }
                                     }

@@ -62,7 +62,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            전성분 설명을 넣어주세요.
+                            ${dto.ingredients }
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
