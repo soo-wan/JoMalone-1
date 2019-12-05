@@ -58,6 +58,7 @@ public class OrderController extends HttpServlet {
 			// 선택 주문
 			else if(cmd.contentEquals("/orderSelect.or")) { 
 				String[] seqs = request.getParameterValues("seq");
+				System.out.println(seqs[0]);
 //				if(seqs==null) {
 //					System.out.println("없어");
 //				}else {

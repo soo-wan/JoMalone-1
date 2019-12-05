@@ -52,7 +52,6 @@
 				  	  		<c:when test="${list.size() == 0}">
 				  	  		<tr>
 					  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
-					  	  		<input type=hidden name="checkReal2" value="check">
 					  	  	</tr>
 							</c:when>
 						<c:otherwise>
@@ -63,7 +62,7 @@
 					  	  		<td style="width: 400px;">${dto.prod_name}
 					  	  		<td style="width: 130px;">${dto.price} 		
 					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
-					  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})">변경</button></td>
+					  	  		<button id="updateBtn" onclick ="updateCart(${dto.seq})" type="button">변경</button></td>
 					  	  		<td style="width: 130px;">20
 					  	  		<td><fmt:formatNumber value="${dto.price*dto.prod_quantity}" pattern="#,###" />
 								<c:set var= "sum" value="${sum + dto.price*dto.prod_quantity}"/>
@@ -142,7 +141,7 @@
 			</div>
 		</div>
 	</div>
-	  	  	</form>
+</form>
 	<script>
 		$(".select-btn").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/Product/order.jsp";
@@ -154,6 +153,8 @@
 		
 		function updateCart(seq){
 			var countval = $(".count"+seq).val();
+			console.log(seq);
+			console.log(countval);
 			location.href="update.ca?prod_quantity="+countval+"&seq="+seq;
         }
 		
