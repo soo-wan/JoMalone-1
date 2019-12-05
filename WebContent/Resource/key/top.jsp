@@ -119,11 +119,11 @@
     		console.log("관리자" + "${sessionScope.adminId}"); //admin1
     		var mem = "${sessionScope.loginInfo}";
     		var admin = "${sessionScope.adminId}";
-    		if(mem == null || admin == null){
+    		if(mem == "" && admin == ""){
 	    		alert("로그인이 필요한 서비스 입니다.");
 				location.href = "/JoMalone/Member/login.jsp";
     		}
-    		else if(admin !=null){
+    		else if(mem == "" && admin != ""){
   				alert("지금 로그인 계정은 관리자 계정입니다.");
     			location.href = "${pageContext.request.contextPath}/home.jsp"; 
     		}
