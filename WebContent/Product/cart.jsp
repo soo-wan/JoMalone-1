@@ -86,7 +86,7 @@
 			  	  		<td>총 가격
 				  	  	</tr>
 				  	  	<tr>
-				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">선택하신 상품이 존재하지 않습니다.
+				  	  		<td colspan="7" style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">서비스 준비중에 있습니다.
 				  	  	</tr>
 			  		</table>
 			    </div>
