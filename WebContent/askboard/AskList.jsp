@@ -12,9 +12,9 @@
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
 	.article {padding-bottom: 10px;}
 	.article:hover {background-color: #cbe7ff90;}	
-	a:link {color: black;}
-	a:visited {color: #887f7f;}
-	a:hover {text-decoration: none;}
+	#a:link {color: black;}
+	#a:visited {color: #887f7f;}
+	#a:hover {text-decoration: none;}
 .naviBar {
 	font-size: 20px;
 	word-spacing: 5px;
@@ -26,7 +26,7 @@
 }
 input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
-</head>
+</head>	
 
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="true" />
@@ -57,7 +57,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<c:if test="${dto.answer_yn eq 'Y' }">
 							<span>[답변완료]</span>
 						</c:if>
-							<a href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+							<a id="a" href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
 						</div>						
 						<div class="col-2">${dto.formedOnlyDate }</div>
 					</div>
@@ -71,9 +71,9 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		</div>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="메인으로" id="toIndex"></div> 
-				<div style="float:left; margin: 0px 5px 0px 0px;"><input type="button" value="마이페이지로" id="toMyPage"></div>
-				<div style="float:right;"><input type="button" value="문의하기" id="toWrite"></div>
+				<div style="float:left; margin: 0px 5px 100px 0px;"><input type="button" value="메인으로" id="toIndex"></div> 
+				<div style="float:left; margin: 0px 5px 100px 0px;"><input type="button" value="마이페이지로" id="toMyPage"></div>
+				<div style="float:right; margin: 0px 5px 100px 0px;"><input type="button" value="문의하기" id="toWrite"></div>
 			</div>
 		</div>
 	</div>

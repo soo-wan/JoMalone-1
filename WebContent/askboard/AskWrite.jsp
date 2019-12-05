@@ -14,6 +14,8 @@
 	#write-page {margin-top: 80px; height: 900px;}
 	#write-title {margin-bottom: 35px; padding: 0px; height: 50px;}
 	#write-title>h4 {width: 100%; line-height: 45px; text-align: center;}
+	
+	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 <body>
@@ -26,7 +28,7 @@
 			</div>
 			<div class="row" id=askMenuBox>
 				<div class="col-12 p-0">
-					<select name="askMenu" id="askMenu">
+					<select name="askMenu" id="askMenu" style="padding-left: 10px;">
 						<option value="a0" disabled selected>문의유형</option>
 						<option value="a1">배송</option>
 						<option value="a2">주문</option>
@@ -44,7 +46,7 @@
 			<div class="row" id=titleBox>
 				<div class="col-12 p-0">
 					<input type=text placeholder="제목을 입력해주세요." id="titleAsk" name="title"
-						style="width: 100%;">
+						style="width: 100%; padding-left: 10px;">
 				</div>
 			</div>
 			<div class="row" id=contentsBox>
@@ -61,9 +63,9 @@
 			</div>
 			<hr>
 			<div class="row" id=btnBox>
-				<div class="col-12 p-0" style="text-align: right;">
-					<input type="button" value="취소" id="cancel"> <input
-						type="button" value="글쓰기" id="toWrite">
+				<div class="col-12 p-0" style="text-align: center;">
+					<input type="button" value="취소" id="cancel">
+					<input type="button" value="글쓰기" id="toWrite">
 				</div>
 			</div>
 		</div>
