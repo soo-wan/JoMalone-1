@@ -51,7 +51,7 @@
 			</div>
             <div id="img_bar" >
             	<div class="notice">
-            		<img src="/JoMalone/Resource/img/notice.png" id="notice" style="cursor:pointer;">
+            		<a href="/JoMalone/list.notice"><img src="/JoMalone/Resource/img/notice3.png" id="notice" style="cursor:pointer;"></a>
             	</div>
             	<c:choose>
             	<c:when test="${sessionScope.loginInfo != null }">
