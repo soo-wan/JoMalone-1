@@ -111,8 +111,10 @@ h4 {
 }
 
 #summernote {
-	width: 350px;
+	float:left;
+	margin-left: 30px;
 }
+
 </style>
 </head>
 <body>
@@ -141,7 +143,7 @@ h4 {
 
 			<form action="${pageContext.request.contextPath}/insertDetail.admini"
 				method="post" id="frm" enctype="multipart/form-data">
-				<table>
+				<table  style="float: left;">
 					<tr>
 						<td class=firstCol>상품분류
 						<td class=secondCol><select name="" id="category"
@@ -211,13 +213,13 @@ h4 {
 							disabled="disabled" class=secondCol_inner></td>
 					</tr>
 				</table>
-				<textarea display="hidden" name="content" class="summernote"></textarea>
+				<div id="summernote"><textarea display="hidden" name="content" class="summernote"></textarea></div>
 
 				<!--
 <input type="button" id="prePageBtn" value="이전페이지">
 -->
 
-				<input type="button" id="enterBtn" value="등록">
+				<div style="float: left; width: 1200px; margin-top: 30px; padding-left: 180px;"><input type="button" id="enterBtn" value="등록"></div>
 			</form>
 			<script>
 			 
@@ -281,8 +283,8 @@ h4 {
 
 
                                 $(".summernote").summernote({
-                                    height : 500,
-                                    width : 800,
+                                    height : 280,
+                                    width : 350,
                                     callbacks : {
                                         onImageUpload : function(files) {
 
