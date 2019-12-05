@@ -10,7 +10,7 @@
 <body>
 <script>
 alert("등록되었습니다.");
-location.href="${pageContext.request.contextPath}/admin/insertProduct.jsp";
+location.href="${pageContext.request.contextPath}/adminBack/insertProduct.jsp";
 </script>
 </body>
 </html>
