@@ -82,9 +82,9 @@ textarea {
 				<div class="col-12 p-0"><h4>REPORT ADMIN</h4></div>
 			</div>
 			<div class="row" id=reportType>
+			<input type="hidden" name="reviewSeq" id="reviewSeq" value=${reviewSeq }>
 				<div class="col-12 p-0">
-				<input type="hidden" name="reviewSeq" id="reviewSeq" value=${reviewSeq }>
-				<p id=reportType style="font-weight: bold;">게시물 관리 사유를 선택해주세요.</p>
+				<p id=reportType style="font-weight: bold;">게시물 관리 대상 접수 사유를 선택해주세요.</p>
 					<input type="radio" name="reportType" value="r1"> 부적절한 홍보<br> <input
 						type="radio" name="reportType" value="r2"> 명예훼손/사생활 침해<br> <input
 						type="radio" name="reportType" value="r3"> 저작권 침해<br> <input
@@ -99,16 +99,16 @@ textarea {
 			<div class="col-12 p-0">
 					
 				<c:choose>
-					<c:when test="${preCheckDTO.check_YN!=null && resultDTO.check_YN != 'Y'}">
-						<c:if test="${preCheckDTO.check_YN == 'Y'}">					
+					<c:when test="${preCheckDTO.check_YN=='Y'}"> <!--  -->
+											
 							<p style="font-weight: bold;"><span style="color: crimson;">*</span> 기존 조치 내역이 있습니다.</p>
 							
 							<span>조치 방안 : <span style="color: crimson;">${preCheckDTO.checkTypeKor }</span></span><br>
 							<span>조치일 : ${preCheckDTO.checkDateFormedFullDate }</span><br>
 							<span>추가 기재 메모 : ${preCheckDTO.checkCommentsBlank }</span><br>							
-						</c:if>
+						
 						<br>
-						<c:if test="${preCheckDTO.check_type == 'none' || preCheckDTO.check_type == 'blind'}">
+						
 							<p style="font-weight: bold;">해당 리뷰를 어떻게 관리하겠습니까?</p>						
 							<input type="radio" name="checkType" value="${preCheckDTO.check_type }"> <span style="color:crimson;">기존 조치 유지</span><br>
 							<input type="radio" name="checkType" value="none"> 1. 별도 조치 없음<br>
@@ -120,13 +120,12 @@ textarea {
 							<textarea id="checkComments" name="checkComments"></textarea>
 							<br>
 							<input type="checkbox" id="confirmAll">
-							<span style="color: crimson; font-weight: bold;">모든 내용을
-								확인했습니다.</span>
+							<span style="color: crimson; font-weight: bold;">모든 내용을 확인했습니다.</span>
 							<br>
-						</c:if>						
+												
 					</c:when>
 					
-					<c:when test="${preCheckDTO.check_YN==null && resultDTO.check_YN != 'Y'}">
+					<c:otherwise>
 						<p style="font-weight: bold;">해당 리뷰를 어떻게 관리하겠습니까?</p>						
 						<input type="radio" name="checkType" value="none"> 1. 별도 조치 없음<br>
 						<input type="radio" name="checkType" value="blind"> 2. 블라인드 처리<br>
@@ -140,12 +139,8 @@ textarea {
 						<span style="color: crimson; font-weight: bold;">모든 내용을
 							확인했습니다.</span>
 						<br>						
-					</c:when>
-					<c:when test="${resultDTO.check_YN == 'Y' }">
-						<p style="font-weight: bold;">조치 방안 : <span style="color: crimson;">${resultDTO.checkTypeKor }</span></p>
-						<p style="font-weight: bold;">조치일 : <span>${resultDTO.checkDateFormedFullDate }</span></p>
-						<p style="font-weight: bold;">추가 기재 메모 : <span>${resultDTO.checkCommentsBlank }</span></p>								
-					</c:when>
+					</c:otherwise>
+					
 				</c:choose>
 			</div>
 		</div>
@@ -153,7 +148,7 @@ textarea {
 		
 			<hr>
 			<div class="row" id=btnBox>
-				<div class="col-12 p-0" style="text-align: right;">
+				<div class="col-12 p-0" style="text-align: right;" id=innerBtnBox>
 					<input type="button" value="취소" id="cancel"> <input
 						type="button" value="접수하기" id="toWrite">
 				</div>
@@ -173,15 +168,85 @@ textarea {
            location.href = "read.review?no=${reviewSeq }&location=adminReviews";//원래 리뷰페이지
        });
        $("#toWrite").on("click", function() {
-       	var check = $('input:radio[name=reportType]').is(':checked');
-       	if(!check){
-       		alert("게시물 관리 사유를 선택해주세요.");
-       		return false;
-       	}
-       	alert("처리가 완료되었습니다.");
-       	document.getElementById("writeFrm").submit();
+          	var check = $('input:radio[name=reportType]').is(':checked');
+           	if(!check){
+           		alert("접수 사유를 선택해주세요.");
+           		return false;
+           	}
+    	   	var check = $('input:radio[name=checkType]').is(':checked');
+			if (!check) {
+				alert("게시물 관리 방법을 선택해주세요.");
+				return false;
+			}
+			var checkBox = $("#confirmAll").prop("checked");
+			if (!checkBox) {
+				alert("\"모든 내용을 확인했습니다.\"에 체크해주세요.");
+				return false;
+			}
+			
+			var checkConfirm = confirm("선택한 내용대로 진행할까요?");
+			if (checkConfirm) {
+				$
+						.ajax(
+								{
+									url : "/JoMalone/dealConfirm.report",
+									type : "post",
+									dataType : "json",
+									data : {
+										reviewSeq : "${reviewSeq }",
+										reportType : $(':radio[name="reportType"]:checked').val(),
+										checkType : $(':radio[name="checkType"]:checked').val(),
+										checkComments : $("#checkComments").val()
+									}
+								})
+						.done(
+								function(data) {
+									console.log(data);
+									$("#reportType").remove();									
+									$("#innerBtnBox").children("input").remove();
+									
+									var checkType = '';
+									if (data.check_type == "none") {
+										checkType = "별도 조치 없음";
+									} else if (data.check_type == "blind") {
+										checkType = "블라인드";
+									} else if (data.check_type == "delete") {
+										checkType = "삭제";
+									}
+									var checkComments = '';
+									if (data.check_comments == null) {
+										checkComments = "없음";
+									} else {
+										checkComments = data.check_comments;
+									}
+									var fillet = '';
+									fillet += '<p style="font-weight: bold;">조치 방안 : <span style="color: crimson;">'
+											+ checkType
+											+ '</span></p>';
+									fillet += '<p style="font-weight: bold;">조치일 : <span>'
+											+ data.formedDate
+											+ '</span></p>';
+									fillet += '<p style="font-weight: bold;">추가 기재 메모 : <span>'
+											+ checkComments
+											+ '</span></p>';
+									$(".checkReportBox")
+											.children("div")
+											.html("").append(
+													fillet);
+									
+									var newBtnBox = '<input type="button" value="리뷰목록보기" id="toAllReviews">';									
+									$("#innerBtnBox").append(newBtnBox);
+									
+								}).fail(function(data) {
+
+						})
+			}
+			
        });
        
+       $(document).on("click","#toAllReviews",function(){
+    	   location.href="/JoMalone/allList.review";
+       });
        
  	</script>
 </body>

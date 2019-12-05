@@ -242,8 +242,33 @@ public class ReportDAO {
 		}
 	}
 	
+	public int insertAdminReport(ReportDTO dto) throws Exception{// 신고글 작성
+		String sql = "insert into reportboard values(report_seq.nextval,?,?,'admin1',null,sysdate,'Y',?,sysdate,?)";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, dto.getReport_type());
+			pstat.setInt(2, dto.getReview_seq());
+			pstat.setString(3, dto.getCheck_comments());
+			pstat.setString(4, dto.getCheck_type());
+			int result = pstat.executeUpdate();
+			con.commit();
+			return result;
+		}
+	}
 	
-	
+	public int latestAdminReportSeq() throws Exception{
+		String sql = "select max(report_seq) from reportboard where mem_id='admin1'";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				ResultSet rs = pstat.executeQuery();
+				){
+			int result = 0;
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}return result;
+		}
+		
+	}
 	
 	public List<ReportDTO> selectByPageById(int start, int end, String id) throws Exception{
 		String sql = "select * from (select reportboard.*, row_number() over (order by report_seq desc) article from reportboard where mem_id=?) where article between ? and ?";

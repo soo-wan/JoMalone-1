@@ -96,9 +96,13 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<c:if test="${dto.check_YN eq 'Y' }">
 							<span>[확인완료]</span>
 						</c:if>
-							<a href="read.report?no=${dto.report_seq }&article=${dto.review_seq}&location=allReports">신고합니다.</a>							
+							<a href="read.report?no=${dto.report_seq }&article=${dto.review_seq}&location=allReports">
+							<c:choose>
+							<c:when test="${dto.mem_id=='admin1' }">관리자 직접 접수</c:when><c:otherwise>신고합니다</c:otherwise>
+							</c:choose>
+							</a>							
 						</div>
-						<div class="col-1">${dto.mem_id }</div>
+						<div class="col-1"><span id="reporterId">${dto.mem_id }</span></div>
 						<div class="col-3">${dto.formedFullDate }</div>
 						<div class="col-2"><c:if test="${dto.check_type !=null}">${dto.checkTypeKor }</c:if></div>
 					</div>
@@ -143,6 +147,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 </div>
 
 	<script>
+
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
 		});
