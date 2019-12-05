@@ -8,7 +8,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<<<<<<< HEAD
+<link rel="stylesheet" href="Resource/css/home.css?b=14">
+=======
 <link rel="stylesheet" href="Resource/css/home.css?b=115">
+>>>>>>> 1d779d52f8b50a04f04eb1640ce27a57d590967f
 </head>
 <body>
 	<jsp:include page="Resource/key/top.jsp" flush="false"/>
