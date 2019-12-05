@@ -46,7 +46,7 @@
 	
 	td{overflow:hidden; white-space : nowrap;}
   	 .contents{height:600px;}
-  	 #search, #all{background-color:transparent; border:1px solid black; border-radius:2px; margin: 0 3px 0 3px;}
+  	 #search, #all{background-color:lightgray; border:1px solid black; border-radius:2px; margin: 0 3px 0 3px;}
      #id, #name, #phone, #logintype,#modi{ border-radius:3px; border:1px solid black; margin:0;}
      input[type=text]{margin: 0 5px 0 0; outline:none}
    		.label{margin:0 5px 0 3px;}
@@ -73,7 +73,6 @@
 	    	<label class="label 4">Phone</label><input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
 	    	<input type="submit" value="검색" id="search">
 	    	<input type="button" value="전체보기" id="all">
-	    	<input type="button" value="회원정보수정하기" id="modi">
     	</fieldset>
     	</form>
     	
@@ -131,6 +130,7 @@
 <script>
 alert("수정되었습니다.");
 window.close();
+location.href="admin.mem"
 </script>
 </c:when>
 </c:choose>
@@ -173,7 +173,7 @@ window.close();
 			var black_yn = td.eq(12).text();
 			var blackdate = td.eq(13).text();
 			window.name="pwin";
-			window.open("modi.mem?id="+id,"","width=610px,height=800px,top=300px,left=200px");
+			window.open("modi.mem?id="+id,"","width=610px,height=600px,top=300px,left=200px");
 		});
     </script>
 </body>
