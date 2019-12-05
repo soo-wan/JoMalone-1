@@ -61,7 +61,7 @@
 						<c:forEach items="${list}" var="dto">
 							<tr class="my-item" id="listVal">
 					  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" value="${dto.seq}" class="delcheck" data-cartNum="${dto.seq}">
-					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg"> <!-- 상품코드받기 -->
+					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/${dto.prod_code }.jpg"> <!-- 상품코드받기 -->
 					  	  		<td style="width: 400px;">${dto.prod_name}
 					  	  		<td style="width: 130px;">${dto.price} 		
 					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
