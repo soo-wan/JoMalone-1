@@ -20,8 +20,8 @@ public class AdminDAO {
 	private AdminDAO() {
 		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("semitest");
-		bds.setPassword("semitest");
+		bds.setUsername("jomalone");
+		bds.setPassword("jomalone");
 		bds.setInitialSize(30); 
 	}
 
