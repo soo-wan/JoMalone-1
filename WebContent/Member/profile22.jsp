@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/JoMalone/Resource/css/profile22.css?log=2">
+<link rel="stylesheet" href="/JoMalone/Resource/css/profile22.css?log=2dd">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>

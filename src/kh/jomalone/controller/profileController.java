@@ -1,6 +1,7 @@
 package kh.jomalone.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,6 @@ public class profileController extends HttpServlet {
 		if(cmd.contentEquals("/Member/profile.my")) {
 			String id =(String)request.getSession().getAttribute("loginInfo");
 			MembersDTO dto =dao.selectById(id);
-			System.out.println(id);
-			System.out.println(dto.getLogintype());
 			request.setAttribute("dto",dto);
 			request.getRequestDispatcher("profile22.jsp").forward(request, response);
 			
@@ -56,6 +55,34 @@ public class profileController extends HttpServlet {
 				request.setAttribute("result", result);
 				if(result > 0) {
 					request.getRequestDispatcher("profileresult.jsp").forward(request, response);
+				}
+			}else if(cmd.contentEquals("/adminmodi.my")) {
+					String id = request.getParameter("id");
+					MembersDTO dto = dao.selectById(id);
+					String name = request.getParameter("name");
+					String phone1 = request.getParameter("phone1");
+					String phone2 = request.getParameter("phone2");
+					String phone3 = request.getParameter("phone3");
+					String email1 = request.getParameter("email1");
+					String email2 = request.getParameter("email2");
+					String zip_code = request.getParameter("zip_code");
+					String address1 = request.getParameter("address1");
+					String address2= request.getParameter("address2");
+					String year = request.getParameter("year");
+					String month = request.getParameter("month");
+					String day = request.getParameter("day");
+					String gender = request.getParameter("gender");
+					String black_yn = request.getParameter("black_yn");
+					String blackdate = request.getParameter("blackdate");
+		
+					MembersDTO info = new MembersDTO(id,name,phone1,phone2,phone3,email1,email2,zip_code,address1,address2,year,month,day,gender,black_yn,blackdate);
+					int result = dao.modifyInfo(info);
+					
+				
+				System.out.println(result);
+				request.setAttribute("result", result);
+				if(result > 0) {
+					request.getRequestDispatcher("admin.jsp").forward(request, response);
 				}
 			}
 		

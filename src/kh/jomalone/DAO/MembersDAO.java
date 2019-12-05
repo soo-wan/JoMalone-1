@@ -134,7 +134,7 @@ public class MembersDAO {
 					Timestamp enrolldate =rs.getTimestamp(12);
 					Timestamp lastlogin = rs.getTimestamp(13);
 					String black_yn=rs.getString(14);
-					Timestamp blackdate=rs.getTimestamp(15);
+					String blackdate=rs.getString(15);
 					String agree_s=rs.getString(16);
 					String agree_p=rs.getString(17);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
@@ -246,7 +246,7 @@ public class MembersDAO {
 					Timestamp enrolldate =rs.getTimestamp(12);
 					Timestamp lastlogin = rs.getTimestamp(13);
 					String black_yn=rs.getString(14);
-					Timestamp blackdate=rs.getTimestamp(15);
+					String blackdate=rs.getString(15);
 					String agree_s=rs.getString(16);
 					String agree_p=rs.getString(17);
 					MembersDTO dto = new MembersDTO(id,logintype,pw,name,phone,email,zip_code,
@@ -385,7 +385,7 @@ public class MembersDAO {
 					Timestamp enrolldate =rs.getTimestamp(12);
 					Timestamp lastlogin = rs.getTimestamp(13);
 					String black_yn=rs.getString(14);
-					Timestamp blackdate=rs.getTimestamp(15);
+					String blackdate=rs.getString(15);
 					String agree_s=rs.getString(16);
 					String agree_p=rs.getString(17);
 					MembersDTO dto = new MembersDTO(id,type,pw,name,phone,email,zip_code,
@@ -398,6 +398,13 @@ public class MembersDAO {
 			}
 		}
 	}
+
+public Timestamp getTimestamp(String str){
+	
+		return Timestamp.valueOf(str);
+	
+};
+
 
 	
 	
