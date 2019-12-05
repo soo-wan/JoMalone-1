@@ -9,7 +9,6 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
                 <style>
                     #sidebar{ float:left; width:200px; margin:0px; padding:0px; }
                     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
@@ -21,7 +20,6 @@
                     }
                     .menu>a{text-decoration: none; color:white;}
                     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
-
                     #container{
                         height:800px;
                         width:1300px;
@@ -30,15 +28,10 @@
                         overflow-x:scroll;
                         border:1px solid black;
                     }
-
-
-
                     #category{display: none;}
                     .firstCol{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; width:100px;}
                     .secondCol{width:250px;}
                     input,select,textarea{width:100%;}
-
-
                     #container{
                         height:800px;
                         width:1300px;
@@ -47,8 +40,6 @@
                         overflow-x:scroll;
                         border:1px solid black;
                     }
-
-
                 </style>
             </head>
             <body>
