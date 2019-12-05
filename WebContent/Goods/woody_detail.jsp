@@ -34,6 +34,7 @@
                             <div style="margin: 20px auto 10px auto; padding: 0px 5px 0px 5px; width: 300px; height: 25px; border: 1px solid lightgray; text-align: left;">
                                 <input type=hidden name=price value=${dto.price }> <!-- value값을 list형 가격으로 -->
                                 <h6 style="float: left; padding: 5px 0px 5px 0px;">₩ ${dto.price }</h6>
+                                <input type="hidden" id="prod_code" value='${dto.productCode }'>
                                 <h6 style="float: left; margin: 0px 10px 0px 10px; padding: 5px 0px 5px 0px;">100ML</h6>
                             </div>
                             <div style="width: 100%; height: 50px;">
@@ -96,7 +97,7 @@
                             location.href="${pageContext.request.contextPath}/list.ca";
                         }
                         else{
-                            location.href="${pageContext.request.contextPath}/home.jsp";
+                        	location.href="${pageContext.request.contextPath}/eachProduct.admini?productCode="+$("#prod_code").val();
                         }                      
                     }
             </c:otherwise>
@@ -116,7 +117,7 @@
                         location.href="${pageContext.request.contextPath}/list.ca";
                     }
                     else{
-                        location.href="${pageContext.request.contextPath}/home.jsp";
+                    	location.href="${pageContext.request.contextPath}/eachProduct.admini?productCode="+$("#prod_code").val();
                         //$("#prod_quantity").val() == 1; 
                         return false;
                     }

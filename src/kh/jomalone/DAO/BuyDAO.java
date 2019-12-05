@@ -109,7 +109,7 @@ public class BuyDAO {
 	public List<OrderListDTO> selectBuyListByID(String id) throws Exception {
 		List<OrderListDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from order_list where mem_id=? and buy_success='Y'")) {
+				PreparedStatement pstat = con.prepareStatement("select * from order_list where mem_id=? and buy_success='Y' and refund='N'")) {
 			pstat.setString(1, id);
 			try (ResultSet rs = pstat.executeQuery();) {
 				while (rs.next()) {
