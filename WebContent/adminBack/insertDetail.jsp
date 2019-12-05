@@ -5,17 +5,13 @@
             <head>
                 <meta charset="UTF-8">
                 <title>adminPage</title>
-                <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+<script src="../Resource/lang/summernote-ko-KR.js"></script>
 
-
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
-                <script	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
-                <script src="../Resource/lang/summernote-ko-KR.js"></script>
+              
 
 
 
@@ -37,7 +33,7 @@
                         height:800px;
                         width:1300px;
                         float:left;
-                        padding: 20px; margin:0px;
+                        padding: 20px;
                         overflow-x:scroll;
                         border:1px solid black;
                     }
@@ -150,7 +146,7 @@
                                     <td class=secondCol><input type="text" id="winter" disabled="disabled" class=secondCol_inner></td>
                                 </tr>
                             </table>
-                            <textarea display="hidden" name="content" id="summernote"></textarea>
+                            <textarea display="hidden" name="content" class="summernote"></textarea>
 
                             <!--
 <input type="button" id="prePageBtn" value="이전페이지">
@@ -218,8 +214,8 @@
                             })
 
 
-                            (function($) {
-                                $("#summernote").summernote({
+                       (function($) {
+                                $(".summernote").summernote({
                                     height : 500,
                                     width : 800,
                                     callbacks : {
@@ -249,7 +245,7 @@
                                         }
                                     }
                                 });
-                            })(jQuery);       
+                       })(jQuery);   
 
                         </script>
 
