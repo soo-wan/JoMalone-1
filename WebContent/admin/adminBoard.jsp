@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Notice | Jo Malone</title>
+<title>Admin | Jo Malone</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -43,6 +43,7 @@
 	.naviPage:visited{
 	color: black;
 	}
+	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 <body>
@@ -59,9 +60,12 @@
                 <li class="menu"><a href="/JoMalone/allList.report">전체 신고글</a></li>
                 <li class="menu"><a href="/JoMalone/allList.review">리뷰</a></li>
 			</ul>
-      </div>
-	<div id="container">
-				<div class="row" style="text-align: center;" id="headDiv">
+     </div>
+		
+		
+		
+			<div class=container>
+		<div class="row" style="text-align: center;" id="headDiv">
 			<div class="col-12">공지사항</div>
 		</div>
 		<div class="row" style="text-align: center;">
@@ -104,8 +108,11 @@
                 </c:choose>			
 			</div>
 		</div>
-    </div>
+	</div>
+		
+	</div>
 </div>
+
     <script>
     $("#toIndex").on("click", function() {
 		location.href = "home.jsp";

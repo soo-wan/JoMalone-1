@@ -51,7 +51,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 	color: crimson;
 }
 .star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
+.star_rating span {
     font-size:15px;
     letter-spacing:0;
     display:inline-block;
@@ -59,8 +59,8 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
     color:#ccc;
     text-decoration:none;
 }
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffd800;}
+.star_rating span:first-child {margin-left:0;}
+.star_rating span.on {color:#ffd800;}
 </style>
 </head>
 
@@ -109,10 +109,10 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<div class="col-2">
 							<p class="star_rating">
 							    <c:forEach var="i" begin="1" end="${dto.grade}">
-									 <a href="#" class="on">★</a>									
+									 <span class="on">★</span>									
 								</c:forEach>
 								<c:forEach var="i" begin="${dto.grade+1}" end="5">
-									 <a href="#">★</a>									
+									 <span>★</span>									
 								</c:forEach>
 							</p>
 						</div>

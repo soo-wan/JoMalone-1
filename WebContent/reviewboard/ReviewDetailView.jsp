@@ -35,7 +35,7 @@
 #titleBox {margin-top: 5px; margin-bottom: 5px;}
 	#contents {padding-top: 10px; padding-bottom: 10px;	min-height: 500px;}	
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
-#toReport {
+#toReport,#toDealReview {
 	border-style: none;
 	background-color: crimson;
 	color: white;
@@ -125,8 +125,15 @@
 		<hr>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
-				<input type="button" value="게시글신고" id="toReport"> <input
-					type="button" value="목록" id="toMain">
+			<c:choose>
+				<c:when test="${sessionScope.adminId==null}">
+					<input type="button" value="게시글신고" id="toReport"> 
+				</c:when>
+				<c:otherwise>
+					<input type="button" value="게시글관리" id="toDealReview">
+				</c:otherwise>
+			</c:choose>
+				<input type="button" value="목록" id="toMain">
 				<c:choose>
 					<c:when test="${sessionScope.loginInfo == readDTO.mem_id}">
 						<input type="button" value="수정" id="toModify">
@@ -178,6 +185,9 @@
     });        
     $("#toReport").on("click",function(){
        location.href = "write.report?no=${readDTO.review_seq}";
+    });
+    $("#toDealReview").on("click",function(){
+    	location.href="deal.report?no=${readDTO.review_seq}";
     });
     </script>
 </body>

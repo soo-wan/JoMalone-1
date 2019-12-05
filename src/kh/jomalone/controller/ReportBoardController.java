@@ -121,9 +121,22 @@ public class ReportBoardController extends HttpServlet {
 			}
 		}else if(cmd.contentEquals("/write.report")) {
 			int seq = Integer.parseInt(request.getParameter("no"));
-			request.setAttribute("reportSeq", seq);
+			request.setAttribute("reviewSeq", seq);
 			request.getRequestDispatcher("reportboard/ReportWriteCall.jsp").forward(request, response);
-		
+			
+		}else if(cmd.contentEquals("/deal.report")) {
+			int seq = Integer.parseInt(request.getParameter("no"));
+			try {
+				ReportDTO preCheck = dao.preCheckReport(seq);
+				request.setAttribute("preCheckDTO", preCheck);
+				request.setAttribute("reportSeq", seq);
+				System.out.println(preCheck+":"+seq);
+				//request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("error.jsp");
+			}
+			
 		}else if(cmd.contentEquals("/writeConfirm.report")) {		
 			int seq = Integer.parseInt(request.getParameter("articleSeq"));
 			String reportType = request.getParameter("reportType");
@@ -161,7 +174,7 @@ public class ReportBoardController extends HttpServlet {
 				list.add(obj);
 			}
 			response.getWriter().append(list.toString());
-		}			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

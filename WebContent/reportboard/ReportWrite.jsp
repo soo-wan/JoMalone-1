@@ -38,7 +38,7 @@
 			</div>
 			<div class="row" id=reportType>
 				<div class="col-12 p-0">
-				<input type="hidden" name="articleSeq" id="articleSeq" value=${reportSeq }>
+				<input type="hidden" name="articleSeq" id="articleSeq" value=${reviewSeq }>
 				<p id=reportType style="font-weight: bold;">신고 사유를 선택해주세요.</p>
 					<input type="radio" name="reportType" value="r1"> 부적절한 홍보<br> <input
 						type="radio" name="reportType" value="r2"> 명예훼손/사생활 침해<br> <input
