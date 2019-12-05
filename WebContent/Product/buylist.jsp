@@ -84,7 +84,7 @@
 										<td style="width: 160px;">CJ 대한통운 <br>
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
 										<td style="width: 160px;">
-										<button id=refund onclick="refund( '${dto.imp_uid}' , ${dto.price} , ${dto.prod_quantity} )">환불하기 </button>
+										<button id=refund onclick="refund(${dto.price},${dto.prod_quantity},'${dto.imp_uid}')">환불하기 </button>
 										<button id=writereview onclick="writereview(${dto.order_seq},'${dto.prod_name}')">리뷰쓰기</button>
 									</tr>
 								</c:forEach>
@@ -134,8 +134,8 @@
 		$("#last").on("click",function(){
 			location.href= "search.buy?period=180"
 		});
-		function refund(imp_uid,price,prod_quantity){
-			location.href= "${pageContext.request.contextPath}/partrefund.buy?imp_uid ="+imp_uid+"&price="+ price+"&prod_quantity="+prod_quantity;
+		function refund(price,prod_quantity,imp_uid){
+			location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid;
 		}
 		function writereview(order_seq,prod_name){
 			location.href= "${pageContext.request.contextPath}/write.review?seq="+order_seq+"&prodName="+prod_name;
