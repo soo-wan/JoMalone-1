@@ -9,13 +9,12 @@
 <link rel="stylesheet" href="/JoMalone/Resource/css/profile22.css?log=2">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
-
 <body>
 	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
 	
-	<form action="modi.my" method="post" id="profileform">
+	<form action="modi.my" method="post" id="profileform" style="height: 1000px;">
 	
-		<div id="signup-page" class="container">
+		<div id="signup-page" class="container" style="height: 1000px;">
 			<div id="signup-title" class="row"><h4>MY PROFILE</h4></div>
 			<div id="signup-inputbox" class="row">
 				<div id="su-id"><h5><span>*</span>아이디 : </h5><input type="text" placeholder="Input Your ID" style="width: 200px; height: 30px;" id="id" name="id" value="${dto.id }" readonly></div>
@@ -127,7 +126,8 @@
   </div>
 </div>
 </form>
-
+	
+	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 
 	<script>
 	// 주소찾기	
@@ -239,5 +239,7 @@
 		location.href = "/JoMalone/Member/mypage.jsp";
 	})
 	</script>
+	
+	
 </body>
 </html>

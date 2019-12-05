@@ -14,11 +14,11 @@
 	<jsp:include page="Resource/key/top.jsp" flush="false"/>
 	<div id="homebody">
 	<div id="main-event" class="container">
-	    <div id="main" >
+	    <div id="main" style="margin-top: 0px;">
             <a href="#"><img src="Resource/img/Main_event.jpg"></a>
 	    </div>
 	    <div id="details">
-	        <div >
+	        <div>
 	        	<a href="#"><h4>GIVE A GIFT</h4></a>
 	        	<a href="#"><h6>기브 어 기프트</h6></a><br>
 	        	<a href="#"><input id="main-btn" type="button" value="자세히보기"></a>

@@ -33,7 +33,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 	
 	<div id="enquiry-page" class="container">
 		<div id="enquiry-title" class="row">
-			<h4>1:1 ENQUIRY</h4>
+			<h4 style="text-align: center;">1:1 ENQUIRY</h4>
 		</div>
 		<div class="row" style="margin-top: 60px; text-align: center;">
 			<div class="col-3 d-none d-sm-block">문의종류</div>

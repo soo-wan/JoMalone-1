@@ -13,14 +13,13 @@
 <style>
 
 	#toptop{height:250px; margin:auto; width:1200px;}
-	#top_bar {margin: 0px; height: 25px; background-color: #AAA9AE;}
-	#middle_bar {margin: 0px; height: 160px; width:1200px; margin:auto;}
-	#title {padding: 30px 0px 30px 200px;  font-family: 'Alata', sans-serif; float:left; width:990px; height:160px; text-align:center;}
+	#top_bar {margin: 0px; height: 25px; background-color: #F6F6F6;}
+	#middle_bar {margin: 0px; height: 160px; width:1140px; margin:auto;}
+	#title {padding: 30px 0px 30px 200px;  font-family: 'Alata', sans-serif; float:left; width:930px; height:160px; text-align:center;}
 	
-	#img_bar{ float:left; width:210px; height:160px; line-height:160px;}
+	#img_bar{float:left; width:210px; height:160px; line-height:160px;}
 	 .cart, .search, .information, .notice{float:left; height:160px; padding:55px 0 0 0;}	
 	 #cart, #search, #information, #notice{float:left; width:50px; height:50px;}	
-	
 	
 	#top-two {padding: 0px; margin:auto; height: 40px; width:1140px; background-color: #F6F6F6; line-height:40px;}
 	#nav-ul { padding: 0px; height: 40px; list-style: none; width:1140px; float:left; list-style-type: none;}

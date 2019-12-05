@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/JoMalone/Resource/css/bottom.css">
 </head>
 <body>
-	<div id="bottom-one" class="container-fuild" style="margin: 0px; padding: 0px; background-color: #F6F6F6;">
+	<div id="bottom-one" class="container-fuild" style="margin: 50px 0px 0px 0px; padding: 0px; background-color: #F6F6F6;">
 		<div id="others" class="row" style="margin: auto; width: 1140px; background-color: #F6F6F6;">
 			<div id="customer" class="col-3">
 				<h5>CUSTOMER CENTER</h5>
@@ -35,12 +35,12 @@
 			</div>
 			<div id="info" class="col-3">
 				<p>
-					<a href="https://www.facebook.com/JoMaloneLondon/" target="_blank"><img
-						src="/JoMalone/Resource/img/facebook.png"></a> <a
-						href="https://twitter.com/JoMaloneLondon/" target="_blank"><img
-						src="/JoMalone/Resource/img/twitter.png"></a> <a
-						href="https://www.instagram.com/jomalonelondon/" target="_blank"><img
-						src="/JoMalone/Resource/img/insta.png"></a>
+					<a href="https://www.facebook.com/JoMaloneLondon/" target="_blank">
+					<img src="/JoMalone/Resource/img/facebook.png"></a>
+					<a href="https://twitter.com/JoMaloneLondon/" target="_blank">
+					<img src="/JoMalone/Resource/img/twitter.png"></a>
+					<a href="https://www.instagram.com/jomalonelondon/" target="_blank">
+					<img src="/JoMalone/Resource/img/insta.png"></a>
 				</p>
 				<h5>GUIDE</h5>
 				<h6>이용약관</h6>
