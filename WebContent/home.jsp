@@ -29,31 +29,29 @@
 	<div id="event" class="container">
 	    <div id="event-one" class="row">
 	        <div class="col-5">
-	            <a href="${pageContext.request.contextPath}/Product/prod1.jsp"><div class="bg"><h4>ORANGE BITTERS COLOGNE</h4><h5>오렌지 비터스 코롱</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event01.jpg"></a>
+	            <a href="${pageContext.request.contextPath}/Product/prod1.jsp"><div class="bg"><h4>ORANGE BLOSSOM</h4><h5>오렌지 블로썸</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event11.jpg"></a>
 	        </div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
-	        	<a href="${pageContext.request.contextPath}/Product/prod2.jsp"><div class="bg"><h4>LIMITED EDITION</h4><h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event02.jpg"></a>
-	        	<a href="#"><div class="bg"><h4>LIMITED EDITION</h4>
-	        		<h5>크리스마스 리미티드 에디션</h5><input type="button" value="자세히보기"></div></a>
+	        	<a href="${pageContext.request.contextPath}/Product/prod2.jsp"><div class="bg"><h4>BLACKBERRY & BAY</h4><h5>블랙베리 앤 베이</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event22.jpg"></a>
 	        </div>
 	    </div>
 	    <div id="event-two" class="row">
 	    	<div class="col-5">
-	    		<a href="${pageContext.request.contextPath}/Product/prod3.jsp"><div class="bg"><h4>ENGLISH PEAR & FREESIA DIFFUSER</h4><h5>잉글리쉬 페어 앤 프리지아 디퓨저</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event03.jpg"></a>
+	    		<a href="${pageContext.request.contextPath}/Product/prod3.jsp"><div class="bg"><h4>NECTARINE BLOSSOM & HONEY</h4><h5>넥타린 블로썸 앤 허니</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event33.jpg"></a>
 	    	</div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
-	        	<a href="#"><div class="bg"><h4>HOUSE OF JO MALONE</h4><h5>하우스 오브 조 말론 런던</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event04.jpg"></a>
+	        	<a href="#"><div class="bg"><h4>GRAPE FRUIT</h4><h5>그레이프 프루트</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event44.jpg"></a>
 	        </div>
 	    </div>
 	    <div id="event-three" class="row">
 	    	<div class="col-5">
-	    		<a href="#"><div class="bg"><h4>AT YOUR SERVICE</h4><h5>온라인 부티크 혜택</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event05.gif"></a>
+	    		<a href="#"><div class="bg"><h4>RED ROSES</h4><h5>레드 로즈</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event55.jpg"></a>
 	    	</div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
-	        	<a href="#"><div class="bg"><h4>ALL SCENTS</h4><h5>전체 프레그런스 보기</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event06.jpg"></a>
+	        	<a href="#"><div class="bg"><h4>AMBER & LAVENDER</h4><h5>앰버 앤 라벤더 코롱</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event66.jpg"></a>
 	        </div>
 	    </div>
 	</div>
