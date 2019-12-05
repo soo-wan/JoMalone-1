@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 	.look {margin: 10px 0px 5px 0px; width: 100px; height: 30px; border: 0px; background-color: #353535; color: white;}
+	#productCode{display:none;}
 </style>
 </head>
 <body>
@@ -35,16 +36,18 @@
 					<img src="/JoMalone/Resource/img/${dto.productCode}.jpg">
 					<h5 style="margin: 10px 0px 10px 0px; font-size: 17px;">${dto.productName }</h5>
 					<h6 style="margin: 5px 0px 5px 0px; font-size: 14px;">$${dto.price}</h6>
-					<button class =look type=button onclick="toDetail()">자세히보기</button>
+					<button class =look type=button>자세히보기</button>
+					<input id=productCode type="text" value="${dto.productCode}">
 				</div>
 			</c:forEach>
 		</div>
 	</div>
 	
 	<script>
-		$(".look").on("click", function() {
-			location.href = "/JoMalone/Goods/goods_detail.jsp";
-		})
+	$("body").on("click","button",function(){
+		var productCode = $(this).closest("div").find("#productCode").val();
+		location.href="/JoMalone/eachProduct.admini?productCode="+productCode;
+	})
 	</script>
 	
 	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
