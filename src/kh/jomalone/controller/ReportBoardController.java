@@ -106,12 +106,11 @@ public class ReportBoardController extends HttpServlet {
 		}else if(cmd.contentEquals("/deal.report")) {
 			int seq = Integer.parseInt(request.getParameter("no"));
 			try {
-				ReportDTO preCheck = dao.preCheckReport(seq);
-				ReportDTO result = dao.selectAdminReport(seq);
+				ReportDTO preCheck = dao.preCheckReport(seq);//동일리뷰에 대한 가장최근 처리건 조회
+				ReportDTO result = dao.selectAdminReport(seq);//동일리뷰에 대한 관리자 직접접수건 조회
 				request.setAttribute("preCheckDTO", preCheck);
 				request.setAttribute("resultDTO", result);
 				request.setAttribute("reviewSeq", seq);
-				System.out.println(preCheck+":"+seq);
 				request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -123,6 +122,26 @@ public class ReportBoardController extends HttpServlet {
 			String reportType = request.getParameter("reportType");
 			String checkType = request.getParameter("checkType");
 			String checkComments = request.getParameter("checkComments");		
+			try {
+				int result = dao.insertAdminReport(new ReportDTO(0,reportType,reviewSeq,null,null,null,null,checkComments,null,checkType));
+				if(checkType.contentEquals("none")) {
+					dao.makeReviewNonBlindBySeq(reviewSeq);
+				}else if(checkType.contentEquals("blind")) {
+					dao.makeReviewBlindBySeq(reviewSeq);
+				}else if(checkType.contentEquals("delete")) {
+					dao.makeReviewDeleteBySeq(reviewSeq);
+				}
+				int reportSeq = dao.latestAdminReportSeq();
+				ReportDTO dto = dao.selectReportBySeq(reportSeq);
+				Gson g = new Gson();
+				String resultDTO = g.toJson(dto);
+				if(result>0) {
+					response.getWriter().append(resultDTO);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("error.jsp");
+			}
 			
 			
 		}else if(cmd.contentEquals("/read.report")) {	

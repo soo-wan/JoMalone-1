@@ -13,10 +13,11 @@
 #sidebar{ float:left; width:200px; margin:0px; padding:0px; }
     #sidebar>.menu{ list-style-type: none; text-align: right; margin:auto; color:#1e2d47; text-align:center;
     padding:0px 10px; margin: 10px; width:80%; line-height:30px; background-color : #1e2d47; color:white;}
-    .menu{height:30px; width:100%; border:1px solid black; border-radius:3px;}
+    .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
     
     .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-    h4{margin:0px; padding:20px 20px; font-size: 20px; font-family: 'Alata', sans-serif;}
+    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
+    }
     .menu>a{text-decoration: none; color:white;}
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
     #container{
@@ -27,6 +28,10 @@
      	overflow-x:scroll;
      	border:1px solid black;
     }
+    
+    
+    
+    
     
 #headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
@@ -66,13 +71,14 @@
 	<c:otherwise>
 	<jsp:include page="/Resource/key/top.jsp" flush="true" />
 	</c:otherwise>
-	</c:choose>
+</c:choose>
 
-	<div class=container style="margin: 50px auto 0px auto;">
+
+	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12"><h4>NOTICE</h4></div>
+			<div class="col-12">NOTICE</div>
 		</div>
-		<div class="row" style="text-align: center; margin-top: 30px;">
+		<div class="row" style="text-align: center;">
 			<div class="col-1">번호</div>
 			<div class="col-8">제목</div>
 			<div class="col-3">등록일</div>			
@@ -99,7 +105,7 @@
 		</c:choose>
 		<hr>
 		
-		<div class="row" style="text-align: border: 1px solid blue;">
+		<div class="row" style="text-align: center;">
 			<div class="col-12 naviBar" style="color:black;">${pageNavi }</div>
 		</div>
 		<div class="row">

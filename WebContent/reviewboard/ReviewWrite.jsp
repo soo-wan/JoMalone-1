@@ -31,7 +31,7 @@
 .star_rating a.on {color:#ffd800;}
 .star_rating a:hover{
 	text-decoration:none;
-	color: #ccc;
+	color:#ffd800;
 }
 </style>
 
