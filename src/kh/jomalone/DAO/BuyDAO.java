@@ -98,7 +98,7 @@ public class BuyDAO {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select sum(prod_quantity) as quantity,prod_name from order_list group by prod_name order by 1 desc")) {
 			try (ResultSet rs = pstat.executeQuery()) {
-				if (rs.next()) {
+				while (rs.next()) {
 					list.add(new RankDTO(rs.getInt(1),rs.getString(2)));
 				}
 			}

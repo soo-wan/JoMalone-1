@@ -33,14 +33,14 @@ public class ChartController extends HttpServlet {
 				BuyDAO bdao = BuyDAO.getInstance();
 				list = bdao.selectBuyRank();
 				int[] buy_counts = new int[5];
-				String[] prod_names = {"","","","1","1"};
+				String[] prod_names = {"","","","",""};
 				int count =0;
 				for (RankDTO dto : list) {
 					System.out.println(dto.getProd_name());
 					buy_counts[count] = dto.getBuy_count();
 					prod_names[count] = Util.NullCheck(dto.getProd_name());
 					count++;
-					if(count==4) {
+					if(count==5) {
 						break;
 					}
 				}

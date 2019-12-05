@@ -66,12 +66,7 @@
                                     <td>${dto.prod_quantity}</td>
                                     <td>${dto.order_state}</td>
                                     <td><div id=div>${dto.delivery_check}</div><button id=delivery>배송</button></td>
-                                    <td>111
-                                    <c:choose>
-                                    	<c:when test ="${dto.refund=='P'}"><button>환불 확인</button></c:when>
-                                    	<c:when test ="${dto.refund=='Y'}">환불 완료</c:when>
-                                    	<c:otherwise>${dto.refund}  1111</c:otherwise>
-                                    </c:choose>
+                                    <td>
                                     </td>
                                 </tr>
                             </c:forEach>
