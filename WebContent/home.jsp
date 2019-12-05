@@ -8,17 +8,17 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="Resource/css/home.css">
+<link rel="stylesheet" href="Resource/css/home.css?b=44">
 </head>
 <body>
 	<jsp:include page="Resource/key/top.jsp" flush="false"/>
-	
+	<div id="homebody">
 	<div id="main-event" class="container">
-	    <div id="main" class="row">
+	    <div id="main" >
             <a href="#"><img src="Resource/img/Main_event.jpg"></a>
 	    </div>
-	    <div id="details" class="row">
-	        <div class="col-12">
+	    <div id="details">
+	        <div >
 	        	<a href="#"><h4>GIVE A GIFT</h4></a>
 	        	<a href="#"><h6>기브 어 기프트</h6></a><br>
 	        	<a href="#"><input id="main-btn" type="button" value="자세히보기"></a>
@@ -57,7 +57,7 @@
 	        </div>
 	    </div>
 	</div>
-	
+	</div>
 	<jsp:include page="Resource/key/bottom.jsp" flush="false"/>
 </body>
 </html>
