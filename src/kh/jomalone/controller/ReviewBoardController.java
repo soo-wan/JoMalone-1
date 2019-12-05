@@ -140,13 +140,17 @@ public class ReviewBoardController extends HttpServlet {
 			try {
 				ReviewDTO readDTO = dao.selectReviewBySeq(seq);
 				if (readDTO.getBlind_yn().contentEquals("Y")) {
-					request.setAttribute("blindCheck", "yes");
 					if (location.contentEquals("myReviews")) {
-
 						System.out.println(seq + ":" + location + ":" + readDTO.getBlind_yn());
+						request.setAttribute("blindCheck", "yes");
 						request.getRequestDispatcher("myList.review").forward(request, response);
 					} else if (location.contentEquals("allReviews")) {
+						request.setAttribute("blindCheck", "yes");
 						request.getRequestDispatcher("list.review").forward(request, response);
+					} else if (location.contentEquals("adminReviews")) {
+						request.setAttribute("readDTO", readDTO);
+						request.setAttribute("root", location);
+						request.getRequestDispatcher("reviewboard/ReviewDetailView.jsp").forward(request, response);		
 					}
 				} else {
 					request.setAttribute("readDTO", readDTO);
@@ -163,7 +167,7 @@ public class ReviewBoardController extends HttpServlet {
 			try {
 				ReviewDTO result = dao.selectReviewBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("reviewboard/ReviewModify.jsp").forward(request, response);
+				request.getRequestDispatcher("reviewboard/ReviewModifyCall.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
