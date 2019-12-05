@@ -263,7 +263,7 @@ public class adminController extends HttpServlet {
 				String productCode = request.getParameter("productCode");
 				System.out.println(productCode);
 				ProductDTO dto = dao.eachProductInfo(productCode);
-				request.setAttribute("eachProduct", dto);
+				request.setAttribute("dto", dto);
 				request.getRequestDispatcher("/adminFront/eachProduct.jsp").forward(request, response);
 			
 			}else if(cmd.contentEquals("/checkProduct.admini")) {
