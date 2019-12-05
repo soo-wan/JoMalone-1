@@ -36,10 +36,20 @@ public class AskBoardController extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html; charset=UTF-8");
 
-		String id = (String) request.getSession().getAttribute("loginInfo");
-		AskDAO dao = AskDAO.getInstance();		
+		// String id = (String) request.getSession().getAttribute("loginInfo");
+		// 밑에 회원id랑 관리자id 임의지정.(테스트 끝나면 지우기!!!!!!!!!!!!!!!!!)
+		//String id = "TestID";
+		String id = "TestID4";
+		//String id = "TestID2";
+		//String id = "TestID3";
+		//request.getSession().setAttribute("adminId", "admin");
+		//request.getSession().invalidate();
+		AskDAO dao = AskDAO.getInstance();
+		Util u = new Util();
 		
 		if (cmd.contentEquals("/list.ask")) {//나의문의게시판
+			request.getSession().invalidate();
+			request.getSession().setAttribute("loginInfo", id);
 			try {
 				int currentPage = 1;
 				String page = request.getParameter("currentPage");
@@ -59,6 +69,7 @@ public class AskBoardController extends HttpServlet {
 			}
 			
 		}else if (cmd.contentEquals("/newList.ask")) {//(관리자)신규문의게시판
+			request.getSession().setAttribute("adminId", "admin");
 			request.getSession().setAttribute("fromAdminAskPage", "new");
 			try {
 				int currentPage = 1;
@@ -78,6 +89,7 @@ public class AskBoardController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 		}else if (cmd.contentEquals("/allList.ask")) {//(관리자)전체문의게시판
+			request.getSession().setAttribute("adminId", "admin");
 			request.getSession().setAttribute("fromAdminAskPage", "entire");
 			try {
 				int currentPage = 1;
@@ -139,7 +151,7 @@ public class AskBoardController extends HttpServlet {
 			try {
 				AskDTO result = dao.selectAskBySeq(seq);
 				request.setAttribute("readDTO", result);
-				request.getRequestDispatcher("askboard/AskModifyCall.jsp").forward(request, response);
+				request.getRequestDispatcher("askboard/AskModify.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
@@ -201,10 +213,8 @@ public class AskBoardController extends HttpServlet {
 		} else if (cmd.contentEquals("/writeComment.ask")) {// 댓글작성 ajax
 			int originSeq = Integer.parseInt(request.getParameter("writingSeq"));
 			//String contents = request.getParameter("contents");
-			String contents = Util.ProtectXSS(request.getParameter("contents"));
+			String contents = u.ProtectXSS(request.getParameter("contents"));
 			String emailOk = request.getParameter("emailOk");
-			
-			System.out.println(originSeq+":"+contents+":"+emailOk);
 			PrintWriter pWriter = response.getWriter();
 			try {
 				dao.insertAskComment(new AskCommentsDTO(0,originSeq,contents,null));
