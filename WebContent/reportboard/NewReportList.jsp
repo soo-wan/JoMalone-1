@@ -123,7 +123,6 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 				<input type="button" value="메인으로" id="toIndex"> 
-				<input type="button" value="관리자페이지로" id="toAdminPage">
 			</div>
 		</div>
 	</div>
@@ -138,9 +137,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
 		});
-		$("#toAdminPage").on("click", function() {
-			location.href = "/JoMalone/admin.jsp";//관리자페이지메인
-		});
+
 
 	</script>
 </body>

@@ -107,8 +107,7 @@
 				</div>
 				<div class="row">
 					<div class="col-12" style="text-align: right;">
-						<input type="button" value="메인으로" id="toIndex"> <input
-							type="button" value="관리자페이지로" id="toAdminPage">
+						<input type="button" value="메인으로" id="toIndex">
 					</div>
 				</div>
 			</div>
@@ -123,9 +122,6 @@
 	<script>
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
-		});
-		$("#toAdminPage").on("click", function() {
-			location.href = "/JoMalone/admin.jsp";//관리자페이지메인
 		});
 	</script>
 	

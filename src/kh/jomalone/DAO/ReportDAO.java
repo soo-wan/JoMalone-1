@@ -430,6 +430,7 @@ public class ReportDAO {
 					result.setCheck_date(rs.getTimestamp("check_date"));
 					result.setCheck_type(rs.getString("check_type"));
 					result.setCheck_YN(rs.getString("check_yn"));
+					result.setReport_type(rs.getString("report_type"));
 				}return result;
 			}
 		}
