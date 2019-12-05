@@ -51,7 +51,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 	color: crimson;
 }
 .star_rating {font-size:0; letter-spacing:-4px;}
-.star_rating a {
+.star_rating span {
     font-size:15px;
     letter-spacing:0;
     display:inline-block;
@@ -59,8 +59,8 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
     color:#ccc;
     text-decoration:none;
 }
-.star_rating a:first-child {margin-left:0;}
-.star_rating a.on {color:#ffd800;}
+.star_rating span:first-child {margin-left:0;}
+.star_rating span.on {color:#ffd800;}
 </style>
 </head>
 
@@ -104,15 +104,15 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${selectResult }" var="dto">
-					<div class="row article p-1" style="text-align: center; height: 55px;  font-size:15px;" id="reviewItemsRow">
+					<div class="row article p-1 reviewItemsRow" style="text-align: center; height: 50px;  font-size:15px;">
 						<div class="col-3">${dto.prod_name }</div>
 						<div class="col-2">
 							<p class="star_rating">
 							    <c:forEach var="i" begin="1" end="${dto.grade}">
-									 <a href="#" class="on">★</a>									
+									 <span class="on">★</span>									
 								</c:forEach>
 								<c:forEach var="i" begin="${dto.grade+1}" end="5">
-									 <a href="#">★</a>									
+									 <span>★</span>									
 								</c:forEach>
 							</p>
 						</div>
@@ -143,7 +143,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		
 		
 		<div class="row" style="text-align: center;">
-			<div class="col-12 naviBar" style="color: black;">${pageNavi }</div>
+			<div class="col-12 naviBar" style="color: black; text-decoration:none;">${pageNavi }</div>
 		</div>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
@@ -160,7 +160,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 
 	<script>
 
-		$("#reviewItemsRow").children("div").css("line-height","50px");
+	$(".reviewItemsRow").children("div").css("line-height","40px");
 
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";

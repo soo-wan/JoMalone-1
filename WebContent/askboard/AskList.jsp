@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>1:1 Enquiry | Jo Malone</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="/JoMalone/Resource/css/enquiry.css">
 <style>
 	#headDiv {padding: 0px;	margin: 0px; padding-top: 20px;	padding-bottom: 20px;}
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
@@ -78,7 +77,10 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			</div>
 		</div>
 	</div>
-	
+	<div class="row">
+		<div class="col-12"></div>
+	</div>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
 
 	<script>
 		$("#toIndex").on("click", function() {
@@ -93,6 +95,6 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			location.href = "/JoMalone/askboard/AskWriteCall.jsp";//일대일문의글쓰기 페이지
 		});
 	</script>
-	<jsp:include page="/Resource/key/bottom.jsp" flush="true" />
+	
 </body>
 </html>
