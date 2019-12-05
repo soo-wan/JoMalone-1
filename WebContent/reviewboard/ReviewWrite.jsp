@@ -95,8 +95,7 @@
                 $("#cancel").on("click", function() {
                     var check = confirm("정말 취소하시겠습니까?");
         			if(check){
-        				//location.href = "";//마이페이지				
-        				location.href = "index.jsp";//테스트는 인덱스로가기.
+        				location.href = "/JoMalone/buylist.buy";
         			}
                 });
                 
