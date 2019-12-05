@@ -150,7 +150,7 @@ public class buyController extends HttpServlet {
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
 				request.setAttribute("list",list);
-				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
+				request.getRequestDispatcher("buylist.buy").forward(request, response);	
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");

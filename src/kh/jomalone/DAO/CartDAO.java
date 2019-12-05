@@ -48,6 +48,7 @@ public class CartDAO {
 	}
 
 	public List<CartDTO> selectCart(String mem_id) throws Exception {
+		ProductViewDAO pdao = ProductViewDAO.getInstance();
 		String sql = "select * from cart where mem_id=? order by seq desc";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, mem_id);
@@ -59,6 +60,8 @@ public class CartDAO {
 					dto.setMem_id(rs.getString(2));
 					dto.setMem_name(rs.getString(3));
 					dto.setProd_name(rs.getString(4));
+					dto.setProd_code(pdao.selectProductDTOByProdName(rs.getString(4)).getProductCode());
+					//System.out.println(dto.getProd_code());
 					dto.setProd_quantity(rs.getInt(5));
 					dto.setPrice(rs.getInt(6));
 					list.add(dto);
