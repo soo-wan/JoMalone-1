@@ -30,9 +30,6 @@
                         overflow-x:scroll;
                         border:1px solid black;
                     }
-                    
-                    
-                    
                     th{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; text-align: center; width:150px;}
                     td{text-align:center; border-bottom: 1px solid black;}
                     
@@ -48,8 +45,6 @@
                         </ul>
                     </div>
                     <div id="container">
-
-
                         <table>
                             <tr>
                                 <th>주문코드</th>
@@ -62,7 +57,7 @@
                                 <th>환불여부</th>
                             </tr>
 
-                            <c:forEach items="${list }" var="dto">
+                            <c:forEach items="${list}" var="dto">
                                 <tr>
                                     <td id=merchant_uid>${dto.merchant_uid}</td>
                                     <td>${dto.order_date}</td>
@@ -71,13 +66,16 @@
                                     <td>${dto.prod_quantity}</td>
                                     <td>${dto.order_state}</td>
                                     <td><div id=div>${dto.delivery_check}</div><button id=delivery>배송</button></td>
-                                    <td>
-                                        <c:if test="${dto.refund == 'Y'}"><button>환불</button></c:if>
+                                    <td>111
+                                    <c:choose>
+                                    	<c:when test ="${dto.refund=='P'}"><button>환불 확인</button></c:when>
+                                    	<c:when test ="${dto.refund=='Y'}">환불 완료</c:when>
+                                    	<c:otherwise>${dto.refund}  1111</c:otherwise>
+                                    </c:choose>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </table>
-
                         <script>
                             $("body").on("click","#delivery",function(){
                                 var td = $(this).closest("td");
@@ -88,17 +86,14 @@
                                 }).done(function(data){
                                     if(data == "success"){
                                         td.find("#div").html("배송중");
+                                        $(this).remove();
                                     }else{
                                         location.href="${pageContext.request.contextPath}/adminBack/error.jsp";
                                     }
                                 }).fail(function(){
                                 });
                             });
-
-
                         </script>
-
-
                     </div>
                 </div>
             </body>

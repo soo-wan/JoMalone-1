@@ -133,7 +133,7 @@ public class adminController extends HttpServlet {
 				}
 				int result = dao.changeQuantity(name_quantity_list); // product 테이블에 구매수량만큼 감소시킴
 				int result2 = dao.changeProcessedColumn(); // order_list 테이블에 done 칼럼 전부 'Y'로 바꿈
-
+				
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/adminBack/orderManagement.jsp").forward(request, response);
 

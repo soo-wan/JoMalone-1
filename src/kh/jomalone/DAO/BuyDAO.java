@@ -61,7 +61,7 @@ public class BuyDAO {
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into order_list values(order_seq.nextval,sysdate,?,?,?,?,?,'결제완료',?,?,?,?,'배송상태','N','N','N',?)");) {
+						"insert into order_list values(order_seq.nextval,sysdate,?,?,?,?,?,'결제완료',?,?,?,?,'배송 준비','N','N','N',?)");) {
 			for (OrderListDTO dto : list) {
 				pstat.setString(1, dto.getMerchant_uid());
 				pstat.setString(2, dto.getProd_name());
