@@ -127,6 +127,7 @@ public class AskBoardController extends HttpServlet {
 				List<AskCommentsDTO> coResult = dao.selectCommentsByAskSeq(seq);				
 				request.setAttribute("coList", coResult);
 
+				request.setAttribute("location", request.getParameter("location"));
 				request.getRequestDispatcher("askboard/AskDetailView.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -200,9 +201,12 @@ public class AskBoardController extends HttpServlet {
 		} else if (cmd.contentEquals("/writeComment.ask")) {// 댓글작성 ajax
 			int originSeq = Integer.parseInt(request.getParameter("writingSeq"));
 			//String contents = request.getParameter("contents");
-			String contents = u.ProtectXSS(request.getParameter("contents"));
+			String contents = Util.ProtectXSS(request.getParameter("contents"));
 			String emailOk = request.getParameter("emailOk");
-			PrintWriter pWriter = response.getWriter();
+			String memId = request.getParameter("memId");
+			String askType = request.getParameter("askType");
+			String askTitle = request.getParameter("askTitle");
+			String askDate = request.getParameter("askDate");
 			try {
 				dao.insertAskComment(new AskCommentsDTO(0,originSeq,contents,null));
 				dao.AnswerAskCondition("Y", originSeq);
@@ -210,17 +214,20 @@ public class AskBoardController extends HttpServlet {
 				
 				Gson g = new Gson();
 				String dtoList = g.toJson(result);
-				pWriter.append(dtoList);
-				if(emailOk.contentEquals("Y")) {
-					String memId = request.getParameter("memId");
-					String askType = request.getParameter("askType");
-					String askTitle = request.getParameter("askTitle");
-					String askDate = request.getParameter("askDate");
+				
+				if(emailOk.equals("Y")) {
+					
 					List<String> nameEmail = dao.findMemNameEmailById(memId);
+					
 					String subject = "[조말론]"+nameEmail.get(0)+"님 문의 내용에 대한 답변입니다.";
 					String msg = "문의종류 : "+askType+"\n문의제목 : "+askTitle+"\n문의일 : "+askDate+"\n\n"+"[답변내용]\n"+contents;
 					new SendMail().sendMail(nameEmail.get(1), subject, msg);										
 				}
+				
+				
+				
+				System.out.println(originSeq+":"+contents+":"+emailOk+":"+memId+":"+askType+":"+askTitle+":"+askDate);
+				 response.getWriter().append(dtoList);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");

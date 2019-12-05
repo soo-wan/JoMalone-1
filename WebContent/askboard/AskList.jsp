@@ -57,7 +57,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<c:if test="${dto.answer_yn eq 'Y' }">
 							<span>[답변완료]</span>
 						</c:if>
-							<a id="a" href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+							<a id="a" href="read.ask?no=${dto.ask_seq }&location=myAsk">${dto.title }</a>
 						</div>						
 						<div class="col-2">${dto.formedOnlyDate }</div>
 					</div>

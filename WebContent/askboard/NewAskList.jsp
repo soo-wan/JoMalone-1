@@ -94,7 +94,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 							<div class="row article p-1" style="text-align: center;">
 								<div class="col-2">${dto.askCodeKor }</div>
 								<div class="col-7" style="text-align: left;">
-									<a href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+									<a href="read.ask?no=${dto.ask_seq }&location=newAsk">${dto.title }</a>
 								</div>
 								<div class="col-1">${dto.mem_id }</div>
 								<div class="col-2">${dto.formedFullDate }</div>
