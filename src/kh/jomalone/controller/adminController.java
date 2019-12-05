@@ -75,6 +75,12 @@ public class adminController extends HttpServlet {
 
 			}else if(cmd.contentEquals("/productList.admini")) {
 				List<ProductDTO> productList = dao.productList();
+				
+				for(ProductDTO tmp : productList) {
+					System.out.println(tmp.getProductCode());
+				}
+				
+				
 				request.setAttribute("productList", productList);
 				request.getRequestDispatcher("/adminBack/productList.jsp").forward(request, response);	
 
