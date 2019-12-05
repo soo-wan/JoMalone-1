@@ -16,7 +16,7 @@
     .menu{height:30px; width:100%; font-family: 'Alata', sans-serif; border:1px solid black; border-radius:3px;}
     
     .Wrap{height:800px;  width:200px; margin:0px; float:left; }
-    h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
+    h4{margin:0px; padding:20px 20px; text-align: center; font-size: 20px; font-family: 'Alata', sans-serif;
     }
     .menu>a{text-decoration: none; color:white;}
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
@@ -70,7 +70,7 @@
 
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12"><h3>공지</h3></div>
+			<div class="col-12"><h4>NOTICE</h4></div>
 		</div>
 
 		<div class="row" id="titleBox">

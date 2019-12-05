@@ -117,6 +117,7 @@
                     
                 });
                 
+                (function($) {
                 $(".summernote").summernote({
         			lang : 'ko-KR',
         			minHeight: 500,
@@ -130,7 +131,7 @@
         						data.append("img" + i, files[i]);
         					}
         					$.ajax({
-        						url : "summernote.review",
+        						url : "/JoMalone/summernote.review",
         						enctype : "multipart/form-data",
         						type : "post",
         						data : data,
@@ -158,6 +159,7 @@
         				}
         			}
         		});
+                })(jQuery);
             </script>
 
 </body>
