@@ -17,15 +17,11 @@
 <link rel="stylesheet" href="/JoMalone/Resource/css/bottom.css">
 </head>
 <body>
-
-
-
-
-	<div id="bottom-one" class="container">
-		<div id="others" class="row">
+	<div id="bottom-one" class="container-fuild" style="margin: 0px; padding: 0px; background-color: #EAEAEA;">
+		<div id="others" class="row" style="margin: auto; width: 1140px; background-color: #EAEAEA;">
 			<div id="customer" class="col-3">
 				<h5>CUSTOMER CENTER</h5>
-				<h2 id="phone">010-7327-3143</h2>
+				<h2 id="phone" style="color: #368AFF;">010-7327-3143</h2>
 				<h5>전화 상담</h5>
 				<h6>평일 09:00 ~ 18:00</h6>
 				<h6>점심 12:50 ~ 14:00</h6>
@@ -61,7 +57,6 @@
 				<h6 id="representative">Please Buy (JoMalone@gmail.com)</h6>
 			</div>
 		</div>
-		<div id="margin" class="row"></div>
 	</div>
 	<script>
     	$(document).ready(function(){
