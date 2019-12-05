@@ -138,6 +138,13 @@
                         <script>
                             $("#insertBtn").on("click",function(){
                                 console.log($("#prodImg").val());
+                                console.log($("#productCode").val());
+                                //if($("#productCode").val()==""){alert("상품코드를 입력해주세요"); return;}
+                                return;
+                                
+                                
+                                
+                                
 
                                 var productCode = $("#productCode").val();
                                 $.ajax({
@@ -152,12 +159,7 @@
                                         var category = $("#categorySel").find($("option:selected")).val();
                                         $("#category").val(category);
 
-                                        if(confirm("등록하시겠습니까?")){
-                                        	
-                                        	if($("#categorySel").prop("selected","false")){console.log(11);}
-                                        	
-                                        	//console.log($("#category").val(category));
-                                        	
+                                        if(confirm("등록하시겠습니까?")){                         	
                                             $("#frm").submit();
                                         }
                                     }
