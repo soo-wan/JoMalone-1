@@ -41,10 +41,11 @@ public class buyController extends HttpServlet {
 		request.setCharacterEncoding("UTF8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		BuyDAO bdao = BuyDAO.getInstance();
+		MembersDAO mdao = MembersDAO.getInstance();
+		CartDAO cdao = CartDAO.getInstance();
 		try {
 			if(cmd.contentEquals("/callMerchantuid.buy")){
-				BuyDAO bdao = BuyDAO.getInstance();
-				MembersDAO mdao = MembersDAO.getInstance();
 				int nextSeq = bdao.selectMaxBuySeq()+1;
 				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
@@ -92,7 +93,6 @@ public class buyController extends HttpServlet {
 				System.out.println(Json + "과같이 정보담기 완료");
 				response.getWriter().append(Json);
 			}else if(cmd.contentEquals("/buyComplet.buy")) {
-				BuyDAO bdao = BuyDAO.getInstance();
 				System.out.println("결제성공하고 controller 이동!");
 				String merchant_uid = request.getParameter("merchant_uid");
 				System.out.println(merchant_uid + "코드번호 ");
@@ -103,15 +103,12 @@ public class buyController extends HttpServlet {
 				response.getWriter().append("{}");
 				
 			}else if(cmd.contentEquals("/buyFailed.buy")) {
-				BuyDAO bdao = BuyDAO.getInstance();
 				System.out.println("결제 실패 controller 이동!" );
 				String merchant_uid = request.getParameter("merchant_uid");
 				bdao.deleteOrderByMerchantuid(merchant_uid);
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
-				BuyDAO bdao = BuyDAO.getInstance();
-				CartDAO cdao = CartDAO.getInstance();
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				int cpage = 1;
 				String page = request.getParameter("cpage");
@@ -124,35 +121,34 @@ public class buyController extends HttpServlet {
 				int end = cpage * ConfigurationBuylist.recordCountPerPage;
 				
 				List<OrderListDTO> list = bdao.selectByPage(id,start, end);
-				
+				List<OrderListDTO> list2 = bdao.selectRefundList(id);
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
+				for (OrderListDTO dto : list2) {
+					dto.setDate(sdf.format(dto.getOrder_date()));;
+					cdao.deleteOrderByProdName(dto.getProd_name());
+				}
+				request.setAttribute("list2", list2);
 				request.setAttribute("list",list);
 				request.setAttribute("pageNavi",pageNavi);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
 				
 			}
 			else if(cmd.contentEquals("/search.buy")){
-				BuyDAO bdao = BuyDAO.getInstance();
-				CartDAO cdao = CartDAO.getInstance();
 				List<OrderListDTO> list = new ArrayList<>();
 				System.out.println("도착!");
 				int period = Integer.parseInt(request.getParameter("period"));
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				System.out.println( period +" : " + id);
 				list = bdao.selectBuyListByPeriod(id,period);
-				
-				
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
 					dto.setDate(sdf.format(dto.getOrder_date()));;
 					cdao.deleteOrderByProdName(dto.getProd_name());
 				}
-				
-				
 				request.setAttribute("list",list);
 				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
 			}else if (cmd.contentEquals("/refund.buy")) {
@@ -168,24 +164,20 @@ public class buyController extends HttpServlet {
 				}
 			}else if(cmd.contentEquals("/partrefund.buy")){
 				System.out.println("partrefund arrive");
-				
+				String prod_name = request.getParameter("prod_name");
 				String imp_uid = request.getParameter("imp_uid");
 				int price = Integer.parseInt(request.getParameter("price"));
 				int prod_quantity = Integer.parseInt(request.getParameter("prod_quantity"));
-				System.out.println(prod_quantity + " : " + price + " : " + imp_uid);
+				System.out.println(prod_quantity + " : " + price + " : " + imp_uid + " : " + prod_name);
+				bdao.updateRefund(imp_uid,prod_name);
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
 				CancelData cancel_data = new CancelData(imp_uid, true, BigDecimal.valueOf(price*prod_quantity)); //imp_uid를 통한 부분취소
-
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
-					
-					assertNull(payment_response.getResponse()); // 이미 취소된 거래는 response가 null이다
-					System.out.println(payment_response.getMessage());
 				}  catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
