@@ -37,7 +37,7 @@
                         height:800px;
                         width:1300px;
                         float:left;
-                        padding: 20px;
+                        padding: 20px; margin:0px;
                         overflow-x:scroll;
                         border:1px solid black;
                     }
