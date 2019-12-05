@@ -71,24 +71,8 @@
                                 <c:forEach items="${productList }" var="dto">
 
                                     <form action="${pageContext.request.contextPath}/modifyProduct.admini" method="post" id="frm">
-                                        <!--
-<div id=eachBox>
-<div>상품 코드:<input value="${dto.productCode }" name="fakeProductCode" disabled="disabled"></div>
-<input type="text" id="oriCode" name="productCode">
-<div>상품 분류:<input value="${dto.category }" disabled="disabled"></div>
-<div>상품명:<input value="${dto.productName }" name=productName></div>
-<div>가격:<input value="${dto.price }" name=price></div>
-<div>수량:<input value="${dto.quantity }" name=quantity></div>
-<div>상품 정보:<textarea value="" name=description>${dto.description }</textarea></div>
-<div><img src="Resource/img/${dto.productCode }.jpg"></div>
-<br>
-<div><button type="button" id=mod>수정</button><button type="button" id=delBtn>삭제</button></div>
-<br>
-</div>
--->
-
-
-
+ 
+ 
                                         <table id=eachBox>
 
                                             <tr>
@@ -149,11 +133,27 @@
                                 $("[name=price]").val(price);
                                 $("[name=quantity]").val(quantity);
                                 $("[name=description]").val(description);
-
-                                //console.log($("[name=productName]").val());
-                                //console.log($("[name=price]").val());
-                                //console.log($("[name=quantity]").val());
-                                //console.log($("[name=description]").val());
+                                
+                                if($("[name=productName]").val()==""){
+                                	alert("상품명을 입력해주세요"); 
+                                	return;
+                                }
+                                
+                                if($("[name=price]").val()==""){
+                                	alert("가격을 입력해주세요"); 
+                                	return;
+                                }
+                                
+                                if($("[name=quantity]").val()==""){
+                                	alert("수량을 입력해주세요"); 
+                                	return;
+                                }
+                                
+                                if($("[name=description]").val()==""){
+                                	alert("상품정보를 입력해주세요"); 
+                                	return;
+                                }
+                                
                                 if(confirm("수정 하시겠습니까?")){
                                     $("#frm").submit();
                                 }	

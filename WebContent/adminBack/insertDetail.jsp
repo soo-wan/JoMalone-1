@@ -157,7 +157,7 @@ h4 {
 								<option value="Woody">Woody</option>
 								<option value="Others">Others</option>
 						</select>
-						<td rowspan="11"><img id="img">
+						
 					</tr>
 					<tr>
 						<td class=firstCol>상품코드
@@ -215,9 +215,6 @@ h4 {
 				</table>
 				<div id="summernote"><textarea display="hidden" name="content" class="summernote"></textarea></div>
 
-				<!--
-<input type="button" id="prePageBtn" value="이전페이지">
--->
 
 				<div style="float: left; width: 1200px; margin-top: 30px; padding-left: 180px;"><input type="button" id="enterBtn" value="등록"></div>
 			</form>
@@ -250,38 +247,34 @@ h4 {
                                     data:{productCode:productCode}
                                 }).done(function(data){
                                     productInfo = JSON.parse(data);
-                                    console.log(productInfo);
+                                    
                                     $("#prod_name").val(productInfo.productName);
                                     $("#prod_price").val(productInfo.price);
                                     $("#prod_quantity").val(productInfo.quantity);
-                                    $("#ingredients").val(productInfo.ingredients);
+                                    //$("#ingredients").val(productInfo.ingredients);
                                     $("#prod_description").val(productInfo.description);
                                     $("#spring").val(productInfo.spring);
                                     $("#summer").val(productInfo.summer);
                                     $("#fall").val(productInfo.fall);
                                     $("#winter").val(productInfo.winter);
-                                    //$("#img").attr("src",productInfo[0].filePath);
-                                    $("#img").attr("src","${pageContext.request.contextPath}/Resource/img/"+productCode+".jpg");
+                                    //$("#img").attr("src","${pageContext.request.contextPath}/Resource/img/"+productCode+".jpg");
+                                    $(".note-editable").val(productInfo.content);
                                 }).fail(function(data){
 
                                 });
                             });
 
                             $("body").on("click", "#enterBtn", function(){
-                                $("#summernote").val($(".note-editable").html());
-                                console.log($("#summernote").val());
+
                                 if(confirm("등록하시겠습니까?")){
+                                	$("[name=content]").val($(".note-editable").html());
                                     var prod_code = $("#codeSelectBox").find($("option:selected")).val();
                                     $("[name=prod_code]").val(prod_code);
                                     $("#frm").submit();
                                 }
                             })
 
-                            $("#prePageBtn").on("click", function(){
-                                location.href = "${pageContext.request.contextPath}/admin/adminProduct.jsp";
-                            })
-
-
+                            
                                 $(".summernote").summernote({
                                     height : 280,
                                     width : 350,
