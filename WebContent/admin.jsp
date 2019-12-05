@@ -22,8 +22,8 @@
     .menu>a{text-decoration: none; color:white;}
     #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
    
-	#searchbar{float:left; width:1300px; heigth:30px; text-align:center; margin:auto; padding:0 0 10px 0;
-	text-align:center;}
+	#searchbar{float:left; width:1300px; heigth:30px; margin:auto; padding:0 0 10px 0; font-size:13px; text-align:right; }
+	legend{font-size:15px; text-align:left; width:900px; margin:0 100px 0 350px;}
 	
     #container{
      height:600px;
@@ -46,10 +46,10 @@
 	
 	td{overflow:hidden; white-space : nowrap;}
   	 .contents{height:600px;}
-  	 #search,#all{background-color:transparent; border:1px solid black; border-radius:2px;}
-     #id, #name, #phone, #logintype{ border-radius:3px; border:1px solid black;}
-     input[type=text]{margin: 0 5px 0 0;}
-   
+  	 #search, #all{background-color:transparent; border:1px solid black; border-radius:2px; margin: 0 3px 0 3px;}
+     #id, #name, #phone, #logintype,#modi{ border-radius:3px; border:1px solid black; margin:0;}
+     input[type=text]{margin: 0 5px 0 0; outline:none}
+   		.label{margin:0 5px 0 3px;}
 </style>
 </head>
 <body>
@@ -59,22 +59,24 @@
 	<div class=Wrap>
 		<h4>회원 관리</h4>
 			<ul id="sidebar">
-			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'> 회원관리</a></li>
+			    <li class="menu"><a href='${pageContext.request.contextPath}/admin.mem'> 회원조회</a></li>
 			</ul>
       </div>
       
-      <fieldset id="searchbar">
     	<form action="${pageContext.request.contextPath}/search.mem" method="post">
-    		<legend>검색</legend>
-    		Logintype  <input type="text" placeholder=" normal/kakao/naver" id="logintype" name="logintype">
-	    	ID     <input type="text" placeholder=" 아이디입력" id="id" name="id">
-	    	Name   <input type="text" placeholder=" 이름입력" id="name" name="name">
-	    	Phone  <input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
+    	
+      	<fieldset id="searchbar">
+ 			검색 ▶ 
+    		<label class="label 1">Logintype</label><input type="text" placeholder=" normal/kakao/naver" id="logintype" name="logintype">
+	    	<label class="label 2">ID</label>  <input type="text" placeholder=" 아이디입력" id="id" name="id">
+	    	<label class="label 3">Name</label><input type="text" placeholder=" 이름입력" id="name" name="name">
+	    	<label class="label 4">Phone</label><input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
 	    	<input type="submit" value="검색" id="search">
 	    	<input type="button" value="전체보기" id="all">
-	  
+	    	<input type="button" value="회원정보수정하기" id="modi">
+    	</fieldset>
     	</form>
-    	</fieldset>>
+    	
 	<div id="container">
     	<table id="table" border=1px;>
     	<tr>
@@ -102,20 +104,20 @@
         <c:otherwise>
         <c:forEach items="${list }" var="dto">
         <tr>
-            <td> ${dto.id} </td>
+            <td class="info"> ${dto.id} </td>
             <td> ${dto.logintype} </td>
-            <td> ${dto.name} </td>
-            <td> ${dto.phone} </td>
-            <td> ${dto.email} </td>
+            <td class="info"> ${dto.name} </td>
+            <td class="info"> ${dto.phone} </td>
+            <td class="info"> ${dto.email} </td>
             <td> ${dto.zip_code} </td>
             <td> ${dto.address1} </td>
             <td> ${dto.address2} </td>
-            <td> ${dto.birth} </td>
-            <td> ${dto.gender} </td>
+            <td class="info"> ${dto.birth} </td>
+            <td class="info"> ${dto.gender} </td>
             <td> ${dto.enrolldate} </td>
             <td> ${dto.lastlogin} </td>
-            <td> ${dto.black_yn} </td>
-            <td> ${dto.blackdate}</td>
+            <td class="info"> ${dto.black_yn} </td>
+            <td class="info"> ${dto.blackdate}</td>
         </tr>
         </c:forEach>
         </c:otherwise>
@@ -127,6 +129,10 @@
     <script>
   $("#all").on("click",function(){
 	  location.href="${pageContext.request.contextPath}/admin.mem"
+  })
+  $(".info").on("click",function(){
+	  window.open("modi.mem?id="+ ${dto.id},"width=500px,height=800px,top=300px,left=200px");
+	
   })
     </script>
 </body>
