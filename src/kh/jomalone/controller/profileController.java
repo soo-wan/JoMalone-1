@@ -27,8 +27,6 @@ public class profileController extends HttpServlet {
 		if(cmd.contentEquals("/Member/profile.my")) {
 			String id =(String)request.getSession().getAttribute("loginInfo");
 			MembersDTO dto =dao.selectById(id);
-			System.out.println(id);
-			System.out.println(dto.getLogintype());
 			request.setAttribute("dto",dto);
 			request.getRequestDispatcher("profile22.jsp").forward(request, response);
 			

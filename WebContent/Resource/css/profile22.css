@@ -1,16 +1,15 @@
-#signup-page { height: 1450px; width:500px; }
+#signup-page {margin-top: 80px; height: 1450px; width:900px;}
 
 #signup-title {margin-bottom: 30px; padding: 0px; height: 50px;}
-#signup-title>h4 {width: 580px; line-height: 40px; text-align: center;}
+#signup-title>h4 {width: 100%; line-height: 45px; text-align: center;}
 
-#signup-inputbox {margin: auto; padding: 40px; width: 500px; height: 650px; background-color: #F6F6F6;}
+#signup-inputbox {margin: auto; padding: 40px; width: 900px; height: 650px; background-color: #F6F6F6;}
 #signup-inputbox>div {margin: 0px auto 0px auto; width: 450px; height: 35px;}
-#signup-inputbox>div>h5 {width: 120px; height: 30px; line-height: 30px; font-size: 16px; text-align: right;margin:0px;}
+#signup-inputbox>div>h5 {width: 120px; height: 30px; line-height: 30px; font-size: 16px; text-align: right;}
 span {color: crimson;}
 #signup-inputbox>div>h5, #signup-inputbox>div>input {float: left;}
 #signup-inputbox>div>input[type=text], #signup-inputbox>div>input[type=password] {margin-left: 15px; padding-left: 10px; font-size: 13px; border: 1px solid darkgray; border-radius: 5px;}
 #signup-inputbox>div>input[type=button] {margin-left: 10px; width: 80px; height: 30px; font-size: 12px;}
-
 
 #su-address>input[type=button] {background-color: lightgrey; border: 1px solid lightgray; border-radius: 5px;}
 #zipcode {width: 100px; height: 30px;}
@@ -22,11 +21,10 @@ span {color: crimson;}
 #su-birth>select {border-radius: 5px; font-size: 13px;}
 #su-birth>option {text-align: center;}
 
+#su-genter>input, #su-gender>h6 {float: left; line-height: 30px;}
+#su-gender>input {margin: 0px 5px 0px 15px; width: 15px; height: 30px;}
 
-#su-gender>input {width: 15px; height: 30px;  float:left; margin-left:5px}
 
-#black>input {width: 15px; height: 30px;  float:left; margin-left:5px}
-label {width:15px; height: 30px; float:left; margin:0 5px;}
 
-#myprofile-btn {margin: 40px auto auto auto; width: 580px; height: 100px; text-align: center;}
-#adminmodi, #profile-del, #profile-back {width: 100px; height: 30px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}
+#myprofile-btn {margin: 40px auto auto auto; width: 900px; height: 100px; text-align: center;}
+#profile-modi, #profile-del, #profile-back {width: 100px; height: 30px; background-color: lightgray; color: dimgray; border: 0px; border-radius: 5px;}

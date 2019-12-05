@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/JoMalone/Resource/css/adminmodi.css?a=3ddd1">
+<link rel="stylesheet" href="/JoMalone/Resource/css/adminmodi.css?a=8seef8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
@@ -113,11 +113,7 @@
         }).open();
     }
 	
-	
-
-
-	
-	$(document).ready(function() {
+    $(document).ready(function() {
 		setDateBox();
 	});
 	
@@ -139,18 +135,7 @@
 			$("#day").append(
 				"<option value='"+ i +"'>" + i + "일" + "</option>");
 		}
-	};
-	
-	//$("#adminmodi").on("click",function(){
-	//	$("#profileform").action = "ACTION";
-	//	opener.window.name = "pwin";
-	//	$("#profileform").target = "pwin";
-	//	$("#profileform").submit();
-	//	self.close();
-			
-	//});
-	
-
+	}
 	
 
 	</script>
