@@ -83,7 +83,7 @@ textarea {
 			</div>
 			<div class="row" id=reportType>
 				<div class="col-12 p-0">
-				<input type="hidden" name="articleSeq" id="articleSeq" value=${reviewSeq }>
+				<input type="hidden" name="reviewSeq" id="reviewSeq" value=${reviewSeq }>
 				<p id=reportType style="font-weight: bold;">게시물 관리 사유를 선택해주세요.</p>
 					<input type="radio" name="reportType" value="r1"> 부적절한 홍보<br> <input
 						type="radio" name="reportType" value="r2"> 명예훼손/사생활 침해<br> <input
@@ -123,8 +123,6 @@ textarea {
 							<span style="color: crimson; font-weight: bold;">모든 내용을
 								확인했습니다.</span>
 							<br>
-							<br>
-							<input type="button" value="확인" id=reportConfirm>
 						</c:if>						
 					</c:when>
 					
@@ -141,9 +139,7 @@ textarea {
 						<input type="checkbox" id="confirmAll">
 						<span style="color: crimson; font-weight: bold;">모든 내용을
 							확인했습니다.</span>
-						<br>
-						<br>
-						<input type="button" value="확인" id=reportConfirm>
+						<br>						
 					</c:when>
 					<c:when test="${resultDTO.check_YN == 'Y' }">
 						<p style="font-weight: bold;">조치 방안 : <span style="color: crimson;">${resultDTO.checkTypeKor }</span></p>
