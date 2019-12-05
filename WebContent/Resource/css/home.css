@@ -1,9 +1,10 @@
-#main-event {margin-bottom: 50px;}
+#homebody{width:1140px; margin:auto;}
+#main-event {margin-bottom: 50px; width:1140px;}
 
 #main {margin-top: 20px; margin-bottom: 10px; padding: 0px; height: 500px;}
-#main>a>img {width: 100%; height: 100%;}
+#main>a>img {width:1140px; height: 500px;}
 
-#details {height: 140px;}
+#details {height: 140px; width:1140px;}
 #details>div {text-align: center;}
 #details>div>a {color: black; text-decoration: none;}
 #main-btn {width: 120px; height: 35px; background-color: black; color: white; border: 0;}

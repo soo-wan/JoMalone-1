@@ -57,11 +57,11 @@ public class BuyDAO {
 			return result;
 		}
 	}
-	
+	//확인해야함
 	public void insertOrderList(List<OrderListDTO> list) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into order_list values(order_seq.nextval,sysdate,?,?,?,?,?,'결제완료',?,?,?,?,'배송상태','N','N','N')");) {
+						"insert into order_list values(order_seq.nextval,sysdate,?,?,?,?,?,'결제완료',?,?,?,?,'배송상태','N','N','N',?)");) {
 			for (OrderListDTO dto : list) {
 				pstat.setString(1, dto.getMerchant_uid());
 				pstat.setString(2, dto.getProd_name());
@@ -72,6 +72,7 @@ public class BuyDAO {
 				pstat.setInt(7, dto.getPrice());
 				pstat.setString(8, dto.getFull_address());
 				pstat.setString(9, dto.getZip_code());
+				pstat.setString(10, dto.getImp_uid());
 				pstat.executeUpdate();
 				con.commit();
 			}
@@ -80,7 +81,7 @@ public class BuyDAO {
 	
 	
 	public int selectMaxBuySeq() throws Exception {
-		int maxSeq = 1157;
+		int maxSeq = 1200;
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
 			try (ResultSet rs = pstat.executeQuery()) {
@@ -115,7 +116,7 @@ public class BuyDAO {
 					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
 							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
 							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
-							rs.getString(14), rs.getString(15), rs.getString(16)));
+							rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17)));
 				}
 			}
 		}
@@ -133,7 +134,7 @@ public class BuyDAO {
 					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
 							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
 							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
-							rs.getString(14), rs.getString(15), rs.getString(16)));
+							rs.getString(14), rs.getString(15), rs.getString(16), rs.getString(17)));
 				}
 			}
 		}
@@ -150,7 +151,7 @@ public class BuyDAO {
 					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
 							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
 							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
-							rs.getString(14), rs.getString(15), rs.getString(16)));
+							rs.getString(14), rs.getString(15), rs.getString(16),rs.getString(17)));
 				}
 			}
 		}
@@ -159,12 +160,13 @@ public class BuyDAO {
 	
 	
 	
-	public void updateBuyComplete(String merchant_uid) throws Exception{
+	public void updateBuyComplete(String merchant_uid, String imp_uid) throws Exception{
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("update prod_buy set buy_success ='Y' where merchant_uid= ?"); 
-				PreparedStatement pstat2 = con.prepareStatement("update order_list set buy_success ='Y' where merchant_uid= ?");){
+				PreparedStatement pstat2 = con.prepareStatement("update order_list set buy_success ='Y',imp_uid=? where merchant_uid= ?");){
 			pstat.setString(1, merchant_uid);
-			pstat2.setString(1, merchant_uid);
+			pstat2.setString(1, imp_uid);
+			pstat2.setString(2, merchant_uid);
 			pstat.executeUpdate();
 			pstat2.executeUpdate();
 			con.commit();
@@ -273,7 +275,7 @@ public class BuyDAO {
 					list.add(new OrderListDTO(rs.getInt(1), rs.getTimestamp(2),rs.getString(3),
 							rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
 							rs.getInt(9), rs.getInt(10), rs.getString(11), rs.getString(12), rs.getString(13),
-							rs.getString(14), rs.getString(15), rs.getString(16)));
+							rs.getString(14), rs.getString(15), rs.getString(16),rs.getString(17)));
 				}
 				return list;
 			}

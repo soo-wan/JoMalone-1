@@ -22,7 +22,7 @@
 	#cjInfo:hover{color:red;}
 	#writereview:hover{color:red;}
 	#styleA:visited, #styleA:link{color:black;}
-	.date {margin: 10px 0px 0px 0px; width: 50px; border: 0px; boakground-color: #F6F6F6; font-size: 13px; text-align: center;}
+	.date {margin: 10px 0px 10px 0px; width: 50px; border:0px; boakground-color: #F6F6F6; font-size: 13px; text-align: center; float:left;}
 	#first {border-radius: 5px 0px 0px 5px;}
 	#last {border-radius: 0px 5px 5px 0px;}
 </style>
@@ -46,15 +46,16 @@
 			  	<h6 style="width: 760px; line-height: 50px; text-align: right; font-size: 12px;">※ 운송장 번호를 클릭시 배송 조회가 가능합니다.</h6> 
 			  </li>
 			</ul>
-			<input id="first" class="date" type="button" value="오늘">
-			<input id="second" class="date" type="button" value="일주일">
-			<input id="third"class="date" type="button" value="1개월">
-			<input id="four"class="date" type="button" value="3개월">
-			<input id="last" class="date" type="button" value="6개월">
+			
 			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade show active" id="korea" role="tabpanel">
 					
 					<table class="cart-table">
+						<input id="first" class="date" type="button" value="오늘">
+						<input id="second" class="date" type="button" value="일주일">
+						<input id="third"class="date" type="button" value="1개월">
+						<input id="four"class="date" type="button" value="3개월">
+						<input id="last" class="date" type="button" value="6개월">
 						<tr	style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
 			  	  		<td style="width: 130px;">주문날짜
 			  	  		<td style="width: 200px;">상품이미지
@@ -82,7 +83,7 @@
 										<td style="width: 160px;">CJ 대한통운 <br>
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
 										<td style="width: 160px;">
-										<button id=refund onclick="refund(${dto.order_seq})">환불하기 </button>
+										<button id=refund onclick="refund( '${dto.imp_uid}' , ${dto.price} , ${dto.prod_quantity} )">환불하기 </button>
 										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}" id="writeA">리뷰쓰기</a></button>
 									</tr>
 								</c:forEach>
@@ -130,8 +131,8 @@
 		$("#last").on("click",function(){
 			location.href= "search.buy?period=180"
 		});
-		function refund(order_seq){
-			location.href= "${pageContext.request.contextPath}/refund.buy";
+		function refund(imp_uid,price,prod_quantity){
+			location.href= "${pageContext.request.contextPath}/partrefund.buy?imp_uid ="+imp_uid+"&price="+ price+"&prod_quantity="+prod_quantity;
 		}
 	</script>
 </body>
