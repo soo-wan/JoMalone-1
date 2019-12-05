@@ -14,9 +14,9 @@
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
 	.article {padding-bottom: 10px;}
 	.article:hover {background-color: #cbe7ff90;}
-	a:link {color: black;}
-	a:visited {color: #887f7f;}
-	a:hover {text-decoration: none;}
+	.a:link {color: black;}
+	.a:visited {color: #887f7f;}
+	.a:hover {text-decoration: none;}
 	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 .naviBar {
 	font-size: 20px;
@@ -69,7 +69,8 @@
 
 <body>
 <jsp:include page="/Resource/key/top.jsp" flush="true" />
-	<div class=container>
+
+	<div class=container style="margin-bottom: 200px; margin-top: 100px;">
 	
 	<c:if test="${overLimit!=null }">
 		<div id="myModal" class="modal">
@@ -84,7 +85,7 @@
 	</c:if>
 	
 		<div class="row">
-			<div class="col-12"><h4>MY REVEIWS</h4></div>
+			<div class="col-12"><h4 style="text-align: center;">MY REVEIWS</h4></div>
 		</div>
 		<div class="row" style="margin-top: 60px; text-align: center;">
 			<div class="col-3 d-none d-sm-block">구매상품</div>
@@ -122,25 +123,25 @@
 		</c:choose>
 		<hr>
 		
-				<form action="review.search" method="get" id="searchFrm">
+				<form action="review.search" method="get" id="searchFrm" style="float: left; width: 340px;">
 					<div class="row" style="text-align: center;">
 						<div class="col-12 searchBar">
 							<input type="hidden" name="rootPage" value="myPage"> <select
-								name="reviewSearch" id="reviewSearch">
+								name="reviewSearch" id="reviewSearch" style="height: 25px;">
 								<option value="title">제목</option>
 								<option value="contents">내용</option>
 								<option value="prod_name">상품명</option>
-							</select> <input id="searchInput" name="searchInput" type=text> <input
-								type="button" value="검색" id="toSearch">
+							</select> <input id="searchInput" name="searchInput" type=text style="width: 150px; height: 25px;"> <input
+								type="button" value="검색" id="toSearch" style="height: 27px;">
 						</div>
 					</div>
 				</form>
 				
-		<div class="row" style="text-align: center;">
-			<div class="col-12 naviBar" style="color: black; text-decoration:none;">${pageNavi }</div>
+		<div class="row" style="float: left; text-align: center; width: 520px;">
+			<div class="col-12 naviBar" style="float: left; height: 30px; color: black; text-decoration:none;">${pageNavi }</div>
 		</div>
-		<div class="row">
-			<div class="col-12" style="text-align: right;">
+		<div class="row" style="float: right; width: 240px;">
+			<div class="col-12" style="text-align: right;"  style="border: 1px solid red;">
 				<input type="button" value="메인으로" id="toIndex">
 				<input type="button" value="마이페이지로" id="toMyPage">
 			</div>
