@@ -21,6 +21,7 @@ import kh.jomalone.DAO.AdminDAO;
 import kh.jomalone.DTO.DetailDTO;
 import kh.jomalone.DTO.OrderManagementDTO;
 import kh.jomalone.DTO.ProductDTO;
+import kh.jomalone.Util.Util;
 
 
 @WebServlet("*.admini")
@@ -54,7 +55,7 @@ public class adminController extends HttpServlet {
 				int fall = Integer.parseInt(multi.getParameter("fall"));
 				int winter = Integer.parseInt(multi.getParameter("winter"));
 				
-				String fileName = multi.getFilesystemName("img");    //확장자포함한다.
+				String fileName = Util.NullCheck(multi.getFilesystemName("img"));    //확장자포함한다.
 				String newFileName = productCode + ".jpg";
 				String saveDir = uploadPath;
 
@@ -240,24 +241,6 @@ public class adminController extends HttpServlet {
 				}				
 			
 			//여기서부터 front쪽	
-//			}else if(cmd.contentEquals("/prodPerCategory.admini")) {
-//				String category = request.getParameter("category");
-//				List<ProductDTO> list = dao.productListPerCategory(category);
-//				request.setAttribute("list", list);
-//				
-//				if(category.contentEquals("Citrus")) {
-//					request.getRequestDispatcher("/adminFront/prodPerCategory.jsp").forward(request, response);
-//				}else if(category.contentEquals("Fruits")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Woody")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Spicy")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Floral")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Light Floral")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}
 				
 			}else if(cmd.contentEquals("/eachProduct.admini")) {
 				String productCode = request.getParameter("productCode");
