@@ -34,7 +34,7 @@
                     
                     
                     th{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; text-align: center; width:150px;}
-                    
+                    td{text-align:center; border-bottom: 1px solid black;}
                     
                 </style>
             </head>
