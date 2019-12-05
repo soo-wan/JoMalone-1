@@ -49,6 +49,7 @@
   	 #search,#all{background-color:transparent; border:1px solid black; border-radius:2px;}
      #id, #name, #phone, #logintype{ border-radius:3px; border:1px solid black;}
      input[type=text]{margin: 0 5px 0 0;}
+   
 </style>
 </head>
 <body>
@@ -62,16 +63,18 @@
 			</ul>
       </div>
       
-      <div id="searchbar">
+      <fieldset id="searchbar">
     	<form action="${pageContext.request.contextPath}/search.mem" method="post">
+    		<legend>검색</legend>
     		Logintype  <input type="text" placeholder=" normal/kakao/naver" id="logintype" name="logintype">
-	    	ID  <input type="text" placeholder=" 아이디입력" id="id" name="id">
-	    	Name <input type="text" placeholder=" 이름입력" id="name" name="name">
-	    	Phone <input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
+	    	ID     <input type="text" placeholder=" 아이디입력" id="id" name="id">
+	    	Name   <input type="text" placeholder=" 이름입력" id="name" name="name">
+	    	Phone  <input type="text" placeholder=" 전화번호 '-' 붙혀서 입력" id="phone" name="phone">
 	    	<input type="submit" value="검색" id="search">
 	    	<input type="button" value="전체보기" id="all">
+	  
     	</form>
-    	</div>
+    	</fieldset>>
 	<div id="container">
     	<table id="table" border=1px;>
     	<tr>
