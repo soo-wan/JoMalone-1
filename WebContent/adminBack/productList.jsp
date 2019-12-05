@@ -20,7 +20,7 @@
                     h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
                     }
                     .menu>a{text-decoration: none; color:white;}
-                    #wrapper{width:1500px; border:1px solid black; overflow:hidden; margin:auto; }
+                    #wrapper{width:1500px; border:1px solid black; overflow:hidden; margin:auto;}
 
                     #container{
                         height:800px;
@@ -32,8 +32,17 @@
                     }
 
 
-                    #eachBox{border-bottom: 2px solid black;}
-                    #oriCode{display:none;}    
+
+
+                    #eachBox{border-bottom: 1px solid black;}
+                    #oriCode{display:none;}
+
+                    .firstCol{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; width:100px;}
+                    .secondCol{width:300px;}
+                    .secondCol_inner{width:100%;}
+
+                    button{margin:2px;}
+
 
 
                 </style>
@@ -60,22 +69,64 @@
                             </c:when>
                             <c:otherwise>
                                 <c:forEach items="${productList }" var="dto">
-                                    <br>
+
                                     <form action="${pageContext.request.contextPath}/modifyProduct.admini" method="post" id="frm">
-                                        <div id=eachBox>
-                                            <div>상품 코드:<input value="${dto.productCode }" name="fakeProductCode" disabled="disabled"></div>
-                                            <input type="text" id="oriCode" name="productCode">
-                                            <div>상품 분류:<input value="${dto.category }" disabled="disabled"></div>
-                                            <div>상품명:<input value="${dto.productName }" name=productName></div>
-                                            <div>가격:<input value="${dto.price }" name=price></div>
-                                            <div>수량:<input value="${dto.quantity }" name=quantity></div>
-                                            <div>상품 정보:<textarea value="" name=description>${dto.description }</textarea></div>
-                                            <div><img src="Resource/img/${dto.productCode }.jpg"></div>
+                                        <!--
+<div id=eachBox>
+<div>상품 코드:<input value="${dto.productCode }" name="fakeProductCode" disabled="disabled"></div>
+<input type="text" id="oriCode" name="productCode">
+<div>상품 분류:<input value="${dto.category }" disabled="disabled"></div>
+<div>상품명:<input value="${dto.productName }" name=productName></div>
+<div>가격:<input value="${dto.price }" name=price></div>
+<div>수량:<input value="${dto.quantity }" name=quantity></div>
+<div>상품 정보:<textarea value="" name=description>${dto.description }</textarea></div>
+<div><img src="Resource/img/${dto.productCode }.jpg"></div>
+<br>
+<div><button type="button" id=mod>수정</button><button type="button" id=delBtn>삭제</button></div>
+<br>
+</div>
+-->
+
+
+
+                                        <table id=eachBox>
+
+                                            <tr>
+                                                <td class=firstCol>상품 코드</td>
+                                                <td class=secondCol><input value="${dto.productCode }" name="fakeProductCode" disabled="disabled" class=secondCol_inner></td>
+                                                <td><input type="text" id="oriCode" name="productCode"></td>                                    
+                                                <td rowspan=6><img src="Resource/img/${dto.productCode }.jpg"></td>
+                                            
+                                            </tr>
+                                            <tr>
+                                                <td class=firstCol>상품 분류</td>
+                                                <td class=secondCol><input value="${dto.category }" disabled="disabled" class=secondCol_inner></td>
+                                            </tr>
+                                            <tr>
+                                                <td class=firstCol>상품명</td>
+                                                <td class=secondCol><input value="${dto.productName }" name=productName class=secondCol_inner></td>
+                                            </tr>
+                                            <tr>
+                                                <td class=firstCol>가격</td>
+                                                <td class=secondCol><input value="${dto.price }" name=price class=secondCol_inner></td>
+                                            </tr>
+                                            <tr>
+                                                <td class=firstCol>수량</td>
+                                                <td class=secondCol><input value="${dto.quantity }" name=quantity class=secondCol_inner></td>
+                                            </tr>
+                                            <tr>
+                                                <td class=firstCol>상품정보</td>
+                                                <td class=secondCol><textarea value="" name=description class=secondCol_inner rows="8">${dto.description }</textarea></td>
+                                            </tr>
                                             <br>
-                                            <div><button type="button" id=mod>수정</button><button type="button" id=delBtn>삭제</button></div>
-                                            <br>
-                                        </div>
+                                            <tr>
+                                                <td colspan=2 align=center><button type="button" id=mod>수정</button><button type="button" id=delBtn>삭제</button></td>
+                                            </tr>
+                                        </table>
+
                                     </form>	
+                                    <br>
+
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>

@@ -20,7 +20,7 @@
                     h4{margin:0px; padding:20px 20px; text-align: right; font-size: 20px; font-family: 'Alata', sans-serif;
                     }
                     .menu>a{text-decoration: none; color:white;}
-                    #wrapper{width:1500px; bolder:1px solid black; overflow:hidden; margin:auto; }
+                    #wrapper{width:1500px; border:1px solid black; overflow:hidden; margin:auto; }
 
                     #container{
                         height:800px;
@@ -33,10 +33,6 @@
 
                     .firstCol{width:100px; text-align: center; }
                     .secondCol{width:200px; text-align: center;}
-                    
-
-
-
 
 
                 </style>
@@ -82,8 +78,8 @@
                                 <table border=1>
 
                                     <tr>
-                                        <th class=firstCol class=firstRow>글 번호</th>
-                                        <th class=secondCol class=firstRow>상품 코드</th>
+                                        <th class=firstCol>글 번호</th>
+                                        <th class=secondCol>상품 코드</th>
                                     </tr>
                                     <c:forEach items="${list }" var="dto">
                                         <tr>
