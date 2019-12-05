@@ -76,7 +76,7 @@ public class ReportBoardController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 			
-		}else if(cmd.contentEquals("/check.report")) {
+		}else if(cmd.contentEquals("/check.report")) {//신고글 처리
 			int reportSeq = Integer.parseInt(request.getParameter("reportSeq"));		
 			int reviewSeq = Integer.parseInt(request.getParameter("reviewSeq"));
 			String checkType = request.getParameter("checkType");
@@ -102,6 +102,29 @@ public class ReportBoardController extends HttpServlet {
 				response.sendRedirect("error.jsp");
 			}
 			
+			
+		}else if(cmd.contentEquals("/deal.report")) {
+			int seq = Integer.parseInt(request.getParameter("no"));
+			try {
+				ReportDTO preCheck = dao.preCheckReport(seq);
+				ReportDTO result = dao.selectAdminReport(seq);
+				request.setAttribute("preCheckDTO", preCheck);
+				request.setAttribute("resultDTO", result);
+				request.setAttribute("reviewSeq", seq);
+				System.out.println(preCheck+":"+seq);
+				request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendRedirect("error.jsp");
+			}
+			
+		}else if(cmd.contentEquals("/dealConfirm.report")) {
+			int reviewSeq = Integer.parseInt(request.getParameter("reviewSeq"));
+			String reportType = request.getParameter("reportType");
+			String checkType = request.getParameter("checkType");
+			String checkComments = request.getParameter("checkComments");		
+			
+			
 		}else if(cmd.contentEquals("/read.report")) {	
 			int reviewSeq = Integer.parseInt(request.getParameter("article"));
 			int reportSeq = Integer.parseInt(request.getParameter("no"));
@@ -123,22 +146,7 @@ public class ReportBoardController extends HttpServlet {
 			int seq = Integer.parseInt(request.getParameter("no"));
 			request.setAttribute("reviewSeq", seq);
 			request.getRequestDispatcher("reportboard/ReportWriteCall.jsp").forward(request, response);
-			
-		}else if(cmd.contentEquals("/deal.report")) {
-			int seq = Integer.parseInt(request.getParameter("no"));
-			try {
-				ReportDTO preCheck = dao.preCheckReport(seq);
-				ReportDTO result = dao.selectAdminReport(seq);
-				request.setAttribute("preCheckDTO", preCheck);
-				request.setAttribute("resultDTO", result);
-				request.setAttribute("reviewSeq", seq);
-				System.out.println(preCheck+":"+seq);
-				request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-				response.sendRedirect("error.jsp");
-			}
-			
+					
 		}else if(cmd.contentEquals("/writeConfirm.report")) {		
 			int seq = Integer.parseInt(request.getParameter("articleSeq"));
 			String reportType = request.getParameter("reportType");
