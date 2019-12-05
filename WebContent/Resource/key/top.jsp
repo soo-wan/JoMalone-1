@@ -23,10 +23,10 @@
 	
 	
 	#top-two {padding: 0px; margin:auto; height: 40px; width:1140px; background-color: #F6F6F6; line-height:40px;}
-	#nav-ul { padding: 0px; height: 40px; list-style: none; width:1140px; float:left;}
-	.nav-item { float:left; width:190px; height: 100%; line-height:40px; text-align: center; list-style-type: none;}
-	.nav-link2 {color: #5D5D5D; width:100%; display:block; text-decoration:none; height:40px; text-align: center;  padding:0px;}
-	.nav-link:hover {color: #5D5D5D;}
+	#nav-ul { padding: 0px; height: 40px; list-style: none; width:1140px; float:left; list-style-type: none;}
+	.nav-item { float:left; width:190px; height: 100%; line-height:40px; text-align: center; }
+	.nav-link2 {color: #5D5D5D; width:100%; display:block; height:40px; text-align: center;  padding:0px; text-decoration-line: none;}
+	.nav-link2:hover {color: #5D5D5D; text-decoration-line: none;}
 	
 	#lo-title {padding-top: 8px; font-size: 14px; text-align: center;}
 	#con-div {margin: auto; height: 20px;}
