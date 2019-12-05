@@ -18,7 +18,8 @@
 <style>
 	*{font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";}
 	#writereview,#refund{background-color:black; color:white;}
-	#writeA:visited, #writeA:link{color:white;}
+	#writereview:visited,#refund:visited{color:white;}
+	#writereview:link,#refund:link{color:white;}
 	#cjInfo:hover{color:red;}
 	#writereview:hover{color:red;}
 	#styleA:visited, #styleA:link{color:black;}
@@ -84,12 +85,15 @@
 										<div id="cjInfo">[<a class="button view" href="https://www.cjlogistics.com/ko/tool/parcel/tracking?gnbInvcNo=626978391140" target="_blank" style="cursor: pointer;">626978391140</a>]</div>
 										<td style="width: 160px;">
 										<button id=refund onclick="refund( '${dto.imp_uid}' , ${dto.price} , ${dto.prod_quantity} )">환불하기 </button>
-										<button id=writereview><a href="write.review?seq=${dto.order_seq}&prodName=${dto.prod_name}" id="writeA">리뷰쓰기</a></button>
+										<button id=writereview onclick="writereview(${dto.order_seq},'${dto.prod_name}')">리뷰쓰기</button>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>
 					</table>
+					
+				<div id="page-navi" align="center">${pageNavi}</div>
+				
 				</div>
 				<div class="tab-pane fade" id="country" role="tabpanel">
 					<table class="cart-table">
@@ -110,7 +114,6 @@
 					</table>
 				</div>
 			</div>
-			<div id="page-navi" align="center">${pageNavi}</div>
 		</div>
 	</div>
 
@@ -133,6 +136,9 @@
 		});
 		function refund(imp_uid,price,prod_quantity){
 			location.href= "${pageContext.request.contextPath}/partrefund.buy?imp_uid ="+imp_uid+"&price="+ price+"&prod_quantity="+prod_quantity;
+		}
+		function writereview(order_seq,prod_name){
+			location.href= "${pageContext.request.contextPath}/write.review?seq="+order_seq+"&prodName="+prod_name;
 		}
 	</script>
 </body>
