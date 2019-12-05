@@ -178,6 +178,7 @@ public class buyController extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				request.getRequestDispatcher("buylist.buy").forward(request, response);	
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

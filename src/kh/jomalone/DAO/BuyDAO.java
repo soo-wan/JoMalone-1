@@ -175,7 +175,7 @@ public class BuyDAO {
 	
 	public void updateRefund(String imp_uid, String prod_name) throws Exception{
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("update order_list set refund ='P' where imp_uid=? and prod_name = ?");){
+				PreparedStatement pstat = con.prepareStatement("update order_list set refund ='Y' where imp_uid=? and prod_name = ?");){
 			pstat.setString(1, imp_uid);
 			pstat.setString(2, prod_name);
 			pstat.executeUpdate();
