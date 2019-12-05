@@ -167,15 +167,14 @@ public class buyController extends HttpServlet {
 					e.printStackTrace();
 				}
 			}else if(cmd.contentEquals("/partrefund.buy")){
-				System.out.println("refund arrive");
+				System.out.println("partrefund arrive");
 				
 				String imp_uid = request.getParameter("imp_uid");
 				int price = Integer.parseInt(request.getParameter("price"));
 				int prod_quantity = Integer.parseInt(request.getParameter("prod_quantity"));
 				System.out.println(prod_quantity + " : " + price + " : " + imp_uid);
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");
-				String test_already_cancelled_imp_uid = "imp_601383791362";
-				CancelData cancel_data = new CancelData(test_already_cancelled_imp_uid, true, BigDecimal.valueOf(price*prod_quantity)); //imp_uid를 통한 500원 부분취소
+				CancelData cancel_data = new CancelData(imp_uid, true, BigDecimal.valueOf(price*prod_quantity)); //imp_uid를 통한 부분취소
 
 				try {
 					IamportResponse<Payment> payment_response = client.cancelPaymentByImpUid(cancel_data);
