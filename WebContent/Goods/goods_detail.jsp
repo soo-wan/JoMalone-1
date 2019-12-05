@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <!DOCTYPE html>
     <html>
         <head>
@@ -67,85 +68,70 @@
             </div>
             <jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 
-            <script>
-//                var check = $("#prod_quantity").change();
-//                console.log("change완료");
-//
-//                $("#prod_quantity").on("change",function(){
-//                    if($("#prod_quantity").val() == 0){
-//                        alert("수량을 입력해주세요");
-//                    }
-//                    else{
-//                        $("#btnCart").on("click",function(){
-//                            $("#frm").submit();
-//                            $.ajax({
-//                                url:"../insert.ca",
-//                                type:"post",
-//                                data:{}
-//                            }).done(function(){
-//                                var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
-//                                if(cf){
-//                                    location.href="${pageContext.request.contextPath}/list.ca";
-//                                }
-//                                else{
-//                                    location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
-//                                    $("#prod_quantity").val() == 1; 
-//                                    return false;
-//                                }
-//                            })
-//                        })
-//                    }
-//                })
-                
-                
-                
+            <script>    
                 var change = $("#prod_quantity").change();
                // console.log("change완료");
 				
                 if(change){
-                    if($("#prod_quantity").val() == 0){
-                        alert("수량을 입력해주세요");
-                    }
-                    else{
                         $("#btnCart").on("click",function(){
-                            $("#frm").submit();
-                            $.ajax({
-                                url:"../insert.ca",
-                                type:"post",
-                                data:{}
-                            }).done(function(){
-                                var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
-                                if(cf){
-                                    location.href="${pageContext.request.contextPath}/list.ca";
-                                }
-                                else{
-                                    location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
-                                    $("#prod_quantity").val() == 1; 
-                                    return false;
-                                }
-                            })
-                        })
-                    }
-				}
-                
+                        	//console.log($("#prod_quantity").val());
+                    		<c:choose>
+                    		<c:when test="${loginInfo == null}">
+                	    		alert("로그인이 필요한 서비스 입니다.");
+                    			location.href = "/JoMalone/Member/login.jsp";
+                    		</c:when>
+                    		<c:otherwise>
+	                            if($("#prod_quantity").val() == 0 || $("#prod_quantity").val() == ""){
+	                                alert("수량을 입력해주세요");
+	                            }
+	                            else{
+	                            $("#frm").submit();
+	                            $.ajax({
+	                                url:"../insert.ca",
+	                                type:"post",
+	                                data:{}
+	                            }).done(function(){
+	                                var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
+	                                if(cf){
+	                                    location.href="${pageContext.request.contextPath}/list.ca";
+	                                }
+	                                else{
+	                                    location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
+	                                    //$("#prod_quantity").val() == 1; 
+	                                    return false;
+	                                }
+	                            })
+	                        }
+                    		</c:otherwise>
+                    		</c:choose>                 	
+				})
+              }           
                 else{
                     $("#btnCart").on("click",function(){
-                        $("#frm").submit();
-                        $.ajax({
-                            url:"../insert.ca",
-                            type:"post",
-                            data:{}
-                        }).done(function(){
-                            var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
-                            if(cf){
-                                location.href="${pageContext.request.contextPath}/list.ca";
-                            }
-                            else{
-                                location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
-                                $("#prod_quantity").val() == 1; 
-                                return false;
-                            }
-                        })
+                		<c:choose>
+                		<c:when test="${loginInfo == null}">
+            	    		alert("로그인이 필요한 서비스 입니다.");
+                			location.href = "/JoMalone/Member/login.jsp";
+                		</c:when>
+                		<c:otherwise>
+	                        $("#frm").submit();
+	                        $.ajax({
+	                            url:"../insert.ca",
+	                            type:"post",
+	                            data:{}
+	                        }).done(function(){
+	                            var cf = confirm("장바구니 상품이 정상적으로 담겼습니다.\n장바구니로 이동 하시겠습니까?");
+	                            if(cf){
+	                                location.href="${pageContext.request.contextPath}/list.ca";
+	                            }
+	                            else{
+	                                location.href="${pageContext.request.contextPath}/Goods/goods_detail.jsp";
+	                                //$("#prod_quantity").val() == 1; 
+	                                return false;
+	                            }
+	                        })
+                		</c:otherwise>
+                		</c:choose>
                     })
                 }
             </script>
