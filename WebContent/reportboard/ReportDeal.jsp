@@ -23,7 +23,9 @@
 	#write-title>h4 {width: 100%; line-height: 45px; text-align: center;}
 	
 	input[type=button] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
-
+input[type=button]:hover{
+	cursor:pointer;
+}
 #noticeMsg{
 	color: crimson;
 }
@@ -51,6 +53,10 @@
      	overflow-x:scroll;
      	border:1px solid black;
     }
+textarea {
+	height: 100px;
+	width: 95%;
+}    
 </style>
 </head>
 <body>
@@ -70,14 +76,14 @@
       
       <c:choose>
 		<c:when test="${sessionScope.adminId!=null }">
-	<form action="writeConfirm.report" method="post" id="writeFrm">
+	<form action="dealConfirm.report" method="post" id="writeFrm">
 		<div id="write-page" class=container>
 			<div id="write-title" class="row">
 				<div class="col-12 p-0"><h4>REPORT ADMIN</h4></div>
 			</div>
 			<div class="row" id=reportType>
 				<div class="col-12 p-0">
-				<input type="hidden" name="articleSeq" id="articleSeq" value=${reportSeq }>
+				<input type="hidden" name="articleSeq" id="articleSeq" value=${reviewSeq }>
 				<p id=reportType style="font-weight: bold;">게시물 관리 사유를 선택해주세요.</p>
 					<input type="radio" name="reportType" value="r1"> 부적절한 홍보<br> <input
 						type="radio" name="reportType" value="r2"> 명예훼손/사생활 침해<br> <input
@@ -90,7 +96,7 @@
 		
 		<hr>
 		<div class="row checkReportBox">
-			<div class="col-12">
+			<div class="col-12 p-0">
 					
 				<c:choose>
 					<c:when test="${preCheckDTO.check_YN!=null && resultDTO.check_YN != 'Y'}">
@@ -168,62 +174,18 @@
 
 	<script>
        $("#cancel").on("click", function() {
-           location.href = "read.review?no=${reportSeq }";//원래 리뷰페이지
+           location.href = "read.review?no=${reviewSeq }&location=adminReviews";//원래 리뷰페이지
        });
        $("#toWrite").on("click", function() {
        	var check = $('input:radio[name=reportType]').is(':checked');
        	if(!check){
-       		alert("신고 사유를 선택해주세요.");
+       		alert("게시물 관리 사유를 선택해주세요.");
        		return false;
        	}
        	alert("처리가 완료되었습니다.");
        	document.getElementById("writeFrm").submit();
        });
        
-       (function($) {
-		$(".summernote").summernote({
-   			lang : 'ko-KR',
-   			minHeight: 300,
-   			maxHeight: 300,    
-   			focus: true,
-   			placeholder : "추가로 기재할 내용이 있다면 작성해주세요. (사진 업로드 크기는 10MB까지만 가능합니다.)",
-   			callbacks : {
-   				onImageUpload : function(files) {
-   					console.log(files);
-   					var data = new FormData();
-   					for (var i = 0; i < files.length; i++) {
-   						data.append("img" + i, files[i]);
-   					}
-   					$.ajax({
-   						url : "summernote.report",
-   						enctype : "multipart/form-data",
-   						type : "post",
-   						data : data,
-   						contentType : false,
-   						processData : false,
-   						cache : false,
-   						dataType : "json"
-   					}).done(function(resp) {
-   						console.log(resp);
-   						console.log(resp.length);
-   						for (var i = 0; i < resp.length; i++) {
-   							var imgBox = document.createElement("p");
-   							var imgTag = document.createElement("img");
-   							$(imgTag).attr("src", resp[i].url);
-   							$(imgTag).attr("style", "max-width: 80%; height: auto;");
-   							imgBox.append(imgTag);
-   							$(".summernote").summernote('insertNode', imgBox);
-   						}
-   						var pTag = "<p><br></p>";
-   						$(".summernote").summernote('pasteHTML', pTag);
-   						$('.summernote').summernote('focus');
-   					}).fail(function(resp) {
-
-   					})
-   				}
-   			}	
-       });
-       })(jQuery);
        
  	</script>
 </body>

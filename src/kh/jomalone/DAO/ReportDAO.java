@@ -350,6 +350,32 @@ public class ReportDAO {
 		}		
 	}
 	
+	public ReportDTO selectAdminReport(int reviewSeq) throws Exception{
+		String sql = "select * from reportboard where review_seq=? and mem_id='admin1'";
+		try(
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setInt(1, reviewSeq);
+			try(ResultSet rs = pstat.executeQuery();){
+				ReportDTO result = new ReportDTO();
+				if(rs.next()) {
+					result.setCheck_comments(rs.getString("check_comments"));
+					result.setCheck_date(rs.getTimestamp("check_date"));
+					result.setCheck_YN(rs.getString("check_yn"));
+					result.setContents(rs.getString("contents"));
+					result.setMem_id(rs.getString("mem_id"));
+					result.setReport_date(rs.getTimestamp("report_date"));
+					result.setReport_type(rs.getString("report_type"));
+					result.setReport_seq(rs.getInt("report_seq"));
+					result.setReview_seq(rs.getInt("review_seq"));
+					result.setCheck_type(rs.getString("check_type"));
+					result.setFormedDate(rs.getTimestamp("check_date"));
+				}return result;
+			}			
+		}		
+	}
+	
+	
 	public int accumulationReport(int reviewSeq) throws Exception{
 		String sql = "select count(*) from reportboard where review_seq=?";
 		try(

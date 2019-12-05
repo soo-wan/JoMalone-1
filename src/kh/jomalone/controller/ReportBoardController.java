@@ -128,10 +128,12 @@ public class ReportBoardController extends HttpServlet {
 			int seq = Integer.parseInt(request.getParameter("no"));
 			try {
 				ReportDTO preCheck = dao.preCheckReport(seq);
+				ReportDTO result = dao.selectAdminReport(seq);
 				request.setAttribute("preCheckDTO", preCheck);
-				request.setAttribute("reportSeq", seq);
+				request.setAttribute("resultDTO", result);
+				request.setAttribute("reviewSeq", seq);
 				System.out.println(preCheck+":"+seq);
-				//request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
+				request.getRequestDispatcher("reportboard/ReportDealCall.jsp").forward(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");
