@@ -182,7 +182,9 @@
 	<script>
 	var answerCheck = "${readDTO.answer_yn}";
 	var adminCheck = "${sessionScope.adminId}";
+
             $("#toMain").on("click", function() {
+            	/*
             	var fromAdminRoot = "${sessionScope.fromAdminAskPage}";            	
             	console.log(fromAdminRoot);
             	if(fromAdminRoot=="new"){
@@ -190,6 +192,18 @@
             	}else if(fromAdminRoot=="entire"){
                     location.href = "allList.ask";
             	}else if(fromAdminRoot==""){
+            		location.href = "list.ask";
+            	}
+            	*/
+            	
+            	var locationRoot = "${location}";
+            	if(locationRoot=="newAsk"){
+            		location.href="newList.ask";
+            	}else if(locationRoot=="admin"){
+                    location.href = "allList.ask";
+            	}else if(locationRoot=="myAsk"){
+            		location.href = "list.ask";
+            	}else{
             		location.href = "list.ask";
             	}
             });

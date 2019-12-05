@@ -93,7 +93,7 @@
 									<c:if test="${dto.answer_yn eq 'Y' }">
 										<span>[답변완료]</span>
 									</c:if>
-									<a href="read.ask?no=${dto.ask_seq }">${dto.title }</a>
+									<a href="read.ask?no=${dto.ask_seq }&location=admin">${dto.title }</a>
 								</div>
 								<div class="col-1">${dto.mem_id }</div>
 								<div class="col-2">${dto.formedFullDate }</div>
