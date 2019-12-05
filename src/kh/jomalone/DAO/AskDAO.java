@@ -214,7 +214,7 @@ public class AskDAO {
 	
 	
 	public int insertAsk(AskDTO dto) throws Exception {// 문의글 작성
-		String sql = "insert into askboard values(ask_seq.nextval,?,?,?,?,default,default,?)";
+		String sql = "insert into askboard values(ask_seq.nextval,?,?,?,?,'N',sysdate,?)";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setString(1, dto.getAsk_code());
 			pstat.setString(2, dto.getTitle());
@@ -375,7 +375,7 @@ public class AskDAO {
 	}
 	
 	public int insertAskComment(AskCommentsDTO dto) throws Exception{// 문의글답변(댓글)등록(관리자)
-		String sql = "insert into askcomments values(askco_seq.nextval,?,?,default)";
+		String sql = "insert into askcomments values(askco_seq.nextval,?,?,sysdate)";
 		try(
 				Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);

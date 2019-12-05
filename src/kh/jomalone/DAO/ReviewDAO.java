@@ -164,7 +164,7 @@ public class ReviewDAO {
 	}
 
 	public int insertReview(ReviewDTO dto) throws Exception {// 리뷰 작성
-		String sql = "insert into reviewboard values(review_seq.nextval,?,?,?,?,?,?,default,default)";
+		String sql = "insert into reviewboard values(review_seq.nextval,?,?,?,?,?,?,sysdate,'N')";
 		try (Connection con = this.getConnection(); PreparedStatement pstat = con.prepareStatement(sql);) {
 			pstat.setInt(1, dto.getOrder_seq());
 			pstat.setString(2, dto.getProd_name());
