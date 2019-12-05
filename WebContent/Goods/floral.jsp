@@ -29,9 +29,9 @@
 			</div>
 		</div>
 		
-		<div class="row" style="margin-bottom: 130px; border: 1px solid green;">
+		<div class="row" style="margin-bottom: 130px;">
 			<c:forEach items="${list}" var="dto">
-				<div style="margin: 10px auto 20px auto; width: 300px; height: 300px; border: 1px solid red; text-align: center;">
+				<div style="margin: 10px auto 20px auto; width: 300px; height: 300px; text-align: center;">
 					<img src="/JoMalone/Resource/img/${dto.productCode}.jpg">
 					<h5 style="margin: 10px 0px 10px 0px; font-size: 17px;">${dto.productName }</h5>
 					<h6 style="margin: 5px 0px 5px 0px; font-size: 14px;">$${dto.price}</h6>
