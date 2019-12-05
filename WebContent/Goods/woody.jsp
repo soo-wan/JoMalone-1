@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +30,14 @@
 		</div>
 		
 		<div class="row" style="margin-bottom: 130px; border: 1px solid green;">
-			<div style="margin: 10px auto 20px auto; width: 300px; height: 300px; border: 1px solid red; text-align: center;">
-				<img src="/JoMalone/Resource/img/Wo001.jpg">
-				<h5 style="margin: 10px 0px 10px 0px; font-size: 17px;">우드 세이지 앤 씨 솔트 코롱</h5>
-				<h6 style="margin: 5px 0px 5px 0px; font-size: 14px;">$94,000 - $188,000</h6>
-				<input class="look" type="button" value="자세히보기">
-			</div>
+			<c:forEach items="${list}" var="dto">
+				<div style="margin: 10px auto 20px auto; width: 300px; height: 300px; border: 1px solid red; text-align: center;">
+					<img src="/JoMalone/Resource/img/${dto.productCode}.jpg">
+					<h5 style="margin: 10px 0px 10px 0px; font-size: 17px;">${dto.productName }</h5>
+					<h6 style="margin: 5px 0px 5px 0px; font-size: 14px;">$${dto.price}</h6>
+					<button class =look type=button onclick="toDetail()">자세히보기</button>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	

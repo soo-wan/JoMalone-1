@@ -62,4 +62,18 @@ public class ProductViewDAO {
 		}
 		return list;
 	}
+	public List<ProductDTO> selectProductByProdCategory(String productCategory) throws Exception {
+		List<ProductDTO> list = new ArrayList<>();
+		try (
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select * from product where prod_category=?")) {
+			pstat.setString(1, productCategory);
+			try (ResultSet rs = pstat.executeQuery()) {
+				while (rs.next()) {
+					list.add(new ProductDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10)));
+				}
+			}
+		}
+		return list;
+	}
 }
