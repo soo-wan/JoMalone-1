@@ -85,7 +85,7 @@
 	</c:if>
 	
 		<div class="row">
-			<div class="col-12"><h4 style="text-align: center;">MY REVEIWS</h4></div>
+			<div class="col-12"><h4 style="text-align: center;">MY REVIEWS</h4></div>
 		</div>
 		<div class="row" style="margin-top: 60px; text-align: center;">
 			<div class="col-3 d-none d-sm-block">구매상품</div>
