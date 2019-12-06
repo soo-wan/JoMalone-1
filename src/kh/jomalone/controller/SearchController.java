@@ -162,7 +162,18 @@ public class SearchController extends HttpServlet {
 				request.setAttribute("pageNavi", pageNavi);
 				request.setAttribute("fromSearch", "yes");
 				request.getRequestDispatcher("reportboard/AllReportList.jsp").forward(request, response);
+				
+				
+			}else if(cmd.contentEquals("/eachProd.review")) {
+				String prodName = request.getParameter("prod_name");
+				dao.getReviewPageNavi(currentPage, prodName);
+				
 			}
+			
+			
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

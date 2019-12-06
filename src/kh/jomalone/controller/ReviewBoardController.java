@@ -18,6 +18,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kh.jomalone.DAO.ReviewDAO;
+import kh.jomalone.DAO.SearchDAO;
 import kh.jomalone.DTO.ReviewDTO;
 import kh.jomalone.configuration.Configuration;
 
@@ -230,6 +231,11 @@ public class ReviewBoardController extends HttpServlet {
 			}
 
 			response.getWriter().append(list.toString());
+			
+			
+			
+			
+			
 		}
 
 	}
