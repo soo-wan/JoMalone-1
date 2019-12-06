@@ -14,16 +14,7 @@ import kh.jomalone.configuration.Configuration;
 
 public class ReportDAO {
 	private static ReportDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-	
-	private ReportDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30);
-	}
-	
+
 	public synchronized static ReportDAO getInstance() {
 		if(instance==null) {
 			instance = new ReportDAO();
@@ -32,7 +23,7 @@ public class ReportDAO {
 	}
 	
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 	
 	private int getArticleCount() throws Exception {

@@ -14,16 +14,6 @@ import kh.jomalone.DTO.NMembersDTO;
 
 public class MembersDAO {
 	private static MembersDAO instance; 
-	private BasicDataSource bds = new BasicDataSource();
-
-	private MembersDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(10);
-	}
 
 	public synchronized static MembersDAO getInstance(){ 
 		if(instance == null) {
@@ -32,7 +22,7 @@ public class MembersDAO {
 		return instance; 
 	} 
 	public Connection getConnection()  throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 	
 	//아이디 중복확인

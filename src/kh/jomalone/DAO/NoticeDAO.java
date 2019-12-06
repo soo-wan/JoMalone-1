@@ -13,15 +13,7 @@ import kh.jomalone.configuration.Configuration;
 
 public class NoticeDAO {
 	private static NoticeDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-	
-	private NoticeDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30);
-	}
+
 	
 	public synchronized static NoticeDAO getInstance() {
 		if(instance==null) {
@@ -31,7 +23,7 @@ public class NoticeDAO {
 	}
 	
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 	
 	private int getArticleCount() throws Exception {

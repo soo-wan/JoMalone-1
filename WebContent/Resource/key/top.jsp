@@ -106,6 +106,10 @@
     </div>
 </div>
     <script>
+	    $("#search").on("click",function(){
+	 		alert("현재 준비중인 서비스입니다.");
+		})
+    
 	    $(function () {
 	    	$('[data-toggle="popover"]').popover();
 	    })

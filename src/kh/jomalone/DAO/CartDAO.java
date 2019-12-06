@@ -12,16 +12,7 @@ import kh.jomalone.DTO.CartDTO;
 
 public class CartDAO {
 	private static CartDAO instance;
-	private static BasicDataSource bds = new BasicDataSource();
 
-	private CartDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30);
-	}
-    
 	public synchronized static CartDAO getInstance() {
 		if (instance == null) {
 			instance = new CartDAO();
@@ -30,7 +21,7 @@ public class CartDAO {
 	}
 
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 
 	public int insertCart(CartDTO dto) throws Exception {

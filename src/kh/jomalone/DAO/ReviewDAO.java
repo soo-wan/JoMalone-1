@@ -13,15 +13,6 @@ import kh.jomalone.DTO.ReviewDTO;
 
 public class ReviewDAO {
 	private static ReviewDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-
-	private ReviewDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30);
-	}
 
 	public synchronized static ReviewDAO getInstance() {
 		if (instance == null) {
@@ -31,7 +22,7 @@ public class ReviewDAO {
 	}
 
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 
 	private int getArticleCount() throws Exception {

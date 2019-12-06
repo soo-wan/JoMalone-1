@@ -13,15 +13,6 @@ import kh.jomalone.DTO.RankDTO;
 
 public class ProductViewDAO {
 	private static ProductViewDAO instance;
-	private static BasicDataSource bds = new BasicDataSource();
-
-	private ProductViewDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(50);
-	}
 
 	public synchronized static ProductViewDAO getInstance() {
 		if (instance == null) {
@@ -31,7 +22,7 @@ public class ProductViewDAO {
 	}
 
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 	
 	public List<ProductDTO> selectProductByProdName(String productName) throws Exception {

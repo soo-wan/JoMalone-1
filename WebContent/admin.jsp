@@ -77,7 +77,7 @@
     	</form>
     	
 	<div id="container">
-    	<table id="table" border=1px;>
+    	<table id="table" border=1px; style="cursor: pointer;">
     	<tr>
             <th>아이디</th>
             <th>로그인타입</th>
@@ -91,8 +91,6 @@
             <th>성별</th>
             <th>가입날짜</th>
             <th>최근로그인</th>
-            <th>블랙여부</th>
-            <th>블랙날짜</th>
         </tr>
         <c:choose>
         <c:when  test="${adminId == null }">
@@ -115,8 +113,6 @@
             <td>${dto.gender} </td>
             <td>${dto.enrolldate} </td>
             <td>${dto.lastlogin} </td>
-            <td>${dto.black_yn} </td>
-            <td>${dto.blackdate}</td>
         </tr>
         </c:forEach>
         </c:otherwise>

@@ -113,7 +113,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		
 		
 		
-		<form action="report.search" method="get" id="searchFrm">
+		<form action="report.search" method="get" id="searchFrm" style="padding: 0px; margin-bottom: 30px; width: 380px; float: left; text-align: left;">
 			<div class="row" style="text-align: center;">
 				<div class="col-12 searchBar">
 					<input type="hidden" name="rootPage" value="fromAdminEntire"> <select
@@ -121,15 +121,15 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<option value="contents">내용</option>
 						<option value="report_type">신고유형</option>
 						<option value="mem_id">아이디</option>
-					</select> <input id="searchInput" name="searchInput" type=text> <input
-						type="button" value="검색" id="toSearch">
+					</select> <input id="searchInput" name="searchInput" type=text style="height: 25px;"> <input
+						type="button" value="검색" id="toSearch" style="height: 27px;">
 				</div>
 			</div>
 		</form>
 		
 		
 		
-		<div class="row" style="text-align: center;">
+		<div class="row" style="margin-bottom: 30px; text-align: center; height: 29px; width: 300px;">
 			<div class="col-12 naviBar" style="color:black;">${pageNavi }</div>
 		</div>
 		<div class="row">
@@ -155,7 +155,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			if($("#reportSearch").val()=="report_type"){
 				var reportKor = [null,"부적절한 홍보","명예훼손/사생활 침해","저작권 침해","스팸","기타"];
 				$("#searchInput").remove();
-				var subSelect ='<select name="reportTypeSearch" id="reportTypeSearch"></select>';
+				var subSelect ='<select style="margin-left: 5px; width: 180px;" name="reportTypeSearch" id="reportTypeSearch"></select>';
 				$("#reportSearch").after(subSelect);
 				
 				for(var i=1;i<reportKor.length;i++){
@@ -166,7 +166,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			}else{
 				if($("#reportTypeSearch").length){
 					$("#reportTypeSearch").remove();
-					$("#reportSearch").after('<input id="searchInput" name="searchInput" type=text>');
+					$("#reportSearch").after('<input id="searchInput" name="searchInput" type=text  style="height: 25px; margin-left: 5px;">');
 				}
 			}	
 		});

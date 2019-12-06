@@ -13,9 +13,9 @@
 	#headDiv>div {padding: 0px; margin: 0px; font-weight: bold; font-size: 20px; line-height: 30px;}
 	.article {padding-bottom: 10px;}
 	.article:hover {background-color: #cbe7ff90;}	
-	a:link {color: black;}
-	a:visited {color: #887f7f;}
-	a:hover {text-decoration: none;}
+	.a:link {color: black;}
+	.a:visited {color: #887f7f;}
+	.a:hover {text-decoration: none;}
 
 .naviBar {
 	font-size: 20px;
@@ -37,6 +37,7 @@
 }
 .star_rating a:first-child {margin-left:0;}
 .star_rating a.on {color:#ffd800;}
+input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
 </style>
 </head>
 
@@ -44,7 +45,7 @@
 <jsp:include page="/Resource/key/top.jsp" flush="true" />
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">구매 후기</div>
+			<div class="col-12"><h4 style="margin-top: 60px;">BUY REVIEWS</h4></div>
 		</div>
 		<div class="row" style="text-align: center;">
 			<div class="col-3 d-none d-sm-block">구매상품</div>
@@ -68,10 +69,10 @@
 						<div class="col-2">
 							<p class="star_rating">
 							    <c:forEach var="i" begin="1" end="${dto.grade}">
-									 <a href="#" class="on">★</a>									
+									 <a class="a" href="#" class="on">★</a>									
 								</c:forEach>
 								<c:forEach var="i" begin="${dto.grade+1}" end="5">
-									 <a href="#">★</a>									
+									 <a class="a" href="#">★</a>									
 								</c:forEach>
 							</p>
 						</div>
@@ -84,7 +85,7 @@
 		</c:choose>
 		<hr>
 		
-				<form action="review.search" method="get" id="searchFrm">
+				<form action="review.search" method="get" id="searchFrm" style="padding: 0px; margin-bottom: 30px; width: 380px; float: left; text-align: left;">
 					<div class="row" style="text-align: center;">
 						<div class="col-12 searchBar">
 							<input type="hidden" name="rootPage" value="listPage"> <select
@@ -92,13 +93,13 @@
 								<option value="title">제목</option>
 								<option value="contents">내용</option>
 								<option value="prod_name">상품명</option>								
-							</select> <input id="searchInput" name="searchInput" type=text> <input
-								type="button" value="검색" id="toSearch">
+							</select> <input id="searchInput" name="searchInput" type=text style="height: 25px;"> <input
+								type="button" value="검색" id="toSearch" style="height: 27px;">
 						</div>
 					</div>
 				</form>
 		
-		<div class="row" style="text-align: center;">
+		<div class="row" style="margin-bottom: 30px; text-align: center; height: 29px; width: 300px;">
 			<div class="col-12 naviBar" style="color: black;">${pageNavi }</div>
 		</div>
 		<div class="row">
@@ -115,7 +116,7 @@
 			alert("해당 리뷰는 신고 접수되어 블라인드처리되었습니다.");		
 		}
 		$("#toIndex").on("click", function() {
-			location.href = "index.jsp";
+			location.href = "/JoMalone/home.jsp";
 		});
 		$("#toSearch").on("click", function(){
 			$("#searchFrm").submit();

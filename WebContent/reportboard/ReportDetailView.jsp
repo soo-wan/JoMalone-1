@@ -71,8 +71,9 @@ textarea {
 				<p style="font-weight: bold;">신고된 리뷰 정보</p>
 				<span>누적 신고 횟수 : 총 ${accumulation }회</span><br> <br>
 				<p>
-					<a href="read.review?no=${resultDTO.review_seq }&location=report" target="_blank">신고된
-						리뷰 보기</a>
+				<c:if test="${preCheckDTO.checkTypeKor != '삭제'}">
+               <a href="read.review?no=${resultDTO.review_seq }&location=report" target="_blank">신고된 리뷰 보기</a>
+                  </c:if>
 				</p>
 			</div>
 		</div>
@@ -192,7 +193,9 @@ textarea {
 												})
 										.done(
 												function(data) {
-													console.log(data);
+													
+													$("#originArticle").remove();
+													
 													var checkType = '';
 													if (data.check_type == "none") {
 														checkType = "별도 조치 없음";

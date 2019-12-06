@@ -21,7 +21,7 @@
 	<jsp:include page="/Resource/key/top.jsp" flush="false" />
 	<%
 		String clientId = "VsJ9BGH2srkgM7uumvNE";//애플리케이션 클라이언트 아이디값";
-		String redirectURI = URLEncoder.encode("http://localhost:8080/JoMalone/Ncallback", "UTF-8");
+		String redirectURI = URLEncoder.encode("http://192.168.60.29:8080/JoMalone/Ncallback", "UTF-8");
 		// 상태 토큰으로 사용할 랜덤 문자열 생성
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
@@ -33,7 +33,7 @@
 		
 		String kapiURL = "https://kauth.kakao.com/oauth/authorize?";
 		kapiURL += "client_id=6d5630d4385069dbc2b5bcdc92d10cd4";
-		kapiURL += "&redirect_uri=http://192.168.60.32:8080/JoMalone/Kcallback&response_type=code";
+		kapiURL += "&redirect_uri=http://192.168.60.29:8080/JoMalone/Kcallback&response_type=code";
 	%>
 	
 	<div id="general-login" class="container">
@@ -158,7 +158,7 @@
 출처: https://alpreah.tistory.com/101 [생각에 취하는날]
 	
  		$("#naver").on("click",function(){
-	 		location.href = "<%=napiURL%>"
+	 		alert("현재 준비중인 서비스입니다.");
 		})
 		$("#kakao").on("click",function(){
 	 		location.href = "<%=kapiURL%>"

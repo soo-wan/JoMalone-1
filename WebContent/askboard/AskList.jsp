@@ -116,7 +116,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			if($("#askSearch").val()=="ask_code"){
 				var askKor = [null,"배송","주문","반품/교환","회원정보","상품정보","결제","사이트장애","매장문의","기타"];
 				$("#searchInput").remove();
-				var subSelect ='<select name="askCodeSearch" id="askCodeSearch"></select>';
+				var subSelect ='<select style="margin-left: 5px; width: 180px;" name="askCodeSearch" id="askCodeSearch"></select>';
 				$("#askSearch").after(subSelect);
 				
 				for(var i=1;i<askKor.length;i++){
@@ -127,7 +127,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 			}else{
 				if($("#askCodeSearch").length){
 					$("#askCodeSearch").remove();
-					$("#askSearch").after('<input id="searchInput" name="searchInput" type=text>');
+					$("#askSearch").after('<input id="searchInput" name="searchInput" type=text  style="height: 25px; margin-left: 5px;">');
 				}
 			}	
 		});

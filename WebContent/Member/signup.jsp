@@ -215,8 +215,8 @@
 				</p>
 			</div>
 			<div id="signup-btn">
-				<input id="sign-join" type="button" value="sign up">
-				<input id="sign-reset" type="reset" value="re-input">
+				<input id="sign-join" type="button" value="회원가입">
+				<input id="sign-reset" type="reset" value="다시입력">
 			</div>
 		</div>
 	</form>

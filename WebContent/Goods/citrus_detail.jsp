@@ -74,7 +74,11 @@
                 </div>
                 <jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
 
-                <script>    
+                <script>
+                	$("#btnBuy").on("click", function() {
+                		location.href="/JoMalone/list.review";
+                	})
+                
                     var change = $("#prod_quantity").change();
                     // console.log("change완료");
 

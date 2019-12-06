@@ -99,23 +99,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<hr>
-		
-		
-		<form action="report.search" method="get" id="searchFrm">
-					<div class="row" style="text-align: center;">
-						<div class="col-12 searchBar">
-							<input type="hidden" name="rootPage" value="fromAdminNew"> <select
-								name=reportSearch id="reportSearch">
-								<option value="contents">내용</option>
-								<option value="report_type">신고유형</option>
-								<option value="mem_id">아이디</option>
-							</select> <input id="searchInput" name="searchInput" type=text> <input
-								type="button" value="검색" id="toSearch">
-						</div>
-					</div>
-		</form>
-		
+		<hr>		
 		
 		<div class="row" style="text-align: center;">
 			<div class="col-12 naviBar" style="color:black;">${pageNavi }</div>
@@ -137,7 +121,6 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		$("#toIndex").on("click", function() {
 			location.href = "home.jsp";
 		});
-
 
 	</script>
 </body>

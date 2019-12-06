@@ -32,7 +32,7 @@ public class Kcallback extends HttpServlet {
 	    apiURL = "https://kauth.kakao.com/oauth/token";
 	    apiURL +="?grant_type=authorization_code";
 	    apiURL +="&client_id=6d5630d4385069dbc2b5bcdc92d10cd4" ;
-	    apiURL +="&redirect_uri=http://192.168.60.32:8080/JoMalone/Ncallback" ;
+	    apiURL +="&redirect_uri=http://192.168.60.29:8080/JoMalone/Kcallback" ;
 	    apiURL +="&code="+ code;
 	   
 	    String access_token = "";

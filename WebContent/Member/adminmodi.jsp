@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/JoMalone/Resource/css/adminmodi.css?a=8seef8">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
@@ -71,25 +72,7 @@
 					</c:choose>
 				</div>
 				<br>
-			<div id="black">
-				<h5>블랙여부 : </h5>
-					<c:choose>
-					<c:when test="${dto.black_yn == 'y'}">
-					<label>Y</label> <input type="radio" value="y" name="black_yn" id="black" checked>
-					<label>N</label> <input type="radio" value="N" name="black_yn" id="black">
-					</c:when>
-					<c:otherwise>
-					<label>Y</label> <input type="radio" value="y" name="black" id="black" >
-					<label>N</label> <input type="radio" value="N" name="black" id="black" checked>
-					</c:otherwise>
-					</c:choose>
-				</div>
-				<div>
-				<h5>블랙날짜 : </h5>
-				<input type="text" name="blackdate" id="blackdate" style="margin: 8px 0px 0px 15px; width: 250px; height: 30px;" value="${dto.blackdate }">
-				
-				</div>
-				
+			
 			</div>
 			
 			

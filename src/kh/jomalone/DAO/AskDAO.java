@@ -14,15 +14,6 @@ import kh.jomalone.configuration.Configuration;
 
 public class AskDAO {
 	private static AskDAO instance;
-	private BasicDataSource bds = new BasicDataSource();
-
-	private AskDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30);
-	}
 
 	public synchronized static AskDAO getInstance() {
 		if (instance == null) {
@@ -32,7 +23,7 @@ public class AskDAO {
 	}
 
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 	
 	

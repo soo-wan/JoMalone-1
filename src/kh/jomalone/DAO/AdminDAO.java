@@ -16,15 +16,6 @@ import kh.jomalone.DTO.ProductDTO;
 
 public class AdminDAO {
 	private static AdminDAO instance;
-	private BasicDataSource bds = new BasicDataSource(); 
-	private AdminDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(30); 
-	}
-
 	public static synchronized AdminDAO getInstance() { 
 		if(instance == null) {
 			instance = new AdminDAO();
@@ -33,7 +24,7 @@ public class AdminDAO {
 	}
 
 	public Connection getConnection() throws Exception{
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}
 
 	public int insertProduct(String productCode, String category, String productName, int price, int quantity, String description, int spring, int summer, int fall, int winter) throws Exception{

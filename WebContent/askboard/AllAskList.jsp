@@ -103,7 +103,7 @@
 				</c:choose>
 				<hr>
 				
-				<form action="/JoMalone/ask.search" method="get" id="searchFrm">
+				<form action="/JoMalone/ask.search" method="get" id="searchFrm" style="padding: 0px; margin-bottom: 30px; width: 380px; float: left; text-align: left;">
 					<div class="row" style="text-align: center;">
 						<div class="col-12 searchBar">
 							<input type="hidden" name="rootPage" value="fromAdminEntire"> <select
@@ -112,14 +112,14 @@
 								<option value="contents">내용</option>
 								<option value="ask_code">문의종류</option>
 								<option value="mem_id">아이디</option>
-							</select> <input id="searchInput" name="searchInput" type=text> <input
-								type="button" value="검색" id="toSearch">
+							</select> <input id="searchInput" name="searchInput" type=text style="height: 25px;"> <input
+								type="button" value="검색" id="toSearch" style="height: 27px;">
 						</div>
 					</div>
 				</form>
 				
 				
-				<div class="row" style="text-align: center;">
+				<div class="row" style="margin-bottom: 30px; text-align: center; height: 29px; width: 300px;">
 					<div class="col-12 naviBar">${pageNavi }</div>
 				</div>
 				<div class="row">
@@ -145,7 +145,7 @@
 			if($("#askSearch").val()=="ask_code"){
 				var askKor = [null,"배송","주문","반품/교환","회원정보","상품정보","결제","사이트장애","매장문의","기타"];
 				$("#searchInput").remove();
-				var subSelect ='<select name="askCodeSearch" id="askCodeSearch"></select>';
+				var subSelect ='<select style="margin-left: 5px; width: 180px;" name="askCodeSearch" id="askCodeSearch"></select>';
 				$("#askSearch").after(subSelect);
 				
 				for(var i=1;i<askKor.length;i++){
@@ -156,7 +156,7 @@
 			}else{
 				if($("#askCodeSearch").length){
 					$("#askCodeSearch").remove();
-					$("#askSearch").after('<input id="searchInput" name="searchInput" type=text>');
+					$("#askSearch").after('<input id="searchInput" name="searchInput" type=text  style="height: 25px; margin-left: 5px;">');
 				}
 			}	
 		});

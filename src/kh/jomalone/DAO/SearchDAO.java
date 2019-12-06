@@ -17,15 +17,6 @@ import kh.jomalone.configuration.Configuration;
 
 public class SearchDAO {
 	private static SearchDAO instance;
-	private static BasicDataSource bds = new BasicDataSource();
-
-	private SearchDAO() {
-		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		bds.setUsername("jomalone");
-		bds.setPassword("jomalone");
-		bds.setInitialSize(50);
-	}
 
 	public synchronized static SearchDAO getInstance() {
 		if (instance == null) {
@@ -35,7 +26,7 @@ public class SearchDAO {
 	}
 
 	private Connection getConnection() throws Exception {
-		return bds.getConnection();
+		return DAO.bds.getConnection();
 	}	
 	
 	
