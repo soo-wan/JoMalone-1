@@ -31,19 +31,16 @@
                         border:1px solid black;
                     }
 
-
-
-
-                    #eachBox{border-bottom: 1px solid black;}
+                     
+                    #eachBox{margin:10px 10px;}
                     #oriCode{display:none;}
 
                     .firstCol{background-color:#1e2d47; color:white; font-weight:bold; text-align:center; width:100px;}
                     .secondCol{width:300px;}
                     .secondCol_inner{width:100%;}
 
-                    button{margin:2px;}
-
-
+                    button{margin:2px; background-color:lightgray; border-radius:3px; border:1px solid black}
+                    
 
                 </style>
             </head>

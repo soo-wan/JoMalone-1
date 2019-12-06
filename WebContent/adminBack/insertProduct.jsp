@@ -163,22 +163,17 @@
                                 	return;
                                 }
                                 
-                                if($("#summer").val()==""){
+                                if($("#summer").val()=="" || !($("#summer").val()==0 || $("#summer").val()==1)){
                                 	alert("summer값을 입력해주세요"); 
                                 	return;
                                 }
                                 
-                                if($("#fall").val()==""){
+                                if($("#fall").val()=="" || !($("#fall").val()==0 || $("#fall").val()==1)){
                                 	alert("fall값을 입력해주세요"); 
                                 	return;
                                 }
                                 
-                                if($("#winter").val()==""){
-                                	alert("winter값을 입력해주세요"); 
-                                	return;
-                                }
-                                
-                                if($("#winter").val()==""){
+                                if($("#winter").val()=="" || !($("#winter").val()==0 || $("#winter").val()==1)){
                                 	alert("winter값을 입력해주세요"); 
                                 	return;
                                 }
