@@ -10,7 +10,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
-   <jsp:include page="/Resource/key/top.jsp" flush="false"/>
+   <jsp:include page="/Resource/key/top.jsp" flush="true"/>
    
    <form action="modi.my" method="post" id="profileform" style="height: 1000px;">
    
@@ -127,7 +127,7 @@
 </div>
 </form>
    
-   <jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
+   <jsp:include page="/Resource/key/bottom.jsp" flush="true"/>
 
    <script>
    // 주소찾기   

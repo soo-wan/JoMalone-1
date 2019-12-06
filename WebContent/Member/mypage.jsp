@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-	<jsp:include page="/Resource/key/top.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/top.jsp" flush="true"/>
 	
 	<div id="mypage-home" class="container">
 		<div id="welcome-msg" class="row"><h5>${name} 회원님 마이페이지에 오신걸 환영합니다!</h5></div> <!-- 이름 값 받아오기 -->
@@ -57,6 +57,6 @@
 		})
 	</script>
 	
-	<jsp:include page="/Resource/key/bottom.jsp" flush="false"/>
+	<jsp:include page="/Resource/key/bottom.jsp" flush="true"/>
 </body>
 </html>
