@@ -126,12 +126,12 @@
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
 			<c:choose>
-				<c:when test="${sessionScope.adminId==null}">
+				<c:when test="${sessionScope.adminId==null && sessionScope.loginInfo!=readDTO.mem_id && sessionScope.loginInfo!=null}">
 					<input type="button" value="게시글신고" id="toReport"> 
-				</c:when>
-				<c:otherwise>
+				</c:when>				
+				<c:when test="${sessionScope.adminId!=null }">
 					<input type="button" value="게시글관리" id="toDealReview">
-				</c:otherwise>
+				</c:when>
 			</c:choose>
 				<input type="button" value="목록" id="toMain">
 				<c:choose>

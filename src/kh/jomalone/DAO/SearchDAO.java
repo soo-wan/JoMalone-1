@@ -79,6 +79,77 @@ public class SearchDAO {
 		}
 	}
 	
+	private int getArticleCountExactProd(String prodName) throws Exception {
+		String sql = "select count(*) from reviewboard where prod_name = ?";
+		try (Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				) {
+			pstat.setString(1, prodName);
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);				
+			}
+		}
+	}
+	
+	public String getReviewPageNavi(int currentPage, String target) throws Exception {
+		int recordTotalCount = getArticleCountExactProd(target);
+				
+		int pageTotalCount = 0;
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+		if (currentPage < 1) {
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) {
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = (currentPage - 1) / Configuration.naviCountPerPage * Configuration.naviCountPerPage + 1;
+		int endNavi = startNavi + (Configuration.naviCountPerPage - 1);
+
+		if (endNavi > pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		if (needPrev) {
+			sb.append("<a href='review.search?currentPage=" + (startNavi - 1) + "'>< </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a href='review.search?currentPage=" + i + "'>");
+			sb.append(i);
+			sb.append("</a> ");
+		}
+		if (needNext) {
+			sb.append("<a href='review.search?currentPage=" + (endNavi + 1) + "'>></a>");
+		}
+		return sb.toString();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public String getPageNavi(int currentPage, String linkURL, String boardName, String columnName, String target, String rootPage, String id) throws Exception {
 		int recordTotalCount = 0;
 		
