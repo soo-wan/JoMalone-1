@@ -6,8 +6,78 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<style>
+html { box-sizing: border-box; }
+
+*,
+*::before,
+*::after { box-sizing: inherit; }
+
+body * {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: normal 100%/1.15 "Merriweather", serif;
+  background-color: #7ed0f2;
+  color: #fff;
+}
+
+.wrapper {
+  position: relative;
+  max-width: 1298px;
+  height: auto;
+  margin: 2em auto 0 auto;
+}
+
+/* https://www.flaticon.com/authors/vectors-market */
+/* https://www.flaticon.com/authors/icomoon */
+.box {
+  max-width: 70%;
+  min-height: auto;
+  margin: 0 auto;
+  padding: 1em 1em;
+  text-align: center;
+  background: url("https://www.dropbox.com/s/xq0841cp3icnuqd/flame.png?raw=1") no-repeat top 10em center/128px 128px,
+              transparent url("https://www.dropbox.com/s/w7qqrcvhlx3pwnf/desktop-pc.png?raw=1") no-repeat top 13em center/128px 128px;
+}
+
+h1, p:not(:last-of-type) { text-shadow: 0 0 6px #216f79; }
+
+h1 {
+  margin: 0 0 1rem 0;
+  font-size: 8em;
+}
+
+p {
+  margin-bottom: 0.5em;
+  font-size: 3em;
+}
+
+p:first-of-type { margin-top: 4em; }
+
+p > a {
+  border-bottom: 1px dashed #216f79;
+  font-style: italic;
+  text-decoration: none;
+  color: #216f79;
+}
+
+p > a:hover { text-shadow: 0 0 6px #216f79; }
+
+p img { vertical-align: bottom; }
+
+</style>
 </head>
 <body>
-에러입니다.
+<div class="wrapper">
+<div class="box">
+<h1>error</h1>
+<p>I'm sorry. I'm currently implementing the service.</p>
+<p>&#58;&#40;</p>
+<p><a href="${pageContext.request.contextPath}/home.jsp">Home ◀</a></p>
+</div>
+</div>          
 </body>
 </html>
