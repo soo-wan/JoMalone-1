@@ -48,6 +48,7 @@ public class buyController extends HttpServlet {
 		try {
 			if(cmd.contentEquals("/callMerchantuid.buy")){
 				int nextSeq = bdao.selectMaxBuySeq()+1;
+				System.out.println(nextSeq);
 				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				String mem_name = request.getParameter("name");
@@ -76,7 +77,7 @@ public class buyController extends HttpServlet {
 					list.add(new OrderListDTO(0,null,merchant_uid,prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null,"N",null));
 				}
 				bdao.insertOrderList(list);
-				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
+				bdao.insertBuyProduct(new BuyDTO(nextSeq,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
 				Gson gson = new Gson();
 				JsonObject object = new JsonObject();
 				object.addProperty("pg", pg);
