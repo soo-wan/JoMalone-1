@@ -18,7 +18,6 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kh.jomalone.DAO.ReviewDAO;
-import kh.jomalone.DAO.SearchDAO;
 import kh.jomalone.DTO.ReviewDTO;
 import kh.jomalone.configuration.Configuration;
 
@@ -141,18 +140,24 @@ public class ReviewBoardController extends HttpServlet {
 			try {
 				ReviewDTO readDTO = dao.selectReviewBySeq(seq);
 				if (readDTO.getBlind_yn().contentEquals("Y")) {
-					if (location.contentEquals("myReviews")) {
-						System.out.println(seq + ":" + location + ":" + readDTO.getBlind_yn());
-						request.setAttribute("blindCheck", "yes");
-						request.getRequestDispatcher("myList.review").forward(request, response);
-					} else if (location.contentEquals("allReviews")) {
+					if(location!=null) {
+						if (location.contentEquals("myReviews")) {
+							System.out.println(seq + ":" + location + ":" + readDTO.getBlind_yn());
+							request.setAttribute("blindCheck", "yes");
+							request.getRequestDispatcher("myList.review").forward(request, response);
+						} else if (location.contentEquals("allReviews")) {
+							request.setAttribute("blindCheck", "yes");
+							request.getRequestDispatcher("list.review").forward(request, response);
+						} else if (location.contentEquals("adminReviews")) {
+							request.setAttribute("readDTO", readDTO);
+							request.setAttribute("root", location);
+							request.getRequestDispatcher("reviewboard/ReviewDetailView.jsp").forward(request, response);		
+						}
+					}else {
 						request.setAttribute("blindCheck", "yes");
 						request.getRequestDispatcher("list.review").forward(request, response);
-					} else if (location.contentEquals("adminReviews")) {
-						request.setAttribute("readDTO", readDTO);
-						request.setAttribute("root", location);
-						request.getRequestDispatcher("reviewboard/ReviewDetailView.jsp").forward(request, response);		
 					}
+					
 				} else {
 					request.setAttribute("readDTO", readDTO);
 					request.setAttribute("root", location);
@@ -231,11 +236,6 @@ public class ReviewBoardController extends HttpServlet {
 			}
 
 			response.getWriter().append(list.toString());
-			
-			
-			
-			
-			
 		}
 
 	}

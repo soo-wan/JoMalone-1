@@ -357,9 +357,6 @@ textarea {
 													fillet += '<p style="font-weight: bold;">조치일 : <span>'
 															+ data.formedDate
 															+ '</span></p>';
-													fillet += '<p style="font-weight: bold;">신고 사유 : <span>'
-															+ data.reportTypeKor
-															+ '</span></p>';
 													fillet += '<p style="font-weight: bold;">추가 기재 메모 : <span>'
 															+ checkComments
 															+ '</span></p>';

@@ -219,15 +219,21 @@ public class AskBoardController extends HttpServlet {
 					
 					List<String> nameEmail = dao.findMemNameEmailById(memId);
 					
-					String subject = "[조말론]"+nameEmail.get(0)+"님 문의 내용에 대한 답변입니다.";
-					String msg = "문의종류 : "+askType+"\n문의제목 : "+askTitle+"\n문의일 : "+askDate+"\n\n"+"[답변내용]\n"+contents;
-					new SendMail().sendMail(nameEmail.get(1), subject, msg);										
+					if(nameEmail.get(0)!=null && nameEmail.get(1)!=null) {
+						String subject = "[조말론]"+nameEmail.get(0)+"님 문의 내용에 대한 답변입니다.";
+						String msg = "문의종류 : "+askType+"\n문의제목 : "+askTitle+"\n문의일 : "+askDate+"\n\n"+"[답변내용]\n"+contents;
+						new SendMail().sendMail(nameEmail.get(1), subject, msg);
+						System.out.println(originSeq+":"+contents+":"+emailOk+":"+memId+":"+askType+":"+askTitle+":"+askDate);
+
+					}
+						response.getWriter().append(dtoList);
+									
+															
 				}
 				
 				
 				
-				System.out.println(originSeq+":"+contents+":"+emailOk+":"+memId+":"+askType+":"+askTitle+":"+askDate);
-				 response.getWriter().append(dtoList);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				response.sendRedirect("error.jsp");

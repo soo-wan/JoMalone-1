@@ -75,7 +75,7 @@
 								</c:forEach>
 							</p>
 						</div>
-						<div class="col-4" style="text-align: left;"><a href="read.review?no=${dto.review_seq }&location=allReviews&search=${fromSearch}">${dto.title }</a></div>
+						<div class="col-4" style="text-align: left;"><a href="read.review?no=${dto.review_seq }&location=allReviews">${dto.title }</a></div>
 						<div class="col-1">${dto.blindId }</div>
 						<div class="col-2">${dto.formedOnlyDate }</div>						
 					</div>
@@ -110,7 +110,7 @@
 
 
 	<script>	
-		var blindCheck = "${blind}";
+		var blindCheck = "${blindCheck}";
 		if(blindCheck!=""){
 			alert("해당 리뷰는 신고 접수되어 블라인드처리되었습니다.");		
 		}
