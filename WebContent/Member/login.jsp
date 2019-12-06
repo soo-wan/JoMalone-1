@@ -33,7 +33,7 @@
 		
 		String kapiURL = "https://kauth.kakao.com/oauth/authorize?";
 		kapiURL += "client_id=6d5630d4385069dbc2b5bcdc92d10cd4";
-		kapiURL += "&redirect_uri=http://localhost:8080/JoMalone/Kcallback&response_type=code";
+		kapiURL += "&redirect_uri=http://192.168.60.32:8080/JoMalone/Kcallback&response_type=code";
 	%>
 	
 	<div id="general-login" class="container">
