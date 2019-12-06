@@ -63,7 +63,7 @@
 	<div id="event" class="container">
 	    <div id="event-one" class="row">
 	        <div class="col-5">
-	        	<a href="/JoMalone/prod.prod?prod_Category=Citrus&url=citrus.jsp"><div class="bg"><h4>GRAPE FRUIT</h4><h5>그레이프 프루트</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event44.jpg"></a>
+	        	<a href="/JoMalone/eachProduct.admini?productCode=Ci002"><div class="bg"><h4>GRAPE FRUIT</h4><h5>그레이프 프루트</h5><input type="button" value="자세히보기"></div><img src="Resource/img/event44.jpg"></a>
 	        </div>
 	        <div class="col-2"></div>
 	        <div class="col-5">
