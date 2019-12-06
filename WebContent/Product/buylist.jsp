@@ -108,7 +108,7 @@
 			  	  		<td style="width: 130px;">환불 상태
 						</tr>
 						<c:choose>
-							<c:when test="${fn:length(list) == 0}">
+							<c:when test="${fn:length(list2) == 0}">
 								<td colspan="7"
 									style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">주문
 									내역이 없습니다.
