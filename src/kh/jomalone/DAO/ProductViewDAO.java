@@ -48,6 +48,22 @@ public class ProductViewDAO {
 		}
 		return list;
 	}
+	
+	public ProductDTO selectProductDTOByProdName(String productName) throws Exception {
+		ProductDTO dto = new ProductDTO();
+		try (
+				Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement("select * from product where prod_name=?")) {
+			pstat.setString(1, productName);
+			try (ResultSet rs = pstat.executeQuery()) {
+				if (rs.next()) {
+					dto = new ProductDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5),rs.getString(6),rs.getInt(7),rs.getInt(8),rs.getInt(9),rs.getInt(10));
+				}
+			}
+		}
+		return dto;
+	}
+	
 	public List<ProductDTO> selectProductByProdcode(String productCode) throws Exception {
 		List<ProductDTO> list = new ArrayList<>();
 		try (

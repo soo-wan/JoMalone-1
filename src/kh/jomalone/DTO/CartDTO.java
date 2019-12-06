@@ -7,6 +7,7 @@ public class CartDTO {
 	 private String prod_name;
 	 private int prod_quantity;
 	 private int price;
+	 private String prod_code;
 	 
 	public CartDTO() {
 		super();
@@ -55,6 +56,12 @@ public class CartDTO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public String getProd_code() {
+		return prod_code;
+	}
+	public void setProd_code(String prod_code) {
+		this.prod_code = prod_code;
 	}
 	
 }

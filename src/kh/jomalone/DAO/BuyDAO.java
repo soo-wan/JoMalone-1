@@ -39,19 +39,20 @@ public class BuyDAO {
 	public int insertBuyProduct(BuyDTO dto) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into prod_buy values(buy_seq.nextval,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)");) {
-			pstat.setString(1, dto.getPg());
-			pstat.setString(2, dto.getPay_method());
-			pstat.setString(3, dto.getMerchant_uid());
-			pstat.setString(4, dto.getBuy_name());
-			pstat.setInt(5, dto.getTotalPrice());
-			pstat.setString(6, dto.getMem_id());
-			pstat.setString(7, dto.getMem_name());
-			pstat.setString(8, dto.getMem_phone());
-			pstat.setString(9, dto.getMem_email());
-			pstat.setString(10, dto.getFull_address());
-			pstat.setString(11, dto.getZip_code());
-			pstat.setString(12, dto.getBuy_success());
+						"insert into prod_buy values(?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)");) {
+			pstat.setInt(1, dto.getBuy_seq());
+			pstat.setString(2, dto.getPg());
+			pstat.setString(3, dto.getPay_method());
+			pstat.setString(4, dto.getMerchant_uid());
+			pstat.setString(5, dto.getBuy_name());
+			pstat.setInt(6, dto.getTotalPrice());
+			pstat.setString(7, dto.getMem_id());
+			pstat.setString(8, dto.getMem_name());
+			pstat.setString(9, dto.getMem_phone());
+			pstat.setString(10, dto.getMem_email());
+			pstat.setString(11, dto.getFull_address());
+			pstat.setString(12, dto.getZip_code());
+			pstat.setString(13, dto.getBuy_success());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -81,12 +82,14 @@ public class BuyDAO {
 	
 	
 	public int selectMaxBuySeq() throws Exception {
-		int maxSeq = 1200;
+		int maxSeq = 1300;
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
 			try (ResultSet rs = pstat.executeQuery()) {
 				if (rs.next()) {
-					maxSeq = rs.getInt(1);
+					if (rs.getInt(1)!=0) {
+						maxSeq = rs.getInt(1);
+					}
 				}
 			}
 		}
@@ -98,7 +101,7 @@ public class BuyDAO {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select sum(prod_quantity) as quantity,prod_name from order_list group by prod_name order by 1 desc")) {
 			try (ResultSet rs = pstat.executeQuery()) {
-				if (rs.next()) {
+				while (rs.next()) {
 					list.add(new RankDTO(rs.getInt(1),rs.getString(2)));
 				}
 			}
@@ -109,7 +112,7 @@ public class BuyDAO {
 	public List<OrderListDTO> selectBuyListByID(String id) throws Exception {
 		List<OrderListDTO> list = new ArrayList<>();
 		try (Connection con = this.getConnection();
-				PreparedStatement pstat = con.prepareStatement("select * from order_list where mem_id=? and buy_success='Y'")) {
+				PreparedStatement pstat = con.prepareStatement("select * from order_list where mem_id=? and buy_success='Y' and refund='N'")) {
 			pstat.setString(1, id);
 			try (ResultSet rs = pstat.executeQuery();) {
 				while (rs.next()) {
@@ -275,14 +278,16 @@ public class BuyDAO {
 	//------페이지 내비게이터
 	}
 	
-	public List<OrderListDTO> selectByPage(String mem_id,int start,int end) throws Exception{
+	public List<OrderListDTO> selectByPage(String mem_id,int start,int end, int period) throws Exception{
 		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
-				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
+				+ "row_nb from order_list where TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD') and refund ='N') where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, mem_id);
-			pstat.setInt(2, start);
-			pstat.setInt(3, end);
+			pstat.setInt(1, period);
+			pstat.setString(2, mem_id);
+			pstat.setInt(3, start);
+			pstat.setInt(4, end);
+			
 			try(ResultSet rs = pstat.executeQuery();){
 				List<OrderListDTO> list = new ArrayList<>();
 				while (rs.next()) {

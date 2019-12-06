@@ -81,7 +81,7 @@
 					<c:when test="${selectResult.size()==0 }">
 						<div class="row">
 							<div class="col-12"
-								style="text-align: center; height: 500px; line-height: 500px;">글이
+								style="text-align: center; height: 500px; line-height: 500px;">문의글이
 								없습니다.</div>
 						</div>
 					</c:when>

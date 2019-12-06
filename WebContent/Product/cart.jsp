@@ -12,7 +12,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="/JoMalone/Resource/css/cart.css">
+<link rel="stylesheet" href="/JoMalone/Resource/css/cart.css?=de=f">
 <style>
 	#korea-title, #country-title {color: black;}
 </style>
@@ -61,7 +61,7 @@
 						<c:forEach items="${list}" var="dto">
 							<tr class="my-item" id="listVal">
 					  	  		<td style="width: 50px;"><input type="checkbox" id="check${dto.seq}" name="checks" value="${dto.seq}" class="delcheck" data-cartNum="${dto.seq}">
-					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/img.jpg"> <!-- 상품코드받기 -->
+					  	  		<td style="width: 130px;"><img class="item-img" src="/JoMalone/Resource/img/${dto.prod_code }.jpg"> <!-- 상품코드받기 -->
 					  	  		<td style="width: 400px;">${dto.prod_name}
 					  	  		<td style="width: 130px;">${dto.price} 		
 					  	  		<td style="width: 130px;"><input type="text" style="width: 35px; height: 20px; text-align: center;" class="count${dto.seq}" value="${dto.prod_quantity}">
@@ -77,6 +77,8 @@
 			
 			  	  </table>
 			    </div>
+			    <!-- form hidden 값 넣어보기? -->
+
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
 				  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">

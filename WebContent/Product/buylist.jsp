@@ -108,7 +108,7 @@
 			  	  		<td style="width: 130px;">환불 상태
 						</tr>
 						<c:choose>
-							<c:when test="${fn:length(list) == 0}">
+							<c:when test="${fn:length(list2) == 0}">
 								<td colspan="7"
 									style="height: 100px; border-bottom: 1px solid lightgray; text-align: center;">주문
 									내역이 없습니다.
@@ -155,7 +155,11 @@
 			location.href= "search.buy?period=180"
 		});
 		function refund(prod_name,price,prod_quantity,imp_uid){
-			location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid+"&prod_name="+prod_name;
+			if(confirm("선택 상품을 환불하시겠습니까?")){
+				location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid+"&prod_name="+prod_name;				
+			}else {
+				return false;
+			}
 		}
 		function writereview(order_seq,prod_name){
 			location.href= "${pageContext.request.contextPath}/write.review?seq="+order_seq+"&prodName="+prod_name;

@@ -21,6 +21,7 @@ import kh.jomalone.DAO.AdminDAO;
 import kh.jomalone.DTO.DetailDTO;
 import kh.jomalone.DTO.OrderManagementDTO;
 import kh.jomalone.DTO.ProductDTO;
+import kh.jomalone.Util.Util;
 
 
 @WebServlet("*.admini")
@@ -37,7 +38,8 @@ public class adminController extends HttpServlet {
 		String rootPath = request.getContextPath();
 
 		try {
-			if(cmd.contentEquals("/insertProduct.admini")) {		
+			if(cmd.contentEquals("/insertProduct.admini")) {
+				System.out.println("도착");
 				String uploadPath = request.getServletContext().getRealPath("/Resource/img/");
 
 				int maxSize = 1024 * 1024 * 10;
@@ -53,56 +55,40 @@ public class adminController extends HttpServlet {
 				int summer = Integer.parseInt(multi.getParameter("summer"));
 				int fall = Integer.parseInt(multi.getParameter("fall"));
 				int winter = Integer.parseInt(multi.getParameter("winter"));
-				
-				String fileName = multi.getFilesystemName("img");    //확장자포함한다.
+
+				String fileName = Util.NullCheck(multi.getFilesystemName("img"));    //확장자포함한다.
 				String newFileName = productCode + ".jpg";
 				String saveDir = uploadPath;
 
 				if(!fileName.equals("")) {
-				     // 원본이 업로드된 절대경로와 파일명를 구한다.
-				     String fullFileName = saveDir + "/" + fileName;
-				     File f = new File(fullFileName);
-				     if(f.exists()) {     // 업로드된 파일명이 존재하면 Rename한다.
-				          File newFile = new File(saveDir + "/" + newFileName);
-				          f.renameTo(newFile);   // rename...
-				     }
+					// 원본이 업로드된 절대경로와 파일명를 구한다.
+					String fullFileName = saveDir + "/" + fileName;
+					File f = new File(fullFileName);
+					if(f.exists()) {     // 업로드된 파일명이 존재하면 Rename한다.
+						File newFile = new File(saveDir + "/" + newFileName);
+						f.renameTo(newFile);   // rename...
+					}
 				}
-				
-				dao.insertCategoryProdCode(category, productCode);
-				dao.insertProduct(productCode, category, productName, price, quantity, description, spring, summer, fall, winter);
-				dao.insertDetail(productCode, null, null);
-				response.sendRedirect(rootPath+"/adminBack/insertProductResult.jsp");
+
+				int result1 = dao.insertCategoryProdCode(category, productCode);
+				int result2 = dao.insertProduct(productCode, category, productName, price, quantity, description, spring, summer, fall, winter);
+				int result3 = dao.insertDetail(productCode, null, null);
+				if(result1>0 && result2>0 && result3>0) {
+					response.sendRedirect(rootPath+"/adminBack/insertProductResult.jsp");
+				}
 
 			}else if(cmd.contentEquals("/productList.admini")) {
 				List<ProductDTO> productList = dao.productList();
-				
-				for(ProductDTO tmp : productList) {
-					System.out.println(tmp.getProductCode());
-				}
-				
-				
 				request.setAttribute("productList", productList);
 				request.getRequestDispatcher("/adminBack/productList.jsp").forward(request, response);	
 
 			}else if(cmd.contentEquals("/modifyProduct.admini")) {
-				System.out.println("도착");
-
 				String productCode = request.getParameter("productCode");
-				
 				String productName = request.getParameter("productName");
-				System.out.println(productName);
-				
 				int price = Integer.parseInt(request.getParameter("price"));
-				System.out.println(price);
-				
 				int quantity = Integer.parseInt(request.getParameter("quantity"));
-				System.out.println(quantity);
-				
 				String description = request.getParameter("description");
-				System.out.println(description);
-				
 				int result = dao.modifyProductNew(productCode, productName, price, quantity, description);
-				
 				if(result>0) {response.sendRedirect(rootPath+"/adminBack/modifyProductResult.jsp");}
 
 			}else if(cmd.contentEquals("/deleteProduct.admini")) {
@@ -133,7 +119,7 @@ public class adminController extends HttpServlet {
 				}
 				int result = dao.changeQuantity(name_quantity_list); // product 테이블에 구매수량만큼 감소시킴
 				int result2 = dao.changeProcessedColumn(); // order_list 테이블에 done 칼럼 전부 'Y'로 바꿈
-				
+
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/adminBack/orderManagement.jsp").forward(request, response);
 
@@ -150,7 +136,7 @@ public class adminController extends HttpServlet {
 				Gson gson = new Gson();
 				//response.getWriter().append(gson.toJson(productList));
 				response.getWriter().append(gson.toJson(product));
-			
+
 			}else if(cmd.contentEquals("/detailProduct.admini")) {
 				String uploadPath = request.getServletContext().getRealPath("/Resource/img"); // 여기 경로 조심...
 				File uploadFilePath = new File(uploadPath);
@@ -162,12 +148,12 @@ public class adminController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"UTF8",new DefaultFileRenamePolicy()); 
 
 				String fileName = multi.getFilesystemName("img");
-//				String oriFileName = multi.getOriginalFileName("img"); 
-//
-//				FilesDTO dto = new FilesDTO(0,1,fileName,oriFileName);
-//
-//				FilesDAO filedao = FilesDAO.getInstance();
-//				int result = filedao.insert(dto);
+				//				String oriFileName = multi.getOriginalFileName("img"); 
+				//
+				//				FilesDTO dto = new FilesDTO(0,1,fileName,oriFileName);
+				//
+				//				FilesDAO filedao = FilesDAO.getInstance();
+				//				int result = filedao.insert(dto);
 
 				String respPath = rootPath+"/Resource/img/";
 				respPath+=fileName;
@@ -184,7 +170,7 @@ public class adminController extends HttpServlet {
 				}
 				int maxSize = 1024 * 1024 * 10;
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"UTF8",new DefaultFileRenamePolicy());
-                
+
 				String prod_code = multi.getParameter("prod_code");
 				String content = multi.getParameter("content");
 				String ingredients = multi.getParameter("ingredients");
@@ -193,12 +179,12 @@ public class adminController extends HttpServlet {
 				if(result > 0) {
 					response.sendRedirect(rootPath+"/adminBack/insertDetailResult.jsp");
 				}
-			
+
 			}else if(cmd.contentEquals("/detailBoard.admini")) {
 				List<DetailDTO> list = dao.getDetailList();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("/adminBack/detailList.jsp").forward(request, response);
-				
+
 			}else if(cmd.contentEquals("/detailView.admini")) {
 				String prod_code = request.getParameter("prod_code");
 				DetailDTO dto = dao.getDetail(prod_code);
@@ -207,58 +193,24 @@ public class adminController extends HttpServlet {
 				request.setAttribute("Detail", dto);
 				request.setAttribute("Product", product);
 				request.getRequestDispatcher("/adminBack/detailView.jsp").forward(request, response);
-			
+
 			}else if(cmd.contentEquals("/modifyDetail.admini")) {
 				String uploadPath = request.getServletContext().getRealPath("/Resource/img/");
 				int maxSize = 1024 * 1024 * 10;
 				MultipartRequest multi = new MultipartRequest(request,uploadPath,maxSize,"UTF8",new DefaultFileRenamePolicy()); 
 
-				//String productCode = multi.getParameter("productCode");			
-				//String category = multi.getParameter("category");
-				//String productName = multi.getParameter("productName");
-				//int price = Integer.parseInt(multi.getParameter("price"));
-				//int quantity = Integer.parseInt(multi.getParameter("quantity"));
-				//String description = multi.getParameter("description");
-				//int spring = Integer.parseInt(multi.getParameter("spring"));
-				//int summer = Integer.parseInt(multi.getParameter("summer"));
-				//int fall = Integer.parseInt(multi.getParameter("fall"));
-				//int winter = Integer.parseInt(multi.getParameter("winter"));
 				String oriCode = multi.getParameter("oriCode");
 				String content = multi.getParameter("content");
 				String ingredients = multi.getParameter("ingredients");
 				System.out.println(ingredients);
-				
-				//int result1 = dao.modifyProduct(productCode, category, productName, price, quantity, description, spring, summer, fall, winter, oriCode);
+
 				int result2 = dao.modifyDetail(content, ingredients, oriCode);
-				
-//				if(result1>0 && result2>0) {
-//					response.sendRedirect(rootPath+"/adminBack/modifyDetailResult.jsp");
-//				}
-				
 				if(result2>0) {
 					response.sendRedirect(rootPath+"/adminBack/modifyDetailResult.jsp");
 				}				
-			
-			//여기서부터 front쪽	
-//			}else if(cmd.contentEquals("/prodPerCategory.admini")) {
-//				String category = request.getParameter("category");
-//				List<ProductDTO> list = dao.productListPerCategory(category);
-//				request.setAttribute("list", list);
-//				
-//				if(category.contentEquals("Citrus")) {
-//					request.getRequestDispatcher("/adminFront/prodPerCategory.jsp").forward(request, response);
-//				}else if(category.contentEquals("Fruits")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Woody")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Spicy")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Floral")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}else if(category.contentEquals("Light Floral")) {
-//					request.getRequestDispatcher("").forward(request, response);
-//				}
-				
+
+				//여기서부터 front쪽	
+
 			}else if(cmd.contentEquals("/eachProduct.admini")) {
 				String productCode = request.getParameter("productCode");
 				System.out.println(productCode);
@@ -273,18 +225,18 @@ public class adminController extends HttpServlet {
 					}
 					sb.append(arr[i]);
 				}
-				System.out.println(sb.toString());
+
 				request.setAttribute("dto", dto);
 				request.getRequestDispatcher("/Goods/"+ sb.toString()  +"_detail.jsp").forward(request, response);
-			
+
 			}else if(cmd.contentEquals("/checkProduct.admini")) {
 				String productCode = request.getParameter("productCode");
-				System.out.println(productCode);
+
 				int result = dao.countProduct(productCode);
 				if(result == 0) {response.getWriter().append("new");}
 				else if(result > 0) {response.getWriter().append("exist");}
 			}
-			
+
 
 		}catch(Exception e) {
 			e.printStackTrace();

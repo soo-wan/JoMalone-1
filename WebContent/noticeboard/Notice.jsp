@@ -47,6 +47,8 @@
 	color: black;
 }
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
+	.a-notice{color: black; line-height: 0px;}
+	.a-notice:hober {color: darkgray; line-height: 0px;}
 </style>
 </head>
 
@@ -76,7 +78,7 @@
 
 	<div class=container>
 		<div class="row" style="text-align: center;" id="headDiv">
-			<div class="col-12">NOTICE</div>
+			<div class="col-12"><h4 style="margin-top: 40px; width: 100%; line-height: 45px; text-align: center;">NOTICE</h4></div>
 		</div>
 		<div class="row" style="text-align: center;">
 			<div class="col-1">번호</div>
@@ -96,7 +98,7 @@
 					<div class="row article p-1" style="text-align: center;">
 						<div class="col-1">${dto.notice_seq }</div>
 						<div class="col-8" style="text-align: left;">
-							<a href="read.notice?no=${dto.notice_seq }">${dto.title }</a>							
+							<a class="a-notice" style="line-height: 30px;" href="read.notice?no=${dto.notice_seq }">${dto.title }</a>							
 						</div>
 						<div class="col-3">${dto.formedFullDate }</div>						
 					</div>

@@ -26,6 +26,7 @@ import kh.jomalone.DAO.CartDAO;
 import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
+import kh.jomalone.Util.Util;
 import kh.jomalone.configuration.ConfigurationBuylist;
 
 @WebServlet("*.buy")
@@ -47,6 +48,7 @@ public class buyController extends HttpServlet {
 		try {
 			if(cmd.contentEquals("/callMerchantuid.buy")){
 				int nextSeq = bdao.selectMaxBuySeq()+1;
+				System.out.println(nextSeq);
 				String merchant_uid = "ORD"+String.format("%05d", nextSeq);
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				String mem_name = request.getParameter("name");
@@ -75,7 +77,7 @@ public class buyController extends HttpServlet {
 					list.add(new OrderListDTO(0,null,merchant_uid,prod_names[i],pay_method,mem_id,mem_name,null,prod_quantity,price,full_address,zip_code,null,null,null,"N",null));
 				}
 				bdao.insertOrderList(list);
-				bdao.insertBuyProduct(new BuyDTO(0,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
+				bdao.insertBuyProduct(new BuyDTO(nextSeq,null,pg,pay_method,merchant_uid,buy_name,totalprice,mem_id,mem_name,mem_phone,mem_email,full_address,zip_code,"N"));
 				Gson gson = new Gson();
 				JsonObject object = new JsonObject();
 				object.addProperty("pg", pg);
@@ -109,6 +111,12 @@ public class buyController extends HttpServlet {
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
+				String periodstr = Util.NullCheck(request.getParameter("period"));
+				if(periodstr.contentEquals("")) {
+					periodstr = "9999";
+				}
+				int period = Integer.parseInt(periodstr);
+				System.out.println(period);
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				int cpage = 1;
 				String page = request.getParameter("cpage");
@@ -120,7 +128,7 @@ public class buyController extends HttpServlet {
 				int start = cpage * ConfigurationBuylist.recordCountPerPage - (ConfigurationBuylist.recordCountPerPage-1);
 				int end = cpage * ConfigurationBuylist.recordCountPerPage;
 				
-				List<OrderListDTO> list = bdao.selectByPage(id,start, end);
+				List<OrderListDTO> list = bdao.selectByPage(id,start, end,period);
 				List<OrderListDTO> list2 = bdao.selectRefundList(id);
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
@@ -138,19 +146,9 @@ public class buyController extends HttpServlet {
 				
 			}
 			else if(cmd.contentEquals("/search.buy")){
-				List<OrderListDTO> list = new ArrayList<>();
-				System.out.println("도착!");
-				int period = Integer.parseInt(request.getParameter("period"));
-				String id = (String)request.getSession().getAttribute("loginInfo");
-				System.out.println( period +" : " + id);
-				list = bdao.selectBuyListByPeriod(id,period);
-				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
-				for (OrderListDTO dto : list) {
-					dto.setDate(sdf.format(dto.getOrder_date()));;
-					cdao.deleteOrderByProdName(dto.getProd_name());
-				}
-				request.setAttribute("list",list);
-				request.getRequestDispatcher("Product/buylist.jsp").forward(request, response);	
+//				int period = Integer.parseInt(request.getParameter("period"));
+//				request.setAttribute("period", period);
+				request.getRequestDispatcher("buylist.buy").forward(request, response);	
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
 				IamportClient client = new IamportClient("6408595318184888","tYA4Z7OCAOvaK2xSUHGkwAaqkwN55UVzTwESEsvfg0p12WTXDzha9sAtYnz4ivEc1i5FLAU1Bk3DgWBU");

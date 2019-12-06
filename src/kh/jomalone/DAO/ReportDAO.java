@@ -228,7 +228,7 @@ public class ReportDAO {
 	
 	
 	public int insertReport(ReportDTO dto) throws Exception{// 신고글 작성
-		String sql = "insert into reportboard values(report_seq.nextval,?,?,?,?,sysdate,default,null,null,null)";
+		String sql = "insert into reportboard values(report_seq.nextval,?,?,?,?,sysdate,'N',null,null,null)";
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, dto.getReport_type());

@@ -26,31 +26,22 @@ public class CartController extends HttpServlet {
 		CartDAO dao = CartDAO.getInstance();
 		try {
 			if(cmd.contentEquals("/insert.ca")) {
-				String[] seqString = request.getParameterValues("seq");
-				String[] prod_name = request.getParameterValues("prod_name");
-				String[] priceString = request.getParameterValues("price");
-				String[] prod_quantityString = request.getParameterValues("prod_quantity");
+				int seq = Integer.parseInt(request.getParameter("seq"));
+				String prod_name = request.getParameter("prod_name");
+				int price = Integer.parseInt(request.getParameter("price"));
+				int prod_quantity = Integer.parseInt(request.getParameter("prod_quantity"));
 				String mem_id = (String)request.getSession().getAttribute("loginInfo");
 				String mem_name = (String)request.getSession().getAttribute("name"); 
-				int seq = 0;
-				int price = 0;
-				int prod_quantity = 0 ;
 				List<CartDTO> list = new ArrayList<>();
-				for (int i = 0; i < priceString.length; i++) {
-					seq = Integer.parseInt(seqString[i]);
-					System.out.println(seq);
-					price = Integer.parseInt(priceString[i]);
-					prod_quantity = Integer.parseInt(prod_quantityString[i]);
-					CartDTO dto = new CartDTO(mem_id,seq,mem_name,prod_name[i],prod_quantity,price);				
-					boolean result = dao.checkProdExist(mem_id, prod_name[i]);
-					if(result) {
-						dao.sumProdQuantity(prod_quantity, mem_id, prod_name[i]);
-					}
-					else {
-						dao.insertCart(dto);
-					}
-					list.add(dto);
+				CartDTO dto = new CartDTO(mem_id,seq,mem_name,prod_name,prod_quantity,price);				
+				boolean result = dao.checkProdExist(mem_id, prod_name);
+				if(result) {
+					dao.sumProdQuantity(prod_quantity, mem_id, prod_name);
 				}
+				else {
+					dao.insertCart(dto);
+				}
+				list.add(dto);
 				response.sendRedirect("list.ca");
 			}
 			else if(cmd.contentEquals("/list.ca")) {
