@@ -199,13 +199,13 @@ public class AskDAO {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		if(needPrev) {sb.append("<a href='"+linkURL+"?currentPage="+(startNavi-1)+"'>< </a>");}
+		if(needPrev) {sb.append("<a class='a' href='"+linkURL+"?currentPage="+(startNavi-1)+"'>< </a>");}
 		for(int i=startNavi;i<=endNavi;i++) {
-			sb.append("<a href='"+linkURL+"?currentPage="+i+"'>");
+			sb.append("<a class='a' href='"+linkURL+"?currentPage="+i+"'>");
 			sb.append(i);
 			sb.append("</a> ");
 		}
-		if(needNext) {sb.append("<a href='"+linkURL+"?currentPage="+(endNavi+1)+"'>></a>");}
+		if(needNext) {sb.append("<a class='a' href='"+linkURL+"?currentPage="+(endNavi+1)+"'>></a>");}
 		return sb.toString();
 	}
 	

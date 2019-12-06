@@ -14,7 +14,9 @@
 	.article:hover {background-color: #cbe7ff90;}	
 	.a{color: black;}
 	.a:link {color: black;}
-	.a:hover {color: darkgray;}
+	.a:hover {color: black;}
+	.b {color: black;}
+	.b:hover {color: darkgray;}
 .naviBar {
 	font-size: 20px;
 	word-spacing: 5px;
@@ -57,7 +59,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 						<c:if test="${dto.answer_yn eq 'Y' }">
 							<span>[답변완료]</span>
 						</c:if>
-							<a class="a" href="read.ask?no=${dto.ask_seq }&location=myAsk">${dto.title }</a>
+							<a class="b" href="read.ask?no=${dto.ask_seq }&location=myAsk">${dto.title }</a>
 						</div>						
 						<div class="col-2">${dto.formedOnlyDate }</div>
 					</div>
@@ -68,7 +70,7 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 		<hr>
 		
 		
-				<form action="/JoMalone/ask.search" method="get" id="searchFrm">
+				<form action="/JoMalone/ask.search" method="get" id="searchFrm" style="padding: 0px; margin-bottom: 30px; width: 380px; float: left; text-align: left;">
 					<div class="row" style="text-align: center;">
 						<div class="col-12 searchBar">
 							<input type="hidden" name="rootPage" value="myPage"> <select
@@ -82,10 +84,8 @@ input[type="button"] {width: 100px; height: 30px; border: 0px; background-color:
 					</div>
 		</form>
 		
-		
-		
-		<div class="row" style="text-align: center;">
-			<div class="col-12 naviBar">${pageNavi }</div>
+		<div class="row" style="margin-bottom: 30px; text-align: center; height: 29px; width: 300px;">
+			<div class="col-12 naviBar" style="color: black;">${pageNavi }</div>
 		</div>
 		<div class="row">
 			<div class="col-12" style="text-align: right;">
