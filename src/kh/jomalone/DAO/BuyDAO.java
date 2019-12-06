@@ -280,7 +280,7 @@ public class BuyDAO {
 	
 	public List<OrderListDTO> selectByPage(String mem_id,int start,int end, int period) throws Exception{
 		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
-				+ "row_nb from order_list where TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD')) where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
+				+ "row_nb from order_list where TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD') and refund ='N') where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, period);
