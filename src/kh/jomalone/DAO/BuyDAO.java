@@ -275,14 +275,16 @@ public class BuyDAO {
 	//------페이지 내비게이터
 	}
 	
-	public List<OrderListDTO> selectByPage(String mem_id,int start,int end) throws Exception{
+	public List<OrderListDTO> selectByPage(String mem_id,int start,int end, int period) throws Exception{
 		String sql="select * from (select order_list.*,row_number() over (order by order_seq desc) "
-				+ "row_nb from order_list) where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
+				+ "row_nb from order_list where TO_CHAR(order_date,'YYYYMMDD') BETWEEN TO_CHAR(SYSDATE-?,'YYYYMMDD') AND TO_CHAR(SYSDATE,'YYYYMMDD')) where mem_id=? and buy_success='Y' and refund ='N' and row_nb between ? and ?";
 		try(Connection con = this.getConnection();
 			PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, mem_id);
-			pstat.setInt(2, start);
-			pstat.setInt(3, end);
+			pstat.setInt(1, period);
+			pstat.setString(2, mem_id);
+			pstat.setInt(3, start);
+			pstat.setInt(4, end);
+			
 			try(ResultSet rs = pstat.executeQuery();){
 				List<OrderListDTO> list = new ArrayList<>();
 				while (rs.next()) {

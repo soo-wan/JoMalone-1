@@ -26,6 +26,7 @@ import kh.jomalone.DAO.CartDAO;
 import kh.jomalone.DAO.MembersDAO;
 import kh.jomalone.DTO.BuyDTO;
 import kh.jomalone.DTO.OrderListDTO;
+import kh.jomalone.Util.Util;
 import kh.jomalone.configuration.ConfigurationBuylist;
 
 @WebServlet("*.buy")
@@ -109,6 +110,12 @@ public class buyController extends HttpServlet {
 				System.out.println("삭제완료!");
 				response.getWriter().append("{}");
 			}else if(cmd.contentEquals("/buylist.buy")) {
+				String periodstr = Util.NullCheck(request.getParameter("period"));
+				if(periodstr.contentEquals("")) {
+					periodstr = "9999";
+				}
+				int period = Integer.parseInt(periodstr);
+				System.out.println(period);
 				String id = (String)request.getSession().getAttribute("loginInfo");
 				int cpage = 1;
 				String page = request.getParameter("cpage");
@@ -120,7 +127,7 @@ public class buyController extends HttpServlet {
 				int start = cpage * ConfigurationBuylist.recordCountPerPage - (ConfigurationBuylist.recordCountPerPage-1);
 				int end = cpage * ConfigurationBuylist.recordCountPerPage;
 				
-				List<OrderListDTO> list = bdao.selectByPage(id,start, end);
+				List<OrderListDTO> list = bdao.selectByPage(id,start, end,period);
 				List<OrderListDTO> list2 = bdao.selectRefundList(id);
 				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
 				for (OrderListDTO dto : list) {
@@ -138,18 +145,8 @@ public class buyController extends HttpServlet {
 				
 			}
 			else if(cmd.contentEquals("/search.buy")){
-				List<OrderListDTO> list = new ArrayList<>();
-				System.out.println("도착!");
-				int period = Integer.parseInt(request.getParameter("period"));
-				String id = (String)request.getSession().getAttribute("loginInfo");
-				System.out.println( period +" : " + id);
-				list = bdao.selectBuyListByPeriod(id,period);
-				SimpleDateFormat sdf = new SimpleDateFormat ("yyyy-MM-dd"); 
-				for (OrderListDTO dto : list) {
-					dto.setDate(sdf.format(dto.getOrder_date()));;
-					cdao.deleteOrderByProdName(dto.getProd_name());
-				}
-				request.setAttribute("list",list);
+//				int period = Integer.parseInt(request.getParameter("period"));
+//				request.setAttribute("period", period);
 				request.getRequestDispatcher("buylist.buy").forward(request, response);	
 			}else if (cmd.contentEquals("/refund.buy")) {
 				System.out.println("refund arrive");
