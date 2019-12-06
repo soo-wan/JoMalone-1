@@ -77,6 +77,8 @@
 			
 			  	  </table>
 			    </div>
+			    <!-- form hidden 값 넣어보기? -->
+
 			    <div class="tab-pane fade" id="country" role="tabpanel">
 			    	<table class="cart-table">
 				  	  	<tr style="border-top: 1px solid lightgray; border-bottom: 1px solid lightgray;">
