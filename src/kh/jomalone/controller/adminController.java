@@ -239,7 +239,7 @@ public class adminController extends HttpServlet {
 
 
 		}catch(Exception e) {
-			e.printStackTrace();
+			response.sendRedirect("/JoMalone/error.jsp");
 		}
 	}
 
