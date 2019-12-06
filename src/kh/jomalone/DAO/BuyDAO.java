@@ -39,19 +39,20 @@ public class BuyDAO {
 	public int insertBuyProduct(BuyDTO dto) throws Exception {
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(
-						"insert into prod_buy values(buy_seq.nextval,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)");) {
-			pstat.setString(1, dto.getPg());
-			pstat.setString(2, dto.getPay_method());
-			pstat.setString(3, dto.getMerchant_uid());
-			pstat.setString(4, dto.getBuy_name());
-			pstat.setInt(5, dto.getTotalPrice());
-			pstat.setString(6, dto.getMem_id());
-			pstat.setString(7, dto.getMem_name());
-			pstat.setString(8, dto.getMem_phone());
-			pstat.setString(9, dto.getMem_email());
-			pstat.setString(10, dto.getFull_address());
-			pstat.setString(11, dto.getZip_code());
-			pstat.setString(12, dto.getBuy_success());
+						"insert into prod_buy values(?,sysdate,?,?,?,?,?,?,?,?,?,?,?,?)");) {
+			pstat.setInt(1, dto.getBuy_seq());
+			pstat.setString(2, dto.getPg());
+			pstat.setString(3, dto.getPay_method());
+			pstat.setString(4, dto.getMerchant_uid());
+			pstat.setString(5, dto.getBuy_name());
+			pstat.setInt(6, dto.getTotalPrice());
+			pstat.setString(7, dto.getMem_id());
+			pstat.setString(8, dto.getMem_name());
+			pstat.setString(9, dto.getMem_phone());
+			pstat.setString(10, dto.getMem_email());
+			pstat.setString(11, dto.getFull_address());
+			pstat.setString(12, dto.getZip_code());
+			pstat.setString(13, dto.getBuy_success());
 			int result = pstat.executeUpdate();
 			con.commit();
 			return result;
@@ -81,12 +82,14 @@ public class BuyDAO {
 	
 	
 	public int selectMaxBuySeq() throws Exception {
-		int maxSeq = 1200;
+		int maxSeq = 1300;
 		try (Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement("select max(buy_seq) from prod_buy")) {
 			try (ResultSet rs = pstat.executeQuery()) {
 				if (rs.next()) {
-					maxSeq = rs.getInt(1);
+					if (rs.getInt(1)!=0) {
+						maxSeq = rs.getInt(1);
+					}
 				}
 			}
 		}
