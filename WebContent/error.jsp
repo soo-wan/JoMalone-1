@@ -7,77 +7,206 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-html { box-sizing: border-box; }
+html {
+  background-color: #000121;
+  font-family: 'Roboto', sans-serif;
 
-*,
-*::before,
-*::after { box-sizing: inherit; }
-
-body * {
-  margin: 0;
-  padding: 0;
 }
 
-body {
-  font: normal 100%/1.15 "Merriweather", serif;
-  background-color: #7ed0f2;
-  color: #fff;
-}
-
-.wrapper {
+.maincontainer {
   position: relative;
-  max-width: 1298px;
-  height: auto;
-  margin: 2em auto 0 auto;
+  top: -50px;
+  transform: scale(0.8);
+  background: url("https://www.blissfullemon.com/wp-content/uploads/2018/09/HauntedHouseBackground.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 700px 600px;
+  width: 800px;
+  height: 600px;
+  margin: 0px auto;
+  display: grid;
 }
 
-/* https://www.flaticon.com/authors/vectors-market */
-/* https://www.flaticon.com/authors/icomoon */
-.box {
-  max-width: 70%;
-  min-height: auto;
-  margin: 0 auto;
-  padding: 1em 1em;
+.foregroundimg {
+  position: relative;
+  width: 100%;
+  top: -230px;
+  z-index: 5;
+}
+
+.errorcode {
+  position: relative;
+  top: -200px;
+  font-family: 'Creepster', cursive;
+  color: white;
   text-align: center;
-  background: url("https://www.dropbox.com/s/xq0841cp3icnuqd/flame.png?raw=1") no-repeat top 10em center/128px 128px,
-              transparent url("https://www.dropbox.com/s/w7qqrcvhlx3pwnf/desktop-pc.png?raw=1") no-repeat top 13em center/128px 128px;
+  font-size: 6em;
+  letter-spacing: 0.1em;
 }
 
-h1, p:not(:last-of-type) { text-shadow: 0 0 6px #216f79; }
-
-h1 {
-  margin: 0 0 1rem 0;
-  font-size: 8em;
+.errortext {
+  position: relative;
+  top: -260px;
+  color: #FBD130;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.8em;
 }
 
-p {
-  margin-bottom: 0.5em;
-  font-size: 3em;
+.bat {
+  opacity: 0;
+  position: relative;
+  transform-origin: center;
+  z-index: 3;
 }
 
-p:first-of-type { margin-top: 4em; }
-
-p > a {
-  border-bottom: 1px dashed #216f79;
-  font-style: italic;
-  text-decoration: none;
-  color: #216f79;
+.bat:nth-child(1) {
+  top: 380px;
+  left: 120px;
+  transform: scale(0.5);
+  animation: 13s 1s flyBat1 infinite linear;
 }
 
-p > a:hover { text-shadow: 0 0 6px #216f79; }
+.bat:nth-child(2) {
+  top: 280px;
+  left: 80px;
+  transform: scale(0.3);
+  animation: 8s 4s flyBat2 infinite linear;
+}
 
-p img { vertical-align: bottom; }
+.bat:nth-child(3) {
+  top: 200px;
+  left: 150px;
+  transform: scale(0.4);
+  animation: 12s 2s flyBat3 infinite linear;
+}
 
+.body {
+  position: relative;
+  width: 50px;
+  top: 12px;
+}
+
+.wing {
+  width: 150px;
+  position: relative;
+  transform-origin: right center;
+}
+
+.leftwing {
+  left: 30px;
+  animation: 0.8s flapLeft infinite ease-in-out;
+}
+
+.rightwing {
+  left: -180px;
+  transform: scaleX(-1);
+  animation: 0.8s flapRight infinite ease-in-out;
+}
+
+@keyframes flapLeft {
+  0% { transform: rotateZ(0); }
+  50% { transform: rotateZ(10deg) rotateY(40deg); }
+  100% { transform: rotateZ(0); }
+}
+
+@keyframes flapRight {
+  0% { transform: scaleX(-1) rotateZ(0); }
+  50% { transform: scaleX(-1) rotateZ(10deg) rotateY(40deg); }
+  100% { transform: scaleX(-1) rotateZ(0); }
+}
+
+@keyframes flyBat1 {
+  0% { opacity: 1; transform: scale(0.5)}
+  25% { opacity: 1; transform: scale(0.5) translate(-400px, -330px) }
+  50% { opacity: 1; transform: scale(0.5) translate(400px, -800px) }
+  75% { opacity: 1; transform: scale(0.5) translate(600px, 100px) }
+  100% { opacity: 1; transform: scale(0.5) translate(100px, 300px) }
+}
+
+@keyframes flyBat2 {
+  0% { opacity: 1; transform: scale(0.3)}
+  25% { opacity: 1; transform: scale(0.3) translate(200px, -330px) }
+  50% { opacity: 1; transform: scale(0.3) translate(-300px, -800px) }
+  75% { opacity: 1; transform: scale(0.3) translate(-400px, 100px) }
+  100% { opacity: 1; transform: scale(0.3) translate(100px, 300px) }
+}
+
+@keyframes flyBat3 {
+  0% { opacity: 1; transform: scale(0.4)}
+  25% { opacity: 1; transform: scale(0.4) translate(-350px, -330px) }
+  50% { opacity: 1; transform: scale(0.4) translate(400px, -800px) }
+  75% { opacity: 1; transform: scale(0.4) translate(-600px, 100px) }
+  100% { opacity: 1; transform: scale(0.4) translate(100px, 300px) }
+}
+
+/*@media only screen and (max-width: 850px) {
+  .maincontainer {
+    transform: scale(0.6);
+    width: 600px;
+    height: 400px;
+    background-size: 600px 400px;
+  }
+  
+  .errortext {
+    font-size: 1em;
+  }
+}*/
+a{
+	text-decoration:none;
+}
 </style>
 </head>
 <body>
-<div class="wrapper">
-<div class="box">
-<h1>error</h1>
-<p>I'm sorry. I'm currently implementing the service.</p>
-<p>&#58;&#40;</p>
-<p><a href="${pageContext.request.contextPath}/home.jsp">Home ◀</a></p>
+<div class="maincontainer">
+  <div class="bat">
+    <img class="wing leftwing" 
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+    <img class="body"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-body.png" alt="bat">
+    <img class="wing rightwing"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+  </div>
+  <div class="bat">
+    <img class="wing leftwing" 
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+    <img class="body"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-body.png" alt="bat">
+    <img class="wing rightwing"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+  </div>
+  <div class="bat">
+    <img class="wing leftwing" 
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+    <img class="body"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-body.png" alt="bat">
+    <img class="wing rightwing"
+         src="https://www.blissfullemon.com/wp-content/uploads/2018/09/bat-wing.png">
+  </div>
+  <img class="foregroundimg" src="https://www.blissfullemon.com/wp-content/uploads/2018/09/HauntedHouseForeground.png" alt="haunted house">
+  
 </div>
-</div>          
+<h1 class="errorcode">Error Page</h1>
+<div class="errortext">I'm sorry. I'm currently implementing the service.</div>
+<a href="${pageContext.request.contextPath}/home.jsp"><div class="errortext">Home ◀</div></a>
+
+<script>
+var canvas = document.getElementById('canvas'),
+context = canvas.getContext('2d'),
+height = canvas.height = 256,
+width = canvas.width = height,
+bcontext = 'getCSSCanvasContext' in document ? document.getCSSCanvasContext('2d', 'noise', width, height) : context;
+noise();
+
+function noise() {
+requestAnimationFrame(noise);
+var idata = context.getImageData(0, 0, width, height);
+for (var i = 0; i < idata.data.length; i += 4) {
+    idata.data[i] = idata.data[i + 1] = idata.data[i + 2] = Math.floor(Math.random() * 255);
+    idata.data[i + 3] = 255;
+}
+bcontext.putImageData(idata, 0, 0);
+}
+</script>
 </body>
 </html>
