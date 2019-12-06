@@ -12,6 +12,8 @@
 <style>
 	#mypage-menu>div {margin: auto; width: 180px; height: 200px; text-align: center; cursor: pointer;}
 	#mypage-menu>div>img {width: 150px; height: 150px; text-align: center;}
+	.a{color: black;}
+	.a:hover {color: darkgray;}
 </style>
 </head>
 <body>

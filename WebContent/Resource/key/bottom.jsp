@@ -16,8 +16,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/JoMalone/Resource/css/bottom.css">
 <style>
-	.a{color: black;  line-height: 40px;}
-	.a:hover {color: darkgray;  line-height: 40px;}
+	.a-notice{color: black;  line-height: 40px;}
+	.a-notice:hover {color: darkgray;  line-height: 40px;}
 </style>
 </head>
 <body>
@@ -81,7 +81,7 @@
     				$("#latestNotices").append('<div><p>최신 공지가 없습니다.</p></div><hr>');
     			}else{
     			for(var i=0;i<data.length;i++){
-    				var titleBox = '<div style="height: 40px; line-height: 40px;">'+'<a class="a" href="read.notice?no='+data[i].notice_seq+'">'+data[i].title+'</div>';
+    				var titleBox = '<div style="height: 40px; line-height: 40px;">'+'<a class="a-notice" href="read.notice?no='+data[i].notice_seq+'">'+data[i].title+'</div>';
     				$("#latestNotices").append(titleBox);	
     			}$("#latestNotices").append('<hr>');
     			}

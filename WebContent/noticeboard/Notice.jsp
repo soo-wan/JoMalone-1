@@ -47,8 +47,8 @@
 	color: black;
 }
 	input[type="button"] {width: 100px; height: 30px; border: 0px; background-color: lightgray; font-size: 13px;}
-	.a{color: black; line-height: 0px;}
-	.a:hober {color: darkgray; line-height: 0px;}
+	.a-notice{color: black; line-height: 0px;}
+	.a-notice:hober {color: darkgray; line-height: 0px;}
 </style>
 </head>
 
@@ -98,7 +98,7 @@
 					<div class="row article p-1" style="text-align: center;">
 						<div class="col-1">${dto.notice_seq }</div>
 						<div class="col-8" style="text-align: left;">
-							<a class="a" style="line-height: 30px;" href="read.notice?no=${dto.notice_seq }">${dto.title }</a>							
+							<a class="a-notice" style="line-height: 30px;" href="read.notice?no=${dto.notice_seq }">${dto.title }</a>							
 						</div>
 						<div class="col-3">${dto.formedFullDate }</div>						
 					</div>
