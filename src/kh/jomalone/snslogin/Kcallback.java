@@ -160,6 +160,7 @@ public class Kcallback extends HttpServlet {
 							request.getSession().setAttribute("loginInfo", id);
 							dao.lastlogin(id);
 							request.getSession().setAttribute("name", name);
+							request.getSession().setAttribute("access_token", access_token);
 							request.getRequestDispatcher("home.jsp").forward(request, response);
 							
 					
@@ -169,6 +170,7 @@ public class Kcallback extends HttpServlet {
 							dao.lastlogin(id);
 							request.getSession().setAttribute("loginInfo", id);
 							request.getSession().setAttribute("name", name);
+							request.getSession().setAttribute("access_token", access_token);
 							request.getRequestDispatcher("home.jsp").forward(request, response);
 
 				      }
