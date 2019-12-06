@@ -155,7 +155,11 @@
 			location.href= "search.buy?period=180"
 		});
 		function refund(prod_name,price,prod_quantity,imp_uid){
-			location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid+"&prod_name="+prod_name;
+			if(confirm("선택 상품을 환불하시겠습니까?")){
+				location.href= "${pageContext.request.contextPath}/partrefund.buy?price="+price+"&prod_quantity="+prod_quantity+"&imp_uid="+imp_uid+"&prod_name="+prod_name;				
+			}else {
+				return false;
+			}
 		}
 		function writereview(order_seq,prod_name){
 			location.href= "${pageContext.request.contextPath}/write.review?seq="+order_seq+"&prodName="+prod_name;
