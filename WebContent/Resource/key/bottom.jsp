@@ -72,7 +72,7 @@
 	<script>
     	$(document).ready(function(){
     		$.ajax({
-    			url : "home.notice",
+    			url : "/JoMalone/home.notice",
     			type : "post",
     			dataType : "json",
     			data : {}

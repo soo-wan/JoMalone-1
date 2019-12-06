@@ -126,7 +126,7 @@
   </div>
 </div>
 </form>
-
+ <jsp:include page="/Resource/key/bottom.jsp" flush="true"/>
    <script>
    // 주소찾기   
     function postcode() {
@@ -238,6 +238,6 @@
    })
    </script>
    
-   <jsp:include page="/Resource/key/bottom.jsp" flush="true"/>
+  
 </body>
 </html>
