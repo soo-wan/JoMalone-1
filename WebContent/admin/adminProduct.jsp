@@ -142,14 +142,16 @@
                                 	alert("상품명을 입력해주세요"); 
                                 	return;
                                 }
+                                                             
+                                var regexp = /^[0-9]*$/;
                                 
-                                if($("#price").val()==""){
-                                	alert("가격을 입력해주세요"); 
+                                if($("#price").val()=="" || !regexp.test($("#price").val())){
+                                	alert("가격[숫자]을 입력해주세요"); 
                                 	return;
                                 }
                                 
-                                if($("#quantity").val()==""){
-                                	alert("수량을 입력해주세요"); 
+                                if($("#quantity").val()=="" || !regexp.test($("#quantity").val())){
+                                	alert("수량[숫자]을 입력해주세요"); 
                                 	return;
                                 }
                                 
@@ -159,22 +161,22 @@
                                 }
                                 
                                 if($("#spring").val()=="" || !($("#spring").val()==0 || $("#spring").val()==1)){
-                                	alert("spring값을 입력해주세요"); 
+                                	alert("spring값[0 또는 1]을 입력해주세요"); 
                                 	return;
                                 }
                                 
                                 if($("#summer").val()=="" || !($("#summer").val()==0 || $("#summer").val()==1)){
-                                	alert("summer값을 입력해주세요"); 
+                                	alert("summer값[0 또는 1]을 입력해주세요"); 
                                 	return;
                                 }
                                 
                                 if($("#fall").val()=="" || !($("#fall").val()==0 || $("#fall").val()==1)){
-                                	alert("fall값을 입력해주세요"); 
+                                	alert("fall값[0 또는 1]을 입력해주세요"); 
                                 	return;
                                 }
                                 
                                 if($("#winter").val()=="" || !($("#winter").val()==0 || $("#winter").val()==1)){
-                                	alert("winter값을 입력해주세요"); 
+                                	alert("winter값[0 또는 1]을 입력해주세요"); 
                                 	return;
                                 }
                                 
