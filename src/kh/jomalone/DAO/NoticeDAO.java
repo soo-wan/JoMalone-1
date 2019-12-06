@@ -78,15 +78,15 @@ public class NoticeDAO {
 
 		StringBuilder sb = new StringBuilder();
 		if (needPrev) {
-			sb.append("<a href='list.notice?currentPage=" + (startNavi - 1) + "'>< </a>");
+			sb.append("<a style='color: black;' href='list.notice?currentPage=" + (startNavi - 1) + "'>< </a>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='list.notice?currentPage=" + i + "'>");
+			sb.append("<a style='color: black;' href='list.notice?currentPage=" + i + "'>");
 			sb.append(i);
 			sb.append("</a> ");
 		}
 		if (needNext) {
-			sb.append("<a href='list.notice?currentPage=" + (endNavi + 1) + "'>></a>");
+			sb.append("<a style='color: black;' href='list.notice?currentPage=" + (endNavi + 1) + "'>></a>");
 		}
 		return sb.toString();
 	}
